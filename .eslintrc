@@ -28,6 +28,7 @@
       2,
       { "namedComponents": "function-declaration" }
     ],
+    "import/no-unresolved": "off",
     "sort-imports": [
       "error",
       {
