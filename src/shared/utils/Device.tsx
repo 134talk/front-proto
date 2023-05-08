@@ -49,5 +49,5 @@ const WebViewLayout = styled.div`
   height: calc(100% - 43px);
   border-radius: 40px;
   overflow: hidden;
-  background: blue;
+  border: 1px solid black;
 `;
