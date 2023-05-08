@@ -21,16 +21,16 @@ jobs:
           node-version: 16
 
       - name: Cache node modules
-        id: npm-cache
+        id: yarn-cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - if: steps.npm-cache.outputs.cache-hit == 'true'
-        run: echo 'npm cache hit!'
-      - if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: echo 'npm cache missed!'
-      - run: npm ci
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - if: steps.yarn-cache.outputs.cache-hit == 'true'
+        run: echo 'yarn cache hit!'
+      - if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: echo 'yarn cache missed!'
+      - run: yarn install --immutable --immutable-cache --check-cache
 
 #       - name: Generate Environment Variables File for Production
 #         run: |
@@ -39,7 +39,7 @@ jobs:
 #           REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
 
       - name: Build
-        run: unset CI && npm run build
+        run: unset CI && yarn build
 
       - name: deploy to s3
         uses: jakejarvis/s3-sync-action@master
