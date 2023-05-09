@@ -4,6 +4,7 @@ import NicknamePage from 'pages/NicknamePage';
 import ReportPage from 'pages/ReportPage';
 import RoomsPage from 'pages/RoomsPage';
 import SignPage from 'pages/SignPage';
+import SignSelectPage from 'pages/SignSelectPage';
 import UserPage from 'pages/UserPage';
 import React from 'react';
 
@@ -19,34 +20,38 @@ export const AuthRouter: RouterData[] = [
     path: '/',
     element: <MembersPage />,
   },
-
   {
     id: 1,
     path: '/sign',
-    element: <SignPage />,
+    element: <SignSelectPage />,
   },
   {
     id: 2,
+    path: '/sign/:type',
+    element: <SignPage />,
+  },
+  {
+    id: 3,
     path: '/nickname',
     element: <NicknamePage />,
   },
   {
-    id: 3,
+    id: 4,
     path: '/rooms/:channelId',
     element: <RoomsPage />,
   },
   {
-    id: 4,
+    id: 5,
     path: '/chat/:chatId',
     element: <RoomsPage />,
   },
   {
-    id: 5,
+    id: 6,
     path: '/report',
     element: <ReportPage />,
   },
   {
-    id: 6,
+    id: 7,
     path: '/user',
     element: <UserPage />,
   },
