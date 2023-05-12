@@ -1,6 +1,8 @@
 import LogInPage from 'pages/LogInPage';
 import MembersPage from 'pages/MembersPage';
+import NicknameGuidePage from 'pages/NicknameGuidePage';
 import NicknamePage from 'pages/NicknamePage';
+import NicknameResultPage from 'pages/NicknameResultPage';
 import ReportPage from 'pages/ReportPage';
 import RoomsPage from 'pages/RoomsPage';
 import SignPage from 'pages/SignPage';
@@ -32,26 +34,36 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 3,
-    path: '/nickname',
-    element: <NicknamePage />,
+    path: '/nickname/guide',
+    element: <NicknameGuidePage />,
   },
   {
     id: 4,
+    path: '/nickname/:type',
+    element: <NicknamePage />,
+  },
+  {
+    id: 5,
+    path: '/nickname/result',
+    element: <NicknameResultPage />,
+  },
+  {
+    id: 6,
     path: '/rooms/:channelId',
     element: <RoomsPage />,
   },
   {
-    id: 5,
+    id: 7,
     path: '/chat/:chatId',
     element: <RoomsPage />,
   },
   {
-    id: 6,
+    id: 8,
     path: '/report',
     element: <ReportPage />,
   },
   {
-    id: 7,
+    id: 9,
     path: '/user',
     element: <UserPage />,
   },
