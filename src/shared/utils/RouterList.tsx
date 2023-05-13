@@ -2,7 +2,9 @@ import ChatListPage from 'pages/ChatListPage';
 import ChatPage from 'pages/ChatPage';
 import LogInPage from 'pages/LogInPage';
 import MembersPage from 'pages/MembersPage';
+import NicknameGuidePage from 'pages/NicknameGuidePage';
 import NicknamePage from 'pages/NicknamePage';
+import NicknameResultPage from 'pages/NicknameResultPage';
 import ReportPage from 'pages/ReportPage';
 import SignPage from 'pages/SignPage';
 import SignSelectPage from 'pages/SignSelectPage';
@@ -33,26 +35,36 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 3,
-    path: '/nickname',
-    element: <NicknamePage />,
+    path: '/nickname/guide',
+    element: <NicknameGuidePage />,
   },
   {
     id: 4,
+    path: '/nickname/:type',
+    element: <NicknamePage />,
+  },
+  {
+    id: 5,
+    path: '/nickname/result',
+    element: <NicknameResultPage />,
+  },
+  {
+    id: 6,
     path: '/channel/:channelId',
     element: <ChatListPage />,
   },
   {
-    id: 5,
+    id: 7,
     path: '/chat/:chatId',
     element: <ChatPage />,
   },
   {
-    id: 6,
+    id: 8,
     path: '/report',
     element: <ReportPage />,
   },
   {
-    id: 7,
+    id: 9,
     path: '/user',
     element: <UserPage />,
   },
