@@ -1,10 +1,11 @@
+import ChatListPage from 'pages/ChatListPage';
+import ChatPage from 'pages/ChatPage';
 import LogInPage from 'pages/LogInPage';
 import MembersPage from 'pages/MembersPage';
 import NicknameGuidePage from 'pages/NicknameGuidePage';
 import NicknamePage from 'pages/NicknamePage';
 import NicknameResultPage from 'pages/NicknameResultPage';
 import ReportPage from 'pages/ReportPage';
-import RoomsPage from 'pages/RoomsPage';
 import SignPage from 'pages/SignPage';
 import SignSelectPage from 'pages/SignSelectPage';
 import UserPage from 'pages/UserPage';
@@ -19,7 +20,7 @@ interface RouterData {
 export const AuthRouter: RouterData[] = [
   {
     id: 0,
-    path: '/',
+    path: '/:channelId',
     element: <MembersPage />,
   },
   {
@@ -49,13 +50,13 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 6,
-    path: '/rooms/:channelId',
-    element: <RoomsPage />,
+    path: '/channel/:channelId',
+    element: <ChatListPage />,
   },
   {
     id: 7,
     path: '/chat/:chatId',
-    element: <RoomsPage />,
+    element: <ChatPage />,
   },
   {
     id: 8,
