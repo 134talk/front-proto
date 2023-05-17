@@ -15,7 +15,6 @@ menu, nav, output, ruby, section, summary,
 time, input,select,textarea {
 	margin: 0;
 	padding: 0;
-	border: 0;
 	font-size: 100%;
 	box-sizing: border-box;
 }
@@ -40,7 +39,6 @@ a {
 }
 
 button{
-	border:none;
 	cursor: pointer;
 }
 `;
