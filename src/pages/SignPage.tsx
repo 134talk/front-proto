@@ -27,7 +27,7 @@ export default function SignPage() {
 
   return (
     <div>
-      {type === 'general' ? (
+      {type === 'user' ? (
         <>
           <p>일반 회원 등록</p>
           <input type="text" placeholder="이름" onChange={handleName} />
