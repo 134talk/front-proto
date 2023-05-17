@@ -8,6 +8,7 @@ interface ProfileImgProps {
   onClick?: () => void;
 }
 
+// check & remove image props optional!
 export default function ProfileImg(props: ProfileImgProps) {
   return (
     <Profile
