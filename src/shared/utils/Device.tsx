@@ -23,7 +23,8 @@ export default function Device({ children }: Props) {
 }
 
 const Mobile = styled.div`
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
   width: 100%;
   max-width: 640px;
   min-width: 280px;
