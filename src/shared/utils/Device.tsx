@@ -23,8 +23,6 @@ export default function Device({ children }: Props) {
 }
 
 const Mobile = styled.div`
-  display: flex;
-  position: relative;
   margin: 0 auto;
   width: 100%;
   max-width: 640px;
