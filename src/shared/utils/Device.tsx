@@ -23,13 +23,12 @@ export default function Device({ children }: Props) {
 }
 
 const Mobile = styled.div`
-  display: flex;
-  position: relative;
   margin: 0 auto;
   width: 100%;
   max-width: 640px;
   min-width: 280px;
   overflow: hidden;
+  padding: 0 1.25rem;
 `;
 
 const Web = styled.div`
@@ -50,4 +49,5 @@ const WebViewLayout = styled.div`
   border-radius: 40px;
   overflow: hidden;
   border: 1px solid black;
+  padding: 0 1.25rem;
 `;
