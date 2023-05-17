@@ -30,6 +30,7 @@ const Mobile = styled.div`
   max-width: 640px;
   min-width: 280px;
   overflow: hidden;
+  background-color: red;
 `;
 
 const Web = styled.div`
