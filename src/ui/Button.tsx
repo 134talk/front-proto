@@ -20,8 +20,8 @@ export default function Button(props: BtnProps) {
 const Btn = styled.button<BtnProps>`
   width: ${props => (props.width ? props.width : '100%')};
   margin: ${props => (props.margin ? props.margin : '0')};
-  padding: ${props => (props.padding ? props.padding : '12px 32px')};
-  font-size: ${props => (props.fontSize ? props.fontSize : '16px')};
+  padding: ${props => (props.padding ? props.padding : '0.75rem 2rem')};
+  font-size: ${props => (props.fontSize ? props.fontSize : '1rem')};
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '500')};
   border: ${props => (props.border ? props.border : '1px solid transparent')};
   background-color: ${props => (props.bgColor ? props.bgColor : '#FFD74B')};
