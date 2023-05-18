@@ -10,9 +10,12 @@ export default function ButtonColumn() {
     <t.Container>
       <SignButton
         isAdmin={false}
+        onClick={() => handleNavigate('/sign/user')}
+      />
+      <SignButton
+        isAdmin={true}
         onClick={() => handleNavigate('/sign/admin')}
       />
-      <SignButton isAdmin={true} onClick={() => handleNavigate('/sign/user')} />
     </t.Container>
   );
 }
