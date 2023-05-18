@@ -8,6 +8,7 @@ export interface BtnProps {
   fontWeight?: string;
   border?: string;
   bgColor?: string;
+  category: 'confirm' | 'cancel';
   text?: string;
   disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -23,9 +24,18 @@ const Btn = styled.button<BtnProps>`
   padding: ${props => (props.padding ? props.padding : '0.75rem 2rem')};
   font-size: ${props => (props.fontSize ? props.fontSize : '1rem')};
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '500')};
-  border: ${props => (props.border ? props.border : '1px solid transparent')};
-  background-color: ${props => (props.bgColor ? props.bgColor : '#FFD74B')};
-  color: black;
+  border: ${props =>
+    props.category === 'confirm'
+      ? '1px solid transparent'
+      : '1px solid #C9C8C4'};
+  background-color: ${props =>
+    props.category === 'confirm' ? '#FFD74B' : '#FFFFFF'};
+  color: #000000;
   border-radius: 50px;
-  cursor: pointer;
+  &:disabled {
+    border: 1px solid #c9c8c4;
+    background-color: #ffffff;
+    color: #c9c8c4;
+    cursor: auto;
+  }
 `;
