@@ -3,8 +3,7 @@ import styled from 'styled-components';
 interface ProfileImgProps {
   image?: string;
   id?: string;
-  width?: string;
-  height?: string;
+  size?: string;
   onClick?: () => void;
 }
 
@@ -24,8 +23,8 @@ export default function ProfileImg(props: ProfileImgProps) {
 }
 
 export const Profile = styled.img<ProfileImgProps>`
-  width: ${props => (props.width ? props.width : '2rem')};
-  height: ${props => (props.height ? props.height : '2rem')};
+  width: ${props => (props.size ? props.size : '2rem')};
+  height: ${props => (props.size ? props.size : '2rem')};
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { SignButtonColumn, SignInputColumn, Title } from 'components';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { NAME_REGEX } from 'shared/constants/constants';
+import { ADMIN_ICON, USER_ICON } from 'shared/constants/icons';
 
 const validateName = (name: string): boolean => NAME_REGEX.test(name);
 
@@ -9,9 +11,7 @@ export default function SignPage() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [team, setTeam] = useState('');
-  const [isValid, setIsValid] = useState(true);
 
-  const handleCancel = () => navigate('/sign');
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     let spacesRemovedName = e.target.value.replace(/\s/g, '');
     setName(spacesRemovedName);
@@ -21,29 +21,27 @@ export default function SignPage() {
     setTeam(spacesRemovedTeam);
   };
 
-  useEffect(() => {
-    setIsValid(validateName(name));
-  }, [name]);
+  const handleCancel = () => navigate('/sign');
 
   return (
-    <div>
-      {type === 'general' ? (
-        <>
-          <p>일반 회원 등록</p>
-          <input type="text" placeholder="이름" onChange={handleName} />
-          {!!name.length && !isValid && <span>에러</span>}
-          <input type="text" placeholder="채널코드" onChange={handleTeam} />
-        </>
-      ) : (
-        <>
-          <p>관리자 회원 등록</p>
-          <input type="text" placeholder="이름" onChange={handleName} />
-          {!!name.length && !isValid && <span>에러</span>}
-          <input type="text" placeholder="소속" onChange={handleTeam} />
-        </>
-      )}
-      <button disabled={!name.length || !team.length}>등록</button>
-      <button onClick={handleCancel}>취소</button>
-    </div>
+    <>
+      <Title
+        text={type === 'user' ? '일반 회원 등록' : '관리자 회원 등록'}
+        icon={type === 'user' ? USER_ICON : ADMIN_ICON}
+      />
+      <SignInputColumn
+        isAdmin={type === 'admin'}
+        isName={!!name.length}
+        isError={!!name.length && !validateName(name)}
+        handleName={handleName}
+        handleTeam={handleTeam}
+      />
+      <SignButtonColumn
+        name={name}
+        team={team}
+        disabled={!name.length || !team.length || !validateName(name)}
+        handleCancel={handleCancel}
+      />
+    </>
   );
 }
