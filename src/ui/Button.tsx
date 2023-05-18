@@ -11,6 +11,7 @@ export interface BtnProps {
   category: 'confirm' | 'cancel';
   text?: string;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
