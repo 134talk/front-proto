@@ -1,4 +1,4 @@
-import React from 'react';
+import { BottomTab } from 'components';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -13,12 +13,15 @@ const Router = createBrowserRouter(
       {BaseRouter.map(({ id, path, element }) => (
         <Route key={id} path={path} element={element} />
       ))}
-      {AuthRouter.map(({ id, path, element }) => (
+      {AuthRouter.map(({ id, path, isTab, element }) => (
         <Route
           key={id}
           path={path}
           element={
-            <ProtectedRoute redirectPath="/login">{element}</ProtectedRoute>
+            <ProtectedRoute redirectPath="/login">
+              {element}
+              {isTab && <BottomTab />}
+            </ProtectedRoute>
           }
         />
       ))}

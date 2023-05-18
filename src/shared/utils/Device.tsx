@@ -42,11 +42,23 @@ const Phone = styled.div`
   height: 92%;
   min-height: 750px;
   position: fixed;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  @media screen and (min-width: 1120px) {
+    right: 10%;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
 `;
 
 const WebViewLayout = styled.div`
   max-width: 375px;
   height: calc(100% - 43px);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 40px;
   overflow: hidden;
   border: 1px solid black;

@@ -5,7 +5,7 @@ import * as t from './nicknameResultPage.style';
 export default function NicknameResultPage() {
   const navigate = useNavigate();
 
-  const handleConfirm = () => navigate(`/${TEST_CHNNEL_ID}`);
+  const handleConfirm = () => navigate(`/${TEST_CHNNEL_ID}?tab=1`);
 
   return (
     <t.Container>
