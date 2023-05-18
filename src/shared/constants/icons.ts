@@ -10,3 +10,6 @@ export const USER_ICON = process.env.PUBLIC_URL + '/assets/icons/member.svg';
 
 export const USER_ACTIVE_ICON =
   process.env.PUBLIC_URL + '/assets/icons/member-active.svg';
+
+export const WARNING_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/triangle-exclamation.svg';
