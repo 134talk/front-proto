@@ -44,10 +44,10 @@ export default function BottomTab() {
 
 const Container = styled.div`
   width: 100%;
-  height: 3.5rem;
+  height: 5.625rem;
   position: absolute;
   left: 0;
-  bottom: 2.125rem;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
   background-color: #ffffff;

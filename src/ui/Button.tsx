@@ -10,13 +10,14 @@ export interface BtnProps {
   bgColor?: string;
   category: 'confirm' | 'cancel';
   text?: string;
+  children?: React.ReactNode;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function Button(props: BtnProps) {
-  return <Btn {...props}>{props.text}</Btn>;
+  return <Btn {...props}>{props.children ? props.children : props.text}</Btn>;
 }
 
 const Btn = styled.button<BtnProps>`
@@ -34,9 +35,9 @@ const Btn = styled.button<BtnProps>`
   color: #000000;
   border-radius: 50px;
   &:disabled {
-    border: 1px solid #c9c8c4;
-    background-color: #ffffff;
-    color: #c9c8c4;
+    background: #ffd74b;
+    opacity: 0.3;
+    color: #000000;
     cursor: auto;
   }
 `;
