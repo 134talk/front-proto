@@ -38,7 +38,7 @@ export default function MembersPage() {
       <section>
         {filteredUserList.map(({ userId, nickname, name }) => (
           <div key={userId}>
-            <Profile nickname={nickname} name={name} />
+            <Profile nickname={nickname} name={name} scale="medium" />
           </div>
         ))}
       </section>
