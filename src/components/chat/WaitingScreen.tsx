@@ -5,9 +5,11 @@ import { Button, Spinner } from 'ui';
 
 export default function WaitingScreen() {
   const [isCheck, setIsCheck] = useState<boolean>(false);
+
   const handleCheckIn = () => {
     setIsCheck(true);
   };
+
   return (
     <Container>
       <div className="navbar">
