@@ -1,4 +1,4 @@
-import { SearchBar, TopBar } from 'components';
+import { NavBar, SearchBar } from 'components';
 import Profile from 'components/common/Profile';
 import type { Dispatch, SetStateAction } from 'react';
 import { useMemo, useState } from 'react';
@@ -26,7 +26,13 @@ export default function MembersPage() {
 
   return (
     <Container>
-      <TopBar userCnt={filteredUserList?.length} handleModal={handleModal} />
+      <NavBar
+        isCenter={false}
+        title="참가자"
+        cnt={filteredUserList?.length}
+        button="채널 초대"
+        handleInviteModal={handleModal}
+      />
       {isModalOpen && <Modal setModalIsOpen={setModalIsOpen} />}
       <SearchBar handleSearch={handleSearch} />
       <section>

@@ -46,3 +46,17 @@ export const LEFT_ARROW_ICON =
   process.env.PUBLIC_URL + '/assets/icons/leftArrow.svg';
 
 export const CHECK_ICON = process.env.PUBLIC_URL + '/assets/icons/check.svg';
+
+export const PREV_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/left-arrow.svg';
+
+export const PLUS_ICON = process.env.PUBLIC_URL + '/assets/icons/add.svg';
+
+export const SETTING_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/setting.svg';
+
+export const CLOSE_ICON = process.env.PUBLIC_URL + '/assets/icons/close.svg';
+
+export const CANCEL_ICON = process.env.PUBLIC_URL + '/assets/icons/cancel.svg';
+
+export const RELOAD_ICON = process.env.PUBLIC_URL + '/assets/icons/reload.svg';
