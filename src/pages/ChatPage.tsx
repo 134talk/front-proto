@@ -1,5 +1,9 @@
-import React from 'react';
+import WaitingScreen from 'components/chat/WaitingScreen';
 
 export default function ChatPage() {
-  return <div>ChatPage</div>;
+  return (
+    <>
+      <WaitingScreen />
+    </>
+  );
 }
