@@ -43,9 +43,10 @@ export default function MembersPage() {
 const Container = styled.div`
   > section {
     width: 100%;
-    height: 33.375rem;
+    height: calc(100% - 16.125rem);
     margin-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
+    position: absolute;
     display: flex;
     flex-direction: column;
     gap: 1.125rem;
