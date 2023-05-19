@@ -29,7 +29,7 @@ export default function MembersPage() {
       <NavBar
         isCenter={false}
         title="참가자"
-        cnt={filteredUserList?.length}
+        cnt={filteredUserList?.length.toString()}
         button="채널 초대"
         handleInviteModal={handleModal}
       />
@@ -38,7 +38,7 @@ export default function MembersPage() {
       <section>
         {filteredUserList.map(({ userId, nickname, name }) => (
           <div key={userId}>
-            <Profile nickname={nickname} name={name} />
+            <Profile nickname={nickname} name={name} scale="medium" />
           </div>
         ))}
       </section>
