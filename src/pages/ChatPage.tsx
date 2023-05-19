@@ -1,5 +1,4 @@
-import IntroductionScreen from 'components/chat/IntroductionScreen';
-import WaitingScreen from 'components/chat/WaitingScreen';
+import { IntroductionScreen, WaitingScreen } from 'components';
 import { useState } from 'react';
 
 export default function ChatPage() {

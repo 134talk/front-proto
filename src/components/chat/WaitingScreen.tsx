@@ -1,9 +1,8 @@
+import { UserList } from 'components';
 import { useState } from 'react';
 import { LEFT_ARROW_ICON } from 'shared/constants/icons';
 import { styled } from 'styled-components';
-import { Button } from 'ui';
-import Spinner from 'ui/Spinner';
-import UserList from './UserList';
+import { Button, Spinner } from 'ui';
 
 export default function WaitingScreen() {
   const [isCheck, setIsCheck] = useState<boolean>(false);

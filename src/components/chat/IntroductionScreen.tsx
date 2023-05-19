@@ -1,7 +1,7 @@
+import { UserList } from 'components';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import { Button } from 'ui';
-import UserList from './UserList';
 
 export default function IntroductionScreen() {
   const [isCheck, setIsCheck] = useState<boolean>(true);
