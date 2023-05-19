@@ -10,13 +10,14 @@ export interface BtnProps {
   bgColor?: string;
   category: 'confirm' | 'cancel';
   text?: string;
+  children?: React.ReactNode;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function Button(props: BtnProps) {
-  return <Btn {...props}>{props.text}</Btn>;
+  return <Btn {...props}>{props.children ? props.children : props.text}</Btn>;
 }
 
 const Btn = styled.button<BtnProps>`
@@ -28,15 +29,15 @@ const Btn = styled.button<BtnProps>`
   border: ${props =>
     props.category === 'confirm'
       ? '1px solid transparent'
-      : '1px solid #C9C8C4'};
+      : '1px solid #034B74'};
   background-color: ${props =>
-    props.category === 'confirm' ? '#FFD74B' : '#FFFFFF'};
-  color: #000000;
+    props.category === 'confirm' ? '#034B74' : '#FFFFFF'};
+  color: ${props => (props.category === 'confirm' ? '#FFFFFF' : '#034B74')};
   border-radius: 50px;
   &:disabled {
-    border: 1px solid #c9c8c4;
-    background-color: #ffffff;
-    color: #c9c8c4;
+    background: #034b74;
+    opacity: 0.3;
+    color: #ffffff
     cursor: auto;
   }
 `;
