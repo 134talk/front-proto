@@ -37,3 +37,8 @@ export const TAB_USER = process.env.PUBLIC_URL + '/assets/icons/user.svg';
 
 export const TAB_USER_ACTIVE =
   process.env.PUBLIC_URL + '/assets/icons/user-active.svg';
+
+export const LEFT_ARROW_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/leftArrow.svg';
+
+export const CHECK_ICON = process.env.PUBLIC_URL + '/assets/icons/check.svg';
