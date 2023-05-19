@@ -29,15 +29,15 @@ const Btn = styled.button<BtnProps>`
   border: ${props =>
     props.category === 'confirm'
       ? '1px solid transparent'
-      : '1px solid #C9C8C4'};
+      : '1px solid #034B74'};
   background-color: ${props =>
-    props.category === 'confirm' ? '#FFD74B' : '#FFFFFF'};
-  color: #000000;
+    props.category === 'confirm' ? '#034B74' : '#FFFFFF'};
+  color: ${props => (props.category === 'confirm' ? '#FFFFFF' : '#034B74')};
   border-radius: 50px;
   &:disabled {
-    background: #ffd74b;
+    background: #034b74;
     opacity: 0.3;
-    color: #000000;
+    color: #ffffff
     cursor: auto;
   }
 `;
