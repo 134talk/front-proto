@@ -8,10 +8,18 @@ export const Container = styled.div`
   align-items: center;
   gap: 20.125rem;
   position: relative;
-  margin: 10.75rem 0 5.875rem 0;
-  background: #ffffff;
+  padding-bottom: 5.875rem;
+  .background {
+    position: absolute;
+    top: 0;
+    width: calc(100% + 1.25rem * 2);
+    min-height: 100vh;
+    background: linear-gradient(180.03deg, #71cfd5 44.58%, #2c85ab 99.97%);
+    z-index: -999;
+  }
   > img {
     width: 6.688rem;
     height: 6.25rem;
+    margin-top: 10.75rem;
   }
 `;
