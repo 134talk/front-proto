@@ -54,7 +54,7 @@ const Phone = styled.div`
 
 const WebViewLayout = styled.div`
   max-width: 375px;
-  height: calc(100% - 43px);
+  height: 50.75rem;
   position: relative;
   top: 50%;
   left: 50%;
@@ -62,5 +62,5 @@ const WebViewLayout = styled.div`
   border-radius: 40px;
   overflow: hidden;
   border: 1px solid black;
-  padding: 0 1.25rem;
+  padding: 2.75rem 1.25rem 0 1.25rem;
 `;
