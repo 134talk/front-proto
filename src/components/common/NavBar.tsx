@@ -12,7 +12,7 @@ type Props = {
   isCenter: boolean;
   isNav?: boolean;
   title: string;
-  cnt?: number;
+  cnt?: string;
   button?: '채널 초대' | '새 대화방' | '닫기';
   isAdmin?: boolean;
   handleNav?: () => void;
