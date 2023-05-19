@@ -1,4 +1,4 @@
-import { UserList } from 'components';
+import { NavBar, UserList } from 'components';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import { Button } from 'ui';
@@ -10,9 +10,7 @@ export default function IntroductionScreen() {
   };
   return (
     <Container>
-      <div className="navbar">
-        <h1>대화방</h1>
-      </div>
+      <NavBar isCenter={true} title="대화방" />
       <div className="intro_wrapper">
         <h2>자기소개</h2>
         <p>서로의 닉네임으로 본인을 소개해주세요.</p>
@@ -33,18 +31,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   div {
-    &.navbar {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 7.875rem;
-      width: 100%;
-      height: 3.5rem;
-      h1 {
-        font-size: 1.25rem;
-        line-height: 1.625rem;
-      }
-    }
     &.intro_wrapper {
       display: flex;
       flex-direction: column;

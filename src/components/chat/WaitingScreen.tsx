@@ -1,6 +1,5 @@
-import { UserList } from 'components';
+import { NavBar, UserList } from 'components';
 import { useState } from 'react';
-import { LEFT_ARROW_ICON } from 'shared/constants/icons';
 import { styled } from 'styled-components';
 import { Button, Spinner } from 'ui';
 
@@ -14,8 +13,7 @@ export default function WaitingScreen() {
   return (
     <Container>
       <div className="navbar">
-        <img src={LEFT_ARROW_ICON} alt="leftArrowIcon" />
-        <h1>대화방</h1>
+        <NavBar isCenter={true} title="대화방" isNav={true} />
       </div>
       <UserList isCheck={isCheck} scale="small" />
       <Spinner isLoading={true} />
@@ -43,21 +41,7 @@ const Container = styled.div`
   flex-direction: column;
   div {
     &.navbar {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 7.875rem;
-      width: 100%;
-      height: 3.5rem;
       margin-bottom: 1.75rem;
-      img {
-        width: 1.5rem;
-        height: 1.5rem;
-      }
-      h1 {
-        font-size: 1.25rem;
-        line-height: 1.625rem;
-      }
     }
     &.waiting_wrapper {
       display: flex;
