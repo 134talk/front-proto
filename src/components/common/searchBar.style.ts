@@ -14,6 +14,9 @@ export const Container = styled.div`
     &::placeholder {
       color: #a6acb2;
     }
+    &:focus {
+      outline: none;
+    }
   }
   img {
     position: absolute;
