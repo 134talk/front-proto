@@ -6,23 +6,28 @@ interface ProfileProps {
   nickname?: string;
   name?: string;
   gap?: string;
-  textGap?: string;
-  badgeGap?: string;
+  mgrNick?: string;
+  mgtName?: string;
   fsNick?: string;
   fsName?: string;
+  fsBadge?: string;
   userId?: string;
 }
 
 export default function Profile(props: ProfileProps) {
   return (
-    <Container>
+    <Container gap={props.gap}>
       <ProfileImg size={props.size ? props.size : '3.25rem'} />
       <div>
         <div className="nickname_wrapper">
-          <p className="nickname">{props.nickname && props.nickname}</p>
-          {props.userId && <span>나</span>}
+          <NicknameText fsNick={props.fsNick} mgrNick={props.mgrNick}>
+            {props.nickname && props.nickname}
+          </NicknameText>
+          {props.userId && <BadgeText fsBadge={props.fsBadge}>나</BadgeText>}
         </div>
-        <p className="name">{props.name && props.name}</p>
+        <NameText fsName={props.fsName} mgtName={props.mgtName}>
+          {props.name && props.name}
+        </NameText>
       </div>
     </Container>
   );
@@ -35,29 +40,28 @@ const Container = styled.div<ProfileProps>`
   div {
     display: flex;
     flex-direction: column;
-    gap: ${props => (props.textGap ? props.textGap : '0.313rem')};
     &.nickname_wrapper {
       display: flex;
       flex-direction: row;
-      gap: ${props => (props.badgeGap ? props.badgeGap : '0.25rem')};
-      span {
-        padding: 0.125rem 0.5rem;
-        font-size: 0.875rem;
-        font-weight: bold;
-        border-radius: 50px;
-        background-color: #f1f3f5;
-      }
-    }
-    p {
-      &.nickname {
-        font-size: ${props => (props.fsNick ? props.fsNick : '1rem')};
-        font-weight: bold;
-      }
-      &.name {
-        font-size: ${props => (props.fsName ? props.fsName : '0.875rem')};
-        font-weight: normal;
-        color: #475467;
-      }
+      align-items: center;
     }
   }
+`;
+const NicknameText = styled.p<ProfileProps>`
+  margin-right: ${props => (props.mgrNick ? props.mgrNick : '0.25rem')};
+  font-size: ${props => (props.fsNick ? props.fsNick : '1rem')};
+  font-weight: bold;
+`;
+const BadgeText = styled.span<ProfileProps>`
+  padding: 0.125rem 0.5rem;
+  font-size: ${props => (props.fsBadge ? props.fsBadge : '0.875rem')};
+  font-weight: bold;
+  border-radius: 50px;
+  background-color: #f1f3f5;
+`;
+const NameText = styled.p<ProfileProps>`
+  margin-top: ${props => (props.mgtName ? props.mgtName : '0.313rem')};
+  font-size: ${props => (props.fsName ? props.fsName : '0.875rem')};
+  font-weight: normal;
+  color: #475467;
 `;

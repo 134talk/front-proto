@@ -41,3 +41,8 @@ export const TAB_USER_ACTIVE =
 export const SHARE_ICON = process.env.PUBLIC_URL + '/assets/icons/share.svg';
 
 export const SEARCH_ICON = process.env.PUBLIC_URL + '/assets/icons/search.svg';
+
+export const LEFT_ARROW_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/leftArrow.svg';
+
+export const CHECK_ICON = process.env.PUBLIC_URL + '/assets/icons/check.svg';
