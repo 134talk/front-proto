@@ -2,32 +2,33 @@ import { styled } from 'styled-components';
 import { ProfileImg } from 'ui';
 
 interface ProfileProps {
-  size?: string;
   nickname?: string;
   name?: string;
-  gap?: string;
-  mgrNick?: string;
-  mgtName?: string;
-  fsNick?: string;
-  fsName?: string;
-  fsBadge?: string;
   userId?: string;
+  scale: 'small' | 'medium' | 'large';
 }
 
-export default function Profile(props: ProfileProps) {
+export default function Profile({
+  nickname,
+  name,
+  userId,
+  scale,
+}: ProfileProps) {
   return (
-    <Container gap={props.gap}>
-      <ProfileImg size={props.size ? props.size : '3.25rem'} />
+    <Container scale={scale}>
+      <ProfileImg
+        size={
+          (scale === 'small' && '2rem') ||
+          (scale === 'medium' && '3.25rem') ||
+          (scale === 'large' && '5.5rem')
+        }
+      />
       <div>
         <div className="nickname_wrapper">
-          <NicknameText fsNick={props.fsNick} mgrNick={props.mgrNick}>
-            {props.nickname && props.nickname}
-          </NicknameText>
-          {props.userId && <BadgeText fsBadge={props.fsBadge}>나</BadgeText>}
+          <NicknameText scale={scale}>{nickname && nickname}</NicknameText>
+          {userId && <BadgeText>나</BadgeText>}
         </div>
-        <NameText fsName={props.fsName} mgtName={props.mgtName}>
-          {props.name && props.name}
-        </NameText>
+        <NameText scale={scale}>{name && name}</NameText>
       </div>
     </Container>
   );
@@ -36,7 +37,11 @@ export default function Profile(props: ProfileProps) {
 const Container = styled.div<ProfileProps>`
   display: flex;
   flex-direction: row;
-  gap: ${props => (props.gap ? props.gap : '0.75rem')};
+  align-items: center;
+  gap: ${props =>
+    (props.scale === 'small' && '0.75rem') ||
+    (props.scale === 'medium' && '0.75rem') ||
+    (props.scale === 'large' && '1rem')};
   div {
     display: flex;
     flex-direction: column;
@@ -48,20 +53,32 @@ const Container = styled.div<ProfileProps>`
   }
 `;
 const NicknameText = styled.p<ProfileProps>`
-  margin-right: ${props => (props.mgrNick ? props.mgrNick : '0.25rem')};
-  font-size: ${props => (props.fsNick ? props.fsNick : '1rem')};
+  margin-right: ${props =>
+    (props.scale === 'small' && '0.25rem') ||
+    (props.scale === 'medium' && '0.375rem') ||
+    (props.scale === 'large' && '0')};
+  font-size: ${props =>
+    (props.scale === 'small' && '0.875rem') ||
+    (props.scale === 'medium' && '1rem') ||
+    (props.scale === 'large' && '1.125rem')};
   font-weight: bold;
 `;
-const BadgeText = styled.span<ProfileProps>`
+const BadgeText = styled.span`
   padding: 0.125rem 0.5rem;
-  font-size: ${props => (props.fsBadge ? props.fsBadge : '0.875rem')};
+  font-size: '0.75rem';
   font-weight: bold;
   border-radius: 50px;
   background-color: #f1f3f5;
 `;
 const NameText = styled.p<ProfileProps>`
-  margin-top: ${props => (props.mgtName ? props.mgtName : '0.313rem')};
-  font-size: ${props => (props.fsName ? props.fsName : '0.875rem')};
+  margin-top: ${props =>
+    (props.scale === 'small' && '0.125rem') ||
+    (props.scale === 'medium' && '0.313rem') ||
+    (props.scale === 'large' && '0.5rem')};
+  font-size: ${props =>
+    (props.scale === 'small' && '0.75rem') ||
+    (props.scale === 'medium' && '0.875rem') ||
+    (props.scale === 'large' && '0.875rem')};
   font-weight: normal;
   color: #475467;
 `;
