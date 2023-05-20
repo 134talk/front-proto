@@ -60,3 +60,8 @@ export const CLOSE_ICON = process.env.PUBLIC_URL + '/assets/icons/close.svg';
 export const CANCEL_ICON = process.env.PUBLIC_URL + '/assets/icons/cancel.svg';
 
 export const RELOAD_ICON = process.env.PUBLIC_URL + '/assets/icons/reload.svg';
+
+export const CARD_IMAGE = process.env.PUBLIC_URL + '/assets/cards/card.svg';
+
+export const SELECTED_IMAGE =
+  process.env.PUBLIC_URL + '/assets/cards/card-selected.svg';

@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import { NavBar, UserList } from 'components';
+import { useState } from 'react';
+import { styled } from 'styled-components';
+import { Button, Spinner } from 'ui';
+
+export default function WaitingScreen() {
+  const [isCheck, setIsCheck] = useState<boolean>(false);
+  const handleCheckIn = () => {
+    setIsCheck(true);
+  };
+=======
 import Profile from 'components/common/Profile';
 import React, { useState } from 'react';
 import { CHECK_ICON, LEFT_ARROW_ICON } from 'shared/constants/icons';
@@ -9,11 +21,11 @@ export default function WaitingScreen() {
   const [isCheck, setIsCheck] = useState<boolean>(true);
   console.log('setIsCheck: ', setIsCheck);
 
+>>>>>>> main
   return (
     <Container>
       <div className="navbar">
-        <img src={LEFT_ARROW_ICON} alt="leftArrowIcon" />
-        <h1>대화방</h1>
+        <NavBar isCenter={true} title="대화방" isNav={true} />
       </div>
       <div className="userList_wrapper">
         {userLists.map((item: UserList) => (
@@ -50,6 +62,9 @@ const Container = styled.div`
   flex-direction: column;
   div {
     &.navbar {
+<<<<<<< HEAD
+      margin-bottom: 1.75rem;
+=======
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -65,6 +80,7 @@ const Container = styled.div`
         font-size: 1.25rem;
         line-height: 1.625rem;
       }
+>>>>>>> main
     }
     &.userList_wrapper {
       display: flex;
