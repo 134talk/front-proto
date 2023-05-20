@@ -1,4 +1,4 @@
-import Profile from 'components/common/Profile';
+import { Profile } from 'components';
 import { CHECK_ICON } from 'shared/constants/icons';
 import { styled } from 'styled-components';
 
