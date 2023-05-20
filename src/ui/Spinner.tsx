@@ -14,5 +14,8 @@ export default function Spinner(props: SpinnerProps) {
 }
 
 const Container = styled.div`
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 2.375rem;
+  margin-bottom: 0.625rem;
 `;
