@@ -11,3 +11,4 @@ export { default as WaitingScreen } from './chat/WaitingScreen';
 export { default as IntroductionScreen } from 'components/chat/IntroductionScreen';
 export { default as UserList } from './chat/UserList';
 export { default as Profile } from './common/Profile';
+export { default as KeywordScreen } from './chat/KeywordScreen';

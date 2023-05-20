@@ -70,3 +70,46 @@ export const STATUS_OPTIONS = [
     option: '변화와 해결',
   },
 ];
+
+export const KEYWORD_LIST = [
+  {
+    id: 1,
+    keyword: '일상',
+  },
+  {
+    id: 2,
+    keyword: '삶',
+  },
+  {
+    id: 3,
+    keyword: '나',
+  },
+  {
+    id: 4,
+    keyword: '관계',
+  },
+  {
+    id: 5,
+    keyword: '여행',
+  },
+  {
+    id: 6,
+    keyword: '사랑',
+  },
+  {
+    id: 7,
+    keyword: '치유',
+  },
+  {
+    id: 8,
+    keyword: '일',
+  },
+  {
+    id: 9,
+    keyword: '미래',
+  },
+  {
+    id: 10,
+    keyword: '가치',
+  },
+];
