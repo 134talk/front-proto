@@ -1,4 +1,4 @@
-import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RouterProvider } from 'react-router-dom';
@@ -13,6 +13,23 @@ function App() {
       <Device>
         <div className="App">
           <GlobalStyle />
+          <Toaster
+            position="bottom-center"
+            reverseOrder={false}
+            gutter={30}
+            containerStyle={{
+              position: 'absolute',
+              marginBottom: 110,
+            }}
+            toastOptions={{
+              duration: 5000,
+              style: {
+                top: 1000,
+                background: '#363636',
+                color: '#fff',
+              },
+            }}
+          />
           <RouterProvider router={Router} />
         </div>
       </Device>
