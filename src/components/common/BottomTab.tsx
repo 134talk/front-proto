@@ -9,7 +9,7 @@ import {
   TAB_USER,
   TAB_USER_ACTIVE,
 } from 'shared/constants/icons';
-import { styled } from 'styled-components';
+import * as t from './bottomTab.style';
 
 export default function BottomTab() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function BottomTab() {
   const tab = searchParams.get('tab');
 
   return (
-    <Container>
+    <t.Container>
       {/* FIXME: id 바꾸기 */}
       <button onClick={() => navigate('/1?tab=1')}>
         <img
@@ -38,40 +38,6 @@ export default function BottomTab() {
         <img src={tab === '4' ? TAB_USER_ACTIVE : TAB_USER} alt="마이" />
         <p>마이</p>
       </button>
-    </Container>
+    </t.Container>
   );
 }
-
-const Container = styled.div`
-  width: 100%;
-  height: 5.625rem;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  background-color: #ffffff;
-  box-shadow: 0 -2px 6px 0 rgba(172, 173, 177, 0.1);
-  padding: 0 1.25rem;
-  text-align: center;
-  box-sizing: border-box;
-  color: white;
-
-  ::before {
-    width: 100%;
-    height: 1px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    background-color: #2a2245;
-  }
-  button {
-    width: 5.234rem;
-    height: 3.5rem;
-    background: none;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #000000;
-  }
-`;
