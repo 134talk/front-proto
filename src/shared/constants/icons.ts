@@ -65,3 +65,12 @@ export const CARD_IMAGE = process.env.PUBLIC_URL + '/assets/cards/card.svg';
 
 export const SELECTED_IMAGE =
   process.env.PUBLIC_URL + '/assets/cards/card-selected.svg';
+
+export const CHAT_LEFT_ARROW =
+  process.env.PUBLIC_URL + '/assets/icons/chat-left-arrow.svg';
+
+export const CHAT_RIGHT_ARROW =
+  process.env.PUBLIC_URL + '/assets/icons/chat-right-arrow.svg';
+
+export const CLOSE_BLACK =
+  process.env.PUBLIC_URL + '/assets/icons/close-black.svg';
