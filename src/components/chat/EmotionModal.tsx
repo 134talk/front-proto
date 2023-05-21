@@ -5,7 +5,11 @@ import { CHECK_ICON, CLOSE_BLACK } from 'shared/constants/icons';
 import { styled } from 'styled-components';
 import { Button, ProfileImg } from 'ui';
 
-const User = [
+interface EmotionModalProps extends BottomModalProps {
+  sendEmotion: string;
+}
+
+export const User = [
   { id: 1, nickname: '들썩이는 매의 일격', name: '이담' },
   { id: 2, nickname: '들썩이는 나무의 일격', name: '이담' },
   { id: 3, nickname: '들썩이는 바위의 일격', name: '이담' },
@@ -16,7 +20,8 @@ const User = [
 export default function EmotionModal({
   isOpen,
   toggleModal,
-}: BottomModalProps) {
+  sendEmotion,
+}: EmotionModalProps) {
   const [sendTo, setSendTo] = useState<string>();
   const handleSelect = (nickname: string) => {
     setSendTo(nickname);
@@ -55,7 +60,7 @@ export default function EmotionModal({
               <Button
                 category="confirm"
                 disabled={!sendTo ? true : false}
-                text="감정을 보낼래요!"
+                text={`'${sendEmotion}'을 보낼래요`}
               />
               <Button
                 category="cancel"

@@ -1,4 +1,5 @@
 import {
+  ChatScreen,
   IntroductionScreen,
   KeywordScreen,
   SelectionScreen,
@@ -7,7 +8,7 @@ import {
 import { useState } from 'react';
 
 export default function ChatPage() {
-  const [pageType, setPageType] = useState<number>(0);
+  const [pageType, setPageType] = useState<number>(4);
   console.log('setPageType: ', setPageType);
   return (
     <>
@@ -15,6 +16,7 @@ export default function ChatPage() {
       {pageType === 1 && <IntroductionScreen />}
       {pageType === 2 && <KeywordScreen />}
       {pageType === 3 && <SelectionScreen />}
+      {pageType === 4 && <ChatScreen />}
     </>
   );
 }
