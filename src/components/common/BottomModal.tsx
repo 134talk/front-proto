@@ -39,6 +39,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 const ContentWrapper = styled.div<{ isOpen: boolean }>`
   animation: ${fadeInUp} 0.5s ease-in-out;

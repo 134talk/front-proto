@@ -1,8 +1,8 @@
-import { NavBar } from 'components';
+import { BottomButtonTab, NavBar } from 'components';
 import { useState } from 'react';
 import { VIOLET_IMAGE } from 'shared/constants/cards';
 import { styled } from 'styled-components';
-import { ProfileImg } from 'ui';
+import { Button, ProfileImg } from 'ui';
 import EmotionModal, { User } from './EmotionModal';
 
 const List = [
@@ -48,6 +48,9 @@ export default function ChatScreen() {
             />
           ))}
         </div>
+        <BottomButtonTab>
+          <Button category="confirm" text="다음 질문으로 넘어가볼까요?" />
+        </BottomButtonTab>
       </Container>
     </>
   );
