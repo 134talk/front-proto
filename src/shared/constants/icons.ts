@@ -59,6 +59,7 @@ export const CLOSE_ICON = process.env.PUBLIC_URL + '/assets/icons/close.svg';
 
 export const CANCEL_ICON = process.env.PUBLIC_URL + '/assets/icons/cancel.svg';
 
+
 export const RELOAD_ICON = process.env.PUBLIC_URL + '/assets/icons/reload.svg';
 
 export const CHAT_LEFT_ARROW =
