@@ -1,11 +1,9 @@
 import { ChatBox, NavBar, SearchBar } from 'components';
-import { RELOAD_ICON } from 'shared/constants/icons';
 import * as t from './chatListPage.style';
 
 export default function ChatListPage() {
   const handleCreateModal = () => {};
   const handleSearch = () => {};
-  const handleReload = () => {};
 
   return (
     <t.Container>
@@ -18,10 +16,6 @@ export default function ChatListPage() {
         handleCreateModal={handleCreateModal}
       />
       <SearchBar handleSearch={handleSearch} />
-      <button onClick={handleReload}>
-        <img src={RELOAD_ICON} alt="새로고침" />
-        새로고침
-      </button>
       <section>
         <ChatBox />
         <ChatBox />
