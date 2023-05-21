@@ -5,6 +5,7 @@ export const Container = styled.div<ChipProps>`
   display: inline-block;
   background: ${({ text }) => (text === '참여가능' ? '#ACEED6' : '#F1F3F5')};
   padding: 0.125rem 0.5rem;
+  margin-bottom: 0.6rem;
   border-radius: 50px;
   font-size: 0.875rem;
   font-weight: 700;
