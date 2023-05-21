@@ -18,6 +18,7 @@ type Props = {
   handleNav?: () => void;
   handleInviteModal?: () => void;
   handleCreateModal?: () => void;
+  handleClose?: () => void;
 };
 
 export default function NavBar({
@@ -30,6 +31,7 @@ export default function NavBar({
   handleNav,
   handleInviteModal,
   handleCreateModal,
+  handleClose,
 }: Props) {
   return (
     <>
@@ -73,7 +75,9 @@ export default function NavBar({
               </section>
             </div>
           )}
-          {button === '닫기' && <img src={CLOSE_ICON} alt="닫기" />}
+          {button === '닫기' && (
+            <img src={CLOSE_ICON} alt="닫기" onClick={handleClose} />
+          )}
         </t.Container>
       )}
     </>
