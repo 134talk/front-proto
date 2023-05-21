@@ -61,11 +61,6 @@ export const CANCEL_ICON = process.env.PUBLIC_URL + '/assets/icons/cancel.svg';
 
 export const RELOAD_ICON = process.env.PUBLIC_URL + '/assets/icons/reload.svg';
 
-export const CARD_IMAGE = process.env.PUBLIC_URL + '/assets/cards/card.svg';
-
-export const SELECTED_IMAGE =
-  process.env.PUBLIC_URL + '/assets/cards/card-selected.svg';
-
 export const CHAT_LEFT_ARROW =
   process.env.PUBLIC_URL + '/assets/icons/chat-left-arrow.svg';
 
