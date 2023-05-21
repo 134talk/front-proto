@@ -4,14 +4,14 @@ import * as t from './chip.style';
 export type ChipProps = {
   text: string;
   isDelete?: boolean;
-  handleDelete?: () => void;
+  onDelete?: () => void;
 };
 
-export default function Chip({ text, isDelete, handleDelete }: ChipProps) {
+export default function Chip({ text, isDelete, onDelete }: ChipProps) {
   return (
     <t.Container text={text}>
       <span>{text}</span>
-      {isDelete && <img src={CANCEL_ICON} alt="취소" onClick={handleDelete} />}
+      {isDelete && <img src={CANCEL_ICON} alt="취소" onClick={onDelete} />}
     </t.Container>
   );
 }

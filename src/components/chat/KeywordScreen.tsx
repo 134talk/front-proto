@@ -1,7 +1,7 @@
 import { NavBar } from 'components';
 import { useState } from 'react';
+import { CARD_IMAGE, SELECTED_IMAGE } from 'shared/constants/cards';
 import { KEYWORD_LIST } from 'shared/constants/constants';
-import { CARD_IMAGE, SELECTED_IMAGE } from 'shared/constants/icons';
 import { styled } from 'styled-components';
 import { Button } from 'ui';
 
