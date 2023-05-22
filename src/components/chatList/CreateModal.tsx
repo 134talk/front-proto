@@ -1,6 +1,7 @@
 import { BottomButtonTab, NavBar, Profile, SearchBar } from 'components';
 import { useState } from 'react';
 import { CHECK_ICON } from 'shared/constants/icons';
+import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import { Button, Chip } from 'ui';
 import * as t from './createModal.style';
 
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export default function CreateModal({ handleCreateModal }: Props) {
-  const handleSearch = () => {};
+  const { handleSearch, filteredUserList } = useSearchKeyword(TEST_USER);
 
   const [selectedIdList, setSelectedIdList] = useState<string[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<
@@ -74,7 +75,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
         </div>
         <SearchBar handleSearch={handleSearch} />
         <section>
-          {TEST_USER.map(({ userId, nickname, name }) => (
+          {filteredUserList.map(({ userId, nickname, name }) => (
             <div
               className="profileWrapper"
               key={userId}
