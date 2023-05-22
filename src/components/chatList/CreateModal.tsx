@@ -1,5 +1,6 @@
 import { BottomButtonTab, NavBar, Profile, SearchBar } from 'components';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import { Button, Chip } from 'ui';
@@ -31,7 +32,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
     if (isMemeber) handleDelete(selectedId);
     else {
       if (selectedIdList.length >= 5)
-        alert('대화는 최대 5인까지 참여 가능합니다.');
+        toast.error('대화는 최대 5인까지 참여 가능합니다.');
       else
         setSelectedMembers(prevList => [
           { userId: selectedId, name: selectedName },
