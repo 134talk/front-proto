@@ -16,5 +16,8 @@ export const Container = styled.div`
     &::-webkit-scrollbar {
       display: none;
     }
+    > div {
+      cursor: pointer;
+    }
   }
 `;

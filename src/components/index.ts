@@ -20,3 +20,5 @@ export { default as SelectionScreen } from './chat/SelectionScreen';
 export { default as EmotionModal } from './chat/EmotionModal';
 export { default as ChatScreen } from './chat/ChatScreen';
 export { default as InviteModal } from './members/InviteModal';
+export { default as SettingModal } from './chatList/SettingModal';
+export { default as CheckModal } from './chatList/CheckModal';
