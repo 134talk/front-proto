@@ -9,12 +9,14 @@ export default function NicknameResultPage() {
 
   return (
     <t.Container>
+      <p>
+        당신의
+        <br />
+        인디언 이름을 알려드립니다.
+      </p>
       <ProfileImg size="13.875rem" />
       <p>
-        당신의 이름은
-        <br />
         <span>{TEST_NICKNAME}</span> <br />
-        입니다.
       </p>
       <Button text="확인" category="confirm" onClick={handleConfirm} />
     </t.Container>
