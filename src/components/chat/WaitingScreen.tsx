@@ -1,37 +1,44 @@
-import { NavBar, UserList } from 'components';
+import { ExitConfirmModal, NavBar, UserList } from 'components';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import { Button, Spinner } from 'ui';
 
 export default function WaitingScreen() {
   const [isCheck, setIsCheck] = useState<boolean>(false);
-
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleCheckIn = () => {
     setIsCheck(true);
   };
 
   return (
-    <Container>
-      <div className="navbar">
-        <NavBar isCenter={true} title="대화방" isNav={true} />
-      </div>
-      <UserList isCheck={isCheck} scale="small" />
-      <Spinner isLoading={true} />
-      <div className="waiting_wrapper">
-        <p className="waiting_number_text">n/m</p>
-        <p className="waiting_text">대기중입니다.</p>
-      </div>
-      <div className="button_wrapper">
-        {!isCheck && (
+    <>
+      <ExitConfirmModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Container>
+        <div className="navbar">
+          <NavBar isCenter={true} title="대화방" isNav={true} />
+        </div>
+        <UserList isCheck={isCheck} scale="small" />
+        <Spinner isLoading={true} />
+        <div className="waiting_wrapper">
+          <p className="waiting_number_text">n/m</p>
+          <p className="waiting_text">대기중입니다.</p>
+        </div>
+        <div className="button_wrapper">
+          {!isCheck && (
+            <Button
+              category="confirm"
+              text="대화 참여하기"
+              onClick={handleCheckIn}
+            />
+          )}
           <Button
-            category="confirm"
-            text="대화 참여하기"
-            onClick={handleCheckIn}
+            category="cancel"
+            text="대화 나가기"
+            onClick={() => setIsModalOpen(true)}
           />
-        )}
-        <Button category="cancel" text="대화 나가기" />
-      </div>
-    </Container>
+        </div>
+      </Container>
+    </>
   );
 }
 
