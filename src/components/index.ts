@@ -18,3 +18,4 @@ export { default as SelectionScreen } from './chat/SelectionScreen';
 export { default as BottomModal } from './common/BottomModal';
 export { default as EmotionModal } from './chat/EmotionModal';
 export { default as ChatScreen } from './chat/ChatScreen';
+export { default as ChatNotifyScreen } from './chat/ChatNotifyScreen';
