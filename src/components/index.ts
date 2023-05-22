@@ -22,4 +22,3 @@ export { default as ChatScreen } from './chat/ChatScreen';
 export { default as ChatNotifyScreen } from './chat/ChatNotifyScreen';
 export { default as InviteModal } from './members/InviteModal';
 export { default as ExitConfirmModal } from './chat/ExitConfirmModal';
-export { default as InviteModal } from './members/InviteModal';
