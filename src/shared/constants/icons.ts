@@ -59,7 +59,6 @@ export const CLOSE_ICON = process.env.PUBLIC_URL + '/assets/icons/close.svg';
 
 export const CANCEL_ICON = process.env.PUBLIC_URL + '/assets/icons/cancel.svg';
 
-
 export const RELOAD_ICON = process.env.PUBLIC_URL + '/assets/icons/reload.svg';
 
 export const CHAT_LEFT_ARROW =
@@ -70,3 +69,5 @@ export const CHAT_RIGHT_ARROW =
 
 export const CLOSE_BLACK =
   process.env.PUBLIC_URL + '/assets/icons/close-black.svg';
+
+export const SMILE_ICON = process.env.PUBLIC_URL + '/assets/icons/smile.svg';

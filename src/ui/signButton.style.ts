@@ -15,7 +15,7 @@ export const Container = styled.button`
   font-weight: 700;
   &:hover {
     border: none;
-    background: #ffd74b;
-    color: #f58548;
+    background: #c5e7fa;
+    color: #034b74;
   }
 `;
