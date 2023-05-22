@@ -31,6 +31,9 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    &:first-child {
+      padding-top: 0.5rem;
+    }
     > img {
       width: 1.5rem;
       height: 1.5rem;
@@ -38,8 +41,8 @@ export const Container = styled.div`
   }
   section {
     width: 100%;
-    height: calc(100% - 16.125rem);
-    margin-top: 2rem;
+    height: calc(100% - 13.3rem);
+    margin-top: 0.5rem;
     padding-bottom: 8rem;
     position: absolute;
     display: flex;
