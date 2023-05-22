@@ -1,28 +1,17 @@
 import { NavBar, SearchBar } from 'components';
 import Profile from 'components/common/Profile';
 import type { Dispatch, SetStateAction } from 'react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import { styled } from 'styled-components';
 
 export default function MembersPage() {
   const [isModalOpen, setModalIsOpen] = useState(false);
-  const [keyword, setKeyword] = useState('');
-  //TODO: <GET 참가자 목록 조회>
+
+  const { handleSearch, filteredUserList } = useSearchKeyword(TEST_USER);
 
   const handleModal = () => setModalIsOpen(prev => !prev);
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setKeyword(e.target.value);
-
-  const filteredUserList = useMemo(
-    () =>
-      TEST_USER.filter(user => {
-        if (keyword)
-          return user.nickname.includes(keyword) || user.name.includes(keyword);
-        return user;
-      }),
-    [keyword]
-  );
 
   return (
     <Container>
@@ -49,18 +38,24 @@ export default function MembersPage() {
 const Container = styled.div`
   > section {
     width: 100%;
-    height: calc(100% - 16.125rem);
-    margin-top: 2rem;
-    padding-bottom: 3rem;
+    height: calc(100% - 13.3rem);
+    margin-top: 0.5rem;
+    padding-bottom: 4rem;
     position: absolute;
     display: flex;
     flex-direction: column;
-    gap: 1.125rem;
+    gap: 1.2rem;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
+    }
+    > div {
+      &:first-child {
+        padding-top: 0.5rem;
+      }
+      cursor: pointer;
     }
   }
 `;
