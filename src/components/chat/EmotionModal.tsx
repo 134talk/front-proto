@@ -14,7 +14,7 @@ export const User = [
   { id: 2, nickname: '들썩이는 나무의 일격', name: '이담' },
   { id: 3, nickname: '들썩이는 바위의 일격', name: '이담' },
   { id: 4, nickname: '들썩이는 바람의 일격', name: '이담' },
-  { id: 5, nickname: '들썩이는 황소의 일격', name: '이담' },
+  { id: 5, nickname: '들썩이는 황소의 날개짓', name: '이담' },
 ];
 
 export default function EmotionModal({
@@ -60,7 +60,7 @@ export default function EmotionModal({
               <Button
                 category="confirm"
                 disabled={!sendTo ? true : false}
-                text={`'${sendEmotion}'을 보낼래요`}
+                text={sendEmotion}
               />
               <Button
                 category="cancel"
