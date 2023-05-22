@@ -49,4 +49,5 @@ const ContentWrapper = styled.div<{ isOpen: boolean }>`
   width: 100%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  padding: 0 1.25rem;
 `;

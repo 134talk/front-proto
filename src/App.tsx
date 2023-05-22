@@ -16,7 +16,6 @@ function App() {
           <Toaster
             position="bottom-center"
             reverseOrder={false}
-            gutter={30}
             containerStyle={{
               position: 'absolute',
               marginBottom: 110,
@@ -25,8 +24,12 @@ function App() {
               duration: 5000,
               style: {
                 top: 1000,
-                background: '#363636',
+                background: 'rgba(0, 0, 0, 0.7)',
                 color: '#fff',
+                opacity: 0.5,
+                width: '100%',
+                fontSize: '1rem',
+                fontWeight: 500,
               },
             }}
           />
