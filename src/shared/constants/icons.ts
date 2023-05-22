@@ -79,3 +79,8 @@ export const PHONE_MOCKUP =
   process.env.PUBLIC_URL + '/assets/icons/phone-mockup.svg';
 
 export const SMILE_ICON = process.env.PUBLIC_URL + '/assets/icons/smile.svg';
+
+export const CHAT_NOTIFY_IMAGE =
+  process.env.PUBLIC_URL + '/assets/icons/chat-notify.svg';
+
+export const LINK_ICON = process.env.PUBLIC_URL + '/assets/icons/link.svg';
