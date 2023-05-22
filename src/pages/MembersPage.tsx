@@ -1,10 +1,8 @@
-import { NavBar, SearchBar } from 'components';
+import { InviteModal, NavBar, SearchBar } from 'components';
 import Profile from 'components/common/Profile';
-import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
-import { styled } from 'styled-components';
+import * as t from './membersPage.style';
 
 export default function MembersPage() {
   const [isModalOpen, setModalIsOpen] = useState(false);
@@ -14,7 +12,8 @@ export default function MembersPage() {
   const handleModal = () => setModalIsOpen(prev => !prev);
 
   return (
-    <Container>
+    <t.Container>
+      {isModalOpen && <InviteModal onClose={handleModal} />}
       <NavBar
         isCenter={false}
         title="참가자"
@@ -22,7 +21,6 @@ export default function MembersPage() {
         button="채널 초대"
         handleInviteModal={handleModal}
       />
-      {isModalOpen && <Modal setModalIsOpen={setModalIsOpen} />}
       <SearchBar handleSearch={handleSearch} />
       <section>
         {filteredUserList.map(({ userId, nickname, name }) => (
@@ -31,34 +29,9 @@ export default function MembersPage() {
           </div>
         ))}
       </section>
-    </Container>
+    </t.Container>
   );
 }
-
-const Container = styled.div`
-  > section {
-    width: 100%;
-    height: calc(100% - 13.3rem);
-    margin-top: 0.5rem;
-    padding-bottom: 4rem;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    > div {
-      &:first-child {
-        padding-top: 0.5rem;
-      }
-      cursor: pointer;
-    }
-  }
-`;
 
 const TEST_USER = [
   {
@@ -126,36 +99,6 @@ const TEST_USER = [
   },
 ];
 
-type Props = {
-  setModalIsOpen: Dispatch<SetStateAction<boolean>>;
-};
-
-function Modal({ setModalIsOpen }: Props) {
-  const location = useLocation();
-  const handleClose = () => setModalIsOpen(false);
-
-  const handleCopyClipBoard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('클립보드에 링크가 복사되었어요.');
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={handleClose}>닫기</button>
-      <button>카카오톡 친구 목록에서 초대</button>
-      <button
-        onClick={() =>
-          handleCopyClipBoard(
-            `${process.env.REACT_APP_BASE_URL}/login?channel=${location.pathname}`
-          )
-        }
-      >
-        링크 복사
-      </button>
-    </div>
-  );
-}
+// type Props = {
+//   setModalIsOpen: Dispatch<SetStateAction<boolean>>;
+// };
