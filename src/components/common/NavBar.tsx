@@ -43,9 +43,6 @@ export default function NavBar({
       ) : (
         <t.Container>
           <div className="wrapper">
-            {isNav && (
-              <img src={PREV_ICON} alt="뒤로가기" onClick={handleNav} />
-            )}
             <p>
               {title} {cnt && <span>({cnt})</span>}
             </p>

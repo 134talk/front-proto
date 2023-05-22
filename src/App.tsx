@@ -30,6 +30,9 @@ function App() {
                 fontSize: '1rem',
                 fontWeight: 500,
               },
+              error: {
+                icon: null,
+              },
             }}
           />
           <RouterProvider router={Router} />
