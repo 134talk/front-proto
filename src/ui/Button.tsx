@@ -7,8 +7,8 @@ export interface BtnProps {
   fontSize?: string;
   fontWeight?: string;
   border?: string;
-  bgColor?: string;
-  category: 'confirm' | 'cancel';
+
+  category: 'confirm' | 'cancel' | 'kakao';
   text?: string;
   children?: React.ReactNode;
   disabled?: boolean;
@@ -22,17 +22,30 @@ export default function Button(props: BtnProps) {
 
 const Btn = styled.button<BtnProps>`
   width: ${props => (props.width ? props.width : '100%')};
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.2rem;
   margin: ${props => (props.margin ? props.margin : '0')};
-  padding: ${props => (props.padding ? props.padding : '0.75rem 2rem')};
+  padding: ${props => (props.padding ? props.padding : '0.75rem 1.3rem')};
   font-size: ${props => (props.fontSize ? props.fontSize : '1rem')};
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '500')};
   border: ${props =>
-    props.category === 'confirm'
-      ? '1px solid transparent'
-      : '1px solid #034B74'};
+    props.category === 'cancel'
+      ? '1px solid #034B74'
+      : '1px solid transparent'};
   background-color: ${props =>
-    props.category === 'confirm' ? '#034B74' : '#FFFFFF'};
-  color: ${props => (props.category === 'confirm' ? '#FFFFFF' : '#034B74')};
+    props.category === 'confirm'
+      ? '#034B74'
+      : props.category === 'cancel'
+      ? '#FFFFFF'
+      : '#FEE500'};
+  color: ${props =>
+    props.category === 'confirm'
+      ? '#FFFFFF'
+      : props.category === 'cancel'
+      ? '#034B74'
+      : '#000000'};
   border-radius: 50px;
   &:disabled {
     background: #034b74;
