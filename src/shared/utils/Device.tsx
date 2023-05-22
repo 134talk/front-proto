@@ -61,14 +61,15 @@ const Web = styled.div`
 `;
 
 const Phone = styled.div`
-  width: 426px;
-  height: 92%;
+  width: 419px;
+  height: 852px;
   min-height: 750px;
   position: fixed;
   right: 50%;
   top: 50%;
   transform: translate(50%, -50%);
   background-image: url(${PHONE_MOCKUP});
+  background-repeat: no-repeat;
   background-size: 100% 100%;
   @media screen and (min-width: 1120px) {
     right: 10%;
@@ -103,7 +104,7 @@ const StatusBar = styled.div`
 
 const WebViewLayout = styled.div`
   max-width: 375px;
-  height: calc(100% - 78px);
+  height: calc(100% - 40px);
   position: relative;
   top: 50%;
   left: 50%;
