@@ -28,7 +28,7 @@ export const MOOD_OPTIONS = [
 export const PERSONALITY_OPTIONS = [
   {
     id: 1,
-    option: '경청을 잘하고 전체 의견을 조율하는',
+    option: '경청을 잘하고 의견을 조율하는',
   },
   {
     id: 2,
@@ -36,11 +36,11 @@ export const PERSONALITY_OPTIONS = [
   },
   {
     id: 3,
-    option: '나름의 계획과 효율이 중요한',
+    option: '치밀한 계획과 효율이 중요한',
   },
   {
     id: 4,
-    option: '힘을 빼고 유쾌하게 평균 이상',
+    option: '힘을 빼고 유쾌하게 목표 달성',
   },
   {
     id: 5,

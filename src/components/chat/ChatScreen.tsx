@@ -1,5 +1,7 @@
 import { BottomButtonTab, NavBar } from 'components';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Tooltip } from 'react-tooltip';
 import { VIOLET_IMAGE } from 'shared/constants/cards';
 import { styled } from 'styled-components';
 import { Button, ProfileImg } from 'ui';
@@ -7,7 +9,7 @@ import EmotionModal, { User } from './EmotionModal';
 
 const List = [
   { id: 0, emotion: '응원해요' },
-  { id: 1, emotion: '화나요' },
+  { id: 1, emotion: 'Sad' },
   { id: 2, emotion: '공감해요' },
   { id: 3, emotion: '즐거워요' },
   { id: 4, emotion: '행복해요' },
@@ -16,7 +18,9 @@ const List = [
 export default function ChatScreen() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [sendEmotion, setSendEmotion] = useState<string>('');
-
+  const testAlert = () => {
+    toast.error('대화 종료 5분 전입니다.');
+  };
   return (
     <>
       <EmotionModal
@@ -28,11 +32,39 @@ export default function ChatScreen() {
         <NavBar isCenter={true} title="대화방" />
         <div className="user_wrapper">
           {User.map(item => (
-            <ProfileImg size="3rem" key={item.id} />
+            <>
+              <ProfileImg
+                data-tooltip-id={String(item.id)}
+                size="3rem"
+                key={item.id}
+              />
+              <Tooltip
+                id={String(item.id)}
+                place="bottom"
+                content={`${item.nickname}(${item.name})`}
+                style={{
+                  backgroundColor: 'white',
+                  color: '#000',
+                  borderRadius: '20px',
+                  border: '1px solid #f4f6f9',
+                  boxShadow: '3px 4px 6px 0 rgba(138, 138, 138, 0.2)',
+                  width: '6rem',
+                  height: '2.8rem',
+                  padding: '0.5rem',
+                  textAlign: 'center',
+                  fontSize: '0.75rem',
+                }}
+              />
+            </>
           ))}
         </div>
         <div className="card_wrapper">
-          <img className="card_image" src={VIOLET_IMAGE} alt="card-violet" />
+          <img
+            className="card_image"
+            src={VIOLET_IMAGE}
+            alt="card-violet"
+            onClick={testAlert}
+          />
         </div>
         <p className="card_info_text">'들썩이는 매의 일격'님이 선택한 질문</p>
         <button className="guide_button">💬 대화 가이드가 도착했습니다.</button>
