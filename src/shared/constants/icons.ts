@@ -84,3 +84,5 @@ export const CHAT_NOTIFY_IMAGE =
   process.env.PUBLIC_URL + '/assets/icons/chat-notify.svg';
 
 export const LINK_ICON = process.env.PUBLIC_URL + '/assets/icons/link.svg';
+
+export const SKIP_ICON = process.env.PUBLIC_URL + '/assets/icons/skip.svg';
