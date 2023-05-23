@@ -1,9 +1,10 @@
 import { BaseModal } from 'components';
+import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 import { KAKAO_ICON, LINK_ICON } from 'shared/constants/icons';
-import { styled } from 'styled-components';
 import { Button } from 'ui';
+import * as t from './inviteModal.style';
 
 type Props = {
   onClose: () => void;
@@ -12,7 +13,7 @@ type Props = {
 export default function InviteModal({ onClose }: Props) {
   const location = useLocation();
 
-  const handleCopyClipBoard = async (text: string) => {
+  const copyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       toast.error('클립보드에 링크가 복사되었어요.');
@@ -21,18 +22,61 @@ export default function InviteModal({ onClose }: Props) {
     }
   };
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://developers.kakao.com/sdk/js/kakao.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const shareByKakao = (route: string, title: string) => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+      if (!kakao.isInitialized())
+        kakao.init(process.env.REACT_APP_SHARE_KAKAO_LINK_KEY);
+
+      kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: title,
+          description: '설명',
+          imageUrl: '',
+          link: {
+            mobileWebUrl: route,
+            webUrl: route,
+          },
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: route,
+              webUrl: route,
+            },
+          },
+        ],
+      });
+    }
+  };
+
   return (
-    <Container>
+    <t.Container>
       <BaseModal isCloseButton={true} onClose={onClose}>
         <p>카카오톡 친구 목록에서 초대하기</p>
         <div className="buttonWrapper">
-          <Button category="kakao">
+          <Button
+            category="kakao"
+            onClick={() => shareByKakao('https://134.works', '134')}
+          >
             <img src={KAKAO_ICON} alt="초대하기" /> 초대하기
           </Button>
           <Button
             category="confirm"
             onClick={() =>
-              handleCopyClipBoard(
+              copyClipBoard(
                 `${process.env.REACT_APP_BASE_URL}/login?channel=${location.pathname}`
               )
             }
@@ -41,21 +85,6 @@ export default function InviteModal({ onClose }: Props) {
           </Button>
         </div>
       </BaseModal>
-    </Container>
+    </t.Container>
   );
 }
-
-const Container = styled.div`
-  p {
-    font-size: 1.13rem;
-    font-weight: 700;
-    margin-top: 0.8rem;
-  }
-  .buttonWrapper {
-    width: 100%;
-    height: 2.75rem;
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 2.6rem;
-  }
-`;
