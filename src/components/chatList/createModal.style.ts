@@ -1,22 +1,6 @@
 import { styled } from 'styled-components';
 
-export const Background = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: #ffffff;
-  z-index: 99;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
 export const Container = styled.div`
-  width: calc(100% - 1.25rem * 2);
-  height: 100%;
-  margin-top: 2.75rem;
-  position: absolute;
-  top: 0;
-  z-index: 100;
   .chipWrapper {
     width: 100%;
     > div {

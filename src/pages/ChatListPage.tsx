@@ -2,6 +2,7 @@ import {
   ChatBox,
   CheckModal,
   CreateModal,
+  GuideModal,
   NavBar,
   SearchBar,
   SettingModal,
@@ -13,6 +14,7 @@ export default function ChatListPage() {
   const [createModal, setCreateModal] = useState(false);
   const [settingModal, setSettingModal] = useState(false);
   const [checkModal, setCheckModal] = useState(false);
+  const [guideModal, setGuideModal] = useState(false);
   const [chatTime, setChatTime] = useState('30');
 
   const handleCreateModal = () => setCreateModal(prev => !prev);
@@ -21,6 +23,7 @@ export default function ChatListPage() {
   const handleCheckModal = () => setCheckModal(prev => !prev);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setChatTime(e.target.value);
+  const handleGuideModal = () => setGuideModal(prev => !prev);
 
   return (
     <>
@@ -36,6 +39,7 @@ export default function ChatListPage() {
           onClose={handleSettingModal}
         />
       )}
+      {guideModal && <GuideModal onClose={handleGuideModal} />}
       <t.Container>
         <NavBar
           isCenter={false}
@@ -47,16 +51,16 @@ export default function ChatListPage() {
         />
         <SearchBar handleSearch={handleSearch} />
         <section>
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
-          <ChatBox />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
+          <ChatBox onClick={handleGuideModal} />
         </section>
       </t.Container>
     </>
