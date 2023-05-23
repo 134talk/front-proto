@@ -17,6 +17,7 @@ type Props = {
   isAdmin?: boolean;
   handleNav?: () => void;
   handleInviteModal?: () => void;
+  handleSetting?: () => void;
   handleCreateModal?: () => void;
   handleClose?: () => void;
 };
@@ -30,6 +31,7 @@ export default function NavBar({
   isAdmin,
   handleNav,
   handleInviteModal,
+  handleSetting,
   handleCreateModal,
   handleClose,
 }: Props) {
@@ -60,7 +62,9 @@ export default function NavBar({
           )}
           {button === '새 대화방' && (
             <div className="wrapper">
-              {isAdmin && <img src={SETTING_ICON} alt="설정" />}
+              {isAdmin && (
+                <img src={SETTING_ICON} alt="설정" onClick={handleSetting} />
+              )}
               <section>
                 <Button
                   category="confirm"
