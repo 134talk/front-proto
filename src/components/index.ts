@@ -24,3 +24,5 @@ export { default as InviteModal } from './members/InviteModal';
 export { default as SettingModal } from './chatList/SettingModal';
 export { default as CheckModal } from './chatList/CheckModal';
 export { default as ExitConfirmModal } from './chat/ExitConfirmModal';
+export { default as FullModal } from './common/FullModal';
+export { default as GuideModal } from './chatList/GuideModal';

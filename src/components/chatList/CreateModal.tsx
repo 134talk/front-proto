@@ -1,4 +1,10 @@
-import { BottomButtonTab, NavBar, Profile, SearchBar } from 'components';
+import {
+  BottomButtonTab,
+  FullModal,
+  NavBar,
+  Profile,
+  SearchBar,
+} from 'components';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
@@ -55,46 +61,47 @@ export default function CreateModal({ handleCreateModal }: Props) {
 
   return (
     <>
-      <t.Background />
-      <t.Container>
-        <NavBar
-          isCenter={false}
-          title="대화 초대"
-          cnt={selectedIdList.length.toString()}
-          button="닫기"
-          handleClose={handleCreateModal}
-        />
-        <div className="chipWrapper">
-          {selectedMembers.map(({ userId, name }) => (
-            <Chip
-              text={name}
-              isDelete={true}
-              key={userId}
-              onDelete={() => handleDelete(userId)}
-            />
-          ))}
-        </div>
-        <SearchBar handleSearch={handleSearch} />
-        <section>
-          {filteredUserList.map(({ userId, nickname, name }) => (
-            <div
-              className="profileWrapper"
-              key={userId}
-              onClick={() => handleClick(userId, name)}
-            >
-              <Profile
-                scale="medium"
-                userId={userId}
-                nickname={nickname}
-                name={name}
+      <FullModal>
+        <t.Container>
+          <NavBar
+            isCenter={false}
+            title="대화 초대"
+            cnt={selectedIdList.length.toString()}
+            button="닫기"
+            handleClose={handleCreateModal}
+          />
+          <div className="chipWrapper">
+            {selectedMembers.map(({ userId, name }) => (
+              <Chip
+                text={name}
+                isDelete={true}
+                key={userId}
+                onDelete={() => handleDelete(userId)}
               />
-              {selectedIdList.includes(userId) && (
-                <img src={CHECK_ICON} alt="선택" />
-              )}
-            </div>
-          ))}
-        </section>
-      </t.Container>
+            ))}
+          </div>
+          <SearchBar handleSearch={handleSearch} />
+          <section>
+            {filteredUserList.map(({ userId, nickname, name }) => (
+              <div
+                className="profileWrapper"
+                key={userId}
+                onClick={() => handleClick(userId, name)}
+              >
+                <Profile
+                  scale="medium"
+                  userId={userId}
+                  nickname={nickname}
+                  name={name}
+                />
+                {selectedIdList.includes(userId) && (
+                  <img src={CHECK_ICON} alt="선택" />
+                )}
+              </div>
+            ))}
+          </section>
+        </t.Container>
+      </FullModal>
       <BottomButtonTab>
         <Button text="채널 초대하기" category="confirm" />
       </BottomButtonTab>
