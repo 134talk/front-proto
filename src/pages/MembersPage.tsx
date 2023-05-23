@@ -1,5 +1,4 @@
-import { InviteModal, NavBar, SearchBar } from 'components';
-import Profile from 'components/common/Profile';
+import { InviteModal, NavBar, Profile, SearchBar } from 'components';
 import { useState } from 'react';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import * as t from './membersPage.style';
@@ -98,7 +97,3 @@ const TEST_USER = [
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
 ];
-
-// type Props = {
-//   setModalIsOpen: Dispatch<SetStateAction<boolean>>;
-// };
