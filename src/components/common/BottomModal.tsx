@@ -2,7 +2,7 @@ import { keyframes, styled } from 'styled-components';
 
 export interface BottomModalProps {
   isOpen: boolean;
-  toggleModal: () => void;
+  toggleModal?: () => void;
   children?: React.ReactNode;
 }
 
