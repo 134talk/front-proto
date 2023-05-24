@@ -32,11 +32,14 @@ jobs:
         run: echo 'yarn cache missed!'
       - run: yarn install --immutable --immutable-cache --check-cache
 
-#       - name: Generate Environment Variables File for Production
-#         run: |
-#           echo "REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL" >> .env.production
-#         env:
-#           REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL" >> .env.production
+        env:
+          REACT_APP_KAKAO_CLIENT_ID: ${{ secrets.REACT_APP_KAKAO_CLIENT_ID }}
+          REACT_APP_KAKAO_REDIRECT_URI: ${{ secrets.REACT_APP_KAKAO_REDIRECT_URI }}
+          REACT_APP_SHARE_KAKAO_LINK_KEY: ${{ secrets.REACT_APP_SHARE_KAKAO_LINK_KEY }}
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
 
       - name: Build
         run: unset CI && yarn build
