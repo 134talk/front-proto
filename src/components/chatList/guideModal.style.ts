@@ -11,22 +11,22 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.5rem;
     position: relative;
     button:nth-child(2) {
       position: absolute;
-      bottom: 0;
+      bottom: 1rem;
     }
   }
   .guide_wrapper {
     width: 100%;
-    margin-top: 3.5rem;
+    margin-top: 2rem;
     > img {
       width: 100%;
       height: 17.5rem;
     }
     > p {
-      font-size: 1.125rem;
+      font-size: 1rem;
       text-align: center;
       line-height: 1.3;
       color: #000000;
@@ -65,7 +65,7 @@ export const Container = styled.div`
 export const DotsWrapper = styled.div`
   width: 100%;
   position: absolute;
-  top: 1.2rem;
+  top: 0.5rem;
 `;
 
 export const SkipButton = styled.button<StyleProps>`
