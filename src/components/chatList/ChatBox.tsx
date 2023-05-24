@@ -1,9 +1,13 @@
 import { Chip } from 'ui';
 import * as t from './chatBox.style';
 
-export default function ChatBox() {
+type Props = {
+  onClick: () => void;
+};
+
+export default function ChatBox({ onClick }: Props) {
   return (
-    <t.Container>
+    <t.Container onClick={onClick}>
       <div className="wrapper">
         <p>참여 인원 수 (3)</p>
         <Chip text="참여가능" />
