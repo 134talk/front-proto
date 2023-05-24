@@ -12,7 +12,6 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    margin: 2.5rem 0;
     position: relative;
     button:nth-child(2) {
       position: absolute;
