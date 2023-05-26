@@ -1,12 +1,15 @@
 import { BottomModal } from 'components';
-import type { BottomModalProps } from 'components/common/BottomModal';
-import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { CHECK_ICON, CLOSE_BLACK } from 'shared/constants/icons';
 import { styled } from 'styled-components';
 import { Button, ProfileImg } from 'ui';
 
-interface EmotionModalProps extends BottomModalProps {
+interface EmotionModalProps {
+  isModalOpen: boolean;
   sendEmotion: string;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsSendEmotion: Dispatch<SetStateAction<boolean>>;
 }
 
 export const User = [
@@ -18,28 +21,40 @@ export const User = [
 ];
 
 export default function EmotionModal({
-  isOpen,
-  toggleModal,
+  isModalOpen,
   sendEmotion,
+  setIsModalOpen,
+  setIsSendEmotion,
 }: EmotionModalProps) {
-  const [sendTo, setSendTo] = useState<string>();
+  const [sendTo, setSendTo] = useState<string>('');
   const handleSelect = (nickname: string) => {
     setSendTo(nickname);
   };
+  const handleClose = () => {
+    setSendTo('');
+    setIsModalOpen(false);
+  };
+  const handleSendEmotion = () => {
+    setSendTo('');
+    setIsSendEmotion(true);
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setIsSendEmotion(false);
+    }
+  }, [isModalOpen]);
 
   return (
     <>
-      {isOpen && (
-        <BottomModal toggleModal={() => toggleModal()} isOpen={isOpen}>
+      {isModalOpen && (
+        <BottomModal isOpen={isModalOpen}>
           <Container>
             <div className="navbar_wrapper">
               <div className="navbar_top_wrapper">
                 <p className="guide_text">어느 분에게 감정을 표현하시겠어요?</p>
-                <img
-                  src={CLOSE_BLACK}
-                  alt="close"
-                  onClick={() => toggleModal()}
-                />
+                <img src={CLOSE_BLACK} alt="close" onClick={handleClose} />
               </div>
               {sendTo && <p className="sub_text">'{sendTo}'님에게</p>}
             </div>
@@ -61,12 +76,9 @@ export default function EmotionModal({
                 category="confirm"
                 disabled={!sendTo ? true : false}
                 text={sendEmotion}
+                onClick={handleSendEmotion}
               />
-              <Button
-                category="cancel"
-                text="취소"
-                onClick={() => toggleModal()}
-              />
+              <Button category="cancel" text="취소" onClick={handleClose} />
             </div>
           </Container>
         </BottomModal>

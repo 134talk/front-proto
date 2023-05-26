@@ -2,7 +2,7 @@ import { keyframes, styled } from 'styled-components';
 
 export interface BottomModalProps {
   isOpen: boolean;
-  toggleModal?: () => void;
+  onClick?: () => void;
   children?: React.ReactNode;
 }
 
@@ -20,11 +20,13 @@ const fadeInUp = keyframes`
 export default function BottomModal({
   isOpen,
   children,
-  toggleModal,
+  onClick,
 }: BottomModalProps) {
   return (
     <Container>
-      <ContentWrapper isOpen={isOpen}>{children}</ContentWrapper>
+      <ContentWrapper isOpen={isOpen} onClick={onClick}>
+        {children}
+      </ContentWrapper>
     </Container>
   );
 }

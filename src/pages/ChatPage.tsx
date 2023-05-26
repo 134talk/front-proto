@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 
 export default function ChatPage() {
-  const [pageType, setPageType] = useState<number>(4);
+  const [pageType, setPageType] = useState<number>(5);
   console.log('setPageType: ', setPageType);
   return (
     <>

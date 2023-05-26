@@ -13,7 +13,7 @@ export default function UserList({ isCheck, scale }: UserListProps) {
       {userLists.map((item: UserListType) => (
         <div className="user_wrapper" key={item.id}>
           {isCheck && (
-            <img className="check_image" src={CHECK_ICON} alt="checkIcon" />
+            <img className="check_image" src={CHECK_ICON} alt="check" />
           )}
           <Profile
             nickname={item.nickname}

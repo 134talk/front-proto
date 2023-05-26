@@ -26,3 +26,4 @@ export { default as CheckModal } from './chatList/CheckModal';
 export { default as ExitConfirmModal } from './chat/ExitConfirmModal';
 export { default as FullModal } from './common/FullModal';
 export { default as GuideModal } from './chatList/GuideModal';
+export { default as Card } from './chat/Card';
