@@ -1,3 +1,12 @@
+import {
+  EMOTION_ANGRY,
+  EMOTION_HUG,
+  EMOTION_LIKE,
+  EMOTION_LOVE,
+  EMOTION_RIGHT,
+  EMOTION_SAD,
+} from './icons';
+
 export const KAKAO_OAUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
 
 export const NAME_REGEX = /^[가-힣]{2,20}$/;
@@ -72,44 +81,23 @@ export const STATUS_OPTIONS = [
 ];
 
 export const KEYWORD_LIST = [
-  {
-    id: 1,
-    keyword: '일상',
-  },
-  {
-    id: 2,
-    keyword: '삶',
-  },
-  {
-    id: 3,
-    keyword: '나',
-  },
-  {
-    id: 4,
-    keyword: '관계',
-  },
-  {
-    id: 5,
-    keyword: '여행',
-  },
-  {
-    id: 6,
-    keyword: '사랑',
-  },
-  {
-    id: 7,
-    keyword: '치유',
-  },
-  {
-    id: 8,
-    keyword: '일',
-  },
-  {
-    id: 9,
-    keyword: '미래',
-  },
-  {
-    id: 10,
-    keyword: '가치',
-  },
+  { id: 1, keyword: '일상' },
+  { id: 2, keyword: '삶' },
+  { id: 3, keyword: '나' },
+  { id: 4, keyword: '관계' },
+  { id: 5, keyword: '여행' },
+  { id: 6, keyword: '사랑' },
+  { id: 7, keyword: '치유' },
+  { id: 8, keyword: '일' },
+  { id: 9, keyword: '미래' },
+  { id: 10, keyword: '가치' },
+];
+
+export const EMOTION_LIST = [
+  { id: 0, emotion: 'love', source: EMOTION_LOVE },
+  { id: 1, emotion: 'like', source: EMOTION_LIKE },
+  { id: 2, emotion: 'hug', source: EMOTION_HUG },
+  { id: 3, emotion: 'sad', source: EMOTION_SAD },
+  { id: 4, emotion: 'right', source: EMOTION_RIGHT },
+  { id: 5, emotion: 'angry', source: EMOTION_ANGRY },
 ];
