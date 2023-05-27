@@ -86,3 +86,23 @@ export const CHAT_NOTIFY_IMAGE =
 export const LINK_ICON = process.env.PUBLIC_URL + '/assets/icons/link.svg';
 
 export const SKIP_ICON = process.env.PUBLIC_URL + '/assets/icons/skip.svg';
+
+export const SHADOW_IMAGE = process.env.PUBLIC_URL + '/assets/icons/shadow.svg';
+
+export const EMOTION_LOVE =
+  process.env.PUBLIC_URL + '/assets/emotions/love.svg';
+
+export const EMOTION_LIKE =
+  process.env.PUBLIC_URL + '/assets/emotions/like.svg';
+
+export const EMOTION_HUG = process.env.PUBLIC_URL + '/assets/emotions/hug.svg';
+
+export const EMOTION_SAD = process.env.PUBLIC_URL + '/assets/emotions/sad.svg';
+
+export const EMOTION_RIGHT =
+  process.env.PUBLIC_URL + '/assets/emotions/right.svg';
+
+export const EMOTION_ANGRY =
+  process.env.PUBLIC_URL + '/assets/emotions/angry.svg';
+
+export const ROTATE_ICON = process.env.PUBLIC_URL + '/assets/icons/rotate.svg';

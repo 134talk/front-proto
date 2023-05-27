@@ -85,6 +85,8 @@ const StatusBar = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
+  z-index: 9999;
+  position: relative;
   padding: 0.938rem 0 0.75rem 0;
   p {
     &.real_time_text {
