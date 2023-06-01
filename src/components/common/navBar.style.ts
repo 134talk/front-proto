@@ -18,6 +18,19 @@ export const Container = styled.div`
       top: 1.3rem;
       cursor: pointer;
     }
+    > div {
+      position: absolute;
+      right: 0;
+      top: 1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .badge_image {
+      position: absolute;
+      width: 0.875rem;
+      right: -0.25rem;
+    }
   }
   .wrapper {
     display: flex;

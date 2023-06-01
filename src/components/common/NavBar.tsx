@@ -1,5 +1,7 @@
 import {
   CLOSE_ICON,
+  HAMBURGER_ICON,
+  NEW_BADGE_ICON,
   PLUS_ICON,
   PREV_ICON,
   SETTING_ICON,
@@ -11,6 +13,8 @@ import * as t from './navBar.style';
 type Props = {
   isCenter: boolean;
   isNav?: boolean;
+  isHamburger?: boolean;
+  isNew?: boolean;
   title: string;
   cnt?: string;
   button?: '채널 초대' | '새 대화방' | '닫기';
@@ -20,11 +24,14 @@ type Props = {
   handleSetting?: () => void;
   handleCreateModal?: () => void;
   handleClose?: () => void;
+  handleSideNav?: () => void;
 };
 
 export default function NavBar({
   isCenter,
   isNav,
+  isHamburger,
+  isNew,
   title,
   cnt,
   button,
@@ -34,6 +41,7 @@ export default function NavBar({
   handleSetting,
   handleCreateModal,
   handleClose,
+  handleSideNav,
 }: Props) {
   return (
     <>
@@ -41,6 +49,22 @@ export default function NavBar({
         <t.Container className="center">
           {isNav && <img src={PREV_ICON} alt="뒤로가기" onClick={handleNav} />}
           <p>{title}</p>
+          {isHamburger && (
+            <div>
+              <img
+                src={HAMBURGER_ICON}
+                alt="hamburger"
+                onClick={handleSideNav}
+              />
+              {isNew && (
+                <img
+                  className="badge_image"
+                  src={NEW_BADGE_ICON}
+                  alt="newBadge"
+                />
+              )}
+            </div>
+          )}
         </t.Container>
       ) : (
         <t.Container>
