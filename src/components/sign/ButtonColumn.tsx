@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { SignButton } from 'ui';
+import { Button } from 'ui';
 import * as t from './buttonColumn.style';
 
 export default function ButtonColumn() {
@@ -8,12 +8,14 @@ export default function ButtonColumn() {
 
   return (
     <t.Container>
-      <SignButton
-        isAdmin={false}
+      <Button
+        category="confirm"
+        text="일반 회원 등록"
         onClick={() => handleNavigate('/sign/user')}
       />
-      <SignButton
-        isAdmin={true}
+      <Button
+        category="cancel"
+        text="관리자 회원 등록"
         onClick={() => handleNavigate('/sign/admin')}
       />
     </t.Container>

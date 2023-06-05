@@ -32,11 +32,11 @@ const Btn = styled.button<BtnProps>`
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '500')};
   border: ${props =>
     props.category === 'cancel'
-      ? '1px solid #034B74'
+      ? '1px solid #7588EA'
       : '1px solid transparent'};
   background-color: ${props =>
     props.category === 'confirm'
-      ? '#034B74'
+      ? '#7588EA'
       : props.category === 'cancel'
       ? '#FFFFFF'
       : '#FEE500'};
@@ -44,11 +44,11 @@ const Btn = styled.button<BtnProps>`
     props.category === 'confirm'
       ? '#FFFFFF'
       : props.category === 'cancel'
-      ? '#034B74'
+      ? '#4059DE'
       : '#000000'};
   border-radius: 50px;
   &:disabled {
-    background: #034b74;
+    background: #7588EA;
     opacity: 0.3;
     color: #ffffff
     cursor: auto;

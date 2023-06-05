@@ -11,8 +11,19 @@ export const silentRefresh = (accessToken: string, refreshToken: string) =>
     accessToken: accessToken,
     refreshToken: refreshToken,
   });
-// 일반 회원 등록
-// 관리자 회원 등록
+
+export const signUser = (name: string, channel: string) =>
+  axiosInstance.post('/user/register', {
+    name: name,
+    teamCode: channel,
+  });
+
+export const signAdmin = (name: string, team: string) =>
+  axiosInstance.post('/user/admin/register', {
+    name: name,
+    teamName: team,
+  });
+
 // 이름 조회
 // 닉네임 등록
 // 닉네임 수정
