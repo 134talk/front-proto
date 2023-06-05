@@ -7,9 +7,7 @@ type Props = {
 };
 
 export default function ProtectedRoute({ children, redirectPath }: Props) {
-  // TODO: 서버 연결 후 주석 해제하기
-  // const isAuth = !!sessionStorage.getItem('token');
-  const isAuth = true;
+  const isAuth = !!sessionStorage.getItem('token');
 
   return (
     <>{isAuth ? <>{children}</> : <Navigate to={redirectPath} replace />}</>
