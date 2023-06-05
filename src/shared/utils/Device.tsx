@@ -49,6 +49,7 @@ const Mobile = styled.div`
   margin: 0 auto;
   padding: 0;
   width: 100%;
+  height: 100%;
   max-width: 640px;
   min-width: 280px;
   overflow: hidden;
