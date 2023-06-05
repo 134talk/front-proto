@@ -13,6 +13,7 @@ const token = sessionStorage.getItem('token');
 axiosInstance.interceptors.request.use(
   config => {
     config.headers.Authorization = `Bearer ${token}`;
+    config = { ...config, withCredentials: true };
     return config;
   },
   error => {

@@ -18,7 +18,7 @@ const Router = createBrowserRouter(
           key={id}
           path={path}
           element={
-            <ProtectedRoute redirectPath="/login">
+            <ProtectedRoute redirectPath="/">
               {element}
               {isTab && <BottomTab />}
             </ProtectedRoute>
