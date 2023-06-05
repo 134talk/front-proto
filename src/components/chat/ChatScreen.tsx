@@ -1,78 +1,51 @@
-import { BottomButtonTab, NavBar } from 'components';
+import { BottomButtonTab, Card, EmotionModal, NavBar } from 'components';
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { Tooltip } from 'react-tooltip';
-import { VIOLET_IMAGE } from 'shared/constants/cards';
+import { EMOTION_LIST } from 'shared/constants/constants';
 import { styled } from 'styled-components';
-import { Button, ProfileImg } from 'ui';
-import EmotionModal, { User } from './EmotionModal';
+import { Button, Emotion } from 'ui';
 
-const List = [
-  { id: 0, emotion: '응원해요' },
-  { id: 1, emotion: 'Sad' },
-  { id: 2, emotion: '공감해요' },
-  { id: 3, emotion: '즐거워요' },
-  { id: 4, emotion: '행복해요' },
-  { id: 5, emotion: '슬퍼요' },
-];
 export default function ChatScreen() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [sendEmotion, setSendEmotion] = useState<string>('');
-  const testAlert = () => {
-    toast.error('대화 종료 5분 전입니다.');
+  const [isSendEmotion, setIsSendEmotion] = useState<boolean>(false);
+  const [isRotate, setIsRotate] = useState<boolean>(false);
+
+  const handleRotate = () => {
+    setIsRotate(!isRotate);
   };
   return (
     <>
       <EmotionModal
-        isOpen={isModalOpen}
-        toggleModal={() => setIsModalOpen(false)}
         sendEmotion={sendEmotion}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        setIsSendEmotion={setIsSendEmotion}
       />
       <Container>
         <NavBar isCenter={true} title="대화방" />
-        <div className="user_wrapper">
-          {User.map(item => (
-            <>
-              <ProfileImg
-                data-tooltip-id={String(item.id)}
-                size="3rem"
-                key={item.id}
-              />
-              <Tooltip
-                id={String(item.id)}
-                place="bottom"
-                content={`${item.nickname}(${item.name})`}
-                style={{
-                  backgroundColor: 'white',
-                  color: '#000',
-                  borderRadius: '20px',
-                  border: '1px solid #f4f6f9',
-                  boxShadow: '3px 4px 6px 0 rgba(138, 138, 138, 0.2)',
-                  width: '6rem',
-                  height: '2.8rem',
-                  padding: '0.5rem',
-                  textAlign: 'center',
-                  fontSize: '0.75rem',
-                }}
-              />
-            </>
-          ))}
-        </div>
         <div className="card_wrapper">
-          <img
-            className="card_image"
-            src={VIOLET_IMAGE}
-            alt="card-violet"
-            onClick={testAlert}
+          <Card
+            size="15.188rem"
+            keyword="일상"
+            hint="모든 중요한 것은 일상 속에 있다."
+            question="당신에게 소소한 행복은 어떤 것들인가요?"
+            isFront={isRotate}
+            type="chat"
+            fillColor="#D4D1FF"
+            lightColor="#DF9EEC"
+            darkColor="#D299FF"
+            onClick={handleRotate}
           />
         </div>
         <p className="card_info_text">'들썩이는 매의 일격'님이 선택한 질문</p>
-        <button className="guide_button">💬 대화 가이드가 도착했습니다.</button>
         <div className="emotion_wrapper">
-          {List.map(item => (
-            <div
-              className="temp"
+          {EMOTION_LIST.map(item => (
+            <Emotion
+              image={item.source}
               key={item.id}
+              isEmotion={
+                isSendEmotion && sendEmotion.includes(item.emotion) && true
+              }
               onClick={() => {
                 setIsModalOpen(!isModalOpen);
                 setSendEmotion(item.emotion);
@@ -87,22 +60,16 @@ export default function ChatScreen() {
     </>
   );
 }
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   div {
-    &.user_wrapper {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      margin-top: 1.25rem;
-      gap: 0.5rem;
-    }
     &.card_wrapper {
       display: flex;
-      margin-top: 1.375rem;
+      margin-top: 4.75rem;
       margin-bottom: 1.5rem;
     }
     &.emotion_wrapper {
@@ -111,6 +78,7 @@ const Container = styled.div`
       justify-content: space-between;
       row-gap: 0.5rem;
       width: 14rem;
+      margin-top: 2.625rem;
     }
     &.temp {
       background-color: skyblue;
@@ -119,30 +87,11 @@ const Container = styled.div`
       border-radius: 50%;
     }
   }
-  img {
-    &.card_image {
-      margin: 0 auto;
-      width: 15.188rem;
-      height: 15.188rem;
-    }
-  }
   p {
     &.card_info_text {
       color: #475467;
       font-size: 0.875rem;
       text-align: center;
-    }
-  }
-  button {
-    &.guide_button {
-      width: 14.375rem;
-      margin-top: 0.375rem;
-      margin-bottom: 1.188rem;
-      padding: 0.5rem 1.25rem;
-      border-radius: 999px;
-      box-shadow: 3px 4px 6px 0 rgba(138, 138, 138, 0.2);
-      border: solid 1px #e9ecef;
-      background-color: #fff;
     }
   }
 `;

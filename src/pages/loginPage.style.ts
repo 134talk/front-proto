@@ -6,16 +6,19 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20.125rem;
   position: relative;
   padding-bottom: 5.875rem;
-  .background {
-    position: absolute;
-    top: 0;
-    width: calc(100% + 1.25rem * 2);
-    min-height: 100vh;
-    background: linear-gradient(180.03deg, #71cfd5 44.58%, #2c85ab 99.97%);
-    z-index: -999;
+  > p {
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.3;
+    text-align: center;
+    margin-top: 0.5rem;
+    &.bold {
+      margin-top: 1.5rem;
+      font-weight: 600;
+    }
   }
   > img {
     width: 6.688rem;

@@ -1,5 +1,6 @@
 import ChatListPage from 'pages/ChatListPage';
 import ChatPage from 'pages/ChatPage';
+import KakaoPage from 'pages/KakaoPage';
 import LogInPage from 'pages/LogInPage';
 import MembersPage from 'pages/MembersPage';
 import NicknameGuidePage from 'pages/NicknameGuidePage';
@@ -87,5 +88,11 @@ export const BaseRouter: RouterData[] = [
     path: '/login',
     isTab: false,
     element: <LogInPage />,
+  },
+  {
+    id: 1,
+    path: '/oauth/callback/kakao',
+    isTab: false,
+    element: <KakaoPage />,
   },
 ];
