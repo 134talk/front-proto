@@ -3,6 +3,7 @@ import axiosInstance from './instance';
 export const login = (code: string) =>
   axiosInstance.post('/auth/login/kakao', {
     code: code,
+    redirectUri: process.env.REACT_APP_KAKAO_REDIRECT_URI,
   });
 
 export const silentRefresh = (accessToken: string, refreshToken: string) =>

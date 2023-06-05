@@ -22,7 +22,7 @@ interface RouterData {
 export const AuthRouter: RouterData[] = [
   {
     id: 0,
-    path: '/:channelId',
+    path: '/channel/:channelId',
     isTab: true,
     element: <MembersPage />,
   },
@@ -85,7 +85,7 @@ export const AuthRouter: RouterData[] = [
 export const BaseRouter: RouterData[] = [
   {
     id: 0,
-    path: '/login',
+    path: '/',
     isTab: false,
     element: <LogInPage />,
   },
