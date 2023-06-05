@@ -1,4 +1,5 @@
 import React from 'react';
+import { use100vh } from 'react-div-100vh';
 import { INDICATOR, PHONE_MOCKUP, STATUS_BAR } from 'shared/constants/icons';
 import { styled } from 'styled-components';
 import isMobile from './deviceDetector';
@@ -13,10 +14,12 @@ export default function Device({ children }: Props) {
     hour: 'numeric',
   });
   const realtime = now.slice(2);
+  const mobileHeight = use100vh();
+
   return (
     <>
       {isMobile ? (
-        <Mobile>{children}</Mobile>
+        <Mobile height={mobileHeight}>{children}</Mobile>
       ) : (
         <Web>
           <Phone>
@@ -45,13 +48,13 @@ export default function Device({ children }: Props) {
   );
 }
 
-const Mobile = styled.div`
+const Mobile = styled.div<{ height: number }>`
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  height: 100%;
   max-width: 640px;
   min-width: 280px;
+  height: ${({ height }) => height}
   overflow: hidden;
   padding: 0 1.25rem;
 `;
