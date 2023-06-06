@@ -1,19 +1,16 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getName } from 'shared/api/userApi';
 import { SILHOUETTE } from 'shared/constants/icons';
+import useName from 'shared/query/useName';
 import { Background, Button } from 'ui';
 import * as t from './nicknameGuidePage.style';
 
 export default function NicknameGuidePage() {
   const navigate = useNavigate();
+  const { name } = useName();
 
   useEffect(() => {
     localStorage.removeItem('mood');
-  }, []);
-
-  useEffect(() => {
-    getName().then(res => console.log(res));
   }, []);
 
   const handleNext = () => navigate('/nickname/mood');
@@ -21,7 +18,7 @@ export default function NicknameGuidePage() {
   return (
     <t.Container>
       <Background />
-      <p className="username">{NAME} 님</p>
+      <p className="username">{name}님</p>
       <p>134에 오신 것을 환영해요.</p>
       <section>
         <p>
@@ -42,5 +39,3 @@ export default function NicknameGuidePage() {
     </t.Container>
   );
 }
-//FIXME: TEST DATA
-const NAME = '유저';
