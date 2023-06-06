@@ -38,7 +38,7 @@ export default function SignInputColumn({
         <Message
           isError={false}
           isValue={!!team}
-          text="가입 가능한 채널 코드입니다."
+          text="유효한 채널 코드입니다."
         />
       </section>
     </t.Container>
