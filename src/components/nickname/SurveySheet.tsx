@@ -25,7 +25,6 @@ export default function SurveySheet({ optionList, question }: Props) {
 
   const storeValue = (selectedValue: string) => {
     localStorage.setItem(type, selectedValue);
-    //TODO: type === 'status'면 <POST 닉네임 설정>
     type === 'status' ? navigate('/nickname/result') : navigateNext();
   };
   const removeValue = (nextType: string) => localStorage.removeItem(nextType);

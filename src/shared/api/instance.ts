@@ -8,10 +8,9 @@ const axiosConfig: AxiosRequestConfig = {
 
 const axiosInstance = axios.create(axiosConfig);
 
-const token = sessionStorage.getItem('token');
-
 axiosInstance.interceptors.request.use(
   config => {
+    const token = sessionStorage.getItem('token');
     config.headers.Authorization = `Bearer ${token}`;
     config = { ...config, withCredentials: true };
     return config;
