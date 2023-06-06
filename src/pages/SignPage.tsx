@@ -2,7 +2,8 @@ import { SignButtonColumn, SignInputColumn, Title } from 'components';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { NAME_REGEX } from 'shared/constants/constants';
-import { ADMIN_ICON, SMILE_ICON, USER_ICON } from 'shared/constants/icons';
+import { ADMIN_ICON, USER_ICON } from 'shared/constants/icons';
+import useSign from 'shared/query/useSign';
 import * as t from './signPage.style';
 
 const validateName = (name: string): boolean => NAME_REGEX.test(name);
@@ -22,13 +23,19 @@ export default function SignPage() {
     setTeam(spacesRemovedTeam);
   };
 
-  const handleCancel = () => navigate('/sign');
+  const { onSignUser, onSignAdmin } = useSign();
+
+  const onRegister = () =>
+    type === 'user'
+      ? onSignUser({ name: name, team: team })
+      : onSignAdmin({ name: name, team: team });
+
+  const onCancel = () => navigate('/sign');
 
   return (
     <t.Container>
       <section>
-        <p>회원 등록하고, 인사 나눠요</p>
-        <img src={SMILE_ICON} alt="웃는 아이콘" />
+        <p>회원 등록하고, 인사 나눠요 😆</p>
       </section>
       <Title
         text={type === 'user' ? '일반 회원 등록' : '관리자 회원 등록'}
@@ -42,10 +49,9 @@ export default function SignPage() {
         handleTeam={handleTeam}
       />
       <SignButtonColumn
-        name={name}
-        team={team}
         disabled={!name.length || !team.length || !validateName(name)}
-        handleCancel={handleCancel}
+        onRegister={onRegister}
+        onCancel={onCancel}
       />
     </t.Container>
   );

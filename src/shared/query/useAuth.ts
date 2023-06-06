@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { login } from 'shared/api/userApi';
 
-type UserData = {
+type Res = {
   data: {
     accessToken: string;
     userId: number;
@@ -15,7 +15,7 @@ type UserData = {
 export default function useAuth() {
   const navigate = useNavigate();
 
-  const handleUserData = ({ data }: UserData) => {
+  const handleUserData = ({ data }: Res) => {
     const { accessToken, userId, isAdmin, nickname, teamCode } = data;
     sessionStorage.setItem('token', accessToken);
     localStorage.setItem('uid', String(userId));
