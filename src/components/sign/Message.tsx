@@ -3,10 +3,11 @@ import * as t from './message.style';
 
 type Props = {
   isError: boolean;
-  isName: boolean;
+  isValue: boolean;
+  text: string;
 };
 
-export default function Message({ isError, isName }: Props) {
+export default function Message({ isError, isValue, text }: Props) {
   return (
     <t.Container>
       {isError && (
@@ -15,7 +16,7 @@ export default function Message({ isError, isName }: Props) {
           <span className="error"> 사용할 수 없는 이름입니다.</span>
         </>
       )}
-      {isName && !isError && <span>사용할 수 있는 이름입니다.</span>}
+      {isValue && !isError && <span>{text}</span>}
     </t.Container>
   );
 }

@@ -1,5 +1,5 @@
 import { SignButtonColumn, SignInputColumn, Title } from 'components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { NAME_REGEX } from 'shared/constants/constants';
 import { ADMIN_ICON, USER_ICON } from 'shared/constants/icons';
@@ -23,6 +23,10 @@ export default function SignPage() {
     setTeam(spacesRemovedTeam);
   };
 
+  useEffect(() => {
+    if (type === 'user') setTeam(localStorage.getItem('invite-code'));
+  }, [type]);
+
   const { onSignUser, onSignAdmin } = useSign();
 
   const onRegister = () =>
@@ -44,6 +48,7 @@ export default function SignPage() {
       <SignInputColumn
         isAdmin={type === 'admin'}
         isName={!!name.length}
+        team={team}
         isError={!!name.length && !validateName(name)}
         handleName={handleName}
         handleTeam={handleTeam}

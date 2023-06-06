@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { KAKAO_OAUTH_URL } from 'shared/constants/constants';
 import { LOGO } from 'shared/constants/icons';
 import { Background, KakaoButton } from 'ui';
@@ -6,6 +7,12 @@ import * as t from './loginPage.style';
 
 export default function LogInPage() {
   const onLogin = () => (window.location.href = KAKAO_OAUTH_URL);
+  const [searchParams] = useSearchParams();
+  const channel = searchParams.get('channel');
+
+  useEffect(() => {
+    localStorage.setItem('invite-code', channel);
+  }, [channel]);
 
   useEffect(() => {
     sessionStorage.removeItem('token');
