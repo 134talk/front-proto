@@ -7,8 +7,8 @@ export const Container = styled.div`
   p {
     font-size: 2rem;
     font-weight: 700;
-    line-height: 1.95rem;
-    color: #f58548;
+    line-height: 1.8rem;
+    color: #4059de;
     span {
       font-size: 1.5rem;
       color: #000000;

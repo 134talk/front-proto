@@ -104,3 +104,6 @@ export const EMOTION_ANGRY =
   process.env.PUBLIC_URL + '/assets/emotions/angry.svg';
 
 export const ROTATE_ICON = process.env.PUBLIC_URL + '/assets/icons/rotate.svg';
+
+export const SILHOUETTE =
+  process.env.PUBLIC_URL + '/assets/icons/character-silhouette.svg';
