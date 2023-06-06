@@ -6,7 +6,8 @@ import * as t from './membersPage.style';
 export default function MembersPage() {
   const [isModalOpen, setModalIsOpen] = useState(false);
 
-  const { handleSearch, filteredUserList } = useSearchKeyword(TEST_USER);
+  const { keyword, onDelete, handleSearch, filteredUserList } =
+    useSearchKeyword(TEST_USER);
 
   const handleModal = () => setModalIsOpen(prev => !prev);
 
@@ -20,7 +21,11 @@ export default function MembersPage() {
         button="채널 초대"
         handleInviteModal={handleModal}
       />
-      <SearchBar handleSearch={handleSearch} />
+      <SearchBar
+        keyword={keyword}
+        handleSearch={handleSearch}
+        onDelete={onDelete}
+      />
       <section>
         {filteredUserList.map(({ userId, nickname, name }) => (
           <div key={userId}>
