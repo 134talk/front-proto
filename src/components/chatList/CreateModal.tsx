@@ -17,7 +17,8 @@ type Props = {
 };
 
 export default function CreateModal({ handleCreateModal }: Props) {
-  const { handleSearch, filteredUserList } = useSearchKeyword(TEST_USER);
+  const { keyword, handleSearch, filteredUserList } =
+    useSearchKeyword(TEST_USER);
 
   const [selectedIdList, setSelectedIdList] = useState<string[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<
@@ -80,7 +81,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
               />
             ))}
           </div>
-          <SearchBar handleSearch={handleSearch} />
+          <SearchBar keyword={keyword} handleSearch={handleSearch} />
           <section>
             {filteredUserList.map(({ userId, nickname, name }) => (
               <div
