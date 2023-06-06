@@ -58,7 +58,7 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 6,
-    path: '/channel/:channelId',
+    path: '/chats/:channelId',
     isTab: true,
     element: <ChatListPage />,
   },
