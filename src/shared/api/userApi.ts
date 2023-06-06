@@ -6,8 +6,8 @@ export const login = (code: string) =>
     redirectUri: process.env.REACT_APP_KAKAO_REDIRECT_URI,
   });
 
-export const silentRefresh = (accessToken: string, refreshToken: string) =>
-  axiosInstance.post('/auth/refresh', { accessToken, refreshToken });
+export const silentRefresh = (accessToken: string) =>
+  axiosInstance.post('/auth/refresh', { accessToken });
 
 export const signUser = (name: string, teamCode: string) =>
   axiosInstance.post('/user/register', { name, teamCode });
@@ -17,10 +17,10 @@ export const signAdmin = (name: string, teamName: string) =>
 
 export const getName = () => axiosInstance.get('/user/name');
 
-export const signNickname = (nameCode: string) =>
+export const signNickname = (nameCode: string[]) =>
   axiosInstance.post('/user/nickname', { nameCode });
 
-export const updateNickname = (nameCode: string) =>
+export const updateNickname = (nameCode: string[]) =>
   axiosInstance.put('/user/nickname', { nameCode });
 
 // 유저 프로필 조회

@@ -1,5 +1,6 @@
 import type { AxiosRequestConfig } from 'axios';
 import axios from 'axios';
+import { silentRefresh } from './userApi';
 
 const axiosConfig: AxiosRequestConfig = {
   timeout: 3000,
@@ -23,6 +24,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
+    const { response } = error;
+    const token = sessionStorage.getItem('token');
+    if (response.status === 401) silentRefresh(token);
     return Promise.reject(error);
   }
 );

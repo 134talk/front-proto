@@ -19,6 +19,7 @@ export default function useAuth() {
     const { accessToken, userId, isAdmin, nickname, teamCode } = data;
     sessionStorage.setItem('token', accessToken);
     localStorage.setItem('uid', String(userId));
+    localStorage.setItem('channel', teamCode);
     localStorage.setItem('isAdmin', String(isAdmin));
     localStorage.setItem('nickname', nickname);
 

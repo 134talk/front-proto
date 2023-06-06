@@ -10,6 +10,8 @@ type Props = {
 export default function useSearchKeyword(userList: Props) {
   const [keyword, setKeyword] = useState('');
 
+  const onDelete = () => setKeyword('');
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setKeyword(e.target.value);
 
@@ -23,5 +25,5 @@ export default function useSearchKeyword(userList: Props) {
     [userList, keyword]
   );
 
-  return { handleSearch, filteredUserList };
+  return { keyword, onDelete, handleSearch, filteredUserList };
 }

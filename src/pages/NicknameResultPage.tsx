@@ -6,17 +6,17 @@ import * as t from './nicknameResultPage.style';
 
 export default function NicknameResultPage() {
   const navigate = useNavigate();
-
-  const handleConfirm = () => navigate(`/${TEST_CHNNEL_ID}?tab=1`);
+  const channelId = localStorage.getItem('channel');
+  const handleConfirm = () => navigate(`/channel/${channelId}?tab=1`);
 
   const [mood] = useState(() => localStorage.getItem('mood'));
   const [personality] = useState(() => localStorage.getItem('personality'));
   const [status] = useState(() => localStorage.getItem('status'));
 
-  const { mutate } = useNickname();
+  const { mutate, nickname, profile } = useNickname();
 
   useEffect(() => {
-    mutate({ code: `[${mood}, ${personality}, ${status}]` });
+    mutate({ code: [mood, personality, status] });
   }, [mutate, mood, personality, status]);
 
   return (
@@ -26,14 +26,11 @@ export default function NicknameResultPage() {
         <br />
         인디언 이름을 알려드립니다.
       </p>
-      <ProfileImg size="13.875rem" />
+      <ProfileImg size="13.875rem" image={profile} />
       <p>
-        <span>{TEST_NICKNAME}</span> <br />
+        <span>{nickname}</span> <br />
       </p>
       <Button text="확인" category="confirm" onClick={handleConfirm} />
     </t.Container>
   );
 }
-//FIXME: test data
-const TEST_CHNNEL_ID = 1;
-const TEST_NICKNAME = '들썩이는 매의 일격';
