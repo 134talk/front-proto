@@ -12,17 +12,17 @@ export const Container = styled.div`
     margin-top: 0.75rem;
     padding: 1.25rem 1.5rem;
     font-size: 1rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: #667085;
     cursor: pointer;
   }
   input {
     display: none;
     &:checked + label {
-      border: solid 1px #f58548;
-      background-color: #fff2d7;
+      border: solid 1px #4059de;
+      background-color: #f4f6f9;
       font-size: 1.125rem;
       font-weight: 700;
-      color: #f58548;
+      color: #4059de;
     }
   }
 `;
