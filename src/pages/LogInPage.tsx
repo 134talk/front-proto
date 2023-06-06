@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { KAKAO_OAUTH_URL } from 'shared/constants/constants';
 import { LOGO } from 'shared/constants/icons';
 import { Background, KakaoButton } from 'ui';
@@ -5,6 +6,10 @@ import * as t from './loginPage.style';
 
 export default function LogInPage() {
   const onLogin = () => (window.location.href = KAKAO_OAUTH_URL);
+
+  useEffect(() => {
+    sessionStorage.removeItem('token');
+  }, []);
 
   return (
     <t.Container>
