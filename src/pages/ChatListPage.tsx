@@ -16,9 +16,14 @@ export default function ChatListPage() {
   const [checkModal, setCheckModal] = useState(false);
   const [guideModal, setGuideModal] = useState(false);
   const [chatTime, setChatTime] = useState('30');
+  const [keyword, setKeyword] = useState('');
 
   const handleCreateModal = () => setCreateModal(prev => !prev);
-  const handleSearch = () => {};
+
+  const onDelete = () => setKeyword('');
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setKeyword(e.target.value);
+
   const handleSettingModal = () => setSettingModal(prev => !prev);
   const handleCheckModal = () => setCheckModal(prev => !prev);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -49,7 +54,11 @@ export default function ChatListPage() {
           handleCreateModal={handleCreateModal}
           handleSetting={handleSettingModal}
         />
-        <SearchBar handleSearch={handleSearch} />
+        <SearchBar
+          handleSearch={handleSearch}
+          keyword={keyword}
+          onDelete={onDelete}
+        />
         <section>
           <ChatBox onClick={handleGuideModal} />
           <ChatBox onClick={handleGuideModal} />

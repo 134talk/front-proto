@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function CreateModal({ handleCreateModal }: Props) {
-  const { keyword, handleSearch, filteredUserList } =
+  const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(TEST_USER);
 
   const [selectedIdList, setSelectedIdList] = useState<string[]>([]);
@@ -81,7 +81,11 @@ export default function CreateModal({ handleCreateModal }: Props) {
               />
             ))}
           </div>
-          <SearchBar keyword={keyword} handleSearch={handleSearch} />
+          <SearchBar
+            keyword={keyword}
+            handleSearch={handleSearch}
+            onDelete={onDelete}
+          />
           <section>
             {filteredUserList.map(({ userId, nickname, name }) => (
               <div

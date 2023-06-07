@@ -23,7 +23,7 @@ export const Container = styled.div`
       height: 1.5rem;
     }
   }
-  section {
+  > section {
     width: 100%;
     height: calc(100% - 13.3rem);
     margin-top: 0.5rem;
