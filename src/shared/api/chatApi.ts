@@ -1,5 +1,6 @@
 import axiosInstance from './instance';
-// 참가자 조회
+
+export const getTeam = () => axiosInstance.get('/user/teammate');
 // 대화 목록 조회
 // 대화 목록 검색
 export const setTimer = (timeout: string) =>

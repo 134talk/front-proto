@@ -2,9 +2,10 @@ import type React from 'react';
 import { useMemo, useState } from 'react';
 
 type Props = {
-  userId: string;
+  userId: number;
   nickname: string;
   name: string;
+  profileUrl: string;
 }[];
 
 export default function useSearchKeyword(userList: Props) {

@@ -18,7 +18,7 @@ export default function UserList({ isCheck, scale }: UserListProps) {
           <Profile
             nickname={item.nickname}
             name={item.name}
-            userId={item.userId}
+            // userId={item.userId}
             scale={scale}
           />
         </div>
@@ -53,7 +53,7 @@ export type UserListType = {
   id: number;
   name: string;
   nickname: string;
-  userId?: string;
+  /* userId?: string; */
 };
 
 export const userLists: UserListType[] = [
@@ -61,7 +61,7 @@ export const userLists: UserListType[] = [
     id: 0,
     name: '조해솔',
     nickname: '들썩이는 매의 일격',
-    userId: 'adlkjfa',
+    /* userId: 'adlkjfa', */
   },
   {
     id: 1,

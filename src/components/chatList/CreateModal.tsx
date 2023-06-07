@@ -20,19 +20,19 @@ export default function CreateModal({ handleCreateModal }: Props) {
   const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(TEST_USER);
 
-  const [selectedIdList, setSelectedIdList] = useState<string[]>([]);
+  const [selectedIdList, setSelectedIdList] = useState<number[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<
-    { userId: string; name: string }[]
+    { userId: number; name: string }[]
   >([]);
 
-  const handleSelectedIdList = (selectedId: string) => {
+  const handleSelectedIdList = (selectedId: number) => {
     if (selectedIdList.includes(selectedId))
       setSelectedIdList(prevList => prevList.filter(id => id !== selectedId));
     else if (selectedIdList.length < 5)
       setSelectedIdList(prevList => [selectedId, ...prevList]);
   };
 
-  const handleSelectedMembers = (selectedId: string, selectedName: string) => {
+  const handleSelectedMembers = (selectedId: number, selectedName: string) => {
     const isMemeber = selectedMembers.find(
       member => member.userId === selectedId
     );
@@ -48,12 +48,12 @@ export default function CreateModal({ handleCreateModal }: Props) {
     }
   };
 
-  const handleClick = (userId: string, name: string) => {
+  const handleClick = (userId: number, name: string) => {
     handleSelectedIdList(userId);
     handleSelectedMembers(userId, name);
   };
 
-  const handleDelete = (selectedId: string) => {
+  const handleDelete = (selectedId: number) => {
     setSelectedMembers(prevList =>
       prevList.filter(member => member.userId !== selectedId)
     );
@@ -122,63 +122,63 @@ export default function CreateModal({ handleCreateModal }: Props) {
 
 const TEST_USER = [
   {
-    userId: '1',
+    userId: 1,
     nickname: '떠오르는 매의 날갯짓',
     name: '차정원',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '2',
+    userId: 2,
     nickname: '떠오르는 매의 날갯짓',
     name: '차정원',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '3',
+    userId: 3,
     nickname: '떠오르는 매의 날갯짓',
     name: '김성남',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '4',
+    userId: 4,
     nickname: '떠오르는 매의 날갯짓',
     name: '김수진',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '5',
+    userId: 5,
     nickname: '떠오르는 매의 날갯짓',
     name: '고지섭',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '6',
+    userId: 6,
     nickname: '떠오르는 매의 날갯짓',
     name: '여민구',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '7',
+    userId: 7,
     nickname: '떠오르는 매의 날갯짓',
     name: '서도원',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '8',
+    userId: 8,
     nickname: '떠오르는 매의 날갯짓',
     name: '최창식',
     profileUrl:
       'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
   },
   {
-    userId: '9',
+    userId: 9,
     nickname: '떠오르는 매의 날갯짓',
     name: '이민재',
     profileUrl:
