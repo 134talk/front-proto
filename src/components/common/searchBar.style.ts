@@ -15,7 +15,7 @@ export const Container = styled.div`
     width: 70%;
     height: 2.75rem;
     padding: 0.75rem;
-    margin-left: -2.75rem;
+    margin-left: -10px;
     background: none;
     border: none;
     '' &::placeholder {
@@ -25,12 +25,13 @@ export const Container = styled.div`
       outline: none;
     }
   }
-  .icon_wrapper {
+  .iconWrapper {
     width: 100%;
     height: 2.75rem;
     position: absolute;
     top: 0;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 12px;
