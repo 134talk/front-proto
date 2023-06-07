@@ -24,7 +24,7 @@ export default function useAuth() {
     localStorage.setItem('nickname', nickname);
 
     if (teamCode && nickname) {
-      navigate(`/channel/${teamCode}?tab=1`);
+      navigate(`/channel/${teamCode}/1`);
     } else if (!teamCode && !nickname) {
       navigate('/sign');
     } else {
