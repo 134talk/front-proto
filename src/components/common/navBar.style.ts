@@ -1,11 +1,14 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
+  width: calc(100% + 1.25rem * 2);
   height: 3.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #ffffff;
+  margin: 0 1.25rem 0 -1.25rem;
+  padding: 0 1.25rem;
   > img {
     cursor: pointer;
   }
@@ -14,8 +17,8 @@ export const Container = styled.div`
     justify-content: center;
     > img {
       position: absolute;
-      left: 0;
-      top: 1.3rem;
+      left: 1.25rem;
+      top: 1rem;
       cursor: pointer;
     }
   }
