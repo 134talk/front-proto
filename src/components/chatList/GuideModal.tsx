@@ -137,7 +137,10 @@ export default function GuideModal({ onClose }: Props) {
               <br />
               단답형 대답만 이어지는 건 너무 아쉬워요.
               <br />
-              묻고 답하는 대화 분위기를 만들어주세요.
+              <br />
+              <span className="blue">
+                묻고 답하는 대화 분위기를 만들어주세요.
+              </span>
               <br />
               호기심의 질문은 대화를 춤추게 해요!
             </p>

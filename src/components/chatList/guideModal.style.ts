@@ -32,10 +32,14 @@ export const Container = styled.div`
       color: #000000;
       margin-top: 1.2rem;
       span {
-        font-size: 1rem;
+        font-size: 0.8rem;
         text-align: center;
         line-height: 1.3;
         color: #667085;
+        &.blue {
+          font-size: 1rem;
+          color: #4059de;
+        }
       }
     }
   }
