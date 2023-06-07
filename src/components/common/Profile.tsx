@@ -16,6 +16,8 @@ export default function Profile({
   scale,
   image,
 }: ProfileProps) {
+  const uid = localStorage.getItem('uid');
+
   return (
     <Container scale={scale}>
       <ProfileImg
@@ -29,7 +31,7 @@ export default function Profile({
       <div>
         <div className="nickname_wrapper">
           <NicknameText scale={scale}>{nickname && nickname}</NicknameText>
-          {userId && <BadgeText>나</BadgeText>}
+          {String(userId) === uid && <BadgeText>나</BadgeText>}
         </div>
         <NameText scale={scale}>{name && name}</NameText>
       </div>

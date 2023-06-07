@@ -29,11 +29,12 @@ export default function MembersPage() {
         onDelete={onDelete}
       />
       <section>
-        {filteredUserList.length ? (
+        {filteredUserList?.length ? (
           <>
             {filteredUserList.map(({ userId, nickname, name, profileUrl }) => (
               <div key={userId}>
                 <Profile
+                  userId={userId}
                   nickname={nickname}
                   name={name}
                   scale="medium"
