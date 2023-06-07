@@ -87,23 +87,29 @@ export default function CreateModal({ handleCreateModal }: Props) {
             onDelete={onDelete}
           />
           <section>
-            {filteredUserList.map(({ userId, nickname, name }) => (
-              <div
-                className="profileWrapper"
-                key={userId}
-                onClick={() => handleClick(userId, name)}
-              >
-                <Profile
-                  scale="medium"
-                  userId={userId}
-                  nickname={nickname}
-                  name={name}
-                />
-                {selectedIdList.includes(userId) && (
-                  <img src={CHECK_ICON} alt="선택" />
-                )}
-              </div>
-            ))}
+            {filteredUserList.length ? (
+              <>
+                {filteredUserList.map(({ userId, nickname, name }) => (
+                  <div
+                    className="profileWrapper"
+                    key={userId}
+                    onClick={() => handleClick(userId, name)}
+                  >
+                    <Profile
+                      scale="medium"
+                      userId={userId}
+                      nickname={nickname}
+                      name={name}
+                    />
+                    {selectedIdList.includes(userId) && (
+                      <img src={CHECK_ICON} alt="선택" />
+                    )}
+                  </div>
+                ))}
+              </>
+            ) : (
+              <p>검색 결과가 없습니다.</p>
+            )}
           </section>
         </t.Container>
       </FullModal>

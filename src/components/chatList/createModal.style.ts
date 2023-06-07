@@ -38,5 +38,11 @@ export const Container = styled.div`
     &::-webkit-scrollbar {
       display: none;
     }
+    > p {
+      font-size: 0.9rem;
+      color: #475467;
+      text-align: center;
+      margin: 15rem auto;
+    }
   }
 `;
