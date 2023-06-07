@@ -108,7 +108,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
         </t.Container>
       </FullModal>
       <BottomButtonTab>
-        <Button text="채널 초대하기" category="confirm" />
+        <Button text="대화 초대하기" category="confirm" />
       </BottomButtonTab>
     </>
   );
