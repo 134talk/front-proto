@@ -83,15 +83,17 @@ const Phone = styled.div`
 `;
 
 const StatusBar = styled.div`
+  width: calc(100% + 1.25rem * 2);
   height: 2.75rem;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;
   z-index: 9999;
   position: relative;
-  padding: 0.938rem 0 0.75rem 0;
+  background: #ffffff;
+  margin: 0 1.25rem 0 -1.25rem;
+  padding: 0 1.25rem;
   p {
     &.real_time_text {
       width: 3.375rem;
@@ -118,7 +120,7 @@ const WebViewLayout = styled.div`
   border-radius: 40px;
   overflow: hidden;
   padding: 0 1.25rem;
-  background-color: #fff;
+  background: #ffffff;
 `;
 
 const IndicatorBar = styled.div`

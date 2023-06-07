@@ -107,3 +107,14 @@ export const ROTATE_ICON = process.env.PUBLIC_URL + '/assets/icons/rotate.svg';
 
 export const SILHOUETTE =
   process.env.PUBLIC_URL + '/assets/icons/character-silhouette.svg';
+
+export const RIGHT_ARROW =
+  process.env.PUBLIC_URL + '/assets/icons/right-arrow.svg';
+
+export const NEGATIVE_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/negative.svg';
+
+export const POSITIVE_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/positive.svg';
+
+export const LINE_ICON = process.env.PUBLIC_URL + '/assets/icons/line.svg';
