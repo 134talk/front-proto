@@ -4,8 +4,9 @@ import { ProfileImg } from 'ui';
 interface ProfileProps {
   nickname?: string;
   name?: string;
-  userId?: string;
+  userId?: number;
   scale: 'small' | 'medium' | 'large';
+  image?: string;
 }
 
 export default function Profile({
@@ -13,6 +14,7 @@ export default function Profile({
   name,
   userId,
   scale,
+  image,
 }: ProfileProps) {
   return (
     <Container scale={scale}>
@@ -22,6 +24,7 @@ export default function Profile({
           (scale === 'medium' && '3.25rem') ||
           (scale === 'large' && '5.5rem')
         }
+        image={image}
       />
       <div>
         <div className="nickname_wrapper">
