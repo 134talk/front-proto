@@ -18,7 +18,7 @@ export const Container = styled.div`
     min-height: 31rem;
     position: absolute;
     overflow: auto;
-    padding-bottom: 2rem;
+    padding-bottom: 5rem;
     margin-top: 3rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
