@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100%;
   .sectionWrapper {
     position: absolute;
-    height: calc(100% - 12rem);
+    height: calc(100% - 9rem);
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
