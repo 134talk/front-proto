@@ -1,12 +1,8 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { useMemo } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { createRoom, getChatList } from 'shared/api/chatApi';
+import { useQuery } from 'react-query';
+import { getChatList, searchChatList } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
-
-type Req = {
-  userList: number[];
-};
 
 type Res = {
   roomId: number;
@@ -17,27 +13,14 @@ type Res = {
 }[];
 
 export default function useChatList(name?: string) {
-  const queryClient = useQueryClient();
-  const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
+  const { data, refetch } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.CHATS],
-    getChatList
-  );
-
-  // const { data: searchData } = useQuery<AxiosResponse<Res>, AxiosError>(
-  //   [queryKeys.CHATS],
-  //   () => searchChatList(name),
-  //   {
-  //     onSuccess: res => console.log(res),
-  //   }
-  // );
-
-  const chatList = useMemo(() => data?.data, [data]);
-
-  const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ userList }) => createRoom(userList),
+    name.length > 0 ? () => searchChatList(name) : getChatList,
     {
-      onSuccess: res => queryClient.invalidateQueries([queryKeys.CHATS]),
+      refetchOnWindowFocus: false,
     }
   );
-  return { chatList, mutate };
+  const chatList = useMemo(() => data?.data, [data]);
+
+  return { chatList, refetch };
 }

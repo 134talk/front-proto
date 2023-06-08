@@ -36,3 +36,7 @@ export { default as Background } from './report/Background';
 export { default as BarChart } from './report/BarChart';
 export { default as Section } from './report/Section';
 export { default as FeedbackSection } from './report/FeedbackSection';
+export { default as UserProfile } from './user/UserProfile';
+export { default as UserStatus } from './user/UserStatus';
+export { default as UserBackground } from './user/Background';
+export { default as ReportMenu } from './user/ReportMenu';

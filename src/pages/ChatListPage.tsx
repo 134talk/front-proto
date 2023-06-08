@@ -7,7 +7,8 @@ import {
   SearchBar,
   SettingModal,
 } from 'components';
-import { useState } from 'react';
+import debounce from 'lodash/debounce';
+import { useCallback, useState } from 'react';
 import useChatList from 'shared/query/useChatList';
 import * as t from './chatListPage.style';
 
@@ -21,20 +22,30 @@ export default function ChatListPage() {
   const [chatId, setChatId] = useState(0);
 
   const handleCreateModal = () => setCreateModal(prev => !prev);
-
-  const onDelete = () => setKeyword('');
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setKeyword(e.target.value);
-
   const handleSettingModal = () => setSettingModal(prev => !prev);
   const handleCheckModal = () => setCheckModal(prev => !prev);
+  const handleGuideModal = () => setGuideModal(prev => !prev);
+
+  const { chatList, refetch } = useChatList(keyword);
+
+  const onDelete = () => {
+    setKeyword('');
+    getChatListByKeyword();
+  };
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+    getChatListByKeyword();
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setChatTime(e.target.value);
 
-  const handleGuideModal = () => setGuideModal(prev => !prev);
-
-  const { chatList } = useChatList(keyword);
   const isAdmin = localStorage.getItem('isAdmin');
+
+  const getChatListByKeyword = useCallback(
+    debounce(() => refetch(), 500),
+    [refetch]
+  );
 
   return (
     <>
