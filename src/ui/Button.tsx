@@ -7,7 +7,6 @@ export interface BtnProps {
   fontSize?: string;
   fontWeight?: string;
   border?: string;
-
   category: 'confirm' | 'cancel' | 'kakao';
   text?: string;
   children?: React.ReactNode;
