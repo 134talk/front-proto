@@ -1,7 +1,7 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { createRoom, getChatList } from 'shared/api/chatApi';
+import { createRoom, getChatList, searchChatList } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
 
 type Req = {
@@ -18,19 +18,13 @@ type Res = {
 
 export default function useChatList(name?: string) {
   const queryClient = useQueryClient();
-  const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
-    [queryKeys.CHATS],
-    getChatList
+  const { data, refetch } = useQuery<AxiosResponse<Res>, AxiosError>(
+    [queryKeys.CHATS, name],
+    name.length > 0 ? () => searchChatList(name) : getChatList,
+    {
+      enabled: !!name,
+    }
   );
-
-  // const { data: searchData } = useQuery<AxiosResponse<Res>, AxiosError>(
-  //   [queryKeys.CHATS],
-  //   () => searchChatList(name),
-  //   {
-  //     onSuccess: res => console.log(res),
-  //   }
-  // );
-
   const chatList = useMemo(() => data?.data, [data]);
 
   const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
@@ -39,5 +33,5 @@ export default function useChatList(name?: string) {
       onSuccess: res => queryClient.invalidateQueries([queryKeys.CHATS]),
     }
   );
-  return { chatList, mutate };
+  return { chatList, refetch, mutate };
 }

@@ -7,7 +7,7 @@ import {
   SearchBar,
   SettingModal,
 } from 'components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useChatList from 'shared/query/useChatList';
 import * as t from './chatListPage.style';
 
@@ -33,8 +33,12 @@ export default function ChatListPage() {
 
   const handleGuideModal = () => setGuideModal(prev => !prev);
 
-  const { chatList } = useChatList(keyword);
+  const { chatList, refetch } = useChatList(keyword);
   const isAdmin = localStorage.getItem('isAdmin');
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, keyword]);
 
   return (
     <>
