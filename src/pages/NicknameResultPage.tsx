@@ -7,7 +7,7 @@ import * as t from './nicknameResultPage.style';
 export default function NicknameResultPage() {
   const navigate = useNavigate();
   const channelId = localStorage.getItem('channel');
-  const handleConfirm = () => navigate(`/channel/${channelId}?tab=1`);
+  const handleConfirm = () => navigate(`/channel/${channelId}/1`);
 
   const [mood] = useState(() => localStorage.getItem('mood'));
   const [personality] = useState(() => localStorage.getItem('personality'));

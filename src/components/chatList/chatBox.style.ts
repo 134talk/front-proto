@@ -7,14 +7,29 @@ export const Container = styled.div`
   .wrapper {
     display: flex;
     gap: 0.3rem;
-    font-size: 1rem;
-    color: #000000;
-    font-weight: 500;
-    &:nth-child(2) {
-      margin-top: 0.4rem;
-      font-size: 0.75rem;
-      color: #475467;
-      font-weight: 400;
+    > p {
+      font-size: 1rem;
+      color: #000000;
+      font-weight: 500;
+    }
+  }
+  .users {
+    font-size: 0.85rem;
+    color: #667085;
+  }
+  .emotions {
+    font-size: 0.75rem;
+    color: #667085;
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    p > span {
+      font-weight: 700;
+    }
+    img {
+      width: 1.37rem;
+      height: 1.37rem;
     }
   }
 `;

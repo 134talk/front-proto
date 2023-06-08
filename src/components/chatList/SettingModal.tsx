@@ -1,16 +1,15 @@
 import { BottomModal, NavBar } from 'components';
+import useTimer from 'shared/query/useTimer';
 import { Button } from 'ui';
 import * as t from './settingModal.style';
 
 type Props = {
-  chatTime: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onOpenCheckModal: () => void;
   onClose: () => void;
 };
 
 export default function SettingModal({
-  chatTime,
   onChange,
   onOpenCheckModal,
   onClose,
@@ -19,6 +18,8 @@ export default function SettingModal({
     onClose();
     onOpenCheckModal();
   };
+
+  const { data } = useTimer();
 
   return (
     <t.Container>
@@ -40,8 +41,7 @@ export default function SettingModal({
           대화 시간은
           <input
             type="text"
-            placeholder="30"
-            defaultValue={chatTime}
+            defaultValue={data ? data?.data.timeout : '30'}
             onChange={onChange}
           />
           분으로 설정하겠습니다.

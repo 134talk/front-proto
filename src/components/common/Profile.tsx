@@ -4,8 +4,9 @@ import { ProfileImg } from 'ui';
 interface ProfileProps {
   nickname?: string;
   name?: string;
-  userId?: string;
+  userId?: number;
   scale: 'small' | 'medium' | 'large';
+  image?: string;
 }
 
 export default function Profile({
@@ -13,7 +14,10 @@ export default function Profile({
   name,
   userId,
   scale,
+  image,
 }: ProfileProps) {
+  const uid = localStorage.getItem('uid');
+
   return (
     <Container scale={scale}>
       <ProfileImg
@@ -22,11 +26,12 @@ export default function Profile({
           (scale === 'medium' && '3.25rem') ||
           (scale === 'large' && '5.5rem')
         }
+        image={image}
       />
       <div>
         <div className="nickname_wrapper">
           <NicknameText scale={scale}>{nickname && nickname}</NicknameText>
-          {userId && <BadgeText>나</BadgeText>}
+          {String(userId) === uid && <BadgeText>나</BadgeText>}
         </div>
         <NameText scale={scale}>{name && name}</NameText>
       </div>

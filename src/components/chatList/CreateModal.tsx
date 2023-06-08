@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
+import useSortedMembers from 'shared/hooks/useSortedMembers';
+import useChatList from 'shared/query/useChatList';
 import { Button, Chip } from 'ui';
 import * as t from './createModal.style';
 
@@ -17,22 +19,26 @@ type Props = {
 };
 
 export default function CreateModal({ handleCreateModal }: Props) {
-  const { keyword, handleSearch, filteredUserList, onDelete } =
-    useSearchKeyword(TEST_USER);
+  const members = useSortedMembers();
 
-  const [selectedIdList, setSelectedIdList] = useState<string[]>([]);
+  const { keyword, handleSearch, filteredUserList, onDelete } =
+    useSearchKeyword(members);
+
+  const { mutate } = useChatList();
+
+  const [selectedIdList, setSelectedIdList] = useState<number[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<
-    { userId: string; name: string }[]
+    { userId: number; name: string }[]
   >([]);
 
-  const handleSelectedIdList = (selectedId: string) => {
+  const handleSelectedIdList = (selectedId: number) => {
     if (selectedIdList.includes(selectedId))
       setSelectedIdList(prevList => prevList.filter(id => id !== selectedId));
     else if (selectedIdList.length < 5)
       setSelectedIdList(prevList => [selectedId, ...prevList]);
   };
 
-  const handleSelectedMembers = (selectedId: string, selectedName: string) => {
+  const handleSelectedMembers = (selectedId: number, selectedName: string) => {
     const isMemeber = selectedMembers.find(
       member => member.userId === selectedId
     );
@@ -48,18 +54,24 @@ export default function CreateModal({ handleCreateModal }: Props) {
     }
   };
 
-  const handleClick = (userId: string, name: string) => {
+  const handleClick = (userId: number, name: string) => {
     handleSelectedIdList(userId);
     handleSelectedMembers(userId, name);
   };
 
-  const handleDelete = (selectedId: string) => {
+  const handleDelete = (selectedId: number) => {
     setSelectedMembers(prevList =>
       prevList.filter(member => member.userId !== selectedId)
     );
     setSelectedIdList(prevList => prevList.filter(id => id !== selectedId));
   };
 
+  const onConfirm = () => {
+    if (selectedIdList.length >= 2) {
+      mutate({ userList: selectedIdList });
+      handleCreateModal();
+    } else toast.error('대화는 최소 2인 이상 참여 가능합니다.');
+  };
   return (
     <>
       <FullModal>
@@ -87,95 +99,38 @@ export default function CreateModal({ handleCreateModal }: Props) {
             onDelete={onDelete}
           />
           <section>
-            {filteredUserList.map(({ userId, nickname, name }) => (
-              <div
-                className="profileWrapper"
-                key={userId}
-                onClick={() => handleClick(userId, name)}
-              >
-                <Profile
-                  scale="medium"
-                  userId={userId}
-                  nickname={nickname}
-                  name={name}
-                />
-                {selectedIdList.includes(userId) && (
-                  <img src={CHECK_ICON} alt="선택" />
+            {filteredUserList.length ? (
+              <>
+                {filteredUserList.map(
+                  ({ userId, nickname, name, profileUrl }) => (
+                    <div
+                      className="profileWrapper"
+                      key={userId}
+                      onClick={() => handleClick(userId, name)}
+                    >
+                      <Profile
+                        scale="medium"
+                        userId={userId}
+                        nickname={nickname}
+                        name={name}
+                        image={profileUrl}
+                      />
+                      {selectedIdList.includes(userId) && (
+                        <img src={CHECK_ICON} alt="선택" />
+                      )}
+                    </div>
+                  )
                 )}
-              </div>
-            ))}
+              </>
+            ) : (
+              <p>검색 결과가 없습니다.</p>
+            )}
           </section>
         </t.Container>
       </FullModal>
       <BottomButtonTab>
-        <Button text="채널 초대하기" category="confirm" />
+        <Button text="대화 초대하기" category="confirm" onClick={onConfirm} />
       </BottomButtonTab>
     </>
   );
 }
-
-const TEST_USER = [
-  {
-    userId: '1',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '차정원',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '2',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '차정원',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '3',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '김성남',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '4',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '김수진',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '5',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '고지섭',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '6',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '여민구',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '7',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '서도원',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '8',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '최창식',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-  {
-    userId: '9',
-    nickname: '떠오르는 매의 날갯짓',
-    name: '이민재',
-    profileUrl:
-      'https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png',
-  },
-];

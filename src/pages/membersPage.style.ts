@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   > section {
-    width: 100%;
+    width: calc(100% - 1.25rem);
     height: calc(100% - 13.3rem);
     margin-top: 0.5rem;
     padding-bottom: 4rem;
@@ -15,6 +15,12 @@ export const Container = styled.div`
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
+    }
+    & .notFound {
+      font-size: 0.9rem;
+      color: #475467;
+      text-align: center;
+      margin: 15rem auto;
     }
     > div {
       &:first-child {

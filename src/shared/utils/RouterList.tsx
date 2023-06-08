@@ -1,15 +1,18 @@
-import ChatListPage from 'pages/ChatListPage';
-import ChatPage from 'pages/ChatPage';
-import KakaoPage from 'pages/KakaoPage';
-import LogInPage from 'pages/LogInPage';
-import MembersPage from 'pages/MembersPage';
-import NicknameGuidePage from 'pages/NicknameGuidePage';
-import NicknamePage from 'pages/NicknamePage';
-import NicknameResultPage from 'pages/NicknameResultPage';
-import ReportPage from 'pages/ReportPage';
-import SignPage from 'pages/SignPage';
-import SignSelectPage from 'pages/SignSelectPage';
-import UserPage from 'pages/UserPage';
+import {
+  ChatListPage,
+  ChatPage,
+  KakaoPage,
+  LogInPage,
+  MembersPage,
+  NicknameGuidePage,
+  NicknamePage,
+  NicknameResultPage,
+  ReportDetailPage,
+  ReportPage,
+  SignPage,
+  SignSelectPage,
+  UserPage,
+} from 'pages';
 import React from 'react';
 
 interface RouterData {
@@ -22,7 +25,7 @@ interface RouterData {
 export const AuthRouter: RouterData[] = [
   {
     id: 0,
-    path: '/channel/:channelId',
+    path: '/channel/:channelId/:tabId',
     isTab: true,
     element: <MembersPage />,
   },
@@ -58,7 +61,7 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 6,
-    path: '/chats/:channelId',
+    path: '/chats/:channelId/:tabId',
     isTab: true,
     element: <ChatListPage />,
   },
@@ -70,13 +73,19 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 8,
-    path: '/report/:channelId',
+    path: '/report/:channelId/:tabId',
     isTab: true,
     element: <ReportPage />,
   },
   {
     id: 9,
-    path: '/user/:userId',
+    path: '/report/:channelId/:category/:tabId',
+    isTab: true,
+    element: <ReportDetailPage />,
+  },
+  {
+    id: 10,
+    path: '/user/:userId/:tabId',
     isTab: true,
     element: <UserPage />,
   },

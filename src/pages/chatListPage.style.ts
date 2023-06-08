@@ -20,4 +20,10 @@ export const Container = styled.div`
       cursor: pointer;
     }
   }
+  .notFound {
+    font-size: 0.9rem;
+    color: #475467;
+    text-align: center;
+    margin: 15rem auto;
+  }
 `;

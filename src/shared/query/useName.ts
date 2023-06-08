@@ -6,5 +6,5 @@ import queryKeys from 'shared/constants/queryKeys';
 export default function useName() {
   const { data } = useQuery([queryKeys.NAME], getName);
   const name = useMemo(() => data?.data.name, [data]);
-  return { name };
+  return name;
 }
