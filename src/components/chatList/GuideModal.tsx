@@ -1,6 +1,7 @@
 import FullModal from 'components/common/FullModal';
 import NavBar from 'components/common/NavBar';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -18,10 +19,12 @@ import { Button } from 'ui';
 import * as t from './guideModal.style';
 
 type Props = {
+  roomId: number;
   onClose: () => void;
 };
 
-export default function GuideModal({ onClose }: Props) {
+export default function GuideModal({ roomId, onClose }: Props) {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
 
@@ -42,6 +45,7 @@ export default function GuideModal({ onClose }: Props) {
   };
 
   const onSkip = () => sliderRef.current.slickGoTo(6);
+  const onConfirm = () => navigate(`/chat/${roomId}`);
 
   return (
     <FullModal>
@@ -152,6 +156,7 @@ export default function GuideModal({ onClose }: Props) {
             건너뛰기
           </t.SkipButton>
           <Button
+            onClick={onConfirm}
             text="대화 하러가기"
             category="confirm"
             disabled={currentSlide !== 6}

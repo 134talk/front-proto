@@ -7,7 +7,7 @@ import * as t from './nicknameGuidePage.style';
 
 export default function NicknameGuidePage() {
   const navigate = useNavigate();
-  const { name } = useName();
+  const name = useName();
 
   useEffect(() => {
     localStorage.removeItem('mood');

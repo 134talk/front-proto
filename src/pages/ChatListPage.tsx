@@ -8,6 +8,7 @@ import {
   SettingModal,
 } from 'components';
 import { useState } from 'react';
+import useChatList from 'shared/query/useChatList';
 import * as t from './chatListPage.style';
 
 export default function ChatListPage() {
@@ -17,6 +18,7 @@ export default function ChatListPage() {
   const [guideModal, setGuideModal] = useState(false);
   const [chatTime, setChatTime] = useState('30');
   const [keyword, setKeyword] = useState('');
+  const [chatId, setChatId] = useState(0);
 
   const handleCreateModal = () => setCreateModal(prev => !prev);
 
@@ -28,7 +30,11 @@ export default function ChatListPage() {
   const handleCheckModal = () => setCheckModal(prev => !prev);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setChatTime(e.target.value);
+
   const handleGuideModal = () => setGuideModal(prev => !prev);
+
+  const { chatList } = useChatList(keyword);
+  const isAdmin = localStorage.getItem('isAdmin');
 
   return (
     <>
@@ -38,18 +44,17 @@ export default function ChatListPage() {
       {createModal && <CreateModal handleCreateModal={handleCreateModal} />}
       {settingModal && (
         <SettingModal
-          chatTime={chatTime}
           onChange={handleChange}
           onOpenCheckModal={handleCheckModal}
           onClose={handleSettingModal}
         />
       )}
-      {guideModal && <GuideModal onClose={handleGuideModal} />}
+      {guideModal && <GuideModal onClose={handleGuideModal} roomId={chatId} />}
       <t.Container>
         <NavBar
           isCenter={false}
           title="대화"
-          isAdmin={true}
+          isAdmin={isAdmin === 'true'}
           button="새 대화방"
           handleCreateModal={handleCreateModal}
           handleSetting={handleSettingModal}
@@ -60,16 +65,20 @@ export default function ChatListPage() {
           onDelete={onDelete}
         />
         <section>
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
-          <ChatBox onClick={handleGuideModal} />
+          {chatList?.length > 0 ? (
+            chatList.map(({ roomId, roomName, joinFlag }) => (
+              <div key={roomId} onClick={() => setChatId(roomId)}>
+                <ChatBox
+                  roomId={roomId}
+                  roomName={roomName}
+                  isJoin={joinFlag}
+                  onClick={handleGuideModal}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="notFound">진행 중인 대화방이 없습니다.</p>
+          )}
         </section>
       </t.Container>
     </>
