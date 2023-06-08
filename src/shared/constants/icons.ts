@@ -118,3 +118,6 @@ export const POSITIVE_ICON =
   process.env.PUBLIC_URL + '/assets/icons/positive.svg';
 
 export const LINE_ICON = process.env.PUBLIC_URL + '/assets/icons/line.svg';
+
+export const SIGN_OUT_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/sign-out.svg';
