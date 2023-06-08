@@ -10,7 +10,7 @@ import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import useSortedMembers from 'shared/hooks/useSortedMembers';
-import useChatList from 'shared/query/useChatList';
+import useChatInvitation from 'shared/query/useChatInvitation';
 import { Button, Chip } from 'ui';
 import * as t from './createModal.style';
 
@@ -24,7 +24,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
   const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(members);
 
-  const { mutate } = useChatList();
+  const { mutate } = useChatInvitation();
 
   const [selectedIdList, setSelectedIdList] = useState<number[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<
@@ -79,7 +79,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
           <NavBar
             isCenter={false}
             title="대화 초대"
-            cnt={selectedIdList.length.toString()}
+            cnt={selectedIdList?.length.toString()}
             button="닫기"
             handleClose={handleCreateModal}
           />
@@ -115,7 +115,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
                         name={name}
                         image={profileUrl}
                       />
-                      {selectedIdList.includes(userId) && (
+                      {selectedIdList?.includes(userId) && (
                         <img src={CHECK_ICON} alt="선택" />
                       )}
                     </div>
