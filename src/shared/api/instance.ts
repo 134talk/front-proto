@@ -25,8 +25,10 @@ axiosInstance.interceptors.response.use(
   response => response,
   error => {
     const { response } = error;
-    const token = sessionStorage.getItem('token');
-    if (response.status === 401) silentRefresh(token);
+    if (response.status === 401)
+      silentRefresh().then(({ data }) =>
+        sessionStorage.setItem('token', data?.accessToken)
+      );
     return Promise.reject(error);
   }
 );
