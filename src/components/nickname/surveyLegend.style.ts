@@ -5,13 +5,13 @@ export const Container = styled.div`
   min-height: 6.5rem;
   margin-top: 5.375rem;
   p {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: ${({ theme }) => theme.fs32};
+    font-weight: ${({ theme }) => theme.fw700};
     line-height: 1.8rem;
-    color: #4059de;
+    color: ${({ theme }) => theme.primary_deep_blue};
     span {
-      font-size: 1.5rem;
-      color: #000000;
+      font-size: ${({ theme }) => theme.fs24};
+      color: ${({ theme }) => theme.gray900};
     }
   }
 `;

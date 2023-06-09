@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff;
+  background: ${({ theme }) => theme.white};
   margin: 0 1.25rem 0 -1.25rem;
   padding: 0 1.25rem;
   > img {
@@ -34,11 +34,11 @@ export const Container = styled.div`
     height: 1.875rem;
   }
   p {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #000000;
+    font-size: ${({ theme }) => theme.fs20};
+    font-weight: ${({ theme }) => theme.fw700};
+    color: ${({ theme }) => theme.gray900};
     span {
-      font-weight: 400;
+      font-weight: ${({ theme }) => theme.fw400};
     }
   }
 `;

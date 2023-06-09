@@ -4,7 +4,7 @@ export const Container = styled.input`
   width: 100%;
   padding: 0.75rem;
   border-radius: 8px;
-  border: solid 1px #d5dae0;
+  border: ${({ theme }) => `solid 1px ${theme.gray300}`};
   &:focus {
     outline: none;
   }

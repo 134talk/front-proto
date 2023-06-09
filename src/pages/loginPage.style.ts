@@ -9,15 +9,15 @@ export const Container = styled.div`
   position: relative;
   padding-bottom: 5.875rem;
   > p {
-    color: #ffffff;
-    font-size: 1.125rem;
-    font-weight: 400;
+    color: ${({ theme }) => theme.white};
+    font-size: ${({ theme }) => theme.fs18};
+    font-weight: ${({ theme }) => theme.fw400};
     line-height: 1.3;
     text-align: center;
     margin-top: 0.5rem;
     &.bold {
       margin-top: 1.5rem;
-      font-weight: 600;
+      font-weight: ${({ theme }) => theme.fw600};
     }
   }
   > img {

@@ -5,6 +5,6 @@ export const Container = styled.div`
   top: 0;
   width: calc(100% + 1.25rem * 2);
   min-height: 100vh;
-  background: linear-gradient(180.03deg, #75c7ea 44.58%, #7588ea 99.97%);
+  background: ${({ theme }) => theme.gradation_primary};
   z-index: -999;
 `;

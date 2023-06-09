@@ -2,8 +2,8 @@ import { styled } from 'styled-components';
 
 export const Container = styled.h1`
   width: 100%;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #111111;
+  font-size: ${({ theme }) => theme.fs20};
+  font-weight: ${({ theme }) => theme.fw600};
+  color: ${({ theme }) => theme.gray900};
   margin-top: 1.45rem;
 `;
