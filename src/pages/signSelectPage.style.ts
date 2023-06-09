@@ -7,15 +7,15 @@ export const Container = styled.div`
   align-items: center;
   padding-bottom: 5.875rem;
   > p {
-    color: #7588ea;
-    font-size: 1.125rem;
-    font-weight: 400;
+    color: ${({ theme }) => theme.primary_blue};
+    font-size: ${({ theme }) => theme.fs18};
+    font-weight: ${({ theme }) => theme.fw400};
     line-height: 1.3;
     text-align: center;
     margin-top: 0.5rem;
     &.bold {
       margin-top: 1.5rem;
-      font-weight: 600;
+      font-weight: ${({ theme }) => theme.fw600};
     }
   }
   > img {

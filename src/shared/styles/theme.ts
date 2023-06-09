@@ -25,6 +25,8 @@ const theme: ThemeType = {
   chip_green: '#ACEED6',
   good_blue: '#259CF2',
   error_red: '#F0153D',
+  backdrop: 'rgba(0, 0, 0, 0.5)',
+  shadow: 'rgba(172, 173, 177, 0.1)',
 
   // font-size
   fs12: '0.75rem',

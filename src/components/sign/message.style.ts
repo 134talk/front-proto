@@ -7,11 +7,11 @@ export const Container = styled.div`
     height: 0.75rem;
   }
   span {
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: #259cf2;
+    font-size: ${({ theme }) => theme.fs12};
+    font-weight: ${({ theme }) => theme.fw400};
+    color: ${({ theme }) => theme.good_blue};
     &.error {
-      color: #f0153d;
+      color: ${({ theme }) => theme.error_red};
     }
   }
 `;

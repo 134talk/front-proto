@@ -2,8 +2,8 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   p {
-    font-size: 1.13rem;
-    font-weight: 700;
+    font-size: ${({ theme }) => theme.fs18};
+    font-weight: ${({ theme }) => theme.fw700};
     margin-top: 0.8rem;
   }
   .buttonWrapper {

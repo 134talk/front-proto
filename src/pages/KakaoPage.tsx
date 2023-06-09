@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import useAuth from 'shared/query/useAuth';
-import { styled } from 'styled-components';
 import { Spinner } from 'ui';
+import * as t from './kakaoPage.style';
 
 export default function KakaoPage() {
   const [searchParams] = useSearchParams();
@@ -15,19 +15,9 @@ export default function KakaoPage() {
   }, [mutate, code]);
 
   return (
-    <Container>
+    <t.Container>
       <p>연결 중입니다...</p>
       <Spinner isLoading={true} />
-    </Container>
+    </t.Container>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  > p {
-    margin-top: 300px;
-  }
-`;

@@ -8,15 +8,15 @@ export const Container = styled.div`
   gap: 2.3rem;
   margin: 7.8rem 0 9.5rem 0;
   p {
-    font-size: 1.25rem;
+    font-size: ${({ theme }) => theme.fs20};
     text-align: center;
-    font-weight: 500;
-    color: #111111;
+    font-weight: ${({ theme }) => theme.fw500};
+    color: ${({ theme }) => theme.gray900};
     line-height: 1.3;
     span {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #4059de;
+      font-size: ${({ theme }) => theme.fs24};
+      font-weight: ${({ theme }) => theme.fw700};
+      color: ${({ theme }) => theme.primary_deep_blue};
     }
   }
 `;

@@ -2,21 +2,21 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   .title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: #000000;
+    font-size: ${({ theme }) => theme.fs18};
+    font-weight: ${({ theme }) => theme.fw700};
+    color: ${({ theme }) => theme.gray900};
     text-align: center;
   }
   .check_text {
-    font-size: 1rem;
-    color: #475467;
+    font-size: ${({ theme }) => theme.fs16};
+    color: ${({ theme }) => theme.gray700};
     text-align: center;
     line-height: 1.3;
     margin-top: 0.6rem;
     span {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #f58548;
+      font-size: ${({ theme }) => theme.fs16};
+      font-weight: ${({ theme }) => theme.fw500};
+      color: ${({ theme }) => theme.primary_deep_blue};
     }
   }
   .button_wrapper {

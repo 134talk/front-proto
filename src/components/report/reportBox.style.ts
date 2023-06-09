@@ -7,17 +7,17 @@ export const Container = styled.div`
   align-items: center;
   padding: 1.25rem 0.625rem 1.25rem 1.25rem;
   border-radius: 12px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.white};
   cursor: pointer;
   > div {
     p {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #111111;
+      font-size: ${({ theme }) => theme.fs18};
+      font-weight: ${({ theme }) => theme.fw600};
+      color: ${({ theme }) => theme.gray900};
       &.summary {
-        font-size: 0.875rem;
-        font-weight: 400;
-        color: #7588ea;
+        font-size: ${({ theme }) => theme.fs14};
+        font-weight: ${({ theme }) => theme.fw400};
+        color: ${({ theme }) => theme.primary_blue};
         margin-top: 0.5rem;
       }
     }
