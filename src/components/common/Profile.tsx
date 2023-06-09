@@ -1,3 +1,4 @@
+import useUserData from 'shared/hooks/useUserData';
 import { styled } from 'styled-components';
 import { ProfileImg } from 'ui';
 
@@ -16,7 +17,7 @@ export default function Profile({
   scale,
   image,
 }: ProfileProps) {
-  const uid = localStorage.getItem('uid');
+  const { uid } = useUserData();
 
   return (
     <Container scale={scale}>

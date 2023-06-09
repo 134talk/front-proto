@@ -33,14 +33,14 @@ export const Container = styled.div`
         .point {
           width: 0.938rem;
           height: 0.938rem;
-          background-color: #7588ea;
+          background-color: ${({ theme }) => theme.primary_blue};
           border-radius: 50%;
           margin-top: 0.9rem;
         }
         .line {
           width: 0.6rem;
           height: 1.438rem;
-          border-left: 2px solid #d5dae0;
+          border-left: ${({ theme }) => `2px solid ${theme.gray300}`};
           margin-left: 0.4rem;
         }
       }
@@ -49,16 +49,16 @@ export const Container = styled.div`
         height: 2.8rem;
         padding: 0.688rem 0.6rem 0.688rem 1.25rem;
         border-radius: 8px;
-        background-color: #fff;
+        background-color: ${({ theme }) => theme.white};
         display: flex;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
         p {
-          font-size: 1rem;
-          color: #111111;
+          font-size: ${({ theme }) => theme.fs16};
+          color: ${({ theme }) => theme.gray900};
           span {
-            font-weight: 600;
+            font-weight: ${({ theme }) => theme.fw600};
           }
         }
         img {

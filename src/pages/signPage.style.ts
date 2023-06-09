@@ -6,11 +6,11 @@ export const Container = styled.div`
     width: 11.375rem;
     height: 2.609rem;
     margin: 6.688rem auto 0 auto;
-    background: #ffffff;
+    background: ${({ theme }) => theme.white};
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 2rem;
-    border: #98a2b3 solid 1px;
+    border: ${({ theme }) => `${theme.gray500} solid 1px`};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,7 @@ export const Container = styled.div`
       position: absolute;
       border-style: solid;
       border-width: 10px 8px 0;
-      border-color: #ffffff transparent;
+      border-color: ${({ theme }) => `${theme.white} transparent`};
       display: block;
       width: 0;
       z-index: 1;
@@ -31,7 +31,8 @@ export const Container = styled.div`
       position: absolute;
       border-style: solid;
       border-width: 10px 8px 0;
-      border-color: #98a2b3 transparent;
+      border-color: ${({ theme }) =>
+        `${theme.gray500} transparent`};transparent;
       display: block;
       width: 0;
       z-index: 0;
@@ -39,8 +40,8 @@ export const Container = styled.div`
       left: 5rem;
     }
     p {
-      font-size: 0.75rem;
-      color: #4059de;
+      font-size: ${({ theme }) => theme.fs12};
+      color: ${({ theme }) => theme.primary_deep_blue};
     }
     img {
       width: 1.2rem;

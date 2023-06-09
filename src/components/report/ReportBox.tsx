@@ -1,13 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { REPORT_CATEGORY } from 'shared/constants/constants';
 import { RIGHT_ARROW } from 'shared/constants/icons';
 import * as t from './reportBox.style';
 
 export default function ReportBox() {
   const navigate = useNavigate();
-  const { channelId } = useParams();
 
-  const handleRoute = (id: number) => navigate(`/report/${channelId}/${id}/3`);
+  const handleRoute = (id: number) =>
+    navigate(`/report-detail?category=${id.toString()}`);
 
   return (
     <>

@@ -1,13 +1,9 @@
 import { Profile } from 'components';
 import { SIGN_OUT_ICON } from 'shared/constants/icons';
+import logout from 'shared/utils/logout';
 import * as t from './userProfile.style';
 
 export default function UserProfile() {
-  const logout = () => {
-    sessionStorage.removeItem('token');
-    localStorage.clear();
-  };
-
   return (
     <t.Container>
       <Profile scale="large" nickname="들썩이는 매의 일격" name="유저" />

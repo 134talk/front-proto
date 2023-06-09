@@ -18,7 +18,7 @@ export const Container = styled.div`
     min-height: 31rem;
     position: absolute;
     overflow: auto;
-    padding-bottom: 2rem;
+    padding-bottom: 5rem;
     margin-top: 3rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -32,10 +32,13 @@ export const Container = styled.div`
 export const Tab = styled.button<Props>`
   width: 50%;
   height: 3rem;
-  background: #ffffff;
-  font-size: 1rem;
-  font-weight: 600;
-  color: ${({ isSelected }) => (isSelected ? '#111111' : '#98a2b3')};
-  border-bottom: ${({ isSelected }) =>
-    isSelected ? '2px solid #4059de' : '1px solid #d5dae0'};
+  background: ${({ theme }) => theme.white};
+  font-size: ${({ theme }) => theme.fs16};
+  font-weight: ${({ theme }) => theme.fw600};
+  color: ${({ isSelected, theme }) =>
+    isSelected ? theme.gray900 : theme.gray500};
+  border-bottom: ${({ isSelected, theme }) =>
+    isSelected
+      ? `2px solid ${theme.primary_deep_blue}`
+      : `1px solid ${theme.gray300}`};
 `;

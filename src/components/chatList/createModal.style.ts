@@ -39,8 +39,8 @@ export const Container = styled.div`
       display: none;
     }
     > p {
-      font-size: 0.9rem;
-      color: #475467;
+      font-size: ${({ theme }) => theme.fs14};
+      color: ${({ theme }) => theme.gray700};
       text-align: center;
       margin: 15rem auto;
     }

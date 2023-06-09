@@ -12,8 +12,8 @@ export const Container = styled.div`
     height: 4.25rem;
   }
   span {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #000000;
+    font-size: ${({ theme }) => theme.fs24};
+    font-weight: ${({ theme }) => theme.fw700};
+    color: ${({ theme }) => theme.gray900};
   }
 `;

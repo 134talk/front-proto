@@ -24,12 +24,12 @@ export const Container = styled.div`
       justify-content: space-between;
       margin-top: -8px;
       p {
-        font-size: 0.875rem;
-        color: #475467;
+        font-size: ${({ theme }) => theme.fs14};
+        color: ${({ theme }) => theme.gray700};
         &:nth-child(2) {
-          font-size: 1rem;
-          font-weight: 600;
-          color: #111111;
+          font-size: ${({ theme }) => theme.fs16};
+          font-weight: ${({ theme }) => theme.fw600};
+          color: ${({ theme }) => theme.gray900};
         }
       }
     }
