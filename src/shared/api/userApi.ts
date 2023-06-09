@@ -6,8 +6,7 @@ export const login = (code: string) =>
     redirectUri: process.env.REACT_APP_KAKAO_REDIRECT_URI,
   });
 
-export const silentRefresh = (accessToken: string) =>
-  axiosInstance.post('/auth/refresh', { accessToken });
+export const silentRefresh = () => axiosInstance.post('/auth/refresh');
 
 export const signUser = (name: string, teamCode: string) =>
   axiosInstance.post('/user/register', { name, teamCode });
