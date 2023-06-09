@@ -10,6 +10,7 @@ import {
 import debounce from 'lodash/debounce';
 import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
+import useUserData from 'shared/hooks/useUserData';
 import useChatList from 'shared/query/useChatList';
 import * as t from './chatListPage.style';
 
@@ -48,7 +49,7 @@ export default function ChatListPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setChatTime(e.target.value);
 
-  const isAdmin = localStorage.getItem('isAdmin');
+  const { isAdmin } = useUserData();
 
   const getChatListByKeyword = useCallback(
     debounce(() => refetch(), 500),

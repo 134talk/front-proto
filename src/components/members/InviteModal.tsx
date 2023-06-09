@@ -2,6 +2,7 @@ import { BaseModal } from 'components';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { KAKAO_ICON, LINK_ICON } from 'shared/constants/icons';
+import useUserData from 'shared/hooks/useUserData';
 import { Button } from 'ui';
 import * as t from './inviteModal.style';
 
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export default function InviteModal({ onClose }: Props) {
-  const channelId = localStorage.getItem('channel');
+  const { channel: channelId } = useUserData();
 
   const copyClipBoard = async (text: string) => {
     try {
