@@ -9,6 +9,7 @@ import {
 } from 'components';
 import debounce from 'lodash/debounce';
 import { useCallback, useState } from 'react';
+import toast from 'react-hot-toast';
 import useChatList from 'shared/query/useChatList';
 import * as t from './chatListPage.style';
 
@@ -24,7 +25,14 @@ export default function ChatListPage() {
   const handleCreateModal = () => setCreateModal(prev => !prev);
   const handleSettingModal = () => setSettingModal(prev => !prev);
   const handleCheckModal = () => setCheckModal(prev => !prev);
-  const handleGuideModal = () => setGuideModal(prev => !prev);
+  const handleGuideModal = () => {
+    setGuideModal(prev => !prev);
+  };
+
+  const enterRoom = (isMyRoom: boolean) => {
+    if (isMyRoom) handleGuideModal();
+    else toast.error('참여할 수 없는 대화방입니다.');
+  };
 
   const { chatList, refetch } = useChatList(keyword);
 
@@ -83,7 +91,7 @@ export default function ChatListPage() {
                   roomId={roomId}
                   roomName={roomName}
                   isJoin={joinFlag}
-                  onClick={handleGuideModal}
+                  onClick={() => enterRoom(joinFlag)}
                 />
               </div>
             ))
