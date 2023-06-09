@@ -19,6 +19,6 @@ export const Container = styled.div`
     background: none;
     font-size: ${({ theme }) => theme.fs12};
     font-weight: ${({ theme }) => theme.fw700};
-    color: ${({ theme }) => theme.gry800};
+    color: ${({ theme }) => theme.gray800};
   }
 `;
