@@ -12,6 +12,7 @@ export default function LogInPage() {
 
   useEffect(() => {
     localStorage.setItem('invite-code', channel);
+    return () => localStorage.removeItem('invite-code');
   }, [channel]);
 
   useEffect(() => {

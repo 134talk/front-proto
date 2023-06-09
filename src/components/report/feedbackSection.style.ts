@@ -5,7 +5,7 @@ type StyleProps = {
 };
 
 export const Container = styled.div`
-  width: calc(100% - 1.25rem);
+  width: 100%;
   padding: 1.6rem 1.9rem;
   border-radius: 20px;
   background: ${({ theme }) => theme.white};

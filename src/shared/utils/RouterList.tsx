@@ -25,7 +25,7 @@ interface RouterData {
 export const AuthRouter: RouterData[] = [
   {
     id: 0,
-    path: '/channel/:channelId/:tabId',
+    path: '/channel',
     isTab: true,
     element: <MembersPage />,
   },
@@ -61,7 +61,7 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 6,
-    path: '/chats/:channelId/:tabId',
+    path: '/chats',
     isTab: true,
     element: <ChatListPage />,
   },
@@ -73,19 +73,19 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 8,
-    path: '/report/:channelId/:tabId',
+    path: '/report',
     isTab: true,
     element: <ReportPage />,
   },
   {
     id: 9,
-    path: '/report/:channelId/:category/:tabId',
+    path: '/report-detail',
     isTab: true,
     element: <ReportDetailPage />,
   },
   {
     id: 10,
-    path: '/user/:userId/:tabId',
+    path: '/user',
     isTab: true,
     element: <UserPage />,
   },

@@ -23,9 +23,10 @@ export default function SignPage() {
     setTeam(spacesRemovedTeam);
   };
 
+  const code = localStorage.getItem('invite-code');
   useEffect(() => {
-    if (type === 'user') setTeam(localStorage.getItem('invite-code'));
-  }, [type]);
+    if (type === 'user') setTeam(code !== 'null' ? code : '');
+  }, [type, code]);
 
   const { onSignUser, onSignAdmin } = useSign();
 

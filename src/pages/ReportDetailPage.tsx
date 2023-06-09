@@ -1,12 +1,14 @@
 import { ChatDetail, FeedbackDetail, NavBar, StatusDetail } from 'components';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as t from './reportDetailPage.style';
 
 export default function ReportDetailPage() {
   const navigate = useNavigate();
-  const { channelId, category } = useParams();
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category');
 
-  const handleNav = () => navigate(`/report/${channelId}/3`);
+  const handleNav = () => navigate('/report');
+
   return (
     <>
       <NavBar
