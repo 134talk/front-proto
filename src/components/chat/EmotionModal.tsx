@@ -2,8 +2,8 @@ import { BottomModal } from 'components';
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { CHECK_ICON, CLOSE_BLACK } from 'shared/constants/icons';
-import { styled } from 'styled-components';
 import { Button, ProfileImg } from 'ui';
+import * as t from './emotionModal.style';
 
 interface EmotionModalProps {
   isModalOpen: boolean;
@@ -50,7 +50,7 @@ export default function EmotionModal({
     <>
       {isModalOpen && (
         <BottomModal isOpen={isModalOpen}>
-          <Container>
+          <t.Container>
             <div className="navbar_wrapper">
               <div className="navbar_top_wrapper">
                 <p className="guide_text">어느 분에게 감정을 표현하시겠어요?</p>
@@ -80,70 +80,9 @@ export default function EmotionModal({
               />
               <Button category="cancel" text="취소" onClick={handleClose} />
             </div>
-          </Container>
+          </t.Container>
         </BottomModal>
       )}
     </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 22.313rem;
-  padding: 1.5rem 0;
-  div {
-    &.navbar_wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-      margin-bottom: 1.75rem;
-      height: 3.376rem;
-    }
-    &.navbar_top_wrapper {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    &.user_list_wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      width: 20rem;
-      height: 4rem;
-      margin-bottom: 2rem;
-    }
-    &.user_wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    &.button_wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-  }
-  p {
-    &.guide_text {
-      text-align: center;
-      width: 100%;
-      font-size: 1.125rem;
-      font-weight: bold;
-    }
-    &.sub_text {
-      text-align: center;
-      width: 100%;
-      font-size: 1rem;
-    }
-  }
-  img {
-    &.check_image {
-      width: 1.125rem;
-      height: 1.125rem;
-      position: relative;
-      margin: -50px 0 0 35px;
-      cursor: pointer;
-    }
-  }
-`;

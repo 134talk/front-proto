@@ -1,9 +1,9 @@
-import { Card, NavBar } from 'components';
+import { KeywordList, NavBar } from 'components';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { KEYWORD_LIST } from 'shared/constants/constants';
-import { styled } from 'styled-components';
 import { Button } from 'ui';
+import * as t from './keywordScreen.style';
 
 export default function KeywordScreen() {
   const [selectedKeywords, setSelectedKeywords] = useState([]);
@@ -23,18 +23,16 @@ export default function KeywordScreen() {
   };
 
   return (
-    <Container>
+    <t.Container>
       <NavBar isCenter={true} title="대화방" />
       <p className="guide_text">키워드 3개를 선택해주세요.</p>
       <div className="card_wrapper">
         {KEYWORD_LIST.map(item => (
-          <Card
+          <KeywordList
             key={item.id}
             keyword={item.keyword}
-            type="keyword"
-            fillColor="#D4D1FF"
-            lightColor="#DF9EEC"
-            darkColor="#D299FF"
+            lineColor={item.color[0]}
+            fillColor={item.color[1]}
             selected={selectedKeywords.includes(item.keyword) && true}
             onClick={() => handleSelectKeyword(item.keyword)}
           />
@@ -45,29 +43,6 @@ export default function KeywordScreen() {
         text="키워드 선택하기"
         disabled={selectedKeywords.length > 2 ? false : true}
       />
-    </Container>
+    </t.Container>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  p {
-    &.guide_text {
-      margin: 1.25rem 0 2.438rem 0;
-      text-align: center;
-      font-size: 1rem;
-      line-height: 1.3rem;
-    }
-  }
-  div {
-    &.card_wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      row-gap: 1rem;
-      margin-bottom: 6.25rem;
-    }
-  }
-`;

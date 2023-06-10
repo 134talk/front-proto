@@ -1,53 +1,31 @@
 import { Profile } from 'components';
 import { CHECK_ICON } from 'shared/constants/icons';
-import { styled } from 'styled-components';
+import * as t from './userList.style';
 
 interface UserListProps {
   isCheck: boolean;
+  isRow: boolean;
   scale: 'small' | 'medium' | 'large';
 }
 
-export default function UserList({ isCheck, scale }: UserListProps) {
+export default function UserList({ isCheck, isRow, scale }: UserListProps) {
   return (
-    <Container scale={scale}>
+    <t.Container isRow={isRow}>
       {userLists.map((item: UserListType) => (
-        <div className="user_wrapper" key={item.id}>
-          {isCheck && (
-            <img className="check_image" src={CHECK_ICON} alt="check" />
-          )}
+        <div key={item.id}>
+          {isCheck && <img src={CHECK_ICON} alt="check" />}
           <Profile
             nickname={item.nickname}
             name={item.name}
             userId={item.userId}
-            scale={scale}
+            scale={isRow ? 'small' : scale}
+            isRow={isRow}
           />
         </div>
       ))}
-    </Container>
+    </t.Container>
   );
 }
-
-const Container = styled.div<{ scale: 'small' | 'medium' | 'large' }>`
-display: flex;
-flex-direction: column;
-gap: 0.125rem;
-padding: 1rem 0 0 2rem;
-height: ${props => (props.scale === 'small' ? '17.125rem' : '22.75rem')};
-div {
-    &.user_wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin: 0.5rem 0;
-        gap: 0.5rem;
-        img {
-          &.check_image {
-            width: 1rem;
-            height: 1rem;
-          }
-        }
-}
-`;
 
 export type UserListType = {
   id: number;
@@ -61,12 +39,12 @@ export const userLists: UserListType[] = [
     id: 0,
     name: '조해솔',
     nickname: '들썩이는 매의 일격',
-    userId: 'adlkjfa',
   },
   {
     id: 1,
     name: '이담',
     nickname: '들썩이는 나무의 날개짓',
+    userId: 'adlkjfa',
   },
   {
     id: 2,

@@ -1,8 +1,8 @@
 import { BaseModal } from 'components';
 import type { Dispatch, SetStateAction } from 'react';
-import React from 'react';
-import { styled } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'ui';
+import * as t from './exitConfirmModal.style';
 
 interface ExitConfirmModalProps {
   isOpen: boolean;
@@ -13,48 +13,33 @@ export default function ExitConfirmModal({
   isOpen,
   setIsModalOpen,
 }: ExitConfirmModalProps) {
+  const navigate = useNavigate();
   return (
     <>
       {isOpen && (
         <BaseModal>
-          <Container>
-            <p className="guide_text">
+          <t.Container>
+            <p>
               나가시면 대화에 참여할 수 없습니다.
               <br />
               정말 나가시겠습니까?
             </p>
-            <div className="button_wrapper">
+            <div>
               <Button
                 category="cancel"
                 text="취소"
                 onClick={() => setIsModalOpen(false)}
               />
-              <Button category="confirm" text="확인" />
+              <Button
+                category="confirm"
+                text="확인"
+                // change channelId
+                onClick={() => navigate('/channel/:channelId')}
+              />
             </div>
-          </Container>
+          </t.Container>
         </BaseModal>
       )}
     </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-top: 1rem;
-  p {
-    &.guide_text {
-      font-size: 1.125rem;
-      font-weight: bold;
-      text-align: center;
-      line-height: 1.3;
-    }
-  }
-  div {
-    &.button_wrapper {
-      display: flex;
-      gap: 0.5rem;
-    }
-  }
-`;

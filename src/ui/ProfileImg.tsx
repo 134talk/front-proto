@@ -1,31 +1,21 @@
-import { styled } from 'styled-components';
+import { PROFILE_IMAGE } from 'shared/constants/icons';
+import * as t from './profileImg.style';
 
-interface ProfileImgProps {
+export interface ProfileImgProps {
   image?: string;
   id?: string;
+  isMyProf?: boolean;
+  isCheckIn?: boolean;
   size?: string;
   onClick?: () => void;
 }
 
-// check & remove image props optional!
 export default function ProfileImg(props: ProfileImgProps) {
   return (
-    <Profile
-      src={
-        props.image
-          ? props.image
-          : 'https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179865.jpg'
-      }
+    <t.Profile
+      src={props.image ? props.image : PROFILE_IMAGE}
       alt="profileImg"
       {...props}
     />
   );
 }
-
-export const Profile = styled.img<ProfileImgProps>`
-  width: ${props => (props.size ? props.size : '2rem')};
-  height: ${props => (props.size ? props.size : '2rem')};
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-`;

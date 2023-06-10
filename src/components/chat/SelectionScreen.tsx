@@ -1,8 +1,8 @@
 import { NavBar } from 'components';
 import { useState } from 'react';
 import { CHAT_LEFT_ARROW, CHAT_RIGHT_ARROW } from 'shared/constants/icons';
-import { styled } from 'styled-components';
 import { Button } from 'ui';
+import * as t from './selectionScreen.style';
 
 const List = [
   { main: '키워드1', sub: '키워드1-1' },
@@ -38,7 +38,7 @@ export default function SelectionScreen() {
   };
 
   return (
-    <Container>
+    <t.Container>
       <NavBar isCenter={true} title="대화방" />
       <p className="nav_guide_text">먼저 답하고 싶은 질문을 선택해주세요.</p>
       <div className="card_wrapper">
@@ -66,37 +66,6 @@ export default function SelectionScreen() {
           onClick={handleSelectOrder}
         />
       </div>
-    </Container>
+    </t.Container>
   );
 }
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  p {
-    &.nav_guide_text {
-      margin: 1.25rem 0 2.438rem 0;
-      text-align: center;
-      font-size: 1rem;
-      line-height: 1.3rem;
-    }
-    &.guide_text {
-      text-align: center;
-      font-size: 1rem;
-      line-height: 1.3rem;
-    }
-  }
-  div {
-    &.card_wrapper {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-    }
-    &.button_wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      padding: 0.75rem 0;
-    }
-  }
-`;
