@@ -112,3 +112,6 @@ export const HAMBURGER_ICON =
 
 export const NEW_BADGE_ICON =
   process.env.PUBLIC_URL + '/assets/icons/new-badge.svg';
+
+export const PROFILE_IMAGE =
+  process.env.PUBLIC_URL + '/assets/icons/profile.svg';
