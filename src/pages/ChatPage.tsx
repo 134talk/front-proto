@@ -7,6 +7,7 @@ import {
   WaitingScreen,
 } from 'components';
 import { useState } from 'react';
+import FeedbackPage from './FeedbackPage';
 
 export default function ChatPage() {
   const [pageType, setPageType] = useState<number>(5);
@@ -19,6 +20,7 @@ export default function ChatPage() {
       {pageType === 3 && <SelectionScreen />}
       {pageType === 4 && <ChatNotifyScreen />}
       {pageType === 5 && <ChatScreen />}
+      {pageType === 6 && <FeedbackPage />}
     </>
   );
 }

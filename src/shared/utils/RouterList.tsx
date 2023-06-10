@@ -1,5 +1,6 @@
 import ChatListPage from 'pages/ChatListPage';
 import ChatPage from 'pages/ChatPage';
+import FeedbackPage from 'pages/FeedbackPage';
 import LogInPage from 'pages/LogInPage';
 import MembersPage from 'pages/MembersPage';
 import NicknameGuidePage from 'pages/NicknameGuidePage';
@@ -78,6 +79,12 @@ export const AuthRouter: RouterData[] = [
     path: '/user/:userId',
     isTab: true,
     element: <UserPage />,
+  },
+  {
+    id: 10,
+    path: '/feedback/:type',
+    isTab: false,
+    element: <FeedbackPage />,
   },
 ];
 
