@@ -6,3 +6,4 @@ export { default as Chip } from './Chip';
 export { default as Spinner } from './Spinner';
 export { default as Emotion } from './Emotion';
 export { default as Background } from './Background';
+export { default as InnerBackground } from './InnerBackground';

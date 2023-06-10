@@ -1,10 +1,9 @@
-import { Background, BarChart, ReportTitle, Section } from 'components';
+import { BarChart, ReportTitle, Section } from 'components';
 import * as t from './chatDetail.style';
 
 export default function ChatDetail() {
   return (
     <t.Container>
-      <Background />
       <div className="sectionWrapper">
         <ReportTitle text="우리 대화는?" />
         <Section>

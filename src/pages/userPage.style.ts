@@ -8,6 +8,7 @@ export const Container = styled.div`
   width: 100%;
   .tabWrapper {
     position: absolute;
+    top: 190px;
     left: 0;
     width: 100%;
     z-index: 99;
@@ -31,7 +32,7 @@ export const Container = styled.div`
 
 export const Tab = styled.button<Props>`
   width: 50%;
-  height: 3rem;
+  height: 49px;
   background: ${({ theme }) => theme.white};
   font-size: ${({ theme }) => theme.fs16};
   font-weight: ${({ theme }) => theme.fw600};
