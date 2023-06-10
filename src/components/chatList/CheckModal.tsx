@@ -1,4 +1,5 @@
 import { BaseModal } from 'components';
+import useTimer from 'shared/query/useTimer';
 import { Button } from 'ui';
 import * as t from './checkModal.style';
 
@@ -8,6 +9,12 @@ type Props = {
 };
 
 export default function CheckModal({ chatTime, onClose }: Props) {
+  const { mutate } = useTimer();
+  const onConfirm = () => {
+    mutate({ time: chatTime });
+    onClose();
+  };
+
   return (
     <t.Container>
       <BaseModal>
@@ -19,7 +26,7 @@ export default function CheckModal({ chatTime, onClose }: Props) {
         </p>
         <div className="button_wrapper">
           <Button text="취소" category="cancel" onClick={onClose} />
-          <Button text="확인" category="confirm" />
+          <Button text="확인" category="confirm" onClick={onConfirm} />
         </div>
       </BaseModal>
     </t.Container>

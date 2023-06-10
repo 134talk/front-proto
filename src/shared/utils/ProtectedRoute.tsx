@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import useUserData from 'shared/hooks/useUserData';
 
 type Props = {
   children: React.ReactNode;
@@ -7,9 +8,7 @@ type Props = {
 };
 
 export default function ProtectedRoute({ children, redirectPath }: Props) {
-  // TODO: 서버 연결 후 주석 해제하기
-  // const isAuth = !!sessionStorage.getItem('token');
-  const isAuth = true;
+  const { isAuth } = useUserData();
 
   return (
     <>{isAuth ? <>{children}</> : <Navigate to={redirectPath} replace />}</>

@@ -23,7 +23,7 @@ export const Container = styled.div`
       height: 1.5rem;
     }
   }
-  section {
+  > section {
     width: 100%;
     height: calc(100% - 13.3rem);
     margin-top: 0.5rem;
@@ -37,6 +37,12 @@ export const Container = styled.div`
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
+    }
+    > p {
+      font-size: ${({ theme }) => theme.fs14};
+      color: ${({ theme }) => theme.gray700};
+      text-align: center;
+      margin: 15rem auto;
     }
   }
 `;

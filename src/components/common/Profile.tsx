@@ -1,12 +1,14 @@
+import useUserData from 'shared/hooks/useUserData';
 import { ProfileImg } from 'ui';
 import * as t from './profile.style';
 
 export interface ProfileProps {
   nickname?: string;
   name?: string;
-  userId?: string;
+  userId?: number;
   isRow?: boolean;
   scale: 'small' | 'medium' | 'large';
+  image?: string;
 }
 
 export default function Profile({
@@ -15,7 +17,10 @@ export default function Profile({
   userId,
   isRow,
   scale,
+  image,
 }: ProfileProps) {
+  const { uid } = useUserData();
+
   return (
     <t.Container scale={scale}>
       <ProfileImg
@@ -24,12 +29,13 @@ export default function Profile({
           (scale === 'medium' && '3.25rem') ||
           (scale === 'large' && '5.5rem')
         }
+        image={image}
       />
       <t.NameWrapper isRow={isRow}>
         <div>
-          {isRow && userId && <span>나</span>}
+          {isRow && String(userId) === uid && <span>나</span>}
           <t.NicknameText scale={scale}>{nickname && nickname}</t.NicknameText>
-          {!isRow && userId && <span>나</span>}
+          {!isRow && String(userId) === uid && <span>나</span>}
         </div>
         <t.NameText scale={scale}>{name && name}</t.NameText>
       </t.NameWrapper>

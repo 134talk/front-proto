@@ -1,5 +1,6 @@
 import type { AxiosRequestConfig } from 'axios';
 import axios from 'axios';
+import { silentRefresh } from './userApi';
 
 const axiosConfig: AxiosRequestConfig = {
   timeout: 3000,
@@ -8,11 +9,11 @@ const axiosConfig: AxiosRequestConfig = {
 
 const axiosInstance = axios.create(axiosConfig);
 
-const token = sessionStorage.getItem('token');
-
 axiosInstance.interceptors.request.use(
   config => {
+    const token = sessionStorage.getItem('token');
     config.headers.Authorization = `Bearer ${token}`;
+    config = { ...config, withCredentials: true };
     return config;
   },
   error => {
@@ -23,6 +24,11 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
+    const { response } = error;
+    if (response.status === 401)
+      silentRefresh().then(({ data }) =>
+        sessionStorage.setItem('token', data?.accessToken)
+      );
     return Promise.reject(error);
   }
 );

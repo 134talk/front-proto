@@ -78,8 +78,6 @@ export const STATUS_BAR =
 export const PHONE_MOCKUP =
   process.env.PUBLIC_URL + '/assets/icons/phone-mockup.svg';
 
-export const SMILE_ICON = process.env.PUBLIC_URL + '/assets/icons/smile.svg';
-
 export const CHAT_NOTIFY_IMAGE =
   process.env.PUBLIC_URL + '/assets/icons/chat-notify.svg';
 
@@ -115,3 +113,19 @@ export const NEW_BADGE_ICON =
 
 export const PROFILE_IMAGE =
   process.env.PUBLIC_URL + '/assets/icons/profile.svg';
+export const SILHOUETTE =
+  process.env.PUBLIC_URL + '/assets/icons/character-silhouette.svg';
+
+export const RIGHT_ARROW =
+  process.env.PUBLIC_URL + '/assets/icons/right-arrow.svg';
+
+export const NEGATIVE_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/negative.svg';
+
+export const POSITIVE_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/positive.svg';
+
+export const LINE_ICON = process.env.PUBLIC_URL + '/assets/icons/line.svg';
+
+export const SIGN_OUT_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/sign-out.svg';

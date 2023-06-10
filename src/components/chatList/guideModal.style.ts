@@ -26,16 +26,20 @@ export const Container = styled.div`
       height: 17.5rem;
     }
     > p {
-      font-size: 1rem;
+      font-size: ${({ theme }) => theme.fs16};
       text-align: center;
       line-height: 1.3;
-      color: #000000;
+      color: ${({ theme }) => theme.gray900};
       margin-top: 1.2rem;
       span {
-        font-size: 1rem;
+        font-size: ${({ theme }) => theme.fs12};
         text-align: center;
         line-height: 1.3;
-        color: #667085;
+        color: ${({ theme }) => theme.gray600};
+        &.blue {
+          font-size: ${({ theme }) => theme.fs16};
+          color: ${({ theme }) => theme.primary_deep_blue};
+        }
       }
     }
   }
@@ -58,7 +62,7 @@ export const Container = styled.div`
     cursor: pointer;
   }
   .dotsCustom li.slick-active button {
-    background: #111111;
+    background: ${({ theme }) => theme.gray900};
   }
 `;
 
@@ -72,12 +76,12 @@ export const SkipButton = styled.button<StyleProps>`
   width: 5.688rem;
   height: 1.8rem;
   background: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #667085;
+  font-size: ${({ theme }) => theme.fs14};
+  font-weight: ${({ theme }) => theme.fw500};
+  color: ${({ theme }) => theme.gray600};
   padding: 0.75rem;
   border-radius: 999px;
-  border: solid 1px #d5dae0;
+  border: ${({ theme }) => `solid 1px ${theme.gray300}`};
   display: ${({ currentSlide }) => (currentSlide === 6 ? 'none' : 'flex')};
   flex-direction: row;
   justify-content: center;

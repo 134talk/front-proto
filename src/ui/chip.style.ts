@@ -3,13 +3,14 @@ import type { ChipProps } from './Chip';
 
 export const Container = styled.div<ChipProps>`
   display: inline-block;
-  background: ${({ text }) => (text === '참여가능' ? '#ACEED6' : '#F1F3F5')};
+  background: ${({ text, theme }) =>
+    text === '참여가능' ? theme.chip_green : theme.gray100};
   padding: 0.125rem 0.5rem;
   margin-bottom: 0.6rem;
   border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #1d2939;
+  font-size: ${({ theme }) => theme.fs14};
+  font-weight: ${({ theme }) => theme.fw700};
+  color: ${({ theme }) => theme.gray800};
   position: relative;
   img {
     vertical-align: text-top;

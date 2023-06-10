@@ -1,8 +1,8 @@
 import { BaseModal } from 'components';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { useLocation } from 'react-router-dom';
 import { KAKAO_ICON, LINK_ICON } from 'shared/constants/icons';
+import useUserData from 'shared/hooks/useUserData';
 import { Button } from 'ui';
 import * as t from './inviteModal.style';
 
@@ -11,12 +11,12 @@ type Props = {
 };
 
 export default function InviteModal({ onClose }: Props) {
-  const location = useLocation();
+  const { channel: channelId } = useUserData();
 
   const copyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.error('클립보드에 링크가 복사되었어요.');
+      toast.error('클립보드에 링크가 복사되었습니다.');
     } catch (error) {
       console.log(error);
     }
@@ -69,16 +69,16 @@ export default function InviteModal({ onClose }: Props) {
         <div className="buttonWrapper">
           <Button
             category="kakao"
-            onClick={() => shareByKakao('https://134.works', '134')}
+            onClick={() =>
+              shareByKakao(`https://134.works/?channel=${channelId}`, '134')
+            }
           >
             <img src={KAKAO_ICON} alt="초대하기" /> 초대하기
           </Button>
           <Button
             category="confirm"
             onClick={() =>
-              copyClipBoard(
-                `${process.env.REACT_APP_BASE_URL}/login?channel=${location.pathname}`
-              )
+              copyClipBoard(`https://134.works/?channel=${channelId}`)
             }
           >
             <img src={LINK_ICON} alt="링크복사" /> 링크복사

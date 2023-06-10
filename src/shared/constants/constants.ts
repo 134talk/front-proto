@@ -101,3 +101,24 @@ export const EMOTION_LIST = [
   { id: 4, emotion: 'right', source: EMOTION_RIGHT },
   { id: 5, emotion: 'angry', source: EMOTION_ANGRY },
 ];
+
+export const REPORT_CATEGORY = [
+  {
+    id: 0,
+    title: '지금 우리는?',
+    title2: '',
+    summary: '참가자 성향 from 닉네임',
+  },
+  {
+    id: 1,
+    title: '우리 대화는?',
+    title2: '',
+    summary: '핫한 대화 질문, 감정 from 대화 기록',
+  },
+  {
+    id: 2,
+    title: '대화는 우리에게',
+    title2: '좋은 영향을 주고 있는걸까?',
+    summary: '대화 후 참가자 상태 from 피드백',
+  },
+];

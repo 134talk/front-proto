@@ -6,10 +6,10 @@ export const Container = styled.div`
   position: absolute;
   left: 0;
   bottom: 0;
-  background-color: #ffffff;
-  box-shadow: 0 -2px 6px 0 rgba(172, 173, 177, 0.1);
+  background-color: ${({ theme }) => theme.white};
+  box-shadow: ${({ theme }) => `0 -2px 6px 0 ${theme.shadow}`};
   padding: 0.75rem 1.25rem;
   text-align: center;
-  color: white;
+  color: ${({ theme }) => theme.white};
   z-index: 100;
 `;

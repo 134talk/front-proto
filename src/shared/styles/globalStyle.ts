@@ -122,7 +122,6 @@ time, input,select,textarea {
 	font-size: 100%;
 	box-sizing: border-box;
 }
-
 *::before, *::after {
     margin: 0; 
     padding: 0;
@@ -146,6 +145,13 @@ button{
 	border:none;
 	cursor: pointer;
 }
+
+@mixin flex($direction: 'row', $align: 'center', $justify: 'center') {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+  }
 `;
 
 export default GlobalStyle;

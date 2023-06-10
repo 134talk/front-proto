@@ -31,7 +31,7 @@ export type UserListType = {
   id: number;
   name: string;
   nickname: string;
-  userId?: string;
+  userId?: number;
 };
 
 export const userLists: UserListType[] = [
@@ -44,7 +44,7 @@ export const userLists: UserListType[] = [
     id: 1,
     name: '이담',
     nickname: '들썩이는 나무의 날개짓',
-    userId: 'adlkjfa',
+    userId: 11,
   },
   {
     id: 2,

@@ -20,4 +20,10 @@ export const Container = styled.div`
       cursor: pointer;
     }
   }
+  .notFound {
+    font-size: ${({ theme }) => theme.fs14};
+    color: ${({ theme }) => theme.gray700};
+    text-align: center;
+    margin: 15rem auto;
+  }
 `;

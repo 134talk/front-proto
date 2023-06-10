@@ -1,4 +1,5 @@
 import React from 'react';
+import { use100vh } from 'react-div-100vh';
 import { INDICATOR, PHONE_MOCKUP, STATUS_BAR } from 'shared/constants/icons';
 import { styled } from 'styled-components';
 import isMobile from './deviceDetector';
@@ -13,10 +14,12 @@ export default function Device({ children }: Props) {
     hour: 'numeric',
   });
   const realtime = now.slice(2);
+  const mobileHeight = use100vh();
+
   return (
     <>
       {isMobile ? (
-        <Mobile>{children}</Mobile>
+        <Mobile height={mobileHeight}>{children}</Mobile>
       ) : (
         <Web>
           <Phone>
@@ -45,12 +48,13 @@ export default function Device({ children }: Props) {
   );
 }
 
-const Mobile = styled.div`
+const Mobile = styled.div<{ height: number }>`
   margin: 0 auto;
   padding: 0;
   width: 100%;
   max-width: 640px;
   min-width: 280px;
+  height: ${({ height }) => height}
   overflow: hidden;
   padding: 0 1.25rem;
 `;
@@ -79,15 +83,17 @@ const Phone = styled.div`
 `;
 
 const StatusBar = styled.div`
+  width: calc(100% + 1.25rem * 2);
   height: 2.75rem;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;
   z-index: 9999;
   position: relative;
-  padding: 0.938rem 0 0.75rem 0;
+  background: #ffffff;
+  margin: 0 1.25rem 0 -1.25rem;
+  padding: 0 1.25rem;
   p {
     &.real_time_text {
       width: 3.375rem;
@@ -114,7 +120,7 @@ const WebViewLayout = styled.div`
   border-radius: 40px;
   overflow: hidden;
   padding: 0 1.25rem;
-  background-color: #fff;
+  background: #ffffff;
 `;
 
 const IndicatorBar = styled.div`

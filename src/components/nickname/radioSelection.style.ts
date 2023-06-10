@@ -5,24 +5,24 @@ export const Container = styled.div`
     width: 100%;
     height: 3.5rem;
     border-radius: 8px;
-    border: solid 1px #d5dae0;
+    border: ${({ theme }) => `solid 1px ${theme.gray300}`};
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin-top: 0.75rem;
     padding: 1.25rem 1.5rem;
-    font-size: 1rem;
-    color: rgba(0, 0, 0, 0.6);
+    font-size: ${({ theme }) => theme.fs16};
+    color: ${({ theme }) => theme.gray600};
     cursor: pointer;
   }
   input {
     display: none;
     &:checked + label {
-      border: solid 1px #f58548;
-      background-color: #fff2d7;
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: #f58548;
+      border: ${({ theme }) => `solid 1px ${theme.primary_deep_blue}`};
+      background-color: ${({ theme }) => theme.gray100};
+      font-size: ${({ theme }) => theme.fs18};
+      font-weight: ${({ theme }) => theme.fw700};
+      color: ${({ theme }) => theme.primary_deep_blue};
     }
   }
 `;

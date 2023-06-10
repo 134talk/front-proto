@@ -8,12 +8,12 @@ export const Container = styled.div`
   gap: 0.5rem;
   margin: 2.5rem 0 2.125rem 0;
   img {
-    width: 2.563rem;
-    height: 2.563rem;
+    width: 4.875rem;
+    height: 4.25rem;
   }
   span {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #000000;
+    font-size: ${({ theme }) => theme.fs24};
+    font-weight: ${({ theme }) => theme.fw700};
+    color: ${({ theme }) => theme.gray900};
   }
 `;
