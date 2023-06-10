@@ -6,7 +6,10 @@ export const Container = styled.div`
     padding: 1.25rem;
     background: ${({ theme }) => theme.white};
     border-radius: 12px;
-    margin-top: 1.25rem;
+    margin-top: 20px;
+    &:first-child {
+      margin-top: 160px;
+    }
     > p {
       font-size: ${({ theme }) => theme.fs18};
       color: ${({ theme }) => theme.gray900};

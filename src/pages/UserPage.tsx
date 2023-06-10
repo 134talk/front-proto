@@ -1,13 +1,7 @@
-import {
-  NavBar,
-  ReportMenu,
-  UserBackground,
-  UserProfile,
-  UserStatus,
-} from 'components';
+import { NavBar, ReportMenu, UserProfile, UserStatus } from 'components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'ui';
+import { Button, InnerBackground } from 'ui';
 import * as t from './userPage.style';
 
 export default function UserPage() {
@@ -17,7 +11,7 @@ export default function UserPage() {
 
   return (
     <t.Container>
-      <UserBackground />
+      <InnerBackground />
       <NavBar isCenter title="마이페이지" />
       <UserProfile />
       <div className="tabWrapper">

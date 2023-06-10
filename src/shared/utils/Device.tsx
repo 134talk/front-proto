@@ -50,13 +50,12 @@ export default function Device({ children }: Props) {
 
 const Mobile = styled.div<{ height: number }>`
   margin: 0 auto;
-  padding: 0;
+  padding: 0 20px;
   width: 100%;
   max-width: 640px;
   min-width: 280px;
-  height: ${({ height }) => height}
+  max-height: ${({ height }) => `${height}px`}
   overflow: hidden;
-  padding: 0 1.25rem;
 `;
 
 const Web = styled.div`

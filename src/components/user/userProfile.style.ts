@@ -2,8 +2,10 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 8rem;
-  padding: 0.75rem 0;
+  left: 0;
+  height: 134px;
+  padding: 0.75rem 20px;
+  position: absolute;
   background: ${({ theme }) => theme.white};
   z-index: 999;
   > button {

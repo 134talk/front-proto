@@ -1,10 +1,9 @@
-import { Background, FeedbackSection, ReportTitle } from 'components';
+import { FeedbackSection, ReportTitle } from 'components';
 import * as t from './feedbackDetail.style';
 
 export default function FeedbackDetail() {
   return (
     <t.Container>
-      <Background />
       <div className="sectionWrapper">
         <ReportTitle text="대화는 우리에게 좋은 영향을 주고 있는걸까?" />
         <FeedbackSection

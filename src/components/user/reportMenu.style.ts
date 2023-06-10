@@ -5,6 +5,7 @@ export const Container = styled.div`
   height: calc(100% - 10rem);
   position: absolute;
   overflow: auto;
+  margin-top: 130px;
   padding-bottom: 2rem;
   -ms-overflow-style: none;
   scrollbar-width: none;

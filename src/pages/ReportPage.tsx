@@ -1,4 +1,5 @@
-import { Background, NavBar, ReportBox } from 'components';
+import { NavBar, ReportBox } from 'components';
+import { InnerBackground } from 'ui';
 import * as t from './reportPage.style';
 
 export default function ReportPage() {
@@ -6,7 +7,7 @@ export default function ReportPage() {
     <>
       <NavBar isCenter={true} title="리포트" />
       <t.Container>
-        <Background />
+        <InnerBackground />
         <div className="wrapper">
           <ReportBox />
         </div>
