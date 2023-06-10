@@ -81,16 +81,16 @@ export const STATUS_OPTIONS = [
 ];
 
 export const KEYWORD_LIST = [
-  { id: 1, keyword: '일상' },
-  { id: 2, keyword: '삶' },
-  { id: 3, keyword: '나' },
-  { id: 4, keyword: '관계' },
-  { id: 5, keyword: '여행' },
-  { id: 6, keyword: '사랑' },
-  { id: 7, keyword: '치유' },
-  { id: 8, keyword: '일' },
-  { id: 9, keyword: '미래' },
-  { id: 10, keyword: '가치' },
+  { id: 1, color: ['#F3B8FF', '#C290F1', '#A56ADD'], keyword: '일상' },
+  { id: 2, color: ['#CAF8D3', '#93D39E', '#6DBB7C'], keyword: '삶' },
+  { id: 3, color: ['#FFD9C0', '#F8A07B', '#F18455'], keyword: '나' },
+  { id: 4, color: ['#7F8EC5', '#6568A5', '#43467C'], keyword: '관계' },
+  { id: 5, color: ['#F0EEBE', '#ABCF7B', '#9BC168'], keyword: '여행' },
+  { id: 6, color: ['#FFC6D6', '#FF8FA4', '#F2647D'], keyword: '사랑' },
+  { id: 7, color: ['#C1DCFF', '#78A8F5', '#457ACF'], keyword: '치유' },
+  { id: 8, color: ['#F5F2AC', '#4888A5', '#266C8B'], keyword: '일' },
+  { id: 9, color: ['#DCFFCB', '#69D2DE', '#02C7DE'], keyword: '미래' },
+  { id: 10, color: ['#FFBEDB', '#DDA2A7', '#CC737A'], keyword: '가치' },
 ];
 
 export const EMOTION_LIST = [
