@@ -41,6 +41,7 @@ export default function SettingModal({
           대화 시간은
           <input
             type="text"
+            placeholder="30"
             defaultValue={data ? data?.data.timeout : '30'}
             onChange={onChange}
           />

@@ -1,10 +1,9 @@
-import { Background, BarChart, ReportTitle, Section } from 'components';
+import { BarChart, ReportTitle, Section } from 'components';
 import * as t from './statusDetail.style';
 
 export default function StatusDetail() {
   return (
     <t.Container>
-      <Background />
       <div className="sectionWrapper">
         <ReportTitle text="지금 우리는?" />
         <Section>
