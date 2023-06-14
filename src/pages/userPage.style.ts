@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 type Props = {
-  isSelected: boolean;
+  $isSelected: boolean;
 };
 
 export const Container = styled.div`
@@ -36,10 +36,10 @@ export const Tab = styled.button<Props>`
   background: ${({ theme }) => theme.white};
   font-size: ${({ theme }) => theme.fs16};
   font-weight: ${({ theme }) => theme.fw600};
-  color: ${({ isSelected, theme }) =>
-    isSelected ? theme.gray900 : theme.gray500};
-  border-bottom: ${({ isSelected, theme }) =>
-    isSelected
+  color: ${({ $isSelected, theme }) =>
+    $isSelected ? theme.gray900 : theme.gray500};
+  border-bottom: ${({ $isSelected, theme }) =>
+    $isSelected
       ? `2px solid ${theme.primary_deep_blue}`
       : `1px solid ${theme.gray300}`};
 `;
