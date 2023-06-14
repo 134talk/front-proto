@@ -12,7 +12,6 @@ export default function handleError(code: number) {
 
     case 1010:
     case 1011:
-    case 1020:
       window.location.href = '/';
       break;
 
