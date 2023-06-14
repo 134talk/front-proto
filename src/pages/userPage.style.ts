@@ -1,18 +1,7 @@
 import { styled } from 'styled-components';
 
-type Props = {
-  $isSelected: boolean;
-};
-
 export const Container = styled.div`
   width: 100%;
-  .tabWrapper {
-    position: absolute;
-    top: 190px;
-    left: 0;
-    width: 100%;
-    z-index: 99;
-  }
   > .contentWrapper {
     width: calc(100% - 1.25rem * 2);
     height: calc(100% - 10rem);
@@ -30,7 +19,16 @@ export const Container = styled.div`
   }
 `;
 
-export const Tab = styled.button<Props>`
+export const TabWrapper = styled.div<{ $isMobile: boolean }>`
+  position: absolute;
+  top: ${({ $isMobile }) => ($isMobile ? '190px' : '230px')};
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background: ${({ theme }) => theme.white};
+`;
+
+export const Tab = styled.button<{ $isSelected: boolean }>`
   width: 50%;
   height: 49px;
   background: ${({ theme }) => theme.white};
