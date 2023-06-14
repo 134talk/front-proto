@@ -18,6 +18,7 @@ export default function useChatList(name?: string) {
     name.length > 0 ? () => searchChatList(name) : getChatList,
     {
       refetchOnWindowFocus: false,
+      refetchInterval: 5000,
     }
   );
   const chatList = useMemo(() => data?.data, [data]);
