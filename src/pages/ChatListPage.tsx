@@ -65,6 +65,7 @@ export default function ChatListPage() {
       {createModal && <CreateModal handleCreateModal={handleCreateModal} />}
       {settingModal && (
         <SettingModal
+          chatTime={chatTime}
           onChange={handleChange}
           onOpenCheckModal={handleCheckModal}
           onClose={handleSettingModal}
