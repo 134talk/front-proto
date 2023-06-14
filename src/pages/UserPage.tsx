@@ -15,10 +15,10 @@ export default function UserPage() {
       <NavBar isCenter title="마이페이지" />
       <UserProfile />
       <div className="tabWrapper">
-        <t.Tab onClick={() => setTab(1)} isSelected={tab === 1}>
+        <t.Tab onClick={() => setTab(1)} $isSelected={tab === 1}>
           나의 정보
         </t.Tab>
-        <t.Tab onClick={() => setTab(2)} isSelected={tab === 2}>
+        <t.Tab onClick={() => setTab(2)} $isSelected={tab === 2}>
           나의 대화
         </t.Tab>
       </div>
