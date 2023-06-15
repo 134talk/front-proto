@@ -8,9 +8,9 @@ type Props = {
 };
 
 export default function ProtectedRoute({ children, redirectPath }: Props) {
-  const { isAuth } = useUserData();
+  const { isUserData } = useUserData();
 
   return (
-    <>{isAuth ? <>{children}</> : <Navigate to={redirectPath} replace />}</>
+    <>{isUserData ? <>{children}</> : <Navigate to={redirectPath} replace />}</>
   );
 }

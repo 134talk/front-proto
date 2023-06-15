@@ -11,6 +11,7 @@ import * as t from './navBar.style';
 type Props = {
   isCenter: boolean;
   isNav?: boolean;
+  isBottom?: boolean;
   title: string;
   cnt?: string;
   button?: '채널 초대' | '새 대화방' | '닫기';
@@ -25,6 +26,7 @@ type Props = {
 export default function NavBar({
   isCenter,
   isNav,
+  isBottom,
   title,
   cnt,
   button,
@@ -38,12 +40,21 @@ export default function NavBar({
   return (
     <>
       {isCenter ? (
-        <t.Container className="center">
-          {isNav && <img src={PREV_ICON} alt="뒤로가기" onClick={handleNav} />}
+        <t.Container className="center" isBottom={isBottom}>
+          {isNav ? (
+            <img src={PREV_ICON} alt="뒤로가기" onClick={handleNav} />
+          ) : (
+            <div className="block" />
+          )}
           <p>{title}</p>
+          {button === '닫기' ? (
+            <img src={CLOSE_ICON} alt="닫기" onClick={handleClose} />
+          ) : (
+            <div className="block" />
+          )}
         </t.Container>
       ) : (
-        <t.Container>
+        <t.Container isBottom={isBottom}>
           <div className="wrapper">
             <p>
               {title} {cnt && <span>({cnt})</span>}

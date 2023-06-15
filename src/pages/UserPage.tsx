@@ -1,6 +1,7 @@
 import { NavBar, ReportMenu, UserProfile, UserStatus } from 'components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import isMobile from 'shared/utils/deviceDetector';
 import { Button, InnerBackground } from 'ui';
 import * as t from './userPage.style';
 
@@ -14,14 +15,14 @@ export default function UserPage() {
       <InnerBackground />
       <NavBar isCenter title="마이페이지" />
       <UserProfile />
-      <div className="tabWrapper">
-        <t.Tab onClick={() => setTab(1)} isSelected={tab === 1}>
+      <t.TabWrapper $isMobile={isMobile}>
+        <t.Tab onClick={() => setTab(1)} $isSelected={tab === 1}>
           나의 정보
         </t.Tab>
-        <t.Tab onClick={() => setTab(2)} isSelected={tab === 2}>
+        <t.Tab onClick={() => setTab(2)} $isSelected={tab === 2}>
           나의 대화
         </t.Tab>
-      </div>
+      </t.TabWrapper>
       <div className="contentWrapper">
         {tab === 1 && (
           <>

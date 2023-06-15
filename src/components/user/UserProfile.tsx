@@ -7,10 +7,12 @@ export default function UserProfile() {
   return (
     <t.Container>
       <Profile scale="large" nickname="들썩이는 매의 일격" name="유저" />
-      <button>
-        <img src={SIGN_OUT_ICON} alt="로그아웃" onClick={logout} />
-        로그아웃
-      </button>
+      <div className="buttonWrapper">
+        <button>
+          <img src={SIGN_OUT_ICON} alt="로그아웃" onClick={logout} />
+          로그아웃
+        </button>
+      </div>
     </t.Container>
   );
 }

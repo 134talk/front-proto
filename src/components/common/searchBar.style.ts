@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 type StyleProps = {
-  iskeyword: boolean;
+  $isKeyword: boolean;
 };
 
 export const Container = styled.div`
@@ -44,7 +44,7 @@ export const Container = styled.div`
 `;
 
 export const CancelButton = styled.button<StyleProps>`
-  visibility: ${({ iskeyword }) => (iskeyword ? 'visible' : 'hidden')};
+  visibility: ${({ $isKeyword }) => ($isKeyword ? 'visible' : 'hidden')};
   background: none;
   cursor: pointer;
   img {

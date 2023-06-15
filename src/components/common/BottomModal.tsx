@@ -24,7 +24,7 @@ export default function BottomModal({
 }: BottomModalProps) {
   return (
     <Container>
-      <ContentWrapper isOpen={isOpen} onClick={onClick}>
+      <ContentWrapper $isOpen={isOpen} onClick={onClick}>
         {children}
       </ContentWrapper>
     </Container>
@@ -43,10 +43,10 @@ const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 `;
-const ContentWrapper = styled.div<{ isOpen: boolean }>`
+const ContentWrapper = styled.div<{ $isOpen: boolean }>`
   animation: ${fadeInUp} 0.5s ease-in-out;
-  opacity: ${props => (props.isOpen ? '1' : '0')};
-  pointer-events: ${props => (props.isOpen ? 'auto' : 'none')};
+  opacity: ${props => (props.$isOpen ? '1' : '0')};
+  pointer-events: ${props => (props.$isOpen ? 'auto' : 'none')};
   background-color: white;
   width: 100%;
   border-top-left-radius: 20px;

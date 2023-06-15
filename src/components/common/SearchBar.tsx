@@ -18,7 +18,7 @@ export default function SearchBar({ keyword, handleSearch, onDelete }: Props) {
           onChange={handleSearch}
           value={keyword}
         />
-        <t.CancelButton iskeyword={!!keyword}>
+        <t.CancelButton $isKeyword={!!keyword}>
           <img src={CANCEL_ICON} alt="취소" onClick={onDelete} />
         </t.CancelButton>
       </section>
