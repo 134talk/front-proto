@@ -8,9 +8,15 @@ type Props = {
 export default function UserStatus({ nicknameData }: Props) {
   const { mood, personality, status } = useMemo(
     () => ({
-      mood: NICKNAME_LIST[0].find(({ id }) => id === nicknameData[0]),
-      personality: NICKNAME_LIST[1].find(({ id }) => id === nicknameData[1]),
-      status: NICKNAME_LIST[2].find(({ id }) => id === nicknameData[2]),
+      mood: nicknameData
+        ? NICKNAME_LIST[0].find(({ id }) => id === nicknameData[0]).value
+        : '-',
+      personality: nicknameData
+        ? NICKNAME_LIST[1].find(({ id }) => id === nicknameData[1]).value
+        : '-',
+      status: nicknameData
+        ? NICKNAME_LIST[2].find(({ id }) => id === nicknameData[2]).value
+        : '-',
     }),
     [nicknameData]
   );
@@ -19,15 +25,15 @@ export default function UserStatus({ nicknameData }: Props) {
     <t.Container>
       <section>
         <p>현재의 감정</p>
-        <p>{mood?.value}</p>
+        <p>{mood}</p>
       </section>
       <section>
         <p>업무 성향</p>
-        <p>{personality?.value}</p>
+        <p>{personality}</p>
       </section>
       <section>
         <p>원하는 상태</p>
-        <p>{status?.value}</p>
+        <p>{status}</p>
       </section>
     </t.Container>
   );
