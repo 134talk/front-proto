@@ -23,4 +23,5 @@ export const updateNickname = (nameCode: string[]) =>
   axiosInstance.put('/user/nickname', { nameCode });
 
 // 유저 프로필 조회
-// 로그아웃
+
+export const logout = () => axiosInstance.post('user/logout');

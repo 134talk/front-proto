@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { login } from 'shared/api/userApi';
+import { login, logout } from 'shared/api/userApi';
 
 type Res = {
   data: {
@@ -32,7 +32,17 @@ export default function useAuth() {
     }
   };
 
-  return useMutation((code: string) => login(code), {
+  const { mutate: signIn } = useMutation((code: string) => login(code), {
     onSuccess: res => handleUserData(res),
   });
+
+  const { mutate: signOut } = useMutation(logout, {
+    onSuccess: res => {
+      sessionStorage.removeItem('token');
+      localStorage.clear();
+      navigate('/');
+    },
+  });
+
+  return { signIn, signOut };
 }
