@@ -1,6 +1,7 @@
 import { NavBar, ReportMenu, UserProfile, UserStatus } from 'components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useProfile from 'shared/query/useProfile';
 import isMobile from 'shared/utils/deviceDetector';
 import { Button, InnerBackground } from 'ui';
 import * as t from './userPage.style';
@@ -10,11 +11,13 @@ export default function UserPage() {
   const [tab, setTab] = useState(1);
   const updateNickname = () => navigate('/nickname/guide');
 
+  const { profile, name, nickname, code } = useProfile();
+
   return (
     <t.Container>
       <InnerBackground />
       <NavBar isCenter title="마이페이지" />
-      <UserProfile />
+      <UserProfile profile={profile} name={name} nickname={nickname} />
       <t.TabWrapper $isMobile={isMobile}>
         <t.Tab onClick={() => setTab(1)} $isSelected={tab === 1}>
           나의 정보
@@ -26,7 +29,7 @@ export default function UserPage() {
       <div className="contentWrapper">
         {tab === 1 && (
           <>
-            <UserStatus nicknameData={TEST_DATA} />
+            <UserStatus nicknameData={code} />
             <Button
               text="새로운 이름 받기"
               category="confirm"
@@ -44,5 +47,3 @@ export default function UserPage() {
     </t.Container>
   );
 }
-
-const TEST_DATA = [1, 2, 3];

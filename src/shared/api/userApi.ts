@@ -22,6 +22,6 @@ export const signNickname = (nameCode: string[]) =>
 export const updateNickname = (nameCode: string[]) =>
   axiosInstance.put('/user/nickname', { nameCode });
 
-// 유저 프로필 조회
+export const getProfile = () => axiosInstance.get('/user/profile');
 
 export const logout = () => axiosInstance.post('user/logout');

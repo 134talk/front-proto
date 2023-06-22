@@ -3,6 +3,7 @@ const queryKeys = {
   TEAM: 'team',
   CHATS: 'chatList',
   TIMER: 'timer',
+  PROFILE: 'profile',
 };
 
 export default queryKeys;

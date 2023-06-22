@@ -14,7 +14,10 @@ type Res = {
 export default function useTeam() {
   const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.TEAM],
-    getTeam
+    getTeam,
+    {
+      refetchOnWindowFocus: false,
+    }
   );
 
   const teamList = useMemo(() => data?.data, [data]);
