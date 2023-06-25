@@ -1,6 +1,7 @@
 import type { AxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import handleError from 'shared/utils/errorHandler';
+import { silentRefresh } from './userApi';
 
 const axiosConfig: AxiosRequestConfig = {
   timeout: 3000,
@@ -25,6 +26,10 @@ axiosInstance.interceptors.response.use(
   response => response,
   error => {
     const { response } = error;
+    if (response?.status === 401)
+      silentRefresh().then(({ data }) =>
+        sessionStorage.setItem('token', data?.accessToken)
+      );
     if (response) handleError(response?.data.errorCode);
     return Promise.reject(error);
   }

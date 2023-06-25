@@ -7,27 +7,18 @@ import * as t from './feedbackSection.style';
 
 type Props = {
   title: string;
-  value: string;
+  value: number;
 };
 
 export default function FeedbackSection({ title, value }: Props) {
-  const numVal = parseInt(value);
-  const score = Math.abs(numVal);
-
   return (
     <t.Container>
       <div className="small">{title}</div>
-      <t.Value
-        color={numVal > 0 ? 'f0153d' : numVal === 0 ? '667085' : '259cf2'}
-      >
-        {score}%
+      <t.Value color={value > 0 ? 'f0153d' : value === 0 ? '667085' : '259cf2'}>
+        {value}%
         <img
           src={
-            numVal > 0
-              ? POSITIVE_ICON
-              : numVal === 0
-              ? LINE_ICON
-              : NEGATIVE_ICON
+            value > 0 ? POSITIVE_ICON : value === 0 ? LINE_ICON : NEGATIVE_ICON
           }
           alt="아이콘"
         />
