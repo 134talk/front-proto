@@ -4,6 +4,7 @@ const queryKeys = {
   CHATS: 'chatList',
   TIMER: 'timer',
   PROFILE: 'profile',
+  REPORT: 'report',
 };
 
 export default queryKeys;
