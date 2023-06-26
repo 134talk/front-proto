@@ -1,11 +1,9 @@
 import { BarChart, ReportTitle, Section } from 'components';
-import useUserData from 'shared/hooks/useUserData';
 import useReport from 'shared/query/useReport';
 import * as t from './statusDetail.style';
 
 export default function StatusDetail() {
-  const { channel } = useUserData();
-  const { statusData } = useReport(channel);
+  const { statusData } = useReport('status');
 
   return (
     <t.Container>
@@ -40,7 +38,7 @@ export default function StatusDetail() {
           </p>
           <div className="chartWrapper">
             {statusData?.data.type3.map(({ status, score }) => (
-              <BarChart text={status} value={score} />
+              <BarChart key={status} text={status} value={score} />
             ))}
           </div>
         </Section>
