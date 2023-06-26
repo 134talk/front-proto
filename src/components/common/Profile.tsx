@@ -10,6 +10,7 @@ export interface ProfileProps {
   scale: 'small' | 'medium' | 'large';
   image?: string;
   isCheck?: boolean;
+  isMyProf?: boolean;
 }
 
 export default function Profile({
@@ -20,6 +21,7 @@ export default function Profile({
   scale,
   image,
   isCheck,
+  isMyProf,
 }: ProfileProps) {
   const { uid } = useUserData();
 
@@ -32,7 +34,7 @@ export default function Profile({
           (scale === 'large' && '5.5rem')
         }
         image={image}
-        $isMyProf={uid === String(userId)}
+        $isMyProf={isMyProf}
         $isCheckIn={isCheck}
       />
       <t.NameWrapper $isRow={$isRow}>
