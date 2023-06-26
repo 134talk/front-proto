@@ -1,8 +1,16 @@
-// 피드백 선택 등록
-// 피드백 필수 등록
-// 피드백 필수 조회
-// 피드백 필수 수정
-// 리포트 상세 조회
-// 유저 대화 목록 조회
-// 유저 대화 상세 조회
-export const test = () => {};
+import axiosInstance from './instance';
+
+export const getStatusReport = (teamCode: string) =>
+  axiosInstance.get(`/statistics/team/character/${teamCode}`);
+
+export const getFeedbackReport = (teamCode: string) =>
+  axiosInstance.get(`/statistics/feedback/detail/${teamCode}`);
+
+export const getChatReport = (teamCode: string) =>
+  axiosInstance.get(`/statistics/report/chatlog/${teamCode}`);
+
+export const getUserReport = (teamCode: string) =>
+  axiosInstance.get(`/statistics/user/report/${teamCode}`);
+
+export const getUserReportDetail = (teamCode: string, date: string) =>
+  axiosInstance.get(`/statistics/user/report/${teamCode}/${date}`);
