@@ -129,3 +129,13 @@ export const LINE_ICON = process.env.PUBLIC_URL + '/assets/icons/line.svg';
 
 export const SIGN_OUT_ICON =
   process.env.PUBLIC_URL + '/assets/icons/sign-out.svg';
+
+export const PLUS_BLACK_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/plus.svg';
+
+export const MINUS_ICON = process.env.PUBLIC_URL + '/assets/icons/minus.svg';
+
+export const SLIDER_VERTICAL_IMAGE =
+  process.env.PUBLIC_URL + '/assets/icons/slider-vertical.svg';
+
+export const SLIDER_IMAGE = process.env.PUBLIC_URL + '/assets/icons/slider.svg';
