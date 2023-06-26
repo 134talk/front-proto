@@ -1,4 +1,4 @@
-import { BarChart, ReportTitle, Section } from 'components';
+import { BarChart, Bubble, ReportTitle } from 'components';
 import useReport from 'shared/query/useReport';
 import * as t from './chatDetail.style';
 
@@ -9,44 +9,36 @@ export default function ChatDetail() {
     <t.Container>
       <div className="sectionWrapper">
         <ReportTitle text="우리 대화는?" />
-        <Section>
-          <p className="subtitle">
+        <Bubble isScrollable>
+          <h1>
             대화에서 많은 선택을 받은 대화 주제는{' '}
             <span>
               '{KEYWORD_LIST[chatData?.data.keywordScore[0].code - 1]}'
             </span>{' '}
             이에요.
-          </p>
-          <div className="chartWrapper">
-            {chatData?.data.keywordScore.map(({ code, score }) => (
-              <BarChart
-                key={code}
-                text={KEYWORD_LIST[code - 1]}
-                value={score}
-              />
-            ))}
-          </div>
-        </Section>
-        <Section>
-          <p className="subtitle">
+          </h1>
+          {chatData?.data.keywordScore.map(({ code, score }) => (
+            <BarChart key={code} text={KEYWORD_LIST[code - 1]} value={score} />
+          ))}
+        </Bubble>
+        <Bubble isScrollable>
+          <h1>
             대화하면서 많이 표현한 감정은{' '}
             <span>'{chatData?.data.emoticonScore[0].name}'</span> 이에요.
-          </p>
-          <div className="chartWrapper">
-            {chatData?.data.emoticonScore.map(({ name, score }) => (
-              <BarChart key={name} text={name} value={score} />
-            ))}
-          </div>
-        </Section>
-        <Section>
-          <p className="subtitle">감정이 많이 오고 간 질문 top3</p>
+          </h1>
+          {chatData?.data.emoticonScore.map(({ name, score }) => (
+            <BarChart key={name} text={name} value={score} />
+          ))}
+        </Bubble>
+        <Bubble isScrollable>
+          <h1>감정이 많이 오고 간 질문 top3</h1>
           {chatData?.data.questionList.map((question, idx) => (
             <div className="rankWrapper" key={question}>
               <p>{idx + 1}위</p>
               <p>{question}</p>
             </div>
           ))}
-        </Section>
+        </Bubble>
       </div>
     </t.Container>
   );

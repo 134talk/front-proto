@@ -4,10 +4,10 @@ const queryKeys = {
   CHATS: 'chatList',
   TIMER: 'timer',
   PROFILE: 'profile',
-  REPORT: 'report',
   STATUS_REPORT: 'statusReport',
   CHAT_REPORT: 'chatReport',
   FEEDBACK_REPORT: 'feedbackReport',
+  USER_REPORT: 'userReport',
 };
 
 export default queryKeys;

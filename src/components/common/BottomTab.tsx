@@ -42,7 +42,7 @@ export default function BottomTab() {
         />
         <p>리포트</p>
       </button>
-      <button onClick={() => navigate('/user')}>
+      <button onClick={() => navigate('/user?tab=info')}>
         <img
           src={pathname === '/user' ? TAB_USER_ACTIVE : TAB_USER}
           alt="마이"

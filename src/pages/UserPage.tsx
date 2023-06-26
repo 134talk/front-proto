@@ -1,6 +1,5 @@
 import { NavBar, ReportMenu, UserProfile, UserStatus } from 'components';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useProfile from 'shared/query/useProfile';
 import isMobile from 'shared/utils/deviceDetector';
 import { Button, InnerBackground } from 'ui';
@@ -8,7 +7,8 @@ import * as t from './userPage.style';
 
 export default function UserPage() {
   const navigate = useNavigate();
-  const [tab, setTab] = useState(1);
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get('tab');
   const updateNickname = () => navigate('/nickname/guide');
 
   const { profile, name, nickname, code } = useProfile();
@@ -19,15 +19,21 @@ export default function UserPage() {
       <NavBar isCenter title="마이페이지" />
       <UserProfile profile={profile} name={name} nickname={nickname} />
       <t.TabWrapper $isMobile={isMobile}>
-        <t.Tab onClick={() => setTab(1)} $isSelected={tab === 1}>
+        <t.Tab
+          onClick={() => navigate('/user?tab=info')}
+          $isSelected={tab === 'info'}
+        >
           나의 정보
         </t.Tab>
-        <t.Tab onClick={() => setTab(2)} $isSelected={tab === 2}>
+        <t.Tab
+          onClick={() => navigate('/user?tab=chat')}
+          $isSelected={tab === 'chat'}
+        >
           나의 대화
         </t.Tab>
       </t.TabWrapper>
       <div className="contentWrapper">
-        {tab === 1 && (
+        {tab === 'info' && (
           <>
             <UserStatus nicknameData={code} />
             <Button
@@ -38,11 +44,7 @@ export default function UserPage() {
             />
           </>
         )}
-        {tab === 2 && (
-          <>
-            <ReportMenu />
-          </>
-        )}
+        {tab === 'chat' && <ReportMenu />}
       </div>
     </t.Container>
   );

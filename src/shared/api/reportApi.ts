@@ -11,3 +11,6 @@ export const getChatReport = (teamCode: string) =>
 
 export const getUserReport = (teamCode: string) =>
   axiosInstance.get(`/statistics/user/report/${teamCode}`);
+
+export const getUserReportDetail = (teamCode: string, date: string) =>
+  axiosInstance.get(`/statistics/user/report/${teamCode}/${date}`);

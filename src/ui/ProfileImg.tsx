@@ -4,6 +4,7 @@ interface ProfileImgProps {
   image?: string;
   id?: string;
   size?: string;
+  isClickable?: boolean;
   onClick?: () => void;
 }
 
@@ -18,14 +19,16 @@ export default function ProfileImg(props: ProfileImgProps) {
       }
       alt="profileImg"
       {...props}
+      size={props.size}
+      $isClickable={props.isClickable}
     />
   );
 }
 
-export const Profile = styled.img<ProfileImgProps>`
+export const Profile = styled.img<{ size: string; $isClickable: boolean }>`
   width: ${props => (props.size ? props.size : '2rem')};
   height: ${props => (props.size ? props.size : '2rem')};
   border-radius: 50%;
   object-fit: cover;
-  cursor: pointer;
+  cursor: ${({ $isClickable }) => $isClickable && 'pointer'};
 `;

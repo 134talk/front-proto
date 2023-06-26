@@ -12,6 +12,7 @@ import {
   SignPage,
   SignSelectPage,
   UserPage,
+  UserReportPage,
 } from 'pages';
 import React from 'react';
 
@@ -88,6 +89,12 @@ export const AuthRouter: RouterData[] = [
     path: '/user',
     isTab: true,
     element: <UserPage />,
+  },
+  {
+    id: 11,
+    path: '/user/:date',
+    isTab: false,
+    element: <UserReportPage />,
   },
 ];
 

@@ -9,7 +9,7 @@ import { Button } from 'ui';
 import * as t from './navBar.style';
 
 type Props = {
-  isCenter: boolean;
+  isCenter?: boolean;
   isNav?: boolean;
   isBottom?: boolean;
   title: string;
