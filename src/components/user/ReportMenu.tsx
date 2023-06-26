@@ -1,11 +1,10 @@
 import { RIGHT_ARROW } from 'shared/constants/icons';
-import useUserData from 'shared/hooks/useUserData';
 import useUserChatData from 'shared/query/useUserChatData';
+
 import * as t from './reportMenu.style';
 
 export default function ReportMenuButton() {
-  const { channel } = useUserData();
-  const { data } = useUserChatData(channel);
+  const { data } = useUserChatData();
 
   const onClickReport = (date: string) => {};
 
