@@ -14,6 +14,7 @@ const theme: ThemeType = {
   gray900: '#111111',
   primary_deep_blue: '#4059DE',
   primary_blue: '#7588EA',
+  light_blue: '#0083E1',
   pastel_yellow: '#FFF2D7',
   pastel_red: '#FEEEE6',
   pastel_blue: '#EAF4F3',
@@ -27,8 +28,10 @@ const theme: ThemeType = {
   error_red: '#F0153D',
   backdrop: 'rgba(0, 0, 0, 0.5)',
   shadow: 'rgba(172, 173, 177, 0.1)',
+  blue_shadow: 'rgba(151, 169, 218, 0.25)',
 
   // font-size
+  fs10: '0.625rem',
   fs12: '0.75rem',
   fs14: '0.875rem',
   fs16: '1rem',
@@ -36,6 +39,7 @@ const theme: ThemeType = {
   fs20: '1.25rem',
   fs24: '1.5rem',
   fs32: '2rem',
+  fs56: '3.5rem',
 
   // font-weight
   fw400: '400',
