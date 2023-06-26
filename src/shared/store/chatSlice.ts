@@ -74,6 +74,7 @@ type ChatState = {
   subNotice: SubNotice | null;
   subEmotion: SubEmotion | null;
   subEmotionList: SubEmotionList | null;
+  subNewChat: { type: string };
 };
 
 const initialState: ChatState = {
@@ -86,6 +87,7 @@ const initialState: ChatState = {
   subNotice: null,
   subEmotion: null,
   subEmotionList: null,
+  subNewChat: { type: '' },
 };
 
 const chatSlice = createSlice({
@@ -126,6 +128,10 @@ const chatSlice = createSlice({
       state.subEmotionList = action.payload;
       console.log('setSubEmotionList in chatSlice: ', action.payload);
     },
+    setSubNewChat(state, action: PayloadAction<{ type: string } | null>) {
+      state.subNewChat = action.payload;
+      console.log('setSubNewChat in chatSlice: ', action.payload);
+    },
   },
 });
 
@@ -139,6 +145,7 @@ export const {
   setSubNotice,
   setSubEmotion,
   setSubEmotionList,
+  setSubNewChat,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

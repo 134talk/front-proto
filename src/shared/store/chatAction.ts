@@ -49,6 +49,13 @@ interface SubscribeEmotionListAction extends Action {
   };
 }
 
+interface SubscribeNewChatAction extends Action {
+  type: 'subscribeNewChat';
+  payload: {
+    destination: string;
+  };
+}
+
 interface SendDataAction extends Action {
   type: 'sendData';
   payload: {
@@ -83,7 +90,8 @@ export type SocketAction =
   | SubscribeSelectAction
   | SubscribeNoticeAction
   | SubscribeEmotionAction
-  | SubscribeEmotionListAction;
+  | SubscribeEmotionListAction
+  | SubscribeNewChatAction;
 
 export const subscribeUser = (destination: string): SubscribeUserAction => ({
   type: 'subscribeUser',
@@ -129,5 +137,12 @@ export const subscribeEmotionList = (
   destination: string
 ): SubscribeEmotionListAction => ({
   type: 'subscribeEmotionList',
+  payload: { destination },
+});
+
+export const subscribeNewChat = (
+  destination: string
+): SubscribeNewChatAction => ({
+  type: 'subscribeNewChat',
   payload: { destination },
 });

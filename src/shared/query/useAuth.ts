@@ -1,6 +1,7 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { login, logout } from 'shared/api/userApi';
+import { useAppDispatch } from 'shared/store/store';
 
 type Res = {
   data: {
@@ -14,6 +15,7 @@ type Res = {
 
 export default function useAuth() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleUserData = ({ data }: Res) => {
     const { accessToken, userId, isAdmin, nickname, teamCode } = data;
@@ -40,6 +42,7 @@ export default function useAuth() {
     onSuccess: res => {
       sessionStorage.removeItem('token');
       localStorage.clear();
+      dispatch({ type: 'disconnect' });
       navigate('/');
     },
   });
