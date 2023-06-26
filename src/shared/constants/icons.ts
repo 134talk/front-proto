@@ -139,3 +139,5 @@ export const SLIDER_VERTICAL_IMAGE =
   process.env.PUBLIC_URL + '/assets/icons/slider-vertical.svg';
 
 export const SLIDER_IMAGE = process.env.PUBLIC_URL + '/assets/icons/slider.svg';
+
+export const NOT_FOUND = process.env.PUBLIC_URL + '/assets/icons/not-found.svg';
