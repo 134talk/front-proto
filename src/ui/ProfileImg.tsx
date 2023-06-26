@@ -1,34 +1,24 @@
-import { styled } from 'styled-components';
+import { PROFILE_IMAGE } from 'shared/constants/icons';
+import * as t from './profileImg.style';
 
-interface ProfileImgProps {
+export interface ProfileImgProps {
   image?: string;
   id?: string;
+  $isMyProf?: boolean;
+  $isCheckIn?: boolean;
   size?: string;
-  isClickable?: boolean;
+  $isClickable?: boolean;
   onClick?: () => void;
 }
 
-// check & remove image props optional!
 export default function ProfileImg(props: ProfileImgProps) {
   return (
-    <Profile
-      src={
-        props.image
-          ? props.image
-          : 'https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179865.jpg'
-      }
+    <t.Profile
+      src={props.image ? props.image : PROFILE_IMAGE}
       alt="profileImg"
       {...props}
       size={props.size}
-      $isClickable={props.isClickable}
+      $isClickable={props.$isClickable}
     />
   );
 }
-
-export const Profile = styled.img<{ size: string; $isClickable: boolean }>`
-  width: ${props => (props.size ? props.size : '2rem')};
-  height: ${props => (props.size ? props.size : '2rem')};
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: ${({ $isClickable }) => $isClickable && 'pointer'};
-`;

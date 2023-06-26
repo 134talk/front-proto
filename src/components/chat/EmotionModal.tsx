@@ -1,71 +1,75 @@
 import { BottomModal } from 'components';
-import type { Dispatch, SetStateAction } from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { CHECK_ICON, CLOSE_BLACK } from 'shared/constants/icons';
-import { styled } from 'styled-components';
+import type { ModalActions } from 'shared/hooks/useModal';
+import useUserData from 'shared/hooks/useUserData';
+import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import { Button, ProfileImg } from 'ui';
+import * as t from './emotionModal.style';
 
 interface EmotionModalProps {
-  isModalOpen: boolean;
-  sendEmotion: string;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setIsSendEmotion: Dispatch<SetStateAction<boolean>>;
+  sendEmotion: { emotion: string; id: number };
+  modalActions: ModalActions;
 }
 
-export const User = [
-  { id: 1, nickname: '들썩이는 매의 일격', name: '이담' },
-  { id: 2, nickname: '들썩이는 나무의 일격', name: '이담' },
-  { id: 3, nickname: '들썩이는 바위의 일격', name: '이담' },
-  { id: 4, nickname: '들썩이는 바람의 일격', name: '이담' },
-  { id: 5, nickname: '들썩이는 황소의 날개짓', name: '이담' },
-];
-
 export default function EmotionModal({
-  isModalOpen,
   sendEmotion,
-  setIsModalOpen,
-  setIsSendEmotion,
+  modalActions,
 }: EmotionModalProps) {
-  const [sendTo, setSendTo] = useState<string>('');
-  const handleSelect = (nickname: string) => {
-    setSendTo(nickname);
+  const dispatch = useAppDispatch();
+  const { uid } = useUserData();
+  const { roomId } = useParams();
+  const subUserList = useAppSelector(state => state.chat?.subNotice?.userList);
+  const [sendTo, setSendTo] = useState<{
+    nickname: string;
+    userId: number;
+  } | null>(null);
+  const handleSelect = (nickname: string, userId: number) => {
+    setSendTo({ nickname, userId });
   };
   const handleClose = () => {
-    setSendTo('');
-    setIsModalOpen(false);
+    setSendTo(null);
+    modalActions.close();
   };
   const handleSendEmotion = () => {
-    setSendTo('');
-    setIsSendEmotion(true);
-    setIsModalOpen(false);
+    dispatch({
+      type: 'sendData',
+      payload: {
+        destination: '/pub/room/emotion',
+        data: {
+          roomId: roomId,
+          userId: uid,
+          toUserId: sendTo.userId,
+          emoticonCode: sendEmotion.id,
+        },
+      },
+    });
+    setSendTo(null);
+    modalActions.close();
   };
-
-  useEffect(() => {
-    if (isModalOpen) {
-      setIsSendEmotion(false);
-    }
-  }, [isModalOpen]);
 
   return (
     <>
-      {isModalOpen && (
-        <BottomModal isOpen={isModalOpen}>
-          <Container>
+      {modalActions.isOpen && (
+        <BottomModal isOpen={modalActions.isOpen}>
+          <t.Container>
             <div className="navbar_wrapper">
               <div className="navbar_top_wrapper">
                 <p className="guide_text">어느 분에게 감정을 표현하시겠어요?</p>
                 <img src={CLOSE_BLACK} alt="close" onClick={handleClose} />
               </div>
-              {sendTo && <p className="sub_text">'{sendTo}'님에게</p>}
+              {sendTo && <p className="sub_text">'{sendTo.nickname}'님에게</p>}
             </div>
             <div className="user_list_wrapper">
-              {User.map(item => (
-                <div className="user_wrapper" key={item.id}>
+              {subUserList.map(item => (
+                <div className="user_wrapper" key={item.userId}>
                   <ProfileImg
                     size="3rem"
-                    onClick={() => handleSelect(item.nickname)}
+                    image={item.profileUrl}
+                    onClick={() => handleSelect(item.nickname, item.userId)}
                   />
-                  {sendTo && sendTo.includes(item.nickname) && (
+                  {sendTo && sendTo.nickname.includes(item.nickname) && (
                     <img className="check_image" src={CHECK_ICON} alt="check" />
                   )}
                 </div>
@@ -75,75 +79,14 @@ export default function EmotionModal({
               <Button
                 category="confirm"
                 disabled={!sendTo ? true : false}
-                text={sendEmotion}
+                text={sendEmotion.emotion}
                 onClick={handleSendEmotion}
               />
               <Button category="cancel" text="취소" onClick={handleClose} />
             </div>
-          </Container>
+          </t.Container>
         </BottomModal>
       )}
     </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 22.313rem;
-  padding: 1.5rem 0;
-  div {
-    &.navbar_wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-      margin-bottom: 1.75rem;
-      height: 3.376rem;
-    }
-    &.navbar_top_wrapper {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    &.user_list_wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      width: 20rem;
-      height: 4rem;
-      margin-bottom: 2rem;
-    }
-    &.user_wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    &.button_wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-  }
-  p {
-    &.guide_text {
-      text-align: center;
-      width: 100%;
-      font-size: 1.125rem;
-      font-weight: bold;
-    }
-    &.sub_text {
-      text-align: center;
-      width: 100%;
-      font-size: 1rem;
-    }
-  }
-  img {
-    &.check_image {
-      width: 1.125rem;
-      height: 1.125rem;
-      position: relative;
-      margin: -50px 0 0 35px;
-      cursor: pointer;
-    }
-  }
-`;

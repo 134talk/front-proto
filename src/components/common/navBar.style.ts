@@ -22,6 +22,19 @@ export const Container = styled.div<Props>`
       height: 24px;
       background: none;
     }
+    > div {
+      position: absolute;
+      right: 0;
+      top: 1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .badge_image {
+      position: absolute;
+      width: 0.875rem;
+      right: -0.25rem;
+    }
   }
   .wrapper {
     display: flex;

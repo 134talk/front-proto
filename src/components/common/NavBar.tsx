@@ -1,5 +1,7 @@
 import {
   CLOSE_ICON,
+  HAMBURGER_ICON,
+  NEW_BADGE_ICON,
   PLUS_ICON,
   PREV_ICON,
   SETTING_ICON,
@@ -11,6 +13,8 @@ import * as t from './navBar.style';
 type Props = {
   isCenter?: boolean;
   isNav?: boolean;
+  isHamburger?: boolean;
+  isNew?: boolean;
   isBottom?: boolean;
   title: string;
   cnt?: string;
@@ -21,11 +25,14 @@ type Props = {
   handleSetting?: () => void;
   handleCreateModal?: () => void;
   handleClose?: () => void;
+  handleSideNav?: () => void;
 };
 
 export default function NavBar({
   isCenter,
   isNav,
+  isHamburger,
+  isNew,
   isBottom,
   title,
   cnt,
@@ -36,6 +43,7 @@ export default function NavBar({
   handleSetting,
   handleCreateModal,
   handleClose,
+  handleSideNav,
 }: Props) {
   return (
     <>
@@ -47,6 +55,22 @@ export default function NavBar({
             <div className="block" />
           )}
           <p>{title}</p>
+          {isHamburger && (
+            <div>
+              <img
+                src={HAMBURGER_ICON}
+                alt="hamburger"
+                onClick={handleSideNav}
+              />
+              {isNew && (
+                <img
+                  className="badge_image"
+                  src={NEW_BADGE_ICON}
+                  alt="newBadge"
+                />
+              )}
+            </div>
+          )}
           {button === '닫기' ? (
             <img src={CLOSE_ICON} alt="닫기" onClick={handleClose} />
           ) : (
