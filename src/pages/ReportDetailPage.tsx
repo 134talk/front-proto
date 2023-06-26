@@ -12,12 +12,7 @@ export default function ReportDetailPage() {
 
   return (
     <>
-      <NavBar
-        isCenter={true}
-        title="리포트"
-        isNav={true}
-        handleNav={handleNav}
-      />
+      <NavBar isCenter isMargin title="리포트" isNav handleNav={handleNav} />
       <t.Container>
         <InnerBackground />
         {category === '0' && <StatusDetail />}

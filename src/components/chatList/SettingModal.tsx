@@ -27,7 +27,7 @@ export default function SettingModal({
     <BottomModal isOpen={true}>
       <t.Container>
         <NavBar
-          isCenter={false}
+          isMargin
           isBottom
           title="대화 설정"
           button="닫기"

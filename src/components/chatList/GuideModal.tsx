@@ -50,7 +50,7 @@ export default function GuideModal({ roomId, onClose }: Props) {
   return (
     <FullModal>
       <t.Container>
-        <NavBar isCenter={false} title="" button="닫기" handleClose={onClose} />
+        <NavBar isMargin title="" button="닫기" handleClose={onClose} />
         <Slider {...SETTINGS} ref={sliderRef}>
           <div className="guide_wrapper">
             <img

@@ -12,7 +12,7 @@ export default function ReportPage() {
 
   return (
     <>
-      <NavBar isCenter={true} title="리포트" />
+      <NavBar isCenter={true} title="리포트" isMargin />
       <t.Container>
         <InnerBackground />
         <div className="wrapper">

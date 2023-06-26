@@ -12,6 +12,7 @@ import * as t from './navBar.style';
 
 type Props = {
   isCenter?: boolean;
+  isMargin?: boolean;
   isNav?: boolean;
   isHamburger?: boolean;
   isNew?: boolean;
@@ -30,6 +31,7 @@ type Props = {
 
 export default function NavBar({
   isCenter,
+  isMargin,
   isNav,
   isHamburger,
   isNew,
@@ -48,7 +50,11 @@ export default function NavBar({
   return (
     <>
       {isCenter ? (
-        <t.Container className="center" isBottom={isBottom}>
+        <t.Container
+          className="center"
+          $isBottom={isBottom}
+          $isMargin={isMargin}
+        >
           {isNav ? (
             <img src={PREV_ICON} alt="뒤로가기" onClick={handleNav} />
           ) : (
@@ -78,7 +84,7 @@ export default function NavBar({
           )}
         </t.Container>
       ) : (
-        <t.Container isBottom={isBottom}>
+        <t.Container $isBottom={isBottom} $isMargin={isMargin}>
           <div className="wrapper">
             <p>
               {title} {cnt && <span>({cnt})</span>}

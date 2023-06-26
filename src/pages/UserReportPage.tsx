@@ -19,9 +19,15 @@ export default function UserReportPage() {
 
   const { detailData } = useUserChatData(date);
   console.log(detailData);
+
   return (
     <t.Container>
-      <NavBar title="대화 리포트" button="닫기" handleClose={onClose} />
+      <NavBar
+        isMargin
+        title="대화 리포트"
+        button="닫기"
+        handleClose={onClose}
+      />
       <InnerBackground />
       <section>
         <p>
