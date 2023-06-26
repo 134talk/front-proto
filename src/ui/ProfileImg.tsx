@@ -4,8 +4,8 @@ import * as t from './profileImg.style';
 export interface ProfileImgProps {
   image?: string;
   id?: string;
-  isMyProf?: boolean;
-  isCheckIn?: boolean;
+  $isMyProf?: boolean;
+  $isCheckIn?: boolean;
   size?: string;
   onClick?: () => void;
 }

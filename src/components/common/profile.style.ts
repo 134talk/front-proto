@@ -9,9 +9,9 @@ export const Container = styled.div<{ scale: 'small' | 'medium' | 'large' }>`
     (props.scale === 'medium' && '0.75rem') ||
     (props.scale === 'large' && '1rem')};
 `;
-export const NameWrapper = styled.div<{ isRow: boolean }>`
+export const NameWrapper = styled.div<{ $isRow: boolean }>`
   display: flex;
-  flex-direction: ${props => (props.isRow ? 'row' : 'column')};
+  flex-direction: ${props => (props.$isRow ? 'row' : 'column')};
   > div {
     display: flex;
     flex-direction: row;

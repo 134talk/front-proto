@@ -6,18 +6,20 @@ export interface ProfileProps {
   nickname?: string;
   name?: string;
   userId?: number;
-  isRow?: boolean;
+  $isRow?: boolean;
   scale: 'small' | 'medium' | 'large';
   image?: string;
+  isCheck?: boolean;
 }
 
 export default function Profile({
   nickname,
   name,
   userId,
-  isRow,
+  $isRow,
   scale,
   image,
+  isCheck,
 }: ProfileProps) {
   const { uid } = useUserData();
 
@@ -30,12 +32,14 @@ export default function Profile({
           (scale === 'large' && '5.5rem')
         }
         image={image}
+        $isMyProf={uid === String(userId)}
+        $isCheckIn={isCheck}
       />
-      <t.NameWrapper isRow={isRow}>
+      <t.NameWrapper $isRow={$isRow}>
         <div>
-          {isRow && String(userId) === uid && <span>나</span>}
+          {$isRow && String(userId) === uid && <span>나</span>}
           <t.NicknameText scale={scale}>{nickname && nickname}</t.NicknameText>
-          {!isRow && String(userId) === uid && <span>나</span>}
+          {!$isRow && String(userId) === uid && <span>나</span>}
         </div>
         <t.NameText scale={scale}>{name && name}</t.NameText>
       </t.NameWrapper>
