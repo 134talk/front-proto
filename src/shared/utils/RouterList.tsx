@@ -68,7 +68,7 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 7,
-    path: '/chat/:chatId',
+    path: '/chat/:roomId/:type',
     isTab: false,
     element: <ChatPage />,
   },

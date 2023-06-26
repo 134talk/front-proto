@@ -1,25 +1,28 @@
 import { Profile } from 'components';
 import { CHECK_ICON } from 'shared/constants/icons';
+import type { ChatUserInfo } from 'shared/store/chatSlice';
 import * as t from './userList.style';
 
 interface UserListProps {
-  isCheck: boolean;
-  isRow: boolean;
-  scale: 'small' | 'medium' | 'large';
+  userInfo: ChatUserInfo[];
+  $isRow: boolean;
+  scale?: 'small' | 'medium' | 'large';
 }
 
-export default function UserList({ isCheck, isRow, scale }: UserListProps) {
+export default function UserList({ userInfo, $isRow, scale }: UserListProps) {
   return (
-    <t.Container isRow={isRow}>
-      {userLists.map((item: UserListType) => (
-        <div key={item.id}>
-          {isCheck && <img src={CHECK_ICON} alt="check" />}
+    <t.Container $isRow={$isRow}>
+      {userInfo?.map((item: ChatUserInfo) => (
+        <div key={item.userId}>
+          {item.activeFlag && <img src={CHECK_ICON} alt="check" />}
           <Profile
-            nickname={item.nickname}
-            name={item.name}
             userId={item.userId}
-            scale={isRow ? 'small' : scale}
-            isRow={isRow}
+            nickname={item.nickname}
+            name={item.userName}
+            image={item.profileUrl}
+            isCheck={item.activeFlag}
+            scale={$isRow ? 'small' : scale}
+            $isRow={$isRow}
           />
         </div>
       ))}
@@ -27,38 +30,45 @@ export default function UserList({ isCheck, isRow, scale }: UserListProps) {
   );
 }
 
-export type UserListType = {
-  id: number;
-  name: string;
-  nickname: string;
-  userId?: number;
-};
-
-export const userLists: UserListType[] = [
+export const userLists = [
   {
-    id: 0,
-    name: '조해솔',
-    nickname: '들썩이는 매의 일격',
-  },
-  {
-    id: 1,
-    name: '이담',
-    nickname: '들썩이는 나무의 날개짓',
     userId: 11,
+    userName: '조해솔',
+    nickname: '들썩이는 매의 일격',
+    profileUrl: 'temp',
+    activeFlag: true,
+    socketFlag: 0,
   },
   {
-    id: 2,
-    name: '담담',
-    nickname: '들썩이는 매의 일격',
+    userId: 12,
+    userName: '이담',
+    nickname: '들썩이는 나무의 날개짓',
+    profileUrl: 'temp',
+    activeFlag: true,
+    socketFlag: 0,
   },
   {
-    id: 3,
-    name: '롤롤',
+    userId: 13,
+    userName: '담담',
     nickname: '들썩이는 매의 일격',
+    profileUrl: 'temp',
+    activeFlag: true,
+    socketFlag: 0,
   },
   {
-    id: 4,
-    name: '라라랄',
+    userId: 14,
+    userName: '롤롤',
     nickname: '들썩이는 매의 일격',
+    profileUrl: 'temp',
+    activeFlag: true,
+    socketFlag: 0,
+  },
+  {
+    userId: 15,
+    userName: '라라랄',
+    nickname: '들썩이는 매의 일격',
+    profileUrl: 'temp',
+    activeFlag: true,
+    socketFlag: 0,
   },
 ];

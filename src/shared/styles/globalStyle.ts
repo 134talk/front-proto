@@ -151,7 +151,7 @@ button{
     flex-direction: $direction;
     align-items: $align;
     justify-content: $justify;
-  }
+}
 `;
 
 export default GlobalStyle;

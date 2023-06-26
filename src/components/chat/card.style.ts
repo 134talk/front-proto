@@ -1,46 +1,59 @@
-import { styled } from 'styled-components';
+import { css, keyframes, styled } from 'styled-components';
 
 export const Container = styled.div`
-  position: relative;
-  perspective: 100rem;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-`;
-export const CardWrapper = styled.div<{ isFront: boolean }>`
+  perspective: 50rem;
   width: 15rem;
-  flex-direction: column;
+`;
+export const CardWrapper = styled.div<{ isFront: boolean; size: string }>`
   align-items: center;
-  justify-content: center;
   display: flex;
-  position: absolute;
+  position: relative;
   cursor: pointer;
-  transition: 2s;
   transform-style: preserve-3d;
-  transform: ${props => (props.isFront ? 'rotateY(0deg)' : 'rotateY(180deg)')};
+  width: ${props => (props.size ? props.size : '6.25rem')};
+  transform: ${props => (!props.isFront ? 'rotateY(0deg)' : 'rotateY(180deg)')};
+  animation: ${props =>
+    !props.isFront
+      ? css`
+          ${CardFlipAnimationReverse} 2s ease
+        `
+      : css`
+          ${CardFlipAnimation} 2s ease
+        `};
 `;
-
-export const FrontWrapper = styled.div<{ isFront: boolean }>`
-  width: 100%;
-  display: flex;
-  position: absolute;
-  backface-visibility: ${props => (!props.isFront ? 'visible' : 'hidden')};
-  visibility: ${props => (props.isFront ? 'hidden' : 'visible')};
-  // transform: ${props =>
-    props.isFront ? 'rotateY(180deg)' : 'rotateY(0deg)'};
-  transform: ${props => props.isFront && 'rotateY(180deg)'};
+export const CardFlipAnimation = keyframes`
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
 `;
-export const BackWrapper = styled.div<{ isFront: boolean }>`
-  width: 100%;
-  display: flex;
-  position: absolute;
-  backface-visibility: ${props => (!props.isFront ? 'hidden' : 'visible')};
-  visibility: ${props => (props.isFront ? 'visible' : 'hidden')};
-  // transform: ${props =>
-    props.isFront ? 'rotateY(180deg)' : 'rotateY(0deg)'};
-  transform: ${props => !props.isFront && 'rotateY(-180deg)'};
+export const CardFlipAnimationReverse = keyframes`
+  from {
+    transform: rotateY(-180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
 `;
-
+export const CardSideWrapper = styled.div`
+  &.card {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    backface-visibility: hidden;
+  }
+  &.card_front {
+    z-index: 1;
+    transform: rotateY(0deg);
+  }
+  &.card_back {
+    transform: rotateY(180deg);
+  }
+`;
 export const ChatWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -49,14 +62,13 @@ export const ChatWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 99;
   position: absolute;
   > div {
     display: flex;
     align-items: center;
     gap: 0.25rem;
     position: fixed;
-    bottom: -4.5rem;
+    bottom: 3.25rem;
     > button {
       font-size: 0.675rem;
       color: #fff;
@@ -74,8 +86,8 @@ export const ChatWrapper = styled.div`
     font-weight: 600;
     margin-bottom: 0.75rem;
   }
-  .hint_text {
-    font-size: 0.675rem;
+  .depth_text {
+    font-size: 0.875rem;
     line-height: 1.3rem;
     font-weight: 400;
   }

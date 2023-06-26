@@ -82,24 +82,24 @@ export const STATUS_OPTIONS = [
 
 export const KEYWORD_LIST = [
   { id: 1, color: ['#F3B8FF', '#C290F1', '#A56ADD'], keyword: '일상' },
-  { id: 2, color: ['#CAF8D3', '#93D39E', '#6DBB7C'], keyword: '삶' },
+  { id: 2, color: ['#CAF8D3', '#93D39E', '#6DBB7C'], keyword: '관계' },
   { id: 3, color: ['#FFD9C0', '#F8A07B', '#F18455'], keyword: '나' },
-  { id: 4, color: ['#7F8EC5', '#6568A5', '#43467C'], keyword: '관계' },
-  { id: 5, color: ['#F0EEBE', '#ABCF7B', '#9BC168'], keyword: '여행' },
+  { id: 4, color: ['#7F8EC5', '#6568A5', '#43467C'], keyword: '휴식' },
+  { id: 5, color: ['#F0EEBE', '#ABCF7B', '#9BC168'], keyword: '미래/성장' },
+  { id: 9, color: ['#DCFFCB', '#69D2DE', '#02C7DE'], keyword: '여행' },
+  { id: 7, color: ['#C1DCFF', '#78A8F5', '#457ACF'], keyword: '팀' },
+  { id: 8, color: ['#F5F2AC', '#4888A5', '#266C8B'], keyword: '커리어' },
   { id: 6, color: ['#FFC6D6', '#FF8FA4', '#F2647D'], keyword: '사랑' },
-  { id: 7, color: ['#C1DCFF', '#78A8F5', '#457ACF'], keyword: '치유' },
-  { id: 8, color: ['#F5F2AC', '#4888A5', '#266C8B'], keyword: '일' },
-  { id: 9, color: ['#DCFFCB', '#69D2DE', '#02C7DE'], keyword: '미래' },
-  { id: 10, color: ['#FFBEDB', '#DDA2A7', '#CC737A'], keyword: '가치' },
+  { id: 10, color: ['#FFBEDB', '#DDA2A7', '#CC737A'], keyword: '일' },
 ];
 
 export const EMOTION_LIST = [
-  { id: 0, emotion: 'love', source: EMOTION_LOVE },
-  { id: 1, emotion: 'like', source: EMOTION_LIKE },
-  { id: 2, emotion: 'hug', source: EMOTION_HUG },
-  { id: 3, emotion: 'sad', source: EMOTION_SAD },
-  { id: 4, emotion: 'right', source: EMOTION_RIGHT },
-  { id: 5, emotion: 'angry', source: EMOTION_ANGRY },
+  { id: 1, emotion: 'Love', source: EMOTION_LOVE, count: 0 },
+  { id: 2, emotion: 'Like', source: EMOTION_LIKE, count: 0 },
+  { id: 3, emotion: 'Hug', source: EMOTION_HUG, count: 0 },
+  { id: 4, emotion: 'Sad', source: EMOTION_SAD, count: 0 },
+  { id: 5, emotion: "You're Right", source: EMOTION_RIGHT, count: 0 },
+  { id: 6, emotion: 'Angry', source: EMOTION_ANGRY, count: 0 },
 ];
 
 export const REPORT_CATEGORY = [

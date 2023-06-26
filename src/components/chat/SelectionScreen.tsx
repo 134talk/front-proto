@@ -1,59 +1,166 @@
-import { NavBar } from 'components';
-import { useState } from 'react';
-import { CHAT_LEFT_ARROW, CHAT_RIGHT_ARROW } from 'shared/constants/icons';
+import { Card, NavBar } from 'components';
+import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
+import { KEYWORD_LIST } from 'shared/constants/constants';
+import useUserData from 'shared/hooks/useUserData';
+import { subscribeSelect } from 'shared/store/chatAction';
+import { setIsReselected } from 'shared/store/chatSlice';
+import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import { Button } from 'ui';
 import * as t from './selectionScreen.style';
 
-const List = [
-  { main: '키워드1', sub: '키워드1-1' },
-  { main: '키워드2', sub: '키워드2-1' },
-  { main: '키워드3', sub: '키워드3-1' },
-];
-
 export default function SelectionScreen() {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isFront, setIsFront] = useState<boolean>(false);
-  const [orderList, setOrderList] = useState([]);
-  const handleNext = () => {
-    if (isFront) setIsFront(false);
-    setCurrentIndex(prevIndex => (prevIndex + 1) % List.length);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { roomId } = useParams();
+  const { uid } = useUserData();
+  const subKeywordList = useAppSelector(
+    state => state.chat?.subKeyword?.topicList
+  );
+  const isReselected = useAppSelector(state => state.chat?.isReselected);
+  const subSelect = useAppSelector(
+    state => state.chat?.subSelect?.allRegistered
+  );
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
+  const [orderList, setOrderList] = useState<number[]>([]);
+  const [combinedList, setCombinedList] = useState([]);
+  const [selectedId, setSelectedId] = useState<number>(null);
+  useEffect(() => {
+    const newCombinedList =
+      subKeywordList?.map(item => {
+        const keyword = KEYWORD_LIST.find(el => el.id === item.keywordId);
+        return { ...item, ...keyword, isFront: false };
+      }) || [];
+    setCombinedList(newCombinedList);
+    if (newCombinedList[1]) {
+      setSelectedId(newCombinedList[1].keywordId);
+    }
+  }, [subKeywordList]);
+
+  const handleRotate = useCallback(
+    (id: number) => {
+      setCombinedList(
+        combinedList.map(item =>
+          item.keywordId === id ? { ...item, isFront: !item.isFront } : item
+        )
+      );
+    },
+    [combinedList]
+  );
+
+  const handleSelect = useCallback(
+    (id: number) => {
+      const newIndex = combinedList.findIndex(item => item.keywordId === id);
+      if (newIndex !== -1) {
+        setSelectedId(id);
+        setCurrentIndex(newIndex);
+      }
+    },
+    [combinedList]
+  );
+
+  const handleSelectOrder = useCallback(() => {
+    const order = orderList.indexOf(selectedId);
+    if (orderList.includes(selectedId)) {
+      toast.error(`이미 ${order + 1}번째로 선택한 질문입니다.`);
+    } else {
+      const selectedKeyword = subKeywordList.find(
+        item => item.keywordId === selectedId
+      );
+      const questionId = selectedKeyword ? selectedKeyword.questionId : null;
+      if (questionId !== null) {
+        setOrderList(prevOrderList => {
+          if (prevOrderList.length === 1) {
+            const remainingKeyword = subKeywordList.find(
+              item => !prevOrderList.includes(item.keywordId)
+            );
+            const remainingQuestionId = remainingKeyword
+              ? remainingKeyword.questionId
+              : null;
+            return remainingQuestionId
+              ? [...prevOrderList, questionId, remainingQuestionId]
+              : prevOrderList;
+          } else {
+            return [...prevOrderList, questionId];
+          }
+        });
+      }
+    }
+  }, [selectedId, orderList, combinedList]);
+
+  useEffect(() => {
+    if (orderList.length > 2) {
+      dispatch({
+        type: 'sendData',
+        payload: {
+          destination: '/pub/question-order',
+          data: {
+            roomId: roomId,
+            userId: uid,
+            questionCodeList: orderList,
+          },
+        },
+      });
+      dispatch(subscribeSelect(`/sub/chat/question-order/${roomId}`));
+    }
+  }, [orderList]);
+
+  const handleBack = () => {
+    dispatch(setIsReselected(true));
+    navigate(`/chat/${roomId}/2`);
   };
 
-  const handlePrevious = () => {
-    if (isFront) setIsFront(false);
-    setCurrentIndex(prevIndex =>
-      prevIndex === 0 ? List.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleRotate = () => {
-    setIsFront(!isFront);
-  };
-
-  const handleBack = () => {};
-  const handleSelectOrder = () => {
-    if (!orderList.includes(List[currentIndex].main)) {
-      setOrderList([...orderList, List[currentIndex].main]);
-    } // 같은 질문 선택시 알림 처리 필요 또는 선택된 질문은 리스트에서 지워서 보여지지 않도록 처리
-  };
+  useEffect(() => {
+    if (subSelect) navigate(`/chat/${roomId}/4`);
+  }, [subSelect]);
 
   return (
     <t.Container>
       <NavBar isCenter={true} title="대화방" />
-      <p className="nav_guide_text">먼저 답하고 싶은 질문을 선택해주세요.</p>
-      <div className="card_wrapper">
-        <img src={CHAT_LEFT_ARROW} alt="left-arrow" onClick={handlePrevious} />
-        <p onClick={handleRotate}>
-          {isFront ? List[currentIndex].sub : List[currentIndex].main}
-        </p>
-        <img src={CHAT_RIGHT_ARROW} alt="right-arrow" onClick={handleNext} />
+      <div className="carousel_wrapper">
+        {combinedList.map((item, index) => (
+          <t.StyledCard
+            order={index - currentIndex}
+            selected={item.keywordId === selectedId}
+            key={item.keywordId}
+          >
+            <Card
+              keyword={item.keyword}
+              depth={item.depth}
+              question={item.questionName}
+              lineColor={item.color[0]}
+              fillColor={item.color[1]}
+              isFront={item.isFront}
+              size="16rem"
+              handleRotate={() => handleRotate(item.keywordId)}
+              handleSwipe={() => handleSelect(item.keywordId)}
+            />
+          </t.StyledCard>
+        ))}
       </div>
+      {orderList.length < 1 && (
+        <p className="guide_text">
+          처음으로 다뤄보고 싶은 <br />
+          카드를 골라주세요.
+        </p>
+      )}
+      {orderList.length === 1 && (
+        <p className="guide_text">
+          두번째로 다뤄보고 싶은 <br />
+          카드를 골라주세요.
+        </p>
+      )}
+      {orderList.length > 1 && (
+        <p className="guide_text">
+          대화가 곧 시작될거에요.
+          <br />
+          잠시만 기다려주세요.
+        </p>
+      )}
+      <p className="sub_text">질문에 답을 하며 대화 여행이 진행됩니다.</p>
       <div className="button_wrapper">
-        {orderList.length > 2 ? (
-          <p className="guide_text">
-            잠시만 기다려주세요. <br />곧 대화가 시작됩니다.
-          </p>
-        ) : (
+        {isReselected === false && (
           <Button
             category="cancel"
             text="키워드 다시고르기 (1회)"
@@ -64,6 +171,7 @@ export default function SelectionScreen() {
           category="confirm"
           text="질문 선택하기"
           onClick={handleSelectOrder}
+          disabled={orderList.length > 1}
         />
       </div>
     </t.Container>

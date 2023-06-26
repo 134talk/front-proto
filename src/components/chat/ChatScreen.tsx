@@ -1,47 +1,69 @@
 import { BottomButtonTab, Card, EmotionModal, NavBar } from 'components';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { EMOTION_LIST, KEYWORD_LIST } from 'shared/constants/constants';
+import useModal from 'shared/hooks/useModal';
+import { useAppSelector } from 'shared/store/store';
 import { Button, Emotion } from 'ui';
 import * as t from './chatScreen.style';
+import ChatSideNav from './ChatSideNav';
+import ChatTutorial from './ChatTutorial';
 
 export default function ChatScreen() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [sendEmotion, setSendEmotion] = useState<string>('');
-  const [isSendEmotion, setIsSendEmotion] = useState<boolean>(false);
+  const speaker = useAppSelector(state => state.chat?.subNotice?.speaker);
+  const topic = useAppSelector(state => state.chat?.subNotice?.topic);
+  const endFlag = useAppSelector(state => state.chat?.subNotice?.endFlag);
+  const emotionCode = useAppSelector(
+    state => state.chat?.subEmotion?.emoticonCode
+  );
+  const navigate = useNavigate();
+  const { roomId } = useParams();
+  const emotionModal = useModal();
+  const sideNavModal = useModal();
+  const tutorialModal = useModal();
+  const [sendEmotion, setSendEmotion] = useState<{
+    emotion: string;
+    id: number;
+  } | null>(null);
   const [isRotate, setIsRotate] = useState<boolean>(false);
-  const handleRotate = () => {
-    setIsRotate(!isRotate);
+
+  const handleOpenEmotion = (emotion: string, id: number) => {
+    emotionModal.toggle();
+    setSendEmotion({ emotion: emotion, id: id });
   };
+
+  const handleNext = () => {
+    if (endFlag) navigate('/feedback/1', { state: { roomId: roomId } });
+  };
+
   return (
     <>
-      <EmotionModal
-        sendEmotion={sendEmotion}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        setIsSendEmotion={setIsSendEmotion}
-      />
+      {tutorialModal.isOpen && <ChatTutorial onClick={tutorialModal.close} />}
+      {sideNavModal.isOpen && <ChatSideNav onClose={sideNavModal.close} />}
+      <EmotionModal sendEmotion={sendEmotion} modalActions={emotionModal} />
       <t.Container>
-        {/* change state (isNew) if user gets emotion,
-        remove state (isNew) when user opened SideNavBar
-        */}
         <NavBar
           title="대화방"
           isCenter={true}
           isHamburger={true}
           isNew={true}
+          handleSideNav={sideNavModal.open}
         />
-        <p>들썩이는 매의 일격(이담)님이 선택한 질문</p>
+        <p>
+          {speaker?.nickname}({speaker?.userName})님이 선택한 질문
+        </p>
         <div className="card_wrapper">
           <Card
-            keyword="일상"
-            hint="모든 중요한 것은 일상 속에 있다."
-            question="당신에게 소소한 행복은 어떤 것들인가요?"
+            keyword={topic?.keyword}
+            depth={topic?.depth}
+            question={topic?.questionName}
+            size="15rem"
             isFront={isRotate}
             lineColor={KEYWORD_LIST[0].color[0]}
             fillColor={
               isRotate ? KEYWORD_LIST[0].color[2] : KEYWORD_LIST[0].color[1]
             }
-            onClick={handleRotate}
+            handleRotate={() => setIsRotate(!isRotate)}
           />
         </div>
         <div className="emotion_wrapper">
@@ -49,18 +71,19 @@ export default function ChatScreen() {
             <Emotion
               image={item.source}
               key={item.id}
-              isEmotion={
-                isSendEmotion && sendEmotion.includes(item.emotion) && true
-              }
-              onClick={() => {
-                setIsModalOpen(!isModalOpen);
-                setSendEmotion(item.emotion);
-              }}
+              isEmotion={emotionCode === item.id}
+              onClick={() => handleOpenEmotion(item.emotion, item.id)}
             />
           ))}
         </div>
         <BottomButtonTab>
-          <Button category="confirm" text="다음 질문으로 넘어가볼까요?" />
+          <Button
+            category="confirm"
+            text={
+              endFlag ? '마지막 질문입니다.' : '다음 질문으로 넘어가볼까요?'
+            }
+            onClick={handleNext}
+          />
         </BottomButtonTab>
       </t.Container>
     </>

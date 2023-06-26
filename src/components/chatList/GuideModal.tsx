@@ -45,7 +45,7 @@ export default function GuideModal({ roomId, onClose }: Props) {
   };
 
   const onSkip = () => sliderRef.current.slickGoTo(6);
-  const onConfirm = () => navigate(`/chat/${roomId}`);
+  const onConfirm = () => navigate(`/chat/${roomId}/0`);
 
   return (
     <FullModal>

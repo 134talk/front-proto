@@ -1,7 +1,9 @@
 import { Toaster } from 'react-hot-toast';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
+import store from 'shared/store/store';
 import GlobalStyle from 'shared/styles/globalStyle';
 import theme from 'shared/styles/theme';
 import Device from 'shared/utils/Device';
@@ -38,7 +40,9 @@ function App() {
                 },
               }}
             />
-            <RouterProvider router={Router} />
+            <Provider store={store}>
+              <RouterProvider router={Router} />
+            </Provider>
           </div>
         </Device>
       </ThemeProvider>
