@@ -1,11 +1,9 @@
 import { FeedbackSection, ReportTitle } from 'components';
-import useUserData from 'shared/hooks/useUserData';
 import useReport from 'shared/query/useReport';
 import * as t from './feedbackDetail.style';
 
 export default function FeedbackDetail() {
-  const { channel } = useUserData();
-  const { feedbackData } = useReport(channel);
+  const { feedbackData } = useReport('feedback');
 
   return (
     <t.Container>

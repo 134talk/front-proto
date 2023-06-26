@@ -36,7 +36,7 @@ import * as t from './barChart.style';
 
 type Props = {
   text: string;
-  value: string;
+  value: number;
 };
 
 export default function BarChart({ text, value }: Props) {
@@ -71,6 +71,7 @@ type Mappings = {
   [key: string]: {
     img: string;
     color: string;
+    code?: number;
   };
 };
 
@@ -83,23 +84,23 @@ export const REPORT_MAPPINGS: Mappings = {
   '경청을 잘하고, 의견을 조율하는': { img: P01, color: '7CC67E' },
   '열정적인 목표 달성과 리더십': { img: P02, color: 'FEA86A' },
   '치밀한 계획과 효율이 중요한': { img: P03, color: 'D3A6EB' },
-  '힘을 빼고, 유쾌하게 목표달성': { img: P04, color: '7CC0FF' },
+  '힘을 빼고, 유쾌하게 목표 달성': { img: P04, color: '7CC0FF' },
   '고요하게, 반격을 준비하는': { img: P05, color: '82B9C7' },
   '배움/성장': { img: S01, color: '9EDEEA' },
   '휴식/여행': { img: S02, color: '7F6BC1' },
   '공감/평화': { img: S03, color: 'DFDC6C' },
   '성과달성/보상받기': { img: S04, color: 'DBAB44' },
   '변화/해결': { img: S05, color: 'F65656' },
-  일: { img: C01, color: '4888A5' },
-  나: { img: C02, color: 'F8A07B' },
-  관계: { img: C03, color: '6568A5' },
-  일상: { img: C04, color: 'C290F1' },
-  치유: { img: C05, color: '78A8F5' },
-  미래: { img: C06, color: '69D2DE' },
-  여행: { img: C07, color: 'ABCF7B' },
-  사랑: { img: C08, color: 'FF8FA4' },
-  가치: { img: C09, color: 'DDA2A7' },
-  삶: { img: C10, color: '93D29F' },
+  일상: { img: C04, color: 'C290F1', code: 1 },
+  관계: { img: C03, color: '6568A5', code: 2 },
+  나: { img: C02, color: 'F8A07B', code: 3 },
+  휴식: { img: C05, color: '78A8F5', code: 4 },
+  '미래/성장': { img: C06, color: '69D2DE', code: 5 },
+  여행: { img: C07, color: 'ABCF7B', code: 6 },
+  팀: { img: C09, color: 'DDA2A7', code: 7 },
+  커리어: { img: C10, color: '93D29F', code: 8 },
+  사랑: { img: C08, color: 'FF8FA4', code: 9 },
+  일: { img: C01, color: '4888A5', code: 10 },
   Love: { img: LOVE, color: 'FF498B' },
   Like: { img: LIKE, color: '7499F9' },
   Hug: { img: HUG, color: 'FBC829' },
