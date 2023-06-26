@@ -39,12 +39,14 @@ jobs:
           echo "REACT_APP_KAKAO_REDIRECT_URI=$REACT_APP_KAKAO_REDIRECT_URI" >> .env.production
           echo "REACT_APP_SHARE_KAKAO_LINK_KEY=$REACT_APP_SHARE_KAKAO_LINK_KEY" >> .env.production
           echo "REACT_APP_BASE_URL=$REACT_APP_BASE_URL" >> .env.production
+          echo "REACT_APP_SOCKET_SERVER=$REACT_APP_SOCKET_SERVER" >> .env.production
         env:
           REACT_APP_SERVER: ${{secrets.REACT_APP_SERVER}}
           REACT_APP_KAKAO_CLIENT_ID: ${{ secrets.REACT_APP_KAKAO_CLIENT_ID }}
           REACT_APP_KAKAO_REDIRECT_URI: ${{ secrets.REACT_APP_KAKAO_REDIRECT_URI }}
           REACT_APP_SHARE_KAKAO_LINK_KEY: ${{ secrets.REACT_APP_SHARE_KAKAO_LINK_KEY }}
           REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+          REACT_APP_SOCKET_SERVER: ${{secrets.REACT_APP_SOCKET_SERVER}}
 
       - name: Build
         run: unset CI && yarn build
