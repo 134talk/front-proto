@@ -18,7 +18,7 @@ export default function MembersPage() {
     <t.Container>
       {isModalOpen && <InviteModal onClose={handleModal} />}
       <NavBar
-        isCenter={false}
+        isMargin
         title="참가자"
         cnt={filteredUserList?.length.toString()}
         button="채널 초대"

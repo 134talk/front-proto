@@ -77,7 +77,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
       <FullModal>
         <t.Container>
           <NavBar
-            isCenter={false}
+            isMargin
             title="대화 초대"
             cnt={selectedIdList?.length.toString()}
             button="닫기"

@@ -1,25 +1,21 @@
 import { styled } from 'styled-components';
 
-type Props = {
-  isBottom: boolean;
-};
-
-export const Container = styled.div<Props>`
+export const Container = styled.div<{ $isBottom: boolean; $isMargin: boolean }>`
   width: calc(100% + 1.25rem * 2);
   height: 56px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${({ theme, isBottom }) => (isBottom ? 'none' : theme.white)};
-  margin: 0 1.25rem 0 -1.25rem;
+  background: ${({ theme, $isBottom }) => ($isBottom ? 'none' : theme.white)};
+  margin: ${({ $isMargin }) => ($isMargin ? '0 1.25rem 0 -1.25rem' : 'none')};
   padding: 0 1.25rem;
   > img {
     cursor: pointer;
   }
-  &.center {
+  & .center {
     .block {
-      width: 24px;
-      height: 24px;
+      min-width: 24px;
+      min-height: 24px;
       background: none;
     }
     > div {

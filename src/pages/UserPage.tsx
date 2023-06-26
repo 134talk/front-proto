@@ -16,7 +16,7 @@ export default function UserPage() {
   return (
     <t.Container>
       <InnerBackground />
-      <NavBar isCenter title="마이페이지" />
+      <NavBar isCenter title="마이페이지" isMargin />
       <UserProfile profile={profile} name={name} nickname={nickname} />
       <t.TabWrapper $isMobile={isMobile}>
         <t.Tab
