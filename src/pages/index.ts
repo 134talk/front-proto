@@ -13,3 +13,4 @@ export { default as SignSelectPage } from './SignSelectPage';
 export { default as UserPage } from './UserPage';
 export { default as FeedbackPage } from './FeedbackPage';
 export { default as UserReportPage } from './UserReportPage';
+export { default as NotFoundPage } from './NotFoundPage';

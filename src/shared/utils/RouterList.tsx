@@ -8,6 +8,7 @@ import {
   NicknameGuidePage,
   NicknamePage,
   NicknameResultPage,
+  NotFoundPage,
   ReportDetailPage,
   ReportPage,
   SignPage,
@@ -98,6 +99,12 @@ export const AuthRouter: RouterData[] = [
     element: <FeedbackPage />,
   },
   { id: 12, path: '/user/:date', isTab: false, element: <UserReportPage /> },
+  {
+    id: 13,
+    path: '*',
+    isTab: false,
+    element: <NotFoundPage />,
+  },
 ];
 
 export const BaseRouter: RouterData[] = [
