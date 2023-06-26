@@ -21,4 +21,12 @@ export const Container = styled.div`
     font-weight: ${({ theme }) => theme.fw700};
     color: ${({ theme }) => theme.gray800};
   }
+  .badgeWrapper {
+    position: relative;
+    .badge {
+      position: absolute;
+      top: 0;
+      right: 20px;
+    }
+  }
 `;

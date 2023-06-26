@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
+  NEW_BADGE_ICON,
   TAB_CHAT,
   TAB_CHAT_ACTIVE,
   TAB_MEMBERS,
@@ -9,11 +11,35 @@ import {
   TAB_USER,
   TAB_USER_ACTIVE,
 } from 'shared/constants/icons';
+import useUserData from 'shared/hooks/useUserData';
+import { subscribeNewChat } from 'shared/store/chatAction';
+import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import * as t from './bottomTab.style';
 
 export default function BottomTab() {
   const navigate = useNavigate();
   let { pathname } = useLocation();
+
+  const [isNewChat, setIsNewChat] = useState(false);
+
+  const { uid } = useUserData();
+
+  const dispatch = useAppDispatch();
+  const { type } = useAppSelector(state => state.chat.subNewChat);
+
+  useEffect(() => {
+    if (type === 'NEW_CHATROOM') setIsNewChat(true);
+  }, [type]);
+
+  useEffect(() => {
+    dispatch({ type: 'connect' });
+    dispatch(subscribeNewChat(`/sub/private/channel/${uid}`));
+  }, [dispatch, uid]);
+
+  const onChatPage = () => {
+    setIsNewChat(false);
+    navigate('/chats');
+  };
 
   return (
     <t.Container>
@@ -24,11 +50,16 @@ export default function BottomTab() {
         />
         <p>참가자</p>
       </button>
-      <button onClick={() => navigate('/chats')}>
-        <img
-          src={pathname === '/chats' ? TAB_CHAT_ACTIVE : TAB_CHAT}
-          alt="대화"
-        />
+      <button onClick={onChatPage}>
+        <div className="badgeWrapper">
+          {isNewChat && (
+            <img src={NEW_BADGE_ICON} alt="새 대화" className="badge" />
+          )}
+          <img
+            src={pathname === '/chats' ? TAB_CHAT_ACTIVE : TAB_CHAT}
+            alt="대화"
+          />
+        </div>
         <p>대화</p>
       </button>
       <button onClick={() => navigate('/report')}>

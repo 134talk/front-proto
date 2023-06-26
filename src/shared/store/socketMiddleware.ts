@@ -18,6 +18,7 @@ import {
   setSubEmotion,
   setSubEmotionList,
   setSubKeyword,
+  setSubNewChat,
   setSubNotice,
   setSubSelect,
   setSubTimeout,
@@ -161,6 +162,20 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
           const handleReceivedData = (message: IMessage) => {
             const data: SubEmotionList = JSON.parse(message.body);
             dispatch(setSubEmotionList(data));
+          };
+          const subscription = rxStomp
+            .watch(destination)
+            .subscribe(handleReceivedData);
+          subscriptions.set(destination, subscription);
+        }
+        break;
+      }
+      case 'subscribeNewChat': {
+        const { destination } = action.payload;
+        if (rxStomp && rxStomp.connected) {
+          const handleReceivedData = (message: IMessage) => {
+            const data: { type: string } = JSON.parse(message.body);
+            dispatch(setSubNewChat(data));
           };
           const subscription = rxStomp
             .watch(destination)
