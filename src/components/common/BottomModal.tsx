@@ -13,7 +13,7 @@ export default function BottomModal({
 }: BottomModalProps) {
   return (
     <t.Container>
-      <t.ContentWrapper isOpen={isOpen} onClick={onClick}>
+      <t.ContentWrapper $isOpen={isOpen} onClick={onClick}>
         {children}
       </t.ContentWrapper>
     </t.Container>

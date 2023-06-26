@@ -12,6 +12,7 @@ import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 import useUserData from 'shared/hooks/useUserData';
 import useChatList from 'shared/query/useChatList';
+import { InnerBackground } from 'ui';
 import * as t from './chatListPage.style';
 
 export default function ChatListPage() {
@@ -64,6 +65,7 @@ export default function ChatListPage() {
       {createModal && <CreateModal handleCreateModal={handleCreateModal} />}
       {settingModal && (
         <SettingModal
+          chatTime={chatTime}
           onChange={handleChange}
           onOpenCheckModal={handleCheckModal}
           onClose={handleSettingModal}
@@ -71,6 +73,7 @@ export default function ChatListPage() {
       )}
       {guideModal && <GuideModal onClose={handleGuideModal} roomId={chatId} />}
       <t.Container>
+        <InnerBackground />
         <NavBar
           isCenter={false}
           title="대화"

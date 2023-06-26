@@ -5,6 +5,7 @@ export const Container = styled.div`
   height: calc(100% - 10rem);
   position: absolute;
   overflow: auto;
+  margin-top: 130px;
   padding-bottom: 2rem;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -17,6 +18,12 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 1.75rem;
+    .noData {
+      margin-top: 100px;
+      color: ${({ theme }) => theme.gray500};
+      font-size: ${({ theme }) => theme.fs16};
+      text-align: center;
+    }
     .reportMenu {
       display: flex;
       align-items: flex-start;

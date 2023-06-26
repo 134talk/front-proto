@@ -5,6 +5,11 @@ const queryKeys = {
   TIMER: 'timer',
   FEEDUSER: 'feedUser',
   FEEDREQUIREMENT: 'feedRequirement',
+  PROFILE: 'profile',
+  STATUS_REPORT: 'statusReport',
+  CHAT_REPORT: 'chatReport',
+  FEEDBACK_REPORT: 'feedbackReport',
+  USER_REPORT: 'userReport',
 };
 
 export default queryKeys;

@@ -12,7 +12,7 @@ export const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 `;
-export const ContentWrapper = styled.div<{ isOpen: boolean }>`
+export const ContentWrapper = styled.div<{ $isOpen: boolean }>`
   background-color: white;
   width: 100%;
   border-top-left-radius: 20px;

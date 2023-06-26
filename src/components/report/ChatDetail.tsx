@@ -1,48 +1,58 @@
-import { Background, BarChart, ReportTitle, Section } from 'components';
+import { BarChart, Bubble, ReportTitle } from 'components';
+import useReport from 'shared/query/useReport';
 import * as t from './chatDetail.style';
 
 export default function ChatDetail() {
+  const { chatData } = useReport('chat');
+
   return (
     <t.Container>
-      <Background />
       <div className="sectionWrapper">
         <ReportTitle text="우리 대화는?" />
-        <Section>
-          <p className="subtitle">
-            대화에서 많은 선택을 받은 대화 주제는 <span>'일'</span> 이에요.
-          </p>
-          <div className="chartWrapper">
-            <BarChart text="일" value="50" />
-            <BarChart text="나" value="40" />
-            <BarChart text="관계" value="10" />
-          </div>
-        </Section>
-        <Section>
-          <p className="subtitle">
-            대화하면서 많이 표현한 감정은 <span>'Love'</span> 이에요.
-          </p>
-          <div className="chartWrapper">
-            <BarChart text="Love" value="60" />
-            <BarChart text="Like" value="20" />
-            <BarChart text="Sad" value="10" />
-          </div>
-        </Section>
-        <Section>
-          <p className="subtitle">감정이 많이 오고 간 질문 top3</p>
-          <div className="rankWrapper">
-            <p>1위</p>
-            <p>질문</p>
-          </div>
-          <div className="rankWrapper">
-            <p>2위</p>
-            <p>질문</p>
-          </div>
-          <div className="rankWrapper">
-            <p>3위</p>
-            <p>질문</p>
-          </div>
-        </Section>
+        <Bubble isScrollable>
+          <h1>
+            대화에서 많은 선택을 받은 대화 주제는{' '}
+            <span>
+              '{KEYWORD_LIST[chatData?.data.keywordScore[0].code - 1]}'
+            </span>{' '}
+            이에요.
+          </h1>
+          {chatData?.data.keywordScore.map(({ code, score }) => (
+            <BarChart key={code} text={KEYWORD_LIST[code - 1]} value={score} />
+          ))}
+        </Bubble>
+        <Bubble isScrollable>
+          <h1>
+            대화하면서 많이 표현한 감정은{' '}
+            <span>'{chatData?.data.emoticonScore[0].name}'</span> 이에요.
+          </h1>
+          {chatData?.data.emoticonScore.map(({ name, score }) => (
+            <BarChart key={name} text={name} value={score} />
+          ))}
+        </Bubble>
+        <Bubble isScrollable>
+          <h1>감정이 많이 오고 간 질문 top3</h1>
+          {chatData?.data.questionList.map((question, idx) => (
+            <div className="rankWrapper" key={question}>
+              <p>{idx + 1}위</p>
+              <p>{question}</p>
+            </div>
+          ))}
+        </Bubble>
       </div>
     </t.Container>
   );
 }
+
+const KEYWORD_LIST = [
+  '일상',
+  '관계',
+  '나',
+  '휴식',
+  '미래/성장',
+  '여행',
+  '팀',
+  '커리어',
+  '사랑',
+  '일',
+];

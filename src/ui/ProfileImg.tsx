@@ -7,6 +7,7 @@ export interface ProfileImgProps {
   $isMyProf?: boolean;
   $isCheckIn?: boolean;
   size?: string;
+  $isClickable?: boolean;
   onClick?: () => void;
 }
 
@@ -16,6 +17,8 @@ export default function ProfileImg(props: ProfileImgProps) {
       src={props.image ? props.image : PROFILE_IMAGE}
       alt="profileImg"
       {...props}
+      size={props.size}
+      $isClickable={props.$isClickable}
     />
   );
 }

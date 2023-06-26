@@ -4,12 +4,14 @@ import { Button } from 'ui';
 import * as t from './settingModal.style';
 
 type Props = {
+  chatTime: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onOpenCheckModal: () => void;
   onClose: () => void;
 };
 
 export default function SettingModal({
+  chatTime,
   onChange,
   onOpenCheckModal,
   onClose,
@@ -22,10 +24,11 @@ export default function SettingModal({
   const { data } = useTimer();
 
   return (
-    <t.Container>
-      <BottomModal isOpen={true}>
+    <BottomModal isOpen={true}>
+      <t.Container>
         <NavBar
           isCenter={false}
+          isBottom
           title="대화 설정"
           button="닫기"
           handleClose={onClose}
@@ -41,7 +44,9 @@ export default function SettingModal({
           대화 시간은
           <input
             type="text"
-            defaultValue={data ? data?.data.timeout : '30'}
+            placeholder="30"
+            value={chatTime}
+            defaultValue={data ? data?.data.timeout : chatTime}
             onChange={onChange}
           />
           분으로 설정하겠습니다.
@@ -50,7 +55,7 @@ export default function SettingModal({
           <Button category="cancel" text="취소" onClick={onClose} />
           <Button category="confirm" text="확인" onClick={handleConfirm} />
         </div>
-      </BottomModal>
-    </t.Container>
+      </t.Container>
+    </BottomModal>
   );
 }

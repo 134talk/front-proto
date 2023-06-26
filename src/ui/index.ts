@@ -7,3 +7,5 @@ export { default as Spinner } from './Spinner';
 export { default as Emotion } from './Emotion';
 export { default as CardImg } from './CardImg';
 export { default as Background } from './Background';
+export { default as InnerBackground } from './InnerBackground';
+export { default as Loader } from './Loader';

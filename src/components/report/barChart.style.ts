@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 type StyleProps = {
   color: string;
-  value: string;
+  value: number;
 };
 
 export const Container = styled.div`

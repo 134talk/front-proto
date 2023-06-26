@@ -12,3 +12,4 @@ export { default as ReportPage } from './ReportPage';
 export { default as SignSelectPage } from './SignSelectPage';
 export { default as UserPage } from './UserPage';
 export { default as FeedbackPage } from './FeedbackPage';
+export { default as UserReportPage } from './UserReportPage';

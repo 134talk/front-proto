@@ -13,6 +13,7 @@ import {
   SignPage,
   SignSelectPage,
   UserPage,
+  UserReportPage,
 } from 'pages';
 import React from 'react';
 
@@ -91,11 +92,12 @@ export const AuthRouter: RouterData[] = [
     element: <UserPage />,
   },
   {
-    id: 10,
+    id: 11,
     path: '/feedback/:type',
     isTab: false,
     element: <FeedbackPage />,
   },
+  { id: 12, path: '/user/:date', isTab: false, element: <UserReportPage /> },
 ];
 
 export const BaseRouter: RouterData[] = [

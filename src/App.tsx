@@ -10,6 +10,7 @@ import Device from 'shared/utils/Device';
 import queryClient from 'shared/utils/queryClient';
 import Router from 'shared/utils/Router';
 import { ThemeProvider } from 'styled-components';
+import { Loader } from 'ui';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Device>
           <div className="App">
             <GlobalStyle />
+            <Loader />
             <Toaster
               position="bottom-center"
               reverseOrder={false}

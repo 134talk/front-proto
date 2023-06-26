@@ -8,5 +8,5 @@ export const Profile = styled.img<ProfileImgProps>`
   opacity: ${props => (props.$isCheckIn ? '1' : '0.5')};
   border-radius: 50%;
   object-fit: cover;
-  cursor: pointer;
+  cursor: ${props => props.$isClickable && 'pointer'};
 `;
