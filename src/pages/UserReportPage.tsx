@@ -7,21 +7,25 @@ import {
   Satisfaction,
   Sentence,
 } from 'components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import useUserChatData from 'shared/query/useUserChatData';
 import { InnerBackground } from 'ui';
 import * as t from './userReportPage.style';
 
 export default function UserReportPage() {
   const navigate = useNavigate();
   const onClose = () => navigate('/user?tab=chat');
+  const { date } = useParams();
 
+  const { detailData } = useUserChatData(date);
+  console.log(detailData);
   return (
     <t.Container>
       <NavBar title="대화 리포트" button="닫기" handleClose={onClose} />
       <InnerBackground />
       <section>
         <p>
-          <span>2023-06-26</span>일에는 <span>2</span>번의 대화에 참여했어요.
+          <span>{date}</span>일에는 <span>2</span>번의 대화에 참여했어요.
         </p>
         <div className="bubbleWrapper">
           <Bubble isScrollable>

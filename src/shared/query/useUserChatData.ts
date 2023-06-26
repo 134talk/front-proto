@@ -25,6 +25,7 @@ export default function useUserChatData(date?: string) {
     [queryKeys.USER_REPORT, teamCode],
     () => getUserReport(teamCode),
     {
+      enabled: !date,
       refetchOnWindowFocus: false,
     }
   );

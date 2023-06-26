@@ -17,6 +17,7 @@ export const Container = styled.div`
       font-weight: ${({ theme }) => theme.fw700};
       text-align: center;
       padding: 1.5rem 0;
+      margin-left: -1.25rem;
       span {
         color: ${({ theme }) => theme.primary_deep_blue};
       }
