@@ -14,6 +14,3 @@ export const getTimer = () => axiosInstance.get('/user/get-timeout');
 
 export const setTimer = (timeout: string) =>
   axiosInstance.put(`/user/update-timeout/${timeout}`);
-
-// 키워드 선택
-// 질문 순서 등록
