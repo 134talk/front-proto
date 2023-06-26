@@ -1,12 +1,14 @@
 import {
   ChatListPage,
   ChatPage,
+  FeedbackPage,
   KakaoPage,
   LogInPage,
   MembersPage,
   NicknameGuidePage,
   NicknamePage,
   NicknameResultPage,
+  NotFoundPage,
   ReportDetailPage,
   ReportPage,
   SignPage,
@@ -68,7 +70,7 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 7,
-    path: '/chat/:chatId',
+    path: '/chat/:roomId/:type',
     isTab: false,
     element: <ChatPage />,
   },
@@ -92,9 +94,16 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 11,
-    path: '/user/:date',
+    path: '/feedback/:type',
     isTab: false,
-    element: <UserReportPage />,
+    element: <FeedbackPage />,
+  },
+  { id: 12, path: '/user/:date', isTab: false, element: <UserReportPage /> },
+  {
+    id: 13,
+    path: '*',
+    isTab: false,
+    element: <NotFoundPage />,
   },
 ];
 

@@ -76,6 +76,7 @@ export default function ChatListPage() {
         <InnerBackground />
         <NavBar
           isCenter={false}
+          isMargin
           title="대화"
           isAdmin={isAdmin === 'true'}
           button="새 대화방"

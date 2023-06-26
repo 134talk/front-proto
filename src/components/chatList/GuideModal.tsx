@@ -45,12 +45,12 @@ export default function GuideModal({ roomId, onClose }: Props) {
   };
 
   const onSkip = () => sliderRef.current.slickGoTo(6);
-  const onConfirm = () => navigate(`/chat/${roomId}`);
+  const onConfirm = () => navigate(`/chat/${roomId}/0`);
 
   return (
     <FullModal>
       <t.Container>
-        <NavBar isCenter={false} title="" button="닫기" handleClose={onClose} />
+        <NavBar isMargin title="" button="닫기" handleClose={onClose} />
         <Slider {...SETTINGS} ref={sliderRef}>
           <div className="guide_wrapper">
             <img

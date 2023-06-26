@@ -3,6 +3,8 @@ const queryKeys = {
   TEAM: 'team',
   CHATS: 'chatList',
   TIMER: 'timer',
+  FEEDUSER: 'feedUser',
+  FEEDREQUIREMENT: 'feedRequirement',
   PROFILE: 'profile',
   STATUS_REPORT: 'statusReport',
   CHAT_REPORT: 'chatReport',

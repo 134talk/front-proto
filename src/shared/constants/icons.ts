@@ -105,6 +105,14 @@ export const EMOTION_ANGRY =
 
 export const ROTATE_ICON = process.env.PUBLIC_URL + '/assets/icons/rotate.svg';
 
+export const HAMBURGER_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/hamburger.svg';
+
+export const NEW_BADGE_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/new-badge.svg';
+
+export const PROFILE_IMAGE =
+  process.env.PUBLIC_URL + '/assets/icons/profile.svg';
 export const SILHOUETTE =
   process.env.PUBLIC_URL + '/assets/icons/character-silhouette.svg';
 
@@ -121,3 +129,15 @@ export const LINE_ICON = process.env.PUBLIC_URL + '/assets/icons/line.svg';
 
 export const SIGN_OUT_ICON =
   process.env.PUBLIC_URL + '/assets/icons/sign-out.svg';
+
+export const PLUS_BLACK_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/plus.svg';
+
+export const MINUS_ICON = process.env.PUBLIC_URL + '/assets/icons/minus.svg';
+
+export const SLIDER_VERTICAL_IMAGE =
+  process.env.PUBLIC_URL + '/assets/icons/slider-vertical.svg';
+
+export const SLIDER_IMAGE = process.env.PUBLIC_URL + '/assets/icons/slider.svg';
+
+export const NOT_FOUND = process.env.PUBLIC_URL + '/assets/icons/not-found.svg';
