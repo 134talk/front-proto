@@ -72,6 +72,7 @@ type ChatState = {
   subEmotion: SubEmotion | null;
   subEmotionList: SubEmotionList | null;
   subNewChat: { type: string };
+  isNew: boolean;
 };
 
 const initialState: ChatState = {
@@ -85,6 +86,7 @@ const initialState: ChatState = {
   subEmotion: null,
   subEmotionList: null,
   subNewChat: { type: '' },
+  isNew: false,
 };
 
 const chatSlice = createSlice({
@@ -129,6 +131,9 @@ const chatSlice = createSlice({
       state.subNewChat = action.payload;
       console.log('setSubNewChat in chatSlice: ', action.payload);
     },
+    setIsNew(state, action: PayloadAction<boolean>) {
+      state.isNew = action.payload;
+    },
   },
 });
 
@@ -143,6 +148,7 @@ export const {
   setSubEmotion,
   setSubEmotionList,
   setSubNewChat,
+  setIsNew,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;
