@@ -6,20 +6,22 @@ import { Button } from 'ui';
 import * as t from './introductionScreen.style';
 
 export default function IntroductionScreen() {
-  const dispatch = useAppDispatch();
-  const { roomId } = useParams();
   const { uid } = useUserData();
+  const { roomId } = useParams();
+  const dispatch = useAppDispatch();
+  // 소켓 fetching 데이터
   const subUserList = useAppSelector(
     state => state.chat?.subUser?.chatroomUserInfos
   );
+  // 자기소개 마무리 소켓 메세지 발행
   const handleCheckIn = () => {
     dispatch({
       type: 'sendData',
       payload: {
         destination: '/pub/enter',
         data: {
-          roomId: roomId,
-          userId: uid,
+          roomId: Number(roomId),
+          userId: Number(uid),
           selected: true,
           socketFlag: 2,
         },

@@ -10,30 +10,37 @@ import ChatSideNav from './ChatSideNav';
 import ChatTutorial from './ChatTutorial';
 
 export default function ChatScreen() {
-  const speaker = useAppSelector(state => state.chat?.subNotice?.speaker);
-  const topic = useAppSelector(state => state.chat?.subNotice?.topic);
-  const endFlag = useAppSelector(state => state.chat?.subNotice?.endFlag);
-  const emotionCode = useAppSelector(
-    state => state.chat?.subEmotion?.emoticonCode
-  );
-  const navigate = useNavigate();
   const { roomId } = useParams();
+  const navigate = useNavigate();
   const emotionModal = useModal();
   const sideNavModal = useModal();
   const tutorialModal = useModal();
+  // 소켓 fetching 데이터
+  const speaker = useAppSelector(state => state.chat?.subNotice?.speaker);
+  const topic = useAppSelector(state => state.chat?.subNotice?.topic);
+  const metadata = useAppSelector(state => state.chat?.subNotice?.metadata);
+  const emotionCode = useAppSelector(
+    state => state.chat?.subEmotion?.emoticonCode
+  );
+  // 질문 카드 회전 state
+  const [isRotate, setIsRotate] = useState<boolean>(false);
+  // 감정 보내기 state
   const [sendEmotion, setSendEmotion] = useState<{
     emotion: string;
     id: number;
   } | null>(null);
-  const [isRotate, setIsRotate] = useState<boolean>(false);
-
   const handleOpenEmotion = (emotion: string, id: number) => {
     emotionModal.toggle();
     setSendEmotion({ emotion: emotion, id: id });
   };
-
+  // 버튼 텍스트 => 다음 대화 || 대화 마무리
+  const endFlag = metadata.questionNumber === metadata.finalQuestionNumber;
   const handleNext = () => {
-    if (endFlag) navigate('/feedback/1', { state: { roomId: roomId } });
+    if (!endFlag) {
+      navigate(`/chat/${roomId}/4`);
+    } else {
+      navigate('/feedback/1', { state: { roomId: roomId } });
+    }
   };
 
   return (
@@ -50,11 +57,11 @@ export default function ChatScreen() {
           handleSideNav={sideNavModal.open}
         />
         <p>
-          {speaker?.nickname}({speaker?.userName})님이 선택한 질문
+          {speaker?.nickname}({speaker?.name})님이 선택한 질문
         </p>
         <div className="card_wrapper">
           <Card
-            keyword={topic?.keyword}
+            keyword={topic?.keywordName}
             depth={topic?.depth}
             question={topic?.questionName}
             size="15rem"

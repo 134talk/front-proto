@@ -5,7 +5,7 @@ import { getFeedRequirement, postFeedRequirement } from 'shared/api/reportApi';
 import queryKeys from 'shared/constants/queryKeys';
 
 type Res = {
-  userName: string;
+  name: string;
   nickname: string;
   today: boolean;
   statusEnergy: number;
@@ -14,7 +14,7 @@ type Res = {
   statusStable: number;
 };
 type Req = {
-  roomId: string;
+  roomId: number;
   statusEnergy: number;
   statusRelation: number;
   statusStress: number;
@@ -23,7 +23,7 @@ type Req = {
 
 export default function useFeedRequirement() {
   const { data } = useQuery<AxiosResponse<Res[]>, AxiosError>(
-    [queryKeys.FEEDREQUIREMENT],
+    [queryKeys.FEED_REQUIREMENT],
     () => getFeedRequirement()
   );
   const feedRequirement = useMemo(() => data?.data || [], [data]);

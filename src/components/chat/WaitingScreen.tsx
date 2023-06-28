@@ -1,7 +1,7 @@
 import { ExitConfirmModal, NavBar } from 'components';
-import { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { SHADOW_IMAGE } from 'shared/constants/icons';
+import useModal from 'shared/hooks/useModal';
 import useUserData from 'shared/hooks/useUserData';
 import type { ChatUserInfo } from 'shared/store/chatSlice';
 import { useAppSelector } from 'shared/store/store';
@@ -10,7 +10,8 @@ import * as t from './waitingScreen.style';
 
 export default function WaitingScreen() {
   const { uid } = useUserData();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const exitConfirmModal = useModal();
+  // 소켓 fetching 데이터
   const subUserList = useAppSelector(
     state => state?.chat?.subUser?.chatroomUserInfos
   );
@@ -19,17 +20,13 @@ export default function WaitingScreen() {
 
   return (
     <>
-      <ExitConfirmModal
-        isOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        onConfirm={() => setIsModalOpen(false)}
-      />
+      <ExitConfirmModal modalActions={exitConfirmModal} />
       <t.Container>
         <NavBar
           isCenter={true}
           title="대화방"
           isNav={true}
-          handleNav={() => setIsModalOpen(true)}
+          handleNav={exitConfirmModal.open}
         />
         <div className="user_wrapper">
           <div className="list_wrapper">
@@ -42,13 +39,15 @@ export default function WaitingScreen() {
                     $isMyProf={uid === String(item.userId)}
                     data-tooltip-id={item.userId}
                     image={item.profileUrl}
-                    $isCheckIn={item.activeFlag || item.socketFlag === 1}
+                    $isCheckIn={
+                      item.activeFlag || item.socketFlag === 1 ? false : true
+                    }
                   />
                   <Tooltip
                     className="tooltip"
                     place="bottom"
                     id={String(item.userId)}
-                    content={`${item.nickname}(${item.userName})`}
+                    content={`${item.nickname}(${item.name})`}
                   />
                 </>
               ))}
@@ -69,7 +68,7 @@ export default function WaitingScreen() {
           <Button
             category="cancel"
             text="대화 나가기"
-            onClick={() => setIsModalOpen(true)}
+            onClick={exitConfirmModal.open}
           />
         </div>
       </t.Container>

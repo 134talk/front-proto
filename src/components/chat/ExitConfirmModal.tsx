@@ -1,34 +1,31 @@
 import { BaseModal } from 'components';
-import type { Dispatch, SetStateAction } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import type { ModalActions } from 'shared/hooks/useModal';
 import useUserData from 'shared/hooks/useUserData';
 import { useAppDispatch } from 'shared/store/store';
 import { Button } from 'ui';
 import * as t from './exitConfirmModal.style';
 
 interface ExitConfirmModalProps {
-  isOpen: boolean;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  onConfirm: () => void;
+  modalActions: ModalActions;
 }
 
 export default function ExitConfirmModal({
-  isOpen,
-  setIsModalOpen,
-  onConfirm,
+  modalActions,
 }: ExitConfirmModalProps) {
+  const { uid } = useUserData();
+  const { roomId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { roomId } = useParams();
-  const { uid } = useUserData();
+  // 대화 나가기 activeFlag = false 처리
   const waitNavigate = async () => {
     dispatch({
       type: 'sendData',
       payload: {
         destination: '/pub/enter',
         data: {
-          roomId,
-          userId: uid,
+          roomId: Number(roomId),
+          userId: Number(uid),
           selected: false,
           socketFlag: 0,
         },
@@ -38,12 +35,12 @@ export default function ExitConfirmModal({
     navigate('/chats');
   };
   const handleConfirm = () => {
-    onConfirm();
+    modalActions.close();
     waitNavigate();
   };
   return (
     <>
-      {isOpen && (
+      {modalActions.isOpen && (
         <BaseModal>
           <t.Container>
             <p>
@@ -55,7 +52,7 @@ export default function ExitConfirmModal({
               <Button
                 category="cancel"
                 text="취소"
-                onClick={() => setIsModalOpen(false)}
+                onClick={modalActions.close}
               />
               <Button category="confirm" text="확인" onClick={handleConfirm} />
             </div>
