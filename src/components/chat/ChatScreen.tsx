@@ -22,6 +22,7 @@ export default function ChatScreen() {
   const emotionCode = useAppSelector(
     state => state.chat?.subEmotion?.emoticonCode
   );
+
   // 질문 카드 회전 state
   const [isRotate, setIsRotate] = useState<boolean>(false);
   // 감정 보내기 state
@@ -33,6 +34,10 @@ export default function ChatScreen() {
     emotionModal.toggle();
     setSendEmotion({ emotion: emotion, id: id });
   };
+  // 질문 카드 & 상수 데이터 매칭
+  const matchedItem = KEYWORD_LIST.filter(
+    item => item.keyword === topic?.keywordName
+  );
   // 버튼 텍스트 => 다음 대화 || 대화 마무리
   const endFlag = metadata.questionNumber === metadata.finalQuestionNumber;
   const handleNext = () => {
@@ -66,9 +71,9 @@ export default function ChatScreen() {
             question={topic?.questionName}
             size="15rem"
             isFront={isRotate}
-            lineColor={KEYWORD_LIST[0].color[0]}
+            lineColor={matchedItem[0].color[0]}
             fillColor={
-              isRotate ? KEYWORD_LIST[0].color[2] : KEYWORD_LIST[0].color[1]
+              isRotate ? matchedItem[0].color[2] : matchedItem[0].color[1]
             }
             handleRotate={() => setIsRotate(!isRotate)}
           />
@@ -89,6 +94,7 @@ export default function ChatScreen() {
             text={
               endFlag ? '마지막 질문입니다.' : '다음 질문으로 넘어가볼까요?'
             }
+            bgColor={matchedItem[0].color[2]}
             onClick={handleNext}
           />
         </BottomButtonTab>
