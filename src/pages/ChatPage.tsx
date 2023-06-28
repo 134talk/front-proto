@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useUserData from 'shared/hooks/useUserData';
 import { subscribeTimeout, subscribeUser } from 'shared/store/chatAction';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
+import NotFoundPage from './NotFoundPage';
 
 export default function ChatPage() {
   const { type, roomId } = useParams();
@@ -81,9 +82,8 @@ export default function ChatPage() {
 
     const ScreenComponent = screenMap[pageNumber];
 
-    // 이 부분은 404 페이지 처리
     if (!ScreenComponent) {
-      throw new Error(`Invalid page number: ${pageNumber}`);
+      <NotFoundPage />;
     }
 
     return <ScreenComponent />;
