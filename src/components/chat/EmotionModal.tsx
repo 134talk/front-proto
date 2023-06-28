@@ -21,6 +21,7 @@ export default function EmotionModal({
   const { uid } = useUserData();
   const { roomId } = useParams();
   const subUserList = useAppSelector(state => state.chat?.subNotice?.userList);
+  const chatUserList = subUserList.filter(el => el.userId !== Number(uid));
   const [sendTo, setSendTo] = useState<{
     nickname: string;
     userId: number;
@@ -36,10 +37,10 @@ export default function EmotionModal({
     dispatch({
       type: 'sendData',
       payload: {
-        destination: '/pub/room/emotion',
+        destination: '/pub/room/emoticon',
         data: {
-          roomId: roomId,
-          userId: uid,
+          roomId: Number(roomId),
+          userId: Number(uid),
           toUserId: sendTo.userId,
           emoticonCode: sendEmotion.id,
         },
@@ -62,7 +63,7 @@ export default function EmotionModal({
               {sendTo && <p className="sub_text">'{sendTo.nickname}'님에게</p>}
             </div>
             <div className="user_list_wrapper">
-              {subUserList.map(item => (
+              {chatUserList?.map(item => (
                 <div className="user_wrapper" key={item.userId}>
                   <ProfileImg
                     size="3rem"

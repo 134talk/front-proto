@@ -21,7 +21,7 @@ export default function FeedOptionReminder() {
   const handleNext = () => {
     navigate('/feedback/3');
   };
-  const { feedUserList } = useFeedUser(roomId);
+  const { feedUserList } = useFeedUser(Number(roomId));
   console.log('feedUserList: ', feedUserList);
   return (
     <t.Container>

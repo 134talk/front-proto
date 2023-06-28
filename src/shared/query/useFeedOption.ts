@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { postFeedOption } from 'shared/api/reportApi';
 
 type Req = {
-  roomId: string;
+  roomId: number;
   sentence: string;
   score: number;
   feedback: [{ toUserId: number; review: string; feedbackScore: number }];
