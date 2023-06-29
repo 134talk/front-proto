@@ -1,5 +1,4 @@
 import { Chip, EmotionData } from 'components';
-import { useEffect, useState } from 'react';
 import {
   EMOTION_ANGRY,
   EMOTION_HUG,
@@ -12,26 +11,29 @@ import * as t from './emotion.style';
 
 type Props = {
   idx: number;
-  name: string;
-  count: number;
+  emoticons: { name: string; count: number }[];
 };
 
-export default function Emotion({ idx, name, count }: Props) {
-  const [emotionIcon, setEmotionIcon] = useState('');
-  useEffect(() => {
+export default function Emotion({ idx, emoticons }: Props) {
+  const getEmoticon = (name: string) => {
     if (EMOTION_MAPPINGS.hasOwnProperty(name)) {
       const { img } = EMOTION_MAPPINGS[name];
-      setEmotionIcon(img);
+      return img;
     }
-  }, [name]);
+  };
 
   return (
     <t.Container>
       <Chip text={`${idx + 1}번째 대화`} idx={idx} />
       <div className="emotionWrapper">
-        <EmotionData imgSrc={emotionIcon} name={name} count={count} />
-        <EmotionData imgSrc={emotionIcon} name={name} count={count} />
-        <EmotionData imgSrc={emotionIcon} name={name} count={count} />
+        {emoticons.map(({ name, count }) => (
+          <EmotionData
+            imgSrc={getEmoticon(name)}
+            name={name}
+            count={count}
+            key={name}
+          />
+        ))}
       </div>
     </t.Container>
   );

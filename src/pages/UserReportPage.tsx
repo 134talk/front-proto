@@ -45,9 +45,9 @@ export default function UserReportPage() {
           </Bubble>
           <Bubble isScrollable>
             <h1>내가 공감받은 감정은?</h1>
-            <Emotion idx={0} name="Like" count={5} />
-            <Emotion idx={1} name="Love" count={5} />
-            <Emotion idx={2} name="Angry" count={5} />
+            {detailData?.data.receivedEmoticons.map((emoticons, idx) => (
+              <Emotion key={idx} idx={idx} emoticons={emoticons} />
+            ))}
           </Bubble>
           <Bubble isScrollable>
             <h1>대화 후 나에게 남은 문장은?</h1>
