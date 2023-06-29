@@ -7,7 +7,6 @@ import queryKeys from 'shared/constants/queryKeys';
 type Res = {
   roomId: number;
   roomName: string;
-  userCount: number;
   emotions: { emotionCode: string; emotionCount: number }[] | [];
   joinFlag: boolean;
 }[];
