@@ -32,8 +32,8 @@ export default function SignPage() {
 
   const onRegister = () =>
     type === 'user'
-      ? onSignUser({ name: name, team: team })
-      : onSignAdmin({ name: name, team: team });
+      ? onSignUser({ name: name, teamCode: team })
+      : onSignAdmin({ name: name, teamName: team });
 
   const onCancel = () => navigate('/sign');
 
