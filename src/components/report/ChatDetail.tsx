@@ -24,10 +24,11 @@ export default function ChatDetail() {
         <Bubble isScrollable>
           <h1>
             대화하면서 많이 표현한 감정은{' '}
-            <span>'{chatData?.data.emoticonScore[0].name}'</span> 이에요.
+            <span>'{chatData?.data.emoticonScore[0].emoticonName}'</span>{' '}
+            이에요.
           </h1>
-          {chatData?.data.emoticonScore.map(({ name, score }) => (
-            <BarChart key={name} text={name} value={score} />
+          {chatData?.data.emoticonScore.map(({ emoticonName, score }) => (
+            <BarChart key={emoticonName} text={emoticonName} value={score} />
           ))}
         </Bubble>
         <Bubble isScrollable>
