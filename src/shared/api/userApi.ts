@@ -16,9 +16,6 @@ export const signAdmin = (name: string, teamName: string) =>
 
 export const getName = () => axiosInstance.get('/user/name');
 
-export const signNickname = (nameCode: string[]) =>
-  axiosInstance.post('/user/nickname', { nameCode });
-
 export const updateNickname = (nameCode: string[]) =>
   axiosInstance.put('/user/nickname', { nameCode });
 

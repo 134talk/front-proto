@@ -7,15 +7,14 @@ import queryKeys from 'shared/constants/queryKeys';
 type Res = {
   roomId: number;
   roomName: string;
-  userCount: number;
-  emotions: { emotionCode: string; emotionCount: number }[] | [];
+  emoticons: { emoticon: string; emoticonCount: number }[] | [];
   joinFlag: boolean;
 }[];
 
-export default function useChatList(name?: string) {
+export default function useChatList(keyword?: string) {
   const { data, refetch } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.CHATS],
-    name.length > 0 ? () => searchChatList(name) : getChatList,
+    keyword.length > 0 ? () => searchChatList(keyword) : getChatList,
     {
       refetchOnWindowFocus: false,
       refetchInterval: 5000,

@@ -8,23 +8,24 @@ interface ChatSideNavProps {
   onClose?: () => void;
 }
 export default function ChatSideNav({ onClose }: ChatSideNavProps) {
+  // 소켓 fetching 데이터
   const emotionList = useAppSelector(
     state => state.chat?.subEmotionList?.emoticonList
   );
   const subUserList = useAppSelector(state => state.chat?.subNotice?.userList);
-  const quide = useAppSelector(
+  const guide = useAppSelector(
     state => state.chat?.subNotice?.topic?.questionGuide
   );
+  // 감정 리스트 & 상수 데이터 매칭
   const combinedEmotionList = EMOTION_LIST.map(emotionItem => {
     const matchedItem = emotionList?.find(
-      emotion => emotion.code === emotionItem.id
+      emotion => emotion.emoticonCode === emotionItem.id
     );
     return {
       ...emotionItem,
       ...matchedItem,
     };
   });
-  console.log('combinedEmotionList: ', combinedEmotionList);
 
   return (
     <t.Container onClick={onClose}>
@@ -37,9 +38,9 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
             <div className="emotion_content_wrapper" key={item.id}>
               <div className="image_wrapper">
                 <img src={item.source} alt={item.emotion} />
-                {item.amount > 0 && (
+                {item.emoticonCount > 0 && (
                   <div className="badge_wrapper">
-                    <span>{item.amount}</span>
+                    <span>{item.emoticonCount}</span>
                   </div>
                 )}
               </div>
@@ -53,7 +54,7 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
         </div>
         <div className="guide_wrapper">
           <ol>
-            {quide.map((item, index) => (
+            {guide.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ol>

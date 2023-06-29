@@ -1,10 +1,10 @@
 import axiosInstance from './instance';
 
-export const getFeedUser = (roomId: string) =>
+export const getFeedUser = (roomId: number) =>
   axiosInstance.get(`/chat/find-users/chatroom/${roomId}`);
 
 export const postFeedOption = (
-  roomId: string,
+  roomId: number,
   sentence: string,
   score: number,
   feedback: [{ toUserId: number; review: string; feedbackScore: number }]
@@ -20,7 +20,7 @@ export const getFeedRequirement = () =>
   axiosInstance.get('/chat/find/feedback');
 
 export const postFeedRequirement = (
-  roomId: string,
+  roomId: number,
   statusEnergy: number,
   statusRelation: number,
   statusStress: number,

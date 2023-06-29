@@ -12,7 +12,7 @@ type DetailRes = {
   date: string;
   count: number;
   effect: { energy: number; relation: number; stable: number; stress: number };
-  receivedEmoticons: { name: string; count: number };
+  receivedEmoticons: { name: string; count: number }[][];
   remainedSentences: string[];
   scores: number[];
   feedbacks: { nickname: string; profileImgUrl: string; content: string }[];

@@ -61,6 +61,9 @@ const Mobile = styled.div<{ height: number }>`
 const Web = styled.div`
   width: 100vw;
   height: 100vh;
+  background-image: url('/assets/background.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const Phone = styled.div`

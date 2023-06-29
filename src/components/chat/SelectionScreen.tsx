@@ -11,21 +11,24 @@ import { Button } from 'ui';
 import * as t from './selectionScreen.style';
 
 export default function SelectionScreen() {
+  const { uid } = useUserData();
+  const { roomId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { roomId } = useParams();
-  const { uid } = useUserData();
+  // 소켓 fetching 데이터
   const subKeywordList = useAppSelector(
     state => state.chat?.subKeyword?.topicList
   );
   const isReselected = useAppSelector(state => state.chat?.isReselected);
-  const subSelect = useAppSelector(
+  const allRegistered = useAppSelector(
     state => state.chat?.subSelect?.allRegistered
   );
+  // 질문 카드 state
   const [currentIndex, setCurrentIndex] = useState<number>(1);
-  const [orderList, setOrderList] = useState<number[]>([]);
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
+  const [orderList, setOrderList] = useState<number[]>([]);
+  // 질문 카드 데이터 & 상수 데이터 매칭
   useEffect(() => {
     const newCombinedList =
       subKeywordList?.map(item => {
@@ -37,7 +40,7 @@ export default function SelectionScreen() {
       setSelectedId(newCombinedList[1].keywordId);
     }
   }, [subKeywordList]);
-
+  // 질문 카드 회전 함수
   const handleRotate = useCallback(
     (id: number) => {
       setCombinedList(
@@ -48,7 +51,7 @@ export default function SelectionScreen() {
     },
     [combinedList]
   );
-
+  // 질문 카드 캐로셀 함수
   const handleSelect = useCallback(
     (id: number) => {
       const newIndex = combinedList.findIndex(item => item.keywordId === id);
@@ -59,7 +62,7 @@ export default function SelectionScreen() {
     },
     [combinedList]
   );
-
+  // 선택한 질문 카드 리스트 함수
   const handleSelectOrder = useCallback(() => {
     const order = orderList.indexOf(selectedId);
     if (orderList.includes(selectedId)) {
@@ -88,7 +91,7 @@ export default function SelectionScreen() {
       }
     }
   }, [selectedId, orderList, combinedList]);
-
+  // 선택한 질문 카드 리스트 소켓 메세지 발행 & 구독
   useEffect(() => {
     if (orderList.length > 2) {
       dispatch({
@@ -96,7 +99,7 @@ export default function SelectionScreen() {
         payload: {
           destination: '/pub/question-order',
           data: {
-            roomId: roomId,
+            roomId: Number(roomId),
             userId: uid,
             questionCodeList: orderList,
           },
@@ -105,15 +108,15 @@ export default function SelectionScreen() {
       dispatch(subscribeSelect(`/sub/chat/question-order/${roomId}`));
     }
   }, [orderList]);
-
+  // 키워드 다시 선택하기 함수
   const handleBack = () => {
     dispatch(setIsReselected(true));
     navigate(`/chat/${roomId}/2`);
   };
-
+  // 모든 참가자 선택 완료시 질문 알림으로 이동
   useEffect(() => {
-    if (subSelect) navigate(`/chat/${roomId}/4`);
-  }, [subSelect]);
+    if (allRegistered) navigate(`/chat/${roomId}/4`);
+  }, [allRegistered]);
 
   return (
     <t.Container>
@@ -160,7 +163,7 @@ export default function SelectionScreen() {
       )}
       <p className="sub_text">질문에 답을 하며 대화 여행이 진행됩니다.</p>
       <div className="button_wrapper">
-        {isReselected === false && (
+        {!isReselected && (
           <Button
             category="cancel"
             text="키워드 다시고르기 (1회)"

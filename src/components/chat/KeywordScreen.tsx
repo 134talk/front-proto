@@ -10,10 +10,11 @@ import { Button } from 'ui';
 import * as t from './keywordScreen.style';
 
 export default function KeywordScreen() {
-  const { roomId } = useParams();
   const { uid } = useUserData();
+  const { roomId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  // 선택한 키워드 리스트 state
   const [selectedKeywords, setSelectedKeywords] = useState<number[]>([]);
   const canSubmit = selectedKeywords.length > 2;
   const handleSelectKeyword = (keyword: number) => {
@@ -29,15 +30,15 @@ export default function KeywordScreen() {
       setSelectedKeywords(deleteKeywords);
     }
   };
+  // 선택한 키워드 리스트 소켓 메세지 발행 & 구독
   const handleSubmitKeyword = () => {
     dispatch({
       type: 'sendData',
       payload: {
         destination: '/pub/select/keyword',
         data: {
-          roomId: roomId,
-          userId: uid,
-          selected: true,
+          roomId: Number(roomId),
+          userId: Number(uid),
           keywordCode: selectedKeywords,
         },
       },

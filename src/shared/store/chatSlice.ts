@@ -1,15 +1,34 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface UserInfo {
+export interface User {
   userId: number;
+  name: string;
   nickname: string;
-  userName: string;
+}
+export interface UserInfo extends User {
   profileUrl: string;
 }
 export interface ChatUserInfo extends UserInfo {
   activeFlag?: boolean;
   socketFlag?: number;
+}
+export interface Metadata {
+  senderId: number;
+  questionNumber: number;
+  finalQuestionNumber: number;
+}
+export interface Topic {
+  keywordName: string;
+  questionId: number;
+  questionName: string;
+  depth: string;
+}
+export interface TopicList extends Topic {
+  keywordId: number;
+}
+export interface ChatTopic extends Topic {
+  questionGuide: string[];
 }
 export interface SubUser {
   checkInFlag: 'true' | 'false' | 'stillFalse';
@@ -17,15 +36,7 @@ export interface SubUser {
   chatroomUserInfos: ChatUserInfo[];
 }
 export interface SubTimeout {
-  roomId: string;
   fiveMinuteLeft: boolean;
-}
-export interface TopicList {
-  keywordId: number;
-  keywordName: string;
-  questionId: number;
-  questionName: string;
-  depth: string;
 }
 export interface SubKeyword {
   socketFlag: number;
@@ -33,33 +44,19 @@ export interface SubKeyword {
 }
 export interface SubSelect {
   allRegistered: boolean;
-}
-export interface Speaker {
-  userId: number;
-  profileUrl: string;
-  nickname: string;
-  userName: string;
-}
-export interface Topic {
-  keyword: string;
-  questionCode: number;
-  questionName: string;
-  depth: string;
-  questionGuide: string[];
+  questionNumber: number;
 }
 export interface SubNotice {
-  speaker: Speaker;
+  metadata: Metadata;
+  speaker: User;
   userList: UserInfo[];
-  topic: Topic;
-  questionCount: number;
-  endFlag: boolean;
+  topic: ChatTopic;
 }
 export interface SubEmotion {
   emoticonCode: number;
 }
-export interface Emotion {
-  code: number;
-  amount: number;
+export interface Emotion extends SubEmotion {
+  emoticonCount: number;
 }
 export interface SubEmotionList {
   emoticonList: Emotion[];

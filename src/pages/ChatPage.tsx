@@ -18,10 +18,7 @@ export default function ChatPage() {
   const { uid } = useUserData();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const chatPageUser = useAppSelector(state => state.chat?.subUser);
-  console.log('chatPageUser: ', chatPageUser);
-  const chatPageTimeout = useAppSelector(state => state.chat?.subTimeout);
-  console.log('chatPageTimeout: ', chatPageTimeout);
+  // 소켓 fetching 데이터
   const checkInFlag = useAppSelector(state => state.chat?.subUser?.checkInFlag);
   const socketFlag = useAppSelector(
     state => state.chat?.subUser?.chatroomUserInfos[0]?.socketFlag
@@ -35,8 +32,8 @@ export default function ChatPage() {
     () => ({
       destination: '/pub/enter',
       data: {
-        roomId: roomId,
-        userId: uid,
+        roomId: Number(roomId),
+        userId: Number(uid),
         selected: true,
         socketFlag: 0,
       },
@@ -66,9 +63,10 @@ export default function ChatPage() {
     if (socketFlag === 6) navigate(`${baseChatUrl}/4`);
   }, [socketFlag, checkInFlag]);
 
-  // 마감 5분전 알림
+  // 마감 5분전 & 종료 알림
   useEffect(() => {
     if (timeout) toast.error('대화 마감 5분 전입니다.');
+    if (!timeout) toast.error('대화 시간이 종료되었습니다.');
   }, [timeout]);
 
   const renderScreen = (pageNumber: number) => {

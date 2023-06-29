@@ -21,7 +21,7 @@ export default function SettingModal({
     onOpenCheckModal();
   };
 
-  const { data } = useTimer();
+  const { time } = useTimer();
 
   return (
     <BottomModal isOpen={true}>
@@ -46,7 +46,7 @@ export default function SettingModal({
             type="text"
             placeholder="30"
             value={chatTime}
-            defaultValue={data ? data?.data.timeout : chatTime}
+            defaultValue={time ? time : chatTime}
             onChange={onChange}
           />
           분으로 설정하겠습니다.

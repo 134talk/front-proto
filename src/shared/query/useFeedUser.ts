@@ -6,13 +6,13 @@ import queryKeys from 'shared/constants/queryKeys';
 
 type Res = {
   userId: number;
-  userName: string;
+  name: string;
   nickname: string;
 };
 
-export default function useFeedUser(roomId: string) {
+export default function useFeedUser(roomId: number) {
   const { data } = useQuery<AxiosResponse<Res[]>, AxiosError>(
-    [queryKeys.FEEDUSER],
+    [queryKeys.FEED_USER],
     () => getFeedUser(roomId)
   );
 

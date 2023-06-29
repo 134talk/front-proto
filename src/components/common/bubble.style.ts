@@ -8,6 +8,7 @@ export const Container = styled.div<{
     $isScrollable ? 'calc(100% - 1.25rem)' : '100%'};
   min-width: ${({ $isScrollable }) =>
     $isScrollable ? 'calc(100% - 1.25rem)' : '100%'};
+  height: auto;
   background: ${({ theme }) => theme.white};
   border-radius: 12px;
   padding: 1.25rem;
@@ -48,8 +49,10 @@ export const Container = styled.div<{
     }
   }
   .circleWrapper {
+    width: 18.5rem;
     padding: 0rem 0.625rem;
     display: flex;
-    justify-content: space-between;
+    gap: 1.8rem;
+    flex-wrap: wrap;
   }
 `;

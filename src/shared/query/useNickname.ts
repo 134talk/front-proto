@@ -1,35 +1,29 @@
 import type { AxiosError, AxiosResponse } from 'axios';
-import { useState } from 'react';
+import { useMemo } from 'react';
 import { useMutation } from 'react-query';
-import { signNickname, updateNickname } from 'shared/api/userApi';
+import { updateNickname } from 'shared/api/userApi';
 
 type Req = {
   code: string[];
 };
 
+type Res = {
+  nickname: string;
+  profileUrl: string;
+};
+
 export default function useNickname() {
-  const [nickname, setNickname] = useState('');
-  const [profile, setProfile] = useState('');
-
-  const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ code }) => signNickname(code),
-    {
-      onSuccess: res => {
-        setNickname(res.data?.nickname);
-        setProfile(res.data?.profileUrl);
-      },
-    }
+  const { mutate, data } = useMutation<AxiosResponse<Res>, AxiosError, Req>(
+    ({ code }) => updateNickname(code)
   );
 
-  const { mutate: update } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ code }) => updateNickname(code),
-    {
-      onSuccess: res => {
-        setNickname(res.data?.nickname);
-        setProfile(res.data?.profileUrl);
-      },
-    }
+  const { nickname, profile } = useMemo(
+    () => ({
+      nickname: data?.data.nickname,
+      profile: data?.data.profileUrl,
+    }),
+    [data]
   );
 
-  return { mutate, update, nickname, profile };
+  return { mutate, nickname, profile };
 }

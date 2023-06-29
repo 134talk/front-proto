@@ -24,7 +24,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
   const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(members);
 
-  const { mutate } = useChatInvitation();
+  const mutate = useChatInvitation();
 
   const [selectedIdList, setSelectedIdList] = useState<number[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<
@@ -68,7 +68,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
 
   const onConfirm = () => {
     if (selectedIdList.length >= 2) {
-      mutate({ userList: selectedIdList });
+      mutate(selectedIdList);
       handleCreateModal();
     } else toast.error('대화는 최소 2인 이상 참여 가능합니다.');
   };
