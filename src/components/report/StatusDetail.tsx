@@ -15,7 +15,12 @@ export default function StatusDetail() {
             감정을 많이 느끼고 있어요.
           </h1>
           {statusData?.data.type1.map(({ emotion, emotionCount }) => (
-            <BarChart key={emotion} text={emotion} value={emotionCount} />
+            <BarChart
+              key={emotion}
+              text={emotion}
+              value={emotionCount}
+              isImage
+            />
           ))}
         </Bubble>
         <Bubble isScrollable>
@@ -24,7 +29,7 @@ export default function StatusDetail() {
             많아요.
           </h1>
           {statusData?.data.type2.map(({ act, actCount }) => (
-            <BarChart key={act} text={act} value={actCount} />
+            <BarChart key={act} text={act} value={actCount} isImage />
           ))}
         </Bubble>
         <Bubble isScrollable>
@@ -33,7 +38,7 @@ export default function StatusDetail() {
             원하는 사람이 많아요.
           </h1>
           {statusData?.data.type3.map(({ status, statusCount }) => (
-            <BarChart key={status} text={status} value={statusCount} />
+            <BarChart key={status} text={status} value={statusCount} isImage />
           ))}
         </Bubble>
       </div>

@@ -1,21 +1,12 @@
 import { styled } from 'styled-components';
 
-type StyleProps = {
-  color: string;
-  value: number;
-};
-
 export const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  > img {
-    width: 2.75rem;
-    height: 2.75rem;
-  }
+  justify-content: space-between;
   > .wrapper {
+    width: 80%;
     height: 2.75rem;
     display: flex;
     flex-direction: column;
@@ -23,7 +14,7 @@ export const Container = styled.div`
       display: flex;
       justify-content: space-between;
       margin-top: -8px;
-      p {
+      > p {
         font-size: ${({ theme }) => theme.fs14};
         color: ${({ theme }) => theme.gray700};
         &:nth-child(2) {
@@ -44,9 +35,9 @@ export const Bar = styled.div`
   margin-top: -10px;
 `;
 
-export const Percent = styled.div<StyleProps>`
+export const Percent = styled.div<{ color: string; value: number }>`
   width: ${({ value }) => `${value}%`};
   height: 0.4rem;
   border-radius: 3px;
-  background: ${({ color }) => `#${color}`};
+  background: ${({ color }) => color};
 `;

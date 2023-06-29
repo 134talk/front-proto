@@ -49,6 +49,7 @@ export { default as StatusDetail } from './report/StatusDetail';
 export { default as ChatDetail } from './report/ChatDetail';
 export { default as FeedbackDetail } from './report/FeedbackDetail';
 export { default as BarChart } from './report/BarChart';
+export { default as ChartIcon } from './report/ChartIcon';
 export { default as FeedbackSection } from './report/FeedbackSection';
 // 마이 페이지
 export { default as UserProfile } from './user/UserProfile';
