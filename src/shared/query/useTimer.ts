@@ -1,11 +1,8 @@
 import type { AxiosError, AxiosResponse } from 'axios';
+import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getTimer, setTimer } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
-
-type Req = {
-  time: string;
-};
 
 type Res = {
   timeout: number;
@@ -21,12 +18,14 @@ export default function useTimer() {
     }
   );
 
-  const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ time }) => setTimer(time),
+  const { mutate } = useMutation<AxiosResponse<Res>, AxiosError, string>(
+    time => setTimer(time),
     {
-      onSuccess: res => queryClient.invalidateQueries([queryKeys.TIMER]),
+      onSuccess: _ => queryClient.invalidateQueries([queryKeys.TIMER]),
     }
   );
 
-  return { data, mutate };
+  const time = useMemo(() => data?.data.timeout, [data]);
+
+  return { time, mutate };
 }
