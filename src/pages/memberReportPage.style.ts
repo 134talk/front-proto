@@ -1,15 +1,11 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.div`
-  > section {
+  section {
     position: absolute;
-    width: calc(100% - 1.25rem);
     height: 100%;
     overflow: auto;
     padding-bottom: 10rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar {
@@ -19,11 +15,14 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.gray900};
       font-size: ${({ theme }) => theme.fs16};
       font-weight: ${({ theme }) => theme.fw700};
-      text-align: center;
       padding: 1.5rem 0;
-      margin-left: -1.25rem;
       span {
         color: ${({ theme }) => theme.primary_deep_blue};
+        &.name {
+          color: ${({ theme }) => theme.gray700};
+          font-size: ${({ theme }) => theme.fs14};
+          font-weight: ${({ theme }) => theme.fw400};
+        }
       }
     }
   }

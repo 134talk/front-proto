@@ -3,7 +3,7 @@ import useReport from 'shared/query/useReport';
 import * as t from './chatDetail.style';
 
 export default function ChatDetail() {
-  const { chatData } = useReport('chat');
+  const { chatData } = useReport({ types: 'chat' });
 
   return (
     <t.Container>
@@ -28,7 +28,12 @@ export default function ChatDetail() {
             이에요.
           </h1>
           {chatData?.data.emoticonScore.map(({ emoticonName, score }) => (
-            <BarChart key={emoticonName} text={emoticonName} value={score} />
+            <BarChart
+              key={emoticonName}
+              text={emoticonName}
+              value={score}
+              isImage
+            />
           ))}
         </Bubble>
         <Bubble isScrollable>
