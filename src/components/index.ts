@@ -43,6 +43,7 @@ export { default as FeedOptionReminder } from './feedback/FeedOptionReminder';
 export { default as FeedRequirement } from './feedback/FeedRequirement';
 export { default as StatusReminder } from './feedback/StatusReminder';
 export { default as StatusSlider } from './feedback/StatusSlider';
+export { default as FeedReminderModal } from './feedback/FeedReminderModal';
 // 리포트 페이지
 export { default as ReportTitle } from './report/ReportTitle';
 export { default as StatusDetail } from './report/StatusDetail';

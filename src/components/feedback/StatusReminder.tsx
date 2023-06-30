@@ -1,13 +1,42 @@
 import { BottomButtonTab, StatusSlider } from 'components';
-import { useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { FEED_QUESTION_LIST } from 'shared/constants/constants';
+import useFeedRequirement from 'shared/query/useFeedRequirement';
 import { Button } from 'ui';
 import * as t from './statusReminder.style';
 
 export default function StatusReminder() {
-  const { type } = useParams();
+  const { type, roomId } = useParams();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<number>(0);
+
+  useEffect(() => {
+    setSearchParams({
+      energy: searchParams.get('energy') || '0',
+      relation: searchParams.get('relation') || '0',
+      stress: searchParams.get('stress') || '0',
+      stable: searchParams.get('stable') || '0',
+    });
+  }, [searchParams, setSearchParams]);
+
+  useEffect(() => {
+    if (type === '3') {
+      setSearchParams({ ...searchParams, energy: String(value) });
+    } else if (type === '4') {
+      setSearchParams({ ...searchParams, relation: String(value) });
+    } else if (type === '5') {
+      setSearchParams({ ...searchParams, stable: String(value) });
+    } else if (type === '6') {
+      setSearchParams({ ...searchParams, stress: String(value) });
+    }
+  }, [type, value, setSearchParams, searchParams]);
+
+  const currentQuestion = FEED_QUESTION_LIST.find(
+    item => item.id === Number(type)
+  );
+
   const plusTimeoutRef = useRef<number | null>(null);
   const minusTimeoutRef = useRef<number | null>(null);
   const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,19 +76,22 @@ export default function StatusReminder() {
       minusTimeoutRef.current = null;
     }
   };
+
+  const { mutate } = useFeedRequirement();
   const handleNext = () => {
-    if (type === '6') return;
-    navigate(`/feedback/${Number(type) + 1}`);
+    if (type === '6') {
+      mutate({
+        roomId: Number(roomId),
+        statusEnergy: Number(searchParams.get('energy')),
+        statusRelation: Number(searchParams.get('relation')),
+        statusStress: Number(searchParams.get('stress')),
+        statusStable: Number(searchParams.get('stable')),
+      });
+    } else {
+      navigate(`/feedback/${Number(type) + 1}`);
+    }
   };
-  const FEED_QUESTION_LIST = [
-    { id: 3, question: '오늘 나의 에너지레벨은 어떻게 변했나요?' },
-    { id: 4, question: '오늘 다른 사람에 대해서 얼마나 더 이해하게 되었나요?' },
-    { id: 5, question: '오늘 나의 심리적 안정감은 어떻게 변했나요?' },
-    { id: 6, question: '오늘 스트레스 수치는 어떻게 변했나요?' },
-  ];
-  const currentQuestion = FEED_QUESTION_LIST.find(
-    item => item.id === Number(type)
-  );
+
   return (
     <t.Container>
       <div className="content_wrapper">
