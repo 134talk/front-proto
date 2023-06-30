@@ -49,6 +49,17 @@ export default function ReportPage() {
               <img src={RIGHT_ARROW} alt="화살표" />
             </section>
           </Bubble>
+          <Bubble isClickable onClick={() => onClickMenu(3)}>
+            <section>
+              <div>
+                <h1 className="title">팀원별 종합 리포트</h1>
+                <span className="subTitle">
+                  대화 후 참가자 상태 from 피드백 & 대화 기록
+                </span>
+              </div>
+              <img src={RIGHT_ARROW} alt="화살표" />
+            </section>
+          </Bubble>
         </div>
       </t.Container>
     </>

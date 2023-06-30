@@ -48,3 +48,6 @@ export const getUserReport = (teamCode: string) =>
 
 export const getUserReportDetail = (teamCode: string, date: string) =>
   axiosInstance.get(`/statistics/user/report/${teamCode}/${date}`);
+
+export const getMemberReportDetail = (teamCode: string, searchId: string) =>
+  axiosInstance.get(`/statistics/admin/user/report/${teamCode}/${searchId}`);

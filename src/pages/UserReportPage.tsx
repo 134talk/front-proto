@@ -45,6 +45,7 @@ export default function UserReportPage() {
           </Bubble>
           <Bubble isScrollable>
             <h1>내가 공감받은 감정은?</h1>
+
             {detailData?.data.receivedEmoticons.map((emoticons, idx) => (
               <Emotion key={idx} idx={idx} emoticons={emoticons} />
             ))}

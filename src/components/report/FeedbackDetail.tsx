@@ -3,7 +3,7 @@ import useReport from 'shared/query/useReport';
 import * as t from './feedbackDetail.style';
 
 export default function FeedbackDetail() {
-  const { feedbackData } = useReport('feedback');
+  const { feedbackData } = useReport({ types: 'feedback' });
 
   return (
     <t.Container>

@@ -1,4 +1,10 @@
-import { ChatDetail, FeedbackDetail, NavBar, StatusDetail } from 'components';
+import {
+  ChatDetail,
+  FeedbackDetail,
+  MemberDetail,
+  NavBar,
+  StatusDetail,
+} from 'components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { InnerBackground } from 'ui';
 import * as t from './reportDetailPage.style';
@@ -18,6 +24,7 @@ export default function ReportDetailPage() {
         {category === '0' && <StatusDetail />}
         {category === '1' && <ChatDetail />}
         {category === '2' && <FeedbackDetail />}
+        {category === '3' && <MemberDetail />}
       </t.Container>
     </>
   );

@@ -42,8 +42,9 @@ export default function InviteModal({ onClose }: Props) {
         objectType: 'feed',
         content: {
           title: title,
-          description: '설명',
-          imageUrl: '',
+          description: '원하는 일을 하고, 삶을 사랑해요.',
+          imageUrl:
+            'https://134-back.s3.ap-northeast-2.amazonaws.com/icon/app_icon.jpeg',
           link: {
             mobileWebUrl: route,
             webUrl: route,

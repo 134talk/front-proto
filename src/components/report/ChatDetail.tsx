@@ -3,7 +3,7 @@ import useReport from 'shared/query/useReport';
 import * as t from './chatDetail.style';
 
 export default function ChatDetail() {
-  const { chatData } = useReport('chat');
+  const { chatData } = useReport({ types: 'chat' });
 
   return (
     <t.Container>

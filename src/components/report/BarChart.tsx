@@ -1,4 +1,4 @@
-import { ChartIcon } from 'components';
+import { ChartIcon, PercentChart } from 'components';
 import useChartIcons from 'shared/hooks/useChartIcons';
 import * as t from './barChart.style';
 
@@ -20,14 +20,8 @@ export default function BarChart({ text, value, isImage }: Props) {
           <p>{selectedImg}</p>
         )}
       </ChartIcon>
-      <div className="wrapper">
-        <div className="textWrapper">
-          <p>{text}</p>
-          <p>{value}%</p>
-        </div>
-        <t.Bar>
-          <t.Percent value={value} color={selectedColor} />
-        </t.Bar>
+      <div className="chart">
+        <PercentChart text={text} value={value} color={selectedColor} />
       </div>
     </t.Container>
   );

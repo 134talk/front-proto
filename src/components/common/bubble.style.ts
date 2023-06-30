@@ -32,6 +32,10 @@ export const Container = styled.div<{
     &.subTitle {
       font-size: ${({ theme }) => theme.fs14};
     }
+    & .name {
+      color: ${({ theme }) => theme.gray700};
+      font-weight: ${({ theme }) => theme.fw400};
+    }
   }
   .rankWrapper {
     display: flex;
@@ -54,5 +58,36 @@ export const Container = styled.div<{
     display: flex;
     gap: 1.8rem;
     flex-wrap: wrap;
+  }
+  .userWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .user {
+    color: ${({ theme }) => theme.gray900};
+    font-size: ${({ theme }) => theme.fs16};
+    font-weight: ${({ theme }) => theme.fw700};
+    span {
+      color: ${({ theme }) => theme.gray700};
+      font-size: ${({ theme }) => theme.fs12};
+      font-weight: ${({ theme }) => theme.fw400};
+    }
+    .subText {
+      color: ${({ theme }) => theme.gray700};
+      font-size: ${({ theme }) => theme.fs14};
+      font-weight: ${({ theme }) => theme.fw400};
+      margin-top: 0.25rem;
+    }
+  }
+  .emotionWrapper {
+    width: 100%;
+    display: flex;
+    margin-top: 0.88rem;
+  }
+  .chartWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 `;
