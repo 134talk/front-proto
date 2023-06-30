@@ -101,7 +101,7 @@ export const AuthRouter: RouterData[] = [
   },
   {
     id: 12,
-    path: '/feedback/:type',
+    path: '/feedback/:type/:roomId',
     isTab: false,
     element: <FeedbackPage />,
   },

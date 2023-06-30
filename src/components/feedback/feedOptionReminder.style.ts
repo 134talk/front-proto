@@ -36,6 +36,12 @@ export const RemindWrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  .feedback_wrapper {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
   .question_text {
     font-size: ${({ theme }) => theme.fs18};
     font-weight: ${({ theme }) => theme.fw700};

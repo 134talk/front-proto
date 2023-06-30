@@ -5,35 +5,23 @@ import {
   NavBar,
   ProgressBar,
 } from 'components';
-import { useEffect } from 'react';
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export default function FeedbackPage() {
-  const { type } = useParams();
-  const {
-    state: { roomId },
-  } = useLocation();
+  const { type, roomId } = useParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  useEffect(() => {
-    searchParams.set('roomId', roomId);
-  }, []);
+
   return (
     <Container>
-      {type === '1' ? (
+      {type === '1' || type === '3' ? (
         <NavBar isCenter={true} title="대화는 어떠셨나요?" />
       ) : (
         <NavBar
           isCenter={true}
           isNav={true}
           title="대화는 어떠셨나요?"
-          handleNav={() => navigate(`/feedback/${Number(type) - 1}`)}
+          handleNav={() => navigate(`/feedback/${Number(type) - 1}/${roomId}`)}
         />
       )}
       <ProgressBar type={Number(type)} />

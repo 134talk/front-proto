@@ -24,7 +24,6 @@ export default function Profile({
   isMyProf,
 }: ProfileProps) {
   const { uid } = useUserData();
-
   return (
     <t.Container scale={scale}>
       <ProfileImg

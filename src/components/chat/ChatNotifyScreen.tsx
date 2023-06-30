@@ -54,7 +54,7 @@ export default function ChatNotifyScreen() {
         payload: {
           destination: `/pub/question-notice/${roomId}`,
           data: {
-            userId: uid,
+            userId: Number(uid),
             questionNumber: questionNumber,
           },
         },

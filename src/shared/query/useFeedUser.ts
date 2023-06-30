@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { getFeedUser } from 'shared/api/reportApi';
 import queryKeys from 'shared/constants/queryKeys';
 
-type Res = {
+export type Res = {
   userId: number;
   name: string;
   nickname: string;
