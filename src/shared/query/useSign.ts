@@ -3,39 +3,43 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { signAdmin, signUser } from 'shared/api/userApi';
 
-type Req = {
+type UserReq = {
   name: string;
-  team: string;
+  teamCode: string;
+};
+
+type AdminReq = {
+  name: string;
+  teamName: string;
 };
 
 type Res = {
-  data: {
-    teamCode: string;
-  };
+  teamCode: string;
 };
 
 export default function useSign() {
   const navigate = useNavigate();
 
-  const onSuccessCallback = ({ data }: Res) => {
-    const { teamCode } = data;
+  const onSuccessCallback = ({ teamCode }: Res) => {
     localStorage.setItem('channel', teamCode);
     navigate('/nickname/guide');
   };
 
-  const { mutate: onSignUser } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ name, team }) => signUser(name, team),
-    {
-      onSuccess: res => onSuccessCallback(res),
-    }
-  );
+  const { mutate: onSignUser } = useMutation<
+    AxiosResponse<Res>,
+    AxiosError,
+    UserReq
+  >(({ name, teamCode }) => signUser(name, teamCode), {
+    onSuccess: res => onSuccessCallback(res?.data),
+  });
 
-  const { mutate: onSignAdmin } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ name, team }) => signAdmin(name, team),
-    {
-      onSuccess: res => onSuccessCallback(res),
-    }
-  );
+  const { mutate: onSignAdmin } = useMutation<
+    AxiosResponse<Res>,
+    AxiosError,
+    AdminReq
+  >(({ name, teamName }) => signAdmin(name, teamName), {
+    onSuccess: res => onSuccessCallback(res?.data),
+  });
 
   return { onSignUser, onSignAdmin };
 }

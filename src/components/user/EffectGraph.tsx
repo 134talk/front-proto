@@ -1,16 +1,28 @@
 import * as t from './effectGraph.style';
 
-export default function EffectGraph() {
+type Props = {
+  energy: number;
+  relation: number;
+  stable: number;
+  stress: number;
+};
+
+export default function EffectGraph({
+  energy,
+  relation,
+  stable,
+  stress,
+}: Props) {
   return (
     <t.Container>
       <p>에너지</p>
-      <Graph value={100} />
+      <Graph value={energy} />
       <p>관계 이해</p>
-      <Graph value={30} />
+      <Graph value={relation} />
       <p>심리적 안정</p>
-      <Graph value={-50} />
+      <Graph value={stable} />
       <p>스트레스</p>
-      <Graph value={-80} />
+      <Graph value={stress} />
     </t.Container>
   );
 }

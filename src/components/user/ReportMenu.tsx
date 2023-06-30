@@ -1,12 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import { RIGHT_ARROW } from 'shared/constants/icons';
 import useUserChatData from 'shared/query/useUserChatData';
 
 import * as t from './reportMenu.style';
 
 export default function ReportMenuButton() {
+  const navigate = useNavigate();
   const { data } = useUserChatData();
 
-  const onClickReport = (date: string) => {};
+  const onClickReport = (date: string) => navigate(`/user/${date}`);
 
   return (
     <t.Container>
@@ -33,30 +35,6 @@ export default function ReportMenuButton() {
                 </section>
               </div>
             ))}
-            <div className="reportMenu">
-              <div className="pointLineWrapper">
-                <div className="point" />
-                <div className="line" />
-              </div>
-              <section>
-                <p>
-                  <span>2023/06/08</span>의 대화 리포트
-                </p>
-                <img src={RIGHT_ARROW} alt="화살표 아이콘" />
-              </section>
-            </div>
-            <div className="reportMenu">
-              <div className="pointLineWrapper">
-                <div className="point" />
-                <div className="line" />
-              </div>
-              <section>
-                <p>
-                  <span>2023/06/08</span>의 대화 리포트
-                </p>
-                <img src={RIGHT_ARROW} alt="화살표 아이콘" />
-              </section>
-            </div>
           </>
         )}
       </div>

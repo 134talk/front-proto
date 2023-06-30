@@ -9,13 +9,13 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type StatusRes = {
-  type1: { emotion: string; score: number }[];
-  type2: { act: string; score: number }[];
-  type3: { status: string; score: number }[];
+  type1: { emotion: string; emotionCount: number }[];
+  type2: { act: string; actCount: number }[];
+  type3: { status: string; statusCount: number }[];
 };
 
 type ChatRes = {
-  emoticonScore: { code: number; name: string; score: number }[];
+  emoticonScore: { emoticonName: string; score: number }[];
   keywordScore: { code: number; score: number }[];
   questionList: string[];
 };

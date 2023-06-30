@@ -4,8 +4,8 @@ export const getTeam = () => axiosInstance.get('/user/teammate');
 
 export const getChatList = () => axiosInstance.get('/chat/find-chatrooms');
 
-export const searchChatList = (name: string) =>
-  axiosInstance.get(`/chat/find-chatrooms-with-name?name=${name}`);
+export const searchChatList = (searchName: string) =>
+  axiosInstance.get(`/chat/find-chatrooms-with-name?name=${searchName}`);
 
 export const createRoom = (userIdList: number[]) =>
   axiosInstance.post('/chat/create-chatroom', userIdList);

@@ -11,7 +11,7 @@ type Props = {
 export default function CheckModal({ chatTime, onClose }: Props) {
   const { mutate } = useTimer();
   const onConfirm = () => {
-    mutate({ time: chatTime });
+    mutate(chatTime);
     onClose();
   };
 
