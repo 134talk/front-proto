@@ -21,7 +21,7 @@ export default function EmotionModal({
   const { uid } = useUserData();
   const { roomId } = useParams();
   const subUserList = useAppSelector(state => state.chat?.subNotice?.userList);
-  const chatUserList = subUserList.filter(el => el.userId !== Number(uid));
+  const chatUserList = subUserList?.filter(el => el.userId !== Number(uid));
   const [sendTo, setSendTo] = useState<{
     nickname: string;
     userId: number;

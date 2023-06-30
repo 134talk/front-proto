@@ -1,3 +1,4 @@
+import type { Feedback } from 'shared/query/useFeedOption';
 import axiosInstance from './instance';
 
 export const getFeedUser = (roomId: number) =>
@@ -7,7 +8,7 @@ export const postFeedOption = (
   roomId: number,
   sentence: string,
   score: number,
-  feedback: [{ toUserId: number; review: string; feedbackScore: number }]
+  feedback: Feedback[]
 ) =>
   axiosInstance.post('/chat/create/feedback/optional', {
     roomId,

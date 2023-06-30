@@ -1,18 +1,31 @@
 import { BottomButtonTab, StatusSlider } from 'components';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'ui';
 import * as t from './feedOptionCheck.style';
 
 export default function FeedOptionCheck() {
+  const { roomId } = useParams();
+  const localOptionValue = localStorage.getItem('optionScore');
+  const localOptionSentence = localStorage.getItem('optionSentence');
   const [value, setValue] = useState<number>(5);
+  const [sentence, setSentence] = useState<string>('');
   const navigate = useNavigate();
   const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(Number(e.target.value));
   };
-  const handleNext = () => {
-    navigate('/feedback/2');
+  const handleSentence = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSentence(e.target.value);
   };
+  const handleNext = () => {
+    localStorage.setItem('optionScore', JSON.stringify(value));
+    localStorage.setItem('optionSentence', sentence);
+    navigate(`/feedback/2/${roomId}`);
+  };
+  useEffect(() => {
+    if (localOptionValue) setValue(Number(localOptionValue));
+    if (localOptionSentence) setSentence(localOptionSentence);
+  }, [localOptionValue, localOptionSentence]);
   return (
     <t.Container>
       <div className="title_wrapper">
@@ -41,7 +54,11 @@ export default function FeedOptionCheck() {
       <p className="sentence_text">
         이번 대화방에서 나에게 <br /> 남은 문장이 있다면 어떤 문장일까요?
       </p>
-      <textarea placeholder="기억에 남는 문장 또는 오늘의 대화를 요약할 수 있는 문장이 있다면 자유롭게 남겨주세요!" />
+      <textarea
+        placeholder="기억에 남는 문장 또는 오늘의 대화를 요약할 수 있는 문장이 있다면 자유롭게 남겨주세요!"
+        value={sentence}
+        onChange={handleSentence}
+      />
       <BottomButtonTab>
         <Button category="confirm" text="다음" onClick={handleNext} />
       </BottomButtonTab>
