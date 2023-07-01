@@ -1,7 +1,6 @@
 import { Bubble, NavBar } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { RIGHT_ARROW } from 'shared/constants/icons';
-import { InnerBackground } from 'ui';
 import * as t from './reportPage.style';
 
 export default function ReportPage() {
@@ -14,7 +13,6 @@ export default function ReportPage() {
     <>
       <NavBar isCenter={true} title="리포트" isMargin />
       <t.Container>
-        <InnerBackground />
         <div className="wrapper">
           <Bubble isClickable onClick={() => onClickMenu(0)}>
             <section>

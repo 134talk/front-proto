@@ -2,6 +2,7 @@ import { Bubble, SearchBar } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { RIGHT_ARROW } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
+import isMobile from 'shared/utils/deviceDetector';
 import { ProfileImg } from 'ui';
 import * as t from './memberDetail.style';
 
@@ -20,7 +21,7 @@ export default function MemberDetail() {
         handleSearch={handleSearch}
         onDelete={onDelete}
       />
-      <div className="wrapper">
+      <t.Scroll $isMobile={isMobile}>
         <Bubble isClickable onClick={() => onDetail('1')}>
           <section>
             <div className="userWrapper">
@@ -35,7 +36,105 @@ export default function MemberDetail() {
             <img src={RIGHT_ARROW} alt="화살표" />
           </section>
         </Bubble>
-      </div>
+        <Bubble isClickable onClick={() => onDetail('1')}>
+          <section>
+            <div className="userWrapper">
+              <ProfileImg size="3.25rem" />
+              <div className="user">
+                <p>
+                  들썩이는 매의 일격<span>(해솔)</span>
+                </p>
+                <p className="subText">대화 참여 횟수 : 1번</p>
+              </div>
+            </div>
+            <img src={RIGHT_ARROW} alt="화살표" />
+          </section>
+        </Bubble>
+        <Bubble isClickable onClick={() => onDetail('1')}>
+          <section>
+            <div className="userWrapper">
+              <ProfileImg size="3.25rem" />
+              <div className="user">
+                <p>
+                  들썩이는 매의 일격<span>(해솔)</span>
+                </p>
+                <p className="subText">대화 참여 횟수 : 1번</p>
+              </div>
+            </div>
+            <img src={RIGHT_ARROW} alt="화살표" />
+          </section>
+        </Bubble>
+        <Bubble isClickable onClick={() => onDetail('1')}>
+          <section>
+            <div className="userWrapper">
+              <ProfileImg size="3.25rem" />
+              <div className="user">
+                <p>
+                  들썩이는 매의 일격<span>(해솔)</span>
+                </p>
+                <p className="subText">대화 참여 횟수 : 1번</p>
+              </div>
+            </div>
+            <img src={RIGHT_ARROW} alt="화살표" />
+          </section>
+        </Bubble>
+        <Bubble isClickable onClick={() => onDetail('1')}>
+          <section>
+            <div className="userWrapper">
+              <ProfileImg size="3.25rem" />
+              <div className="user">
+                <p>
+                  들썩이는 매의 일격<span>(해솔)</span>
+                </p>
+                <p className="subText">대화 참여 횟수 : 1번</p>
+              </div>
+            </div>
+            <img src={RIGHT_ARROW} alt="화살표" />
+          </section>
+        </Bubble>
+        <Bubble isClickable onClick={() => onDetail('1')}>
+          <section>
+            <div className="userWrapper">
+              <ProfileImg size="3.25rem" />
+              <div className="user">
+                <p>
+                  들썩이는 매의 일격<span>(해솔)</span>
+                </p>
+                <p className="subText">대화 참여 횟수 : 1번</p>
+              </div>
+            </div>
+            <img src={RIGHT_ARROW} alt="화살표" />
+          </section>
+        </Bubble>
+        <Bubble isClickable onClick={() => onDetail('1')}>
+          <section>
+            <div className="userWrapper">
+              <ProfileImg size="3.25rem" />
+              <div className="user">
+                <p>
+                  들썩이는 매의 일격<span>(해솔)</span>
+                </p>
+                <p className="subText">대화 참여 횟수 : 1번</p>
+              </div>
+            </div>
+            <img src={RIGHT_ARROW} alt="화살표" />
+          </section>
+        </Bubble>
+        <Bubble isClickable onClick={() => onDetail('1')}>
+          <section>
+            <div className="userWrapper">
+              <ProfileImg size="3.25rem" />
+              <div className="user">
+                <p>
+                  들썩이는 매의 일격<span>(해솔)</span>
+                </p>
+                <p className="subText">대화 참여 횟수 : 1번</p>
+              </div>
+            </div>
+            <img src={RIGHT_ARROW} alt="화살표" />
+          </section>
+        </Bubble>
+      </t.Scroll>
     </t.Container>
   );
 }

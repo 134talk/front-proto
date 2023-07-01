@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding-top: 5rem;
+  padding: 5rem 1.25rem 0 1.25rem;
   .username {
     font-size: ${({ theme }) => theme.fs16};
     font-weight: ${({ theme }) => theme.fw500};

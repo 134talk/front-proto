@@ -2,7 +2,7 @@ import { NavBar, ReportMenu, UserProfile, UserStatus } from 'components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import useProfile from 'shared/query/useProfile';
 import isMobile from 'shared/utils/deviceDetector';
-import { Button, InnerBackground } from 'ui';
+import { Button } from 'ui';
 import * as t from './userPage.style';
 
 export default function UserPage() {
@@ -15,7 +15,6 @@ export default function UserPage() {
 
   return (
     <t.Container>
-      <InnerBackground />
       <NavBar isCenter title="마이페이지" isMargin />
       <UserProfile profile={profile} name={name} nickname={nickname} />
       <t.TabWrapper $isMobile={isMobile}>
@@ -32,7 +31,7 @@ export default function UserPage() {
           나의 대화
         </t.Tab>
       </t.TabWrapper>
-      <div className="contentWrapper">
+      <t.Scroll $isMobile={isMobile}>
         {tab === 'info' && (
           <>
             <UserStatus nicknameData={code} />
@@ -45,7 +44,7 @@ export default function UserPage() {
           </>
         )}
         {tab === 'chat' && <ReportMenu />}
-      </div>
+      </t.Scroll>
     </t.Container>
   );
 }

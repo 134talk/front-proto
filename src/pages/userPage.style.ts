@@ -2,21 +2,6 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  > .contentWrapper {
-    width: calc(100% - 1.25rem * 2);
-    height: calc(100% - 10rem);
-    min-height: 31rem;
-    position: absolute;
-    overflow: auto;
-    padding-bottom: 5rem;
-    margin-top: 3rem;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    padding-bottom: 10rem;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
 `;
 
 export const TabWrapper = styled.div<{ $isMobile: boolean }>`
@@ -40,4 +25,21 @@ export const Tab = styled.button<{ $isSelected: boolean }>`
     $isSelected
       ? `2px solid ${theme.primary_deep_blue}`
       : `1px solid ${theme.gray300}`};
+`;
+
+export const Scroll = styled.div<{ $isMobile: boolean }>`
+  width: 100%;
+  height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 9rem)' : '620px')};
+  background: ${({ theme }) => theme.gray100};
+  padding: 3rem 1.25rem 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

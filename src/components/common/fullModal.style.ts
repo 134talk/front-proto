@@ -14,7 +14,7 @@ export const Background = styled.div`
 `;
 
 export const Container = styled.div`
-  width: calc(100% - 1.25rem * 2);
+  width: 100%;
   height: 100%;
   position: absolute;
   z-index: 100;

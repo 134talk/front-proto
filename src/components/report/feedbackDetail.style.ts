@@ -2,16 +2,18 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  .sectionWrapper {
-    width: calc(100% - 1.25rem * 2);
-    position: absolute;
-    height: calc(100% - 9rem);
-    overflow: auto;
-    padding-bottom: 5rem;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+`;
+
+export const Scroll = styled.div<{ $isMobile: boolean }>`
+  width: 100%;
+  height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 9rem)' : '630px')};
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;

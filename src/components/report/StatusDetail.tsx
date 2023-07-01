@@ -1,5 +1,6 @@
 import { BarChart, Bubble, ReportTitle } from 'components';
 import useReport from 'shared/query/useReport';
+import isMobile from 'shared/utils/deviceDetector';
 import * as t from './statusDetail.style';
 
 export default function StatusDetail() {
@@ -7,9 +8,9 @@ export default function StatusDetail() {
 
   return (
     <t.Container>
-      <div className="sectionWrapper">
+      <t.Scroll $isMobile={isMobile}>
         <ReportTitle text="지금 우리는?" />
-        <Bubble isScrollable>
+        <Bubble>
           <h1>
             우리는 최근 <span>'{statusData?.data.type1[0].emotion}'</span>{' '}
             감정을 많이 느끼고 있어요.
@@ -25,7 +26,7 @@ export default function StatusDetail() {
             ))}
           </div>
         </Bubble>
-        <Bubble isScrollable>
+        <Bubble>
           <h1>
             우리 중엔 <span>'{statusData?.data.type2[0].act}'</span> 사람이
             많아요.
@@ -36,7 +37,7 @@ export default function StatusDetail() {
             ))}
           </div>
         </Bubble>
-        <Bubble isScrollable>
+        <Bubble>
           <h1>
             우리는 지금 <span>'{statusData?.data.type3[0].status}'</span> 를
             원하는 사람이 많아요.
@@ -52,7 +53,7 @@ export default function StatusDetail() {
             ))}
           </div>
         </Bubble>
-      </div>
+      </t.Scroll>
     </t.Container>
   );
 }

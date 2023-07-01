@@ -12,7 +12,7 @@ import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 import useUserData from 'shared/hooks/useUserData';
 import useChatList from 'shared/query/useChatList';
-import { InnerBackground } from 'ui';
+import isMobile from 'shared/utils/deviceDetector';
 import * as t from './chatListPage.style';
 
 export default function ChatListPage() {
@@ -72,23 +72,22 @@ export default function ChatListPage() {
         />
       )}
       {guideModal && <GuideModal onClose={handleGuideModal} roomId={chatId} />}
+      <NavBar
+        isCenter={false}
+        isMargin
+        title="대화"
+        isAdmin={isAdmin === 'true'}
+        button="새 대화방"
+        handleCreateModal={handleCreateModal}
+        handleSetting={handleSettingModal}
+      />
       <t.Container>
-        <InnerBackground />
-        <NavBar
-          isCenter={false}
-          isMargin
-          title="대화"
-          isAdmin={isAdmin === 'true'}
-          button="새 대화방"
-          handleCreateModal={handleCreateModal}
-          handleSetting={handleSettingModal}
-        />
         <SearchBar
           handleSearch={handleSearch}
           keyword={keyword}
           onDelete={onDelete}
         />
-        <section>
+        <t.Scroll $isMobile={isMobile}>
           {chatList?.length > 0 ? (
             chatList.map(({ roomId, roomName, joinFlag }) => (
               <div key={roomId} onClick={() => setChatId(roomId)}>
@@ -103,7 +102,7 @@ export default function ChatListPage() {
           ) : (
             <p className="notFound">진행 중인 대화방이 없습니다.</p>
           )}
-        </section>
+        </t.Scroll>
       </t.Container>
     </>
   );
