@@ -2,12 +2,9 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div<{
   $isClickable: boolean;
-  $isScrollable: boolean;
 }>`
-  width: ${({ $isScrollable }) =>
-    $isScrollable ? 'calc(100% - 1.25rem)' : '100%'};
-  min-width: ${({ $isScrollable }) =>
-    $isScrollable ? 'calc(100% - 1.25rem)' : '100%'};
+  width: 100%;
+  min-width: 100%;
   height: auto;
   background: ${({ theme }) => theme.white};
   border-radius: 12px;

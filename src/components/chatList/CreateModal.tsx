@@ -11,6 +11,7 @@ import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import useSortedMembers from 'shared/hooks/useSortedMembers';
 import useChatInvitation from 'shared/query/useChatInvitation';
+import isMobile from 'shared/utils/deviceDetector';
 import { Button, Chip } from 'ui';
 import * as t from './createModal.style';
 
@@ -98,7 +99,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
             handleSearch={handleSearch}
             onDelete={onDelete}
           />
-          <section>
+          <t.Scroll $isMobile={isMobile}>
             {filteredUserList.length ? (
               <>
                 {filteredUserList.map(
@@ -125,7 +126,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
             ) : (
               <p>검색 결과가 없습니다.</p>
             )}
-          </section>
+          </t.Scroll>
         </t.Container>
       </FullModal>
       <BottomButtonTab>

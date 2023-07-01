@@ -7,6 +7,7 @@ import {
 } from 'components';
 import { useNavigate, useParams } from 'react-router-dom';
 import useReport from 'shared/query/useReport';
+import isMobile from 'shared/utils/deviceDetector';
 import { InnerBackground } from 'ui';
 import * as t from './memberReportPage.style';
 
@@ -27,7 +28,7 @@ export default function MemberReportPage() {
         handleClose={onClose}
       />
       <InnerBackground />
-      <section>
+      <t.Scroll $isMobile={isMobile}>
         <p>
           <span>
             {memberData?.data.nickname}
@@ -37,7 +38,7 @@ export default function MemberReportPage() {
           참여했어요.
         </p>
         <div className="bubbleWrapper">
-          <Bubble isScrollable>
+          <Bubble>
             <h1>
               대화는{' '}
               <span>
@@ -53,7 +54,7 @@ export default function MemberReportPage() {
               stress={memberData?.data.stressPercent}
             />
           </Bubble>
-          <Bubble isScrollable>
+          <Bubble>
             <h1>
               <span>
                 {memberData?.data.nickname}
@@ -73,7 +74,7 @@ export default function MemberReportPage() {
               </div>
             </h1>
           </Bubble>
-          <Bubble isScrollable>
+          <Bubble>
             <h1>
               <span>
                 {memberData?.data.nickname}
@@ -88,7 +89,7 @@ export default function MemberReportPage() {
             />
           </Bubble>
         </div>
-      </section>
+      </t.Scroll>
     </t.Container>
   );
 }

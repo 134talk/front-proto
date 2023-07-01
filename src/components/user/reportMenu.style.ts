@@ -3,16 +3,7 @@ import { styled } from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: calc(100% - 10rem);
-  position: absolute;
-  overflow: auto;
   margin-top: 130px;
-  padding-bottom: 2rem;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  padding-bottom: 10rem;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   .sectionWrapper {
     display: flex;
     flex-direction: column;

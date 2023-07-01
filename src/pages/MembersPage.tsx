@@ -2,6 +2,7 @@ import { InviteModal, NavBar, Profile, SearchBar } from 'components';
 import { useState } from 'react';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import useSortedMembers from 'shared/hooks/useSortedMembers';
+import isMobile from 'shared/utils/deviceDetector';
 import * as t from './membersPage.style';
 
 export default function MembersPage() {
@@ -29,7 +30,7 @@ export default function MembersPage() {
         handleSearch={handleSearch}
         onDelete={onDelete}
       />
-      <section>
+      <t.Scroll $isMobile={isMobile}>
         {filteredUserList?.length > 0 ? (
           filteredUserList.map(({ userId, nickname, name, profileUrl }) => (
             <div key={userId}>
@@ -45,7 +46,7 @@ export default function MembersPage() {
         ) : (
           <p className="notFound">검색 결과가 없습니다.</p>
         )}
-      </section>
+      </t.Scroll>
     </t.Container>
   );
 }

@@ -6,7 +6,6 @@ import {
   StatusDetail,
 } from 'components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { InnerBackground } from 'ui';
 import * as t from './reportDetailPage.style';
 
 export default function ReportDetailPage() {
@@ -20,7 +19,6 @@ export default function ReportDetailPage() {
     <>
       <NavBar isCenter isMargin title="리포트" isNav handleNav={handleNav} />
       <t.Container>
-        <InnerBackground />
         {category === '0' && <StatusDetail />}
         {category === '1' && <ChatDetail />}
         {category === '2' && <FeedbackDetail />}

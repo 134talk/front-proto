@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 5.875rem;
+  padding: 0 1.25rem 5.875rem 1.25rem;
   > p {
     color: ${({ theme }) => theme.primary_blue};
     font-size: ${({ theme }) => theme.fs18};

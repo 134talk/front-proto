@@ -6,7 +6,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2.3rem;
-  margin: 7.8rem 0 9.5rem 0;
+  margin: 5rem 0 9.5rem 0;
+  padding: 0 1.25rem;
   p {
     font-size: ${({ theme }) => theme.fs20};
     text-align: center;

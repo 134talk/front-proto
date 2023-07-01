@@ -20,16 +20,18 @@ export default function LogInPage() {
   }, []);
 
   return (
-    <t.Container>
+    <>
       <Background />
-      <img src={LOGO} alt="로고" />
-      <p className="bold">1 3 4</p>
-      <p>
-        원하는 일을 하고,
-        <br />
-        삶을 사랑해요.
-      </p>
-      <KakaoButton onClick={onLogin} />
-    </t.Container>
+      <t.Container>
+        <img src={LOGO} alt="로고" />
+        <p className="bold">1 3 4</p>
+        <p>
+          원하는 일을 하고,
+          <br />
+          삶을 사랑해요.
+        </p>
+        <KakaoButton onClick={onLogin} />
+      </t.Container>
+    </>
   );
 }
