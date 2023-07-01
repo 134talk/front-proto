@@ -18,5 +18,4 @@ export const Container = styled.div`
   height: 100%;
   position: absolute;
   z-index: 100;
-  padding: 0 1.25rem;
 `;

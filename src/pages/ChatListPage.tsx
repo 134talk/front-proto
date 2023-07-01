@@ -72,16 +72,16 @@ export default function ChatListPage() {
         />
       )}
       {guideModal && <GuideModal onClose={handleGuideModal} roomId={chatId} />}
+      <NavBar
+        isCenter={false}
+        isMargin
+        title="대화"
+        isAdmin={isAdmin === 'true'}
+        button="새 대화방"
+        handleCreateModal={handleCreateModal}
+        handleSetting={handleSettingModal}
+      />
       <t.Container>
-        <NavBar
-          isCenter={false}
-          isMargin
-          title="대화"
-          isAdmin={isAdmin === 'true'}
-          button="새 대화방"
-          handleCreateModal={handleCreateModal}
-          handleSetting={handleSettingModal}
-        />
         <SearchBar
           handleSearch={handleSearch}
           keyword={keyword}

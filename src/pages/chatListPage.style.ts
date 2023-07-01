@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 0 1.25rem;
+  padding: 1rem 1.25rem 0 1.25rem;
   background: ${({ theme }) => theme.gray100};
   .notFound {
     font-size: ${({ theme }) => theme.fs14};
@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const Scroll = styled.div<{ $isMobile: boolean }>`
   width: 100%;
   height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 11.5rem)' : '558px')};
-  margin-top: 1rem;
+  padding-top: 1rem;
   padding-bottom: 4rem;
   display: flex;
   flex-direction: column;

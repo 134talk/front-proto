@@ -76,14 +76,14 @@ export default function CreateModal({ handleCreateModal }: Props) {
   return (
     <>
       <FullModal>
+        <NavBar
+          isMargin
+          title="대화 초대"
+          cnt={selectedIdList?.length.toString()}
+          button="닫기"
+          handleClose={handleCreateModal}
+        />
         <t.Container>
-          <NavBar
-            isMargin
-            title="대화 초대"
-            cnt={selectedIdList?.length.toString()}
-            button="닫기"
-            handleClose={handleCreateModal}
-          />
           <div className="chipWrapper">
             {selectedMembers.map(({ userId, name }) => (
               <Chip

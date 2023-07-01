@@ -1,23 +1,30 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.div<{ $isBottom: boolean; $isMargin: boolean }>`
-  width: calc(100% + 1.25rem * 2);
+  width: 100%;
   height: 56px;
+  padding: 0 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: ${({ theme, $isBottom }) => ($isBottom ? 'none' : theme.white)};
-  margin: ${({ $isMargin }) => ($isMargin ? '0 1.25rem 0 -1.25rem' : 'none')};
-  padding: 0 1.25rem;
-  > img {
-    cursor: pointer;
+  position: relative;
+  .back {
+    position: absolute;
+    left: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
-  & .center {
-    .block {
-      min-width: 24px;
-      min-height: 24px;
-      background: none;
-    }
+  .close {
+    position: absolute;
+    right: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  &.center {
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
     > div {
       position: absolute;
       right: 0;

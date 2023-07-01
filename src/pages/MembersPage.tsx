@@ -16,8 +16,7 @@ export default function MembersPage() {
     useSearchKeyword(members);
 
   return (
-    <t.Container>
-      {isModalOpen && <InviteModal onClose={handleModal} />}
+    <>
       <NavBar
         isMargin
         title="참가자"
@@ -25,28 +24,32 @@ export default function MembersPage() {
         button="채널 초대"
         handleInviteModal={handleModal}
       />
-      <SearchBar
-        keyword={keyword}
-        handleSearch={handleSearch}
-        onDelete={onDelete}
-      />
-      <t.Scroll $isMobile={isMobile}>
-        {filteredUserList?.length > 0 ? (
-          filteredUserList.map(({ userId, nickname, name, profileUrl }) => (
-            <div key={userId}>
-              <Profile
-                userId={userId}
-                nickname={nickname}
-                name={name}
-                scale="medium"
-                image={profileUrl}
-              />
-            </div>
-          ))
-        ) : (
-          <p className="notFound">검색 결과가 없습니다.</p>
-        )}
-      </t.Scroll>
-    </t.Container>
+      <t.Container>
+        {isModalOpen && <InviteModal onClose={handleModal} />}
+
+        <SearchBar
+          keyword={keyword}
+          handleSearch={handleSearch}
+          onDelete={onDelete}
+        />
+        <t.Scroll $isMobile={isMobile}>
+          {filteredUserList?.length > 0 ? (
+            filteredUserList.map(({ userId, nickname, name, profileUrl }) => (
+              <div key={userId}>
+                <Profile
+                  userId={userId}
+                  nickname={nickname}
+                  name={name}
+                  scale="medium"
+                  image={profileUrl}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="notFound">검색 결과가 없습니다.</p>
+          )}
+        </t.Scroll>
+      </t.Container>
+    </>
   );
 }
