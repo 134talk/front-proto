@@ -6,28 +6,29 @@ import * as t from './feedRequirement.style';
 
 export default function FeedRequirement() {
   const feedReminderModal = useModal();
-  const { feedRequirement } = useFeedRequirement();
+  const { feedRequirementUser, feedRequirementData } = useFeedRequirement();
   useEffect(() => {
-    if (feedRequirement?.today) feedReminderModal.open();
-  }, [feedRequirement]);
+    if (feedRequirementUser?.today) feedReminderModal.open();
+  }, [feedRequirementUser]);
+
   return (
     <>
       {feedReminderModal.isOpen && (
         <FeedReminderModal
           onClose={feedReminderModal.close}
-          feedRequirement={feedRequirement}
+          feedRequirementData={feedRequirementData}
         />
       )}
       <t.Container>
         <div className="title_wrapper">
           <p className="title_text">
-            '{feedRequirement?.nickname}({feedRequirement?.name})'님,
+            '{feedRequirementUser?.nickname}({feedRequirementUser?.name})'님,
             <br />
             오늘 대화는 어떠셨나요?
           </p>
           <p className="sub_text">대화 후에 어떤 변화가 있었는지 알려주세요.</p>
         </div>
-        <StatusReminder />
+        <StatusReminder feedRequirementData={feedRequirementData} />
       </t.Container>
     </>
   );

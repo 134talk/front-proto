@@ -2,6 +2,7 @@ import { BottomButtonTab } from 'components';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FEED_OPTION_SELECT } from 'shared/constants/constants';
+import useUserData from 'shared/hooks/useUserData';
 import type { Feedback } from 'shared/query/useFeedOption';
 import useFeedOption from 'shared/query/useFeedOption';
 import useFeedUser from 'shared/query/useFeedUser';
@@ -10,6 +11,7 @@ import * as t from './feedOptionReminder.style';
 
 export default function FeedOptionReminder() {
   const { roomId } = useParams();
+  const { uid } = useUserData();
   const navigate = useNavigate();
   const score = localStorage.getItem('optionScore');
   const sentence = localStorage.getItem('optionSentence');
@@ -18,7 +20,10 @@ export default function FeedOptionReminder() {
 
   useEffect(() => {
     if (!feedUserList) return;
-    const initialFeedbacks: Feedback[] = feedUserList.map(user => ({
+    const setFeedList = feedUserList?.filter(
+      item => item.userId !== Number(uid)
+    );
+    const initialFeedbacks: Feedback[] = setFeedList.map(user => ({
       toUserId: user.userId,
       review: '',
       feedbackScore: null,
@@ -74,7 +79,8 @@ export default function FeedOptionReminder() {
           <div className="feedback_wrapper" key={feedback.toUserId}>
             <p className="question_text">
               '{feedUserList[index].nickname}({feedUserList[index].name})'
-              님과의 대화는 어땠나요?
+              님과의 <br />
+              대화는 어땠나요?
             </p>
             <ul>
               {FEED_OPTION_SELECT.map(item => (
@@ -100,7 +106,7 @@ export default function FeedOptionReminder() {
                       {item.label}
                     </t.SelectText>
                   </div>
-                  {item.id === 5 && feedback.feedbackScore === item.id && (
+                  {item.id === 6 && feedback.feedbackScore === item.id && (
                     <textarea
                       className="select_textarea"
                       placeholder={`${feedUserList[index].name}님과의 대화는 어땠는지 자유롭게 남겨주세요!`}

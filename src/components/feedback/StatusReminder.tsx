@@ -1,37 +1,72 @@
 import { BottomButtonTab, StatusSlider } from 'components';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { FEED_QUESTION_LIST } from 'shared/constants/constants';
+import { useNavigate, useParams } from 'react-router-dom';
+import { FEED_QUESTION_LIST, FEED_STATUS } from 'shared/constants/constants';
 import useFeedRequirement from 'shared/query/useFeedRequirement';
 import { Button } from 'ui';
+import type { FeedRequirementData } from './FeedReminderModal';
 import * as t from './statusReminder.style';
 
-export default function StatusReminder() {
+type StatusReminderProps = {
+  feedRequirementData: FeedRequirementData;
+};
+
+export default function StatusReminder({
+  feedRequirementData,
+}: StatusReminderProps) {
   const { type, roomId } = useParams();
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<number>(0);
+  const [internalValues, setInternalValues] = useState({
+    energy: 0,
+    relation: 0,
+    stable: 0,
+    stress: 0,
+  });
 
   useEffect(() => {
-    setSearchParams({
-      energy: searchParams.get('energy') || '0',
-      relation: searchParams.get('relation') || '0',
-      stress: searchParams.get('stress') || '0',
-      stable: searchParams.get('stable') || '0',
-    });
-  }, [searchParams, setSearchParams]);
-
-  useEffect(() => {
-    if (type === '3') {
-      setSearchParams({ ...searchParams, energy: String(value) });
-    } else if (type === '4') {
-      setSearchParams({ ...searchParams, relation: String(value) });
-    } else if (type === '5') {
-      setSearchParams({ ...searchParams, stable: String(value) });
-    } else if (type === '6') {
-      setSearchParams({ ...searchParams, stress: String(value) });
+    if (feedRequirementData) {
+      setInternalValues({
+        energy: feedRequirementData?.statusEnergy || 0,
+        relation: feedRequirementData?.statusRelation || 0,
+        stable: feedRequirementData?.statusStable || 0,
+        stress: feedRequirementData?.statusStress || 0,
+      });
     }
-  }, [type, value, setSearchParams, searchParams]);
+  }, [feedRequirementData]);
+
+  useEffect(() => {
+    const statusType = FEED_STATUS[type as keyof typeof FEED_STATUS];
+    if (statusType) {
+      setValue(internalValues[statusType as keyof typeof internalValues]);
+    }
+  }, [type, feedRequirementData, internalValues]);
+
+  const handleValueChange = (newValue: number) => {
+    setValue(newValue);
+    const statusType = FEED_STATUS[type as keyof typeof FEED_STATUS];
+    if (statusType) {
+      setInternalValues(prev => ({ ...prev, [statusType]: newValue }));
+    }
+  };
+
+  const { mutate } = useFeedRequirement();
+  const handleNext = () => {
+    switch (type) {
+      case '6':
+        mutate({
+          roomId: Number(roomId),
+          statusEnergy: Number(internalValues.energy),
+          statusRelation: Number(internalValues.relation),
+          statusStress: Number(internalValues.stress),
+          statusStable: Number(internalValues.stable),
+        });
+        break;
+      default:
+        navigate(`/feedback/${Number(type) + 1}/${roomId}`);
+        break;
+    }
+  };
 
   const currentQuestion = FEED_QUESTION_LIST.find(
     item => item.id === Number(type)
@@ -40,22 +75,20 @@ export default function StatusReminder() {
   const plusTimeoutRef = useRef<number | null>(null);
   const minusTimeoutRef = useRef<number | null>(null);
   const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(e.target.value));
+    handleValueChange(Number(e.target.value));
   };
   const handlePlusValue = () => {
-    setValue(prev => {
-      if (prev < 100) return prev + 1;
-      return prev;
-    });
+    if (value < 100) {
+      handleValueChange(value + 1);
+    }
     plusTimeoutRef.current = window.setTimeout(() => {
       handlePlusValue();
     }, 200);
   };
   const handleMinusValue = () => {
-    setValue(prev => {
-      if (prev > -100) return prev - 1;
-      return prev;
-    });
+    if (value > -100) {
+      handleValueChange(value - 1);
+    }
     minusTimeoutRef.current = window.setTimeout(() => {
       handleMinusValue();
     }, 200);
@@ -74,21 +107,6 @@ export default function StatusReminder() {
     if (minusTimeoutRef.current) {
       window.clearTimeout(minusTimeoutRef.current);
       minusTimeoutRef.current = null;
-    }
-  };
-
-  const { mutate } = useFeedRequirement();
-  const handleNext = () => {
-    if (type === '6') {
-      mutate({
-        roomId: Number(roomId),
-        statusEnergy: Number(searchParams.get('energy')),
-        statusRelation: Number(searchParams.get('relation')),
-        statusStress: Number(searchParams.get('stress')),
-        statusStable: Number(searchParams.get('stable')),
-      });
-    } else {
-      navigate(`/feedback/${Number(type) + 1}`);
     }
   };
 

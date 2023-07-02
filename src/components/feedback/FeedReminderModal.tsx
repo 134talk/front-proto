@@ -1,25 +1,30 @@
 import { BaseModal } from 'components';
-import { useParams, useSearchParams } from 'react-router-dom';
-import type { Res } from 'shared/query/useFeedRequirement';
+import { useParams } from 'react-router-dom';
 import useFeedRequirement from 'shared/query/useFeedRequirement';
 import { Button } from 'ui';
 import * as t from './feedReminderModal.style';
 
+export type FeedRequirementData = {
+  statusEnergy: number;
+  statusRelation: number;
+  statusStable: number;
+  statusStress: number;
+};
+
 type FeedReminderModalProps = {
   onClose: () => void;
-  feedRequirement: Res;
+  feedRequirementData: FeedRequirementData;
 };
 export default function FeedReminderModal({
   onClose,
-  feedRequirement,
+  feedRequirementData,
 }: FeedReminderModalProps) {
   const { roomId } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
   const { statusEnergy, statusRelation, statusStress, statusStable } =
-    feedRequirement;
+    feedRequirementData;
   const { mutate } = useFeedRequirement();
   const handleCancel = () => {
-    if (feedRequirement) {
+    if (feedRequirementData) {
       mutate({
         roomId: Number(roomId),
         statusEnergy,
@@ -30,11 +35,6 @@ export default function FeedReminderModal({
     }
   };
   const handleConfirm = () => {
-    searchParams.set('energy', String(statusEnergy));
-    searchParams.set('relation', String(statusRelation));
-    searchParams.set('stress', String(statusStress));
-    searchParams.set('stable', String(statusStable));
-    setSearchParams(searchParams);
     onClose();
   };
   return (
