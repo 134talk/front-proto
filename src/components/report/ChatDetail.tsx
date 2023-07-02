@@ -18,9 +18,15 @@ export default function ChatDetail() {
             </span>{' '}
             이에요.
           </h1>
-          {chatData?.data.keywordScore.map(({ code, score }) => (
-            <BarChart key={code} text={KEYWORD_LIST[code - 1]} value={score} />
-          ))}
+          <div className="chartWrapper">
+            {chatData?.data.keywordScore.map(({ code, score }) => (
+              <BarChart
+                key={code}
+                text={KEYWORD_LIST[code - 1]}
+                value={score}
+              />
+            ))}
+          </div>
         </Bubble>
         <Bubble>
           <h1>
@@ -28,14 +34,16 @@ export default function ChatDetail() {
             <span>'{chatData?.data.emoticonScore[0].emoticonName}'</span>{' '}
             이에요.
           </h1>
-          {chatData?.data.emoticonScore.map(({ emoticonName, score }) => (
-            <BarChart
-              key={emoticonName}
-              text={emoticonName}
-              value={score}
-              isImage
-            />
-          ))}
+          <div className="chartWrapper">
+            {chatData?.data.emoticonScore.map(({ emoticonName, score }) => (
+              <BarChart
+                key={emoticonName}
+                text={emoticonName}
+                value={score}
+                isImage
+              />
+            ))}
+          </div>
         </Bubble>
         <Bubble>
           <h1>감정이 많이 오고 간 질문 top3</h1>
