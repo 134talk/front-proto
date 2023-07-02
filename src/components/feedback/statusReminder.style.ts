@@ -8,9 +8,11 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
     .text_wrapper {
-      width: 11rem;
+      width: 12rem;
       display: flex;
       flex-direction: column;
+      padding-left: 0.75rem;
+      margin-right: 0.75rem;
       .main_text {
         font-size: ${({ theme }) => theme.fs18};
         font-weight: ${({ theme }) => theme.fw400};

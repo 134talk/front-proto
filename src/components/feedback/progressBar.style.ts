@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 1.25rem 0;
+  padding: 1.25rem;
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: row;
@@ -30,7 +30,7 @@ export const ProgressText = styled.span<{ $status: boolean }>`
   border-radius: 50%;
 `;
 export const ProgressLine = styled.div<{ $status: boolean }>`
-  width: 2.75rem;
+  width: 2.69rem;
   height: 0.25rem;
   background-color: ${props =>
     props.$status
