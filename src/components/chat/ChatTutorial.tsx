@@ -10,7 +10,6 @@ export default function ChatTutorial({ onClose }: ChatTutorialProps) {
     localStorage.setItem('modalKey', 'true');
     onClose();
   };
-
   return (
     <t.Container onClick={handleClose}>
       {isMobile ? (
