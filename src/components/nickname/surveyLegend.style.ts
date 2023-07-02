@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   min-height: 6.5rem;
-  margin-top: 5.375rem;
+  margin-top: 3rem;
   p {
     font-size: ${({ theme }) => theme.fs32};
     font-weight: ${({ theme }) => theme.fw700};

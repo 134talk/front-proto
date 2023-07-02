@@ -9,6 +9,7 @@ export { default as BottomModal } from './common/BottomModal';
 export { default as FullModal } from './common/FullModal';
 export { default as Bubble } from './common/Bubble';
 export { default as EmotionData } from './common/EmotionData';
+export { default as PercentChart } from './common/PercentChart';
 // 회원 등록 페이지
 export { default as ButtonColumn } from './sign/ButtonColumn';
 export { default as SignButtonColumn } from './sign/SignButtonColumn';
@@ -49,7 +50,9 @@ export { default as ReportTitle } from './report/ReportTitle';
 export { default as StatusDetail } from './report/StatusDetail';
 export { default as ChatDetail } from './report/ChatDetail';
 export { default as FeedbackDetail } from './report/FeedbackDetail';
+export { default as MemberDetail } from './report/MemberDetail';
 export { default as BarChart } from './report/BarChart';
+export { default as ChartIcon } from './report/ChartIcon';
 export { default as FeedbackSection } from './report/FeedbackSection';
 // 마이 페이지
 export { default as UserProfile } from './user/UserProfile';

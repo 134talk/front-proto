@@ -7,6 +7,12 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  padding: 0 1.25rem;
+  > img {
+    width: 6.688rem;
+    height: 6.25rem;
+    margin-top: 10.75rem;
+  }
   > p {
     color: ${({ theme }) => theme.white};
     font-size: ${({ theme }) => theme.fs18};
@@ -18,10 +24,5 @@ export const Container = styled.div`
       margin-top: 1.5rem;
       font-weight: ${({ theme }) => theme.fw600};
     }
-  }
-  > img {
-    width: 6.688rem;
-    height: 6.25rem;
-    margin-top: 10.75rem;
   }
 `;

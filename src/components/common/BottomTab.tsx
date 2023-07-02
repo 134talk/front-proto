@@ -13,6 +13,7 @@ import {
 } from 'shared/constants/icons';
 import useUserData from 'shared/hooks/useUserData';
 import { subscribeNewChat } from 'shared/store/chatAction';
+import { setSubNewChat } from 'shared/store/chatSlice';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import * as t from './bottomTab.style';
 
@@ -38,6 +39,7 @@ export default function BottomTab() {
 
   const onChatPage = () => {
     setIsNewChat(false);
+    dispatch(setSubNewChat({ type: '' }));
     navigate('/chats');
   };
 

@@ -1,10 +1,11 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.div`
+  width: 100%;
   padding: 0.75rem 1.25rem;
   background: ${({ theme }) => theme.white};
   border-radius: 8px;
-  .wrapper {
+  > .wrapper {
     display: flex;
     gap: 0.3rem;
     > p {
@@ -13,23 +14,13 @@ export const Container = styled.div`
       font-weight: ${({ theme }) => theme.fw500};
     }
   }
-  .users {
+  > .users {
     font-size: ${({ theme }) => theme.fs14};
     color: ${({ theme }) => theme.gray600};
+    margin-top: 0.5rem;
   }
-  .emotions {
-    font-size: ${({ theme }) => theme.fs12};
-    color: ${({ theme }) => theme.gray600};
-    margin-top: 0.75rem;
+  > .emoticons {
     display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    p > span {
-      font-weight: ${({ theme }) => theme.fw700};
-    }
-    img {
-      width: 1.37rem;
-      height: 1.37rem;
-    }
+    margin-top: 0.7rem;
   }
 `;

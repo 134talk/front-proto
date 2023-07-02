@@ -1,15 +1,16 @@
 import { BarChart, Bubble, ReportTitle } from 'components';
 import useReport from 'shared/query/useReport';
+import isMobile from 'shared/utils/deviceDetector';
 import * as t from './chatDetail.style';
 
 export default function ChatDetail() {
-  const { chatData } = useReport('chat');
+  const { chatData } = useReport({ types: 'chat' });
 
   return (
     <t.Container>
-      <div className="sectionWrapper">
+      <t.Scroll $isMobile={isMobile}>
         <ReportTitle text="우리 대화는?" />
-        <Bubble isScrollable>
+        <Bubble>
           <h1>
             대화에서 많은 선택을 받은 대화 주제는{' '}
             <span>
@@ -21,17 +22,22 @@ export default function ChatDetail() {
             <BarChart key={code} text={KEYWORD_LIST[code - 1]} value={score} />
           ))}
         </Bubble>
-        <Bubble isScrollable>
+        <Bubble>
           <h1>
             대화하면서 많이 표현한 감정은{' '}
             <span>'{chatData?.data.emoticonScore[0].emoticonName}'</span>{' '}
             이에요.
           </h1>
           {chatData?.data.emoticonScore.map(({ emoticonName, score }) => (
-            <BarChart key={emoticonName} text={emoticonName} value={score} />
+            <BarChart
+              key={emoticonName}
+              text={emoticonName}
+              value={score}
+              isImage
+            />
           ))}
         </Bubble>
-        <Bubble isScrollable>
+        <Bubble>
           <h1>감정이 많이 오고 간 질문 top3</h1>
           {chatData?.data.questionList.map((question, idx) => (
             <div className="rankWrapper" key={question}>
@@ -40,7 +46,7 @@ export default function ChatDetail() {
             </div>
           ))}
         </Bubble>
-      </div>
+      </t.Scroll>
     </t.Container>
   );
 }

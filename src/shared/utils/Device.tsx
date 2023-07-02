@@ -50,11 +50,11 @@ export default function Device({ children }: Props) {
 
 const Mobile = styled.div<{ height: number }>`
   margin: 0 auto;
-  padding: 0 20px;
   width: 100%;
   max-width: 640px;
   min-width: 280px;
-  max-height: ${({ height }) => `${height}px`}
+  height: ${({ height }) => `${height}px`};
+  max-height: ${({ height }) => `${height}px`};
   overflow: hidden;
 `;
 
@@ -95,7 +95,7 @@ const StatusBar = styled.div`
   position: relative;
   background: #ffffff;
   margin: 0 1.25rem 0 -1.25rem;
-  padding: 0 1.25rem;
+  padding: 0 40px;
   p {
     &.real_time_text {
       width: 3.375rem;
@@ -121,7 +121,6 @@ const WebViewLayout = styled.div`
   transform: translate(-50%, -50%);
   border-radius: 40px;
   overflow: hidden;
-  padding: 0 1.25rem;
   background: #ffffff;
 `;
 
