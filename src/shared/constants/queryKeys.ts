@@ -10,6 +10,7 @@ const queryKeys = {
   CHAT_REPORT: 'chatReport',
   FEEDBACK_REPORT: 'feedbackReport',
   USER_REPORT: 'userReport',
+  MEMBER_REPORT: 'memberReport',
 };
 
 export default queryKeys;

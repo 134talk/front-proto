@@ -1,6 +1,7 @@
 import { UserList } from 'components';
 import { EMOTION_LIST } from 'shared/constants/constants';
-import { useAppSelector } from 'shared/store/store';
+import { setIsNew } from 'shared/store/chatSlice';
+import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import isMobile from 'shared/utils/deviceDetector';
 import * as t from './chatSideNav.style';
 
@@ -8,6 +9,7 @@ interface ChatSideNavProps {
   onClose?: () => void;
 }
 export default function ChatSideNav({ onClose }: ChatSideNavProps) {
+  const dispatch = useAppDispatch();
   // 소켓 fetching 데이터
   const emotionList = useAppSelector(
     state => state.chat?.subEmotionList?.emoticonList
@@ -27,8 +29,12 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
     };
   });
 
+  const handleClose = () => {
+    onClose();
+    dispatch(setIsNew(false));
+  };
   return (
-    <t.Container onClick={onClose}>
+    <t.Container onClick={handleClose}>
       <t.NavWrapper isMobile={isMobile}>
         <div className="title_wrapper">
           <p className="title_text">내가 공감받은 감정은?</p>

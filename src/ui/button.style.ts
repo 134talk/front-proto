@@ -16,15 +16,19 @@ export const Btn = styled.button<BtnProps>`
     category === 'cancel'
       ? `1px solid ${theme.primary_blue}`
       : '1px solid transparent'};
-  background-color: ${({ category, theme }) =>
+  background-color: ${({ category, bgColor, theme }) =>
     category === 'confirm'
-      ? theme.primary_blue
+      ? bgColor
+        ? bgColor
+        : theme.primary_blue
       : category === 'cancel'
       ? theme.white
       : theme.kakao_yellow};
-  color: ${({ category, theme }) =>
+  color: ${({ category, theme, color }) =>
     category === 'confirm'
-      ? theme.white
+      ? color
+        ? color
+        : theme.white
       : category === 'cancel'
       ? theme.primary_deep_blue
       : theme.gray900};

@@ -3,22 +3,12 @@ import * as t from './bubble.style';
 type Props = {
   children: React.ReactNode;
   isClickable?: boolean;
-  isScrollable?: boolean;
   onClick?: () => void;
 };
 
-export default function Bubble({
-  children,
-  isClickable,
-  isScrollable,
-  onClick,
-}: Props) {
+export default function Bubble({ children, isClickable, onClick }: Props) {
   return (
-    <t.Container
-      onClick={onClick}
-      $isClickable={isClickable}
-      $isScrollable={isScrollable}
-    >
+    <t.Container onClick={onClick} $isClickable={isClickable}>
       {children}
     </t.Container>
   );

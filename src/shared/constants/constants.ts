@@ -101,3 +101,26 @@ export const EMOTION_LIST = [
   { id: 5, emotion: "You're Right", source: EMOTION_RIGHT, count: 0 },
   { id: 6, emotion: 'Angry', source: EMOTION_ANGRY, count: 0 },
 ];
+
+export const FEED_OPTION_SELECT = [
+  { id: 1, label: '몰랐던 면을 알게 됬어요.', check: false },
+  { id: 2, label: '또 이야기 나눠요.', check: false },
+  { id: 3, label: '오늘 좋았습니다.', check: false },
+  { id: 4, label: '역시 반가웠습니다.', check: false },
+  { id: 5, label: '더 친해져요.', check: false },
+  { id: 6, label: '직접 글쓰기', check: true },
+];
+
+export const FEED_QUESTION_LIST = [
+  { id: 3, question: '오늘 나의 에너지레벨은 어떻게 변했나요?' },
+  { id: 4, question: '오늘 다른 사람에 대해서 얼마나 더 이해하게 되었나요?' },
+  { id: 5, question: '오늘 나의 심리적 안정감은 어떻게 변했나요?' },
+  { id: 6, question: '오늘 스트레스 수치는 어떻게 변했나요?' },
+];
+
+export const FEED_STATUS: { [key: string]: string } = {
+  '3': 'energy',
+  '4': 'relation',
+  '5': 'stable',
+  '6': 'stress',
+};

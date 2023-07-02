@@ -34,7 +34,7 @@ export const Container = styled.div`
         text-align: right;
         position: fixed;
         bottom: 18.75rem;
-        left: 10rem;
+        left: 8rem;
         > span {
           font-size: ${({ theme }) => theme.fs18};
         }

@@ -1,3 +1,4 @@
+import type { Feedback } from 'shared/query/useFeedOption';
 import axiosInstance from './instance';
 
 export const getFeedUser = (roomId: number) =>
@@ -7,7 +8,7 @@ export const postFeedOption = (
   roomId: number,
   sentence: string,
   score: number,
-  feedback: [{ toUserId: number; review: string; feedbackScore: number }]
+  feedback: Feedback[]
 ) =>
   axiosInstance.post('/chat/create/feedback/optional', {
     roomId,
@@ -23,15 +24,15 @@ export const postFeedRequirement = (
   roomId: number,
   statusEnergy: number,
   statusRelation: number,
-  statusStress: number,
-  statusStable: number
+  statusStable: number,
+  statusStress: number
 ) =>
   axiosInstance.post('/chat/create/feedback', {
     roomId,
     statusEnergy,
     statusRelation,
-    statusStress,
     statusStable,
+    statusStress,
   });
 
 export const getStatusReport = (teamCode: string) =>
@@ -48,3 +49,6 @@ export const getUserReport = (teamCode: string) =>
 
 export const getUserReportDetail = (teamCode: string, date: string) =>
   axiosInstance.get(`/statistics/user/report/${teamCode}/${date}`);
+
+export const getMemberReportDetail = (teamCode: string, searchId: string) =>
+  axiosInstance.get(`/statistics/admin/user/report/${teamCode}/${searchId}`);

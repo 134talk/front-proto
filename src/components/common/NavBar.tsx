@@ -55,10 +55,10 @@ export default function NavBar({
           $isBottom={isBottom}
           $isMargin={isMargin}
         >
-          {isNav ? (
-            <img src={PREV_ICON} alt="뒤로가기" onClick={handleNav} />
-          ) : (
-            <div className="block" />
+          {isNav && (
+            <button className="back">
+              <img src={PREV_ICON} alt="뒤로가기" onClick={handleNav} />
+            </button>
           )}
           <p>{title}</p>
           {isHamburger && (
@@ -77,10 +77,10 @@ export default function NavBar({
               )}
             </div>
           )}
-          {button === '닫기' ? (
-            <img src={CLOSE_ICON} alt="닫기" onClick={handleClose} />
-          ) : (
-            <div className="block" />
+          {button === '닫기' && (
+            <button className="close">
+              <img src={CLOSE_ICON} alt="닫기" onClick={handleClose} />
+            </button>
           )}
         </t.Container>
       ) : (
@@ -118,7 +118,9 @@ export default function NavBar({
             </div>
           )}
           {button === '닫기' && (
-            <img src={CLOSE_ICON} alt="닫기" onClick={handleClose} />
+            <button>
+              <img src={CLOSE_ICON} alt="닫기" onClick={handleClose} />
+            </button>
           )}
         </t.Container>
       )}

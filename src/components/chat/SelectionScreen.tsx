@@ -100,7 +100,7 @@ export default function SelectionScreen() {
           destination: '/pub/question-order',
           data: {
             roomId: Number(roomId),
-            userId: uid,
+            userId: Number(uid),
             questionCodeList: orderList,
           },
         },

@@ -1,13 +1,17 @@
 import { TUTORIAL01, TUTORIAL02 } from 'shared/constants/guideImgs';
 import isMobile from 'shared/utils/deviceDetector';
-import * as t from './ChatTutorial.style';
+import * as t from './chatTutorial.style';
 
 interface ChatTutorialProps {
-  onClick?: () => void;
+  onClose?: () => void;
 }
-export default function ChatTutorial({ onClick }: ChatTutorialProps) {
+export default function ChatTutorial({ onClose }: ChatTutorialProps) {
+  const handleClose = () => {
+    localStorage.setItem('modalKey', 'true');
+    onClose();
+  };
   return (
-    <t.Container onClick={onClick}>
+    <t.Container onClick={handleClose}>
       {isMobile ? (
         <img className="tutorial1_1_image" src={TUTORIAL01} alt="tutorial1" />
       ) : (

@@ -46,6 +46,7 @@ export default function ChatNotifyScreen() {
       });
     };
   }, []);
+
   // 순서 등록 완료시 질문 알림 조회 소켓 메세지 발행 & 나머지 구독(질문 알림 조회, 감정 조회, new 감정 리스트)
   useEffect(() => {
     if (allRegistered) {
@@ -54,7 +55,7 @@ export default function ChatNotifyScreen() {
         payload: {
           destination: `/pub/question-notice/${roomId}`,
           data: {
-            userId: uid,
+            userId: Number(uid),
             questionNumber: questionNumber,
           },
         },
@@ -66,6 +67,7 @@ export default function ChatNotifyScreen() {
       );
     }
   }, [allRegistered, questionNumber]);
+
   useEffect(() => {
     if (nickName) {
       setTimeout(() => {
@@ -73,6 +75,7 @@ export default function ChatNotifyScreen() {
       }, 5000);
     }
   }, [nickName]);
+
   return (
     <t.Container>
       <NavBar isCenter={true} title="대화방" />

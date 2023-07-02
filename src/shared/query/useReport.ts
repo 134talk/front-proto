@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import {
   getChatReport,
   getFeedbackReport,
+  getMemberReportDetail,
   getStatusReport,
 } from 'shared/api/reportApi';
 import queryKeys from 'shared/constants/queryKeys';
@@ -27,7 +28,24 @@ type FeedbackRes = {
   stressPercent: number;
 };
 
-export default function useReport(types: 'status' | 'chat' | 'feedback') {
+type MemberRes = {
+  chatCount: number;
+  energyPercent: number;
+  name: string;
+  nickname: string;
+  receivedEmoticons: { emoticon: string; totalCount: number }[];
+  relationPercent: number;
+  scorePercent: number;
+  stablePercent: number;
+  stressPercent: number;
+};
+
+type Args = {
+  types: 'status' | 'chat' | 'feedback' | 'member';
+  uid?: string;
+};
+
+export default function useReport({ types, uid }: Args) {
   const { channel: teamCode } = useUserData();
 
   const { data: statusData } = useQuery<AxiosResponse<StatusRes>, AxiosError>(
@@ -60,5 +78,14 @@ export default function useReport(types: 'status' | 'chat' | 'feedback') {
     }
   );
 
-  return { statusData, chatData, feedbackData };
+  const { data: memberData } = useQuery<AxiosResponse<MemberRes>, AxiosError>(
+    [queryKeys.MEMBER_REPORT, teamCode],
+    () => getMemberReportDetail(teamCode, uid),
+    {
+      enabled: types === 'member',
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  return { statusData, chatData, feedbackData, memberData };
 }
