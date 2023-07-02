@@ -13,6 +13,7 @@ export default function LogInPage() {
   const onLogin = () => (window.location.href = KAKAO_OAUTH_URL);
   const [searchParams] = useSearchParams();
   const channel = searchParams.get('channel');
+
   const { deferredPrompt, installApp, clearPrompt } = useA2hs();
   const isIOS = isIos();
   const installModal = useModal();
