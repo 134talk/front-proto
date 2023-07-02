@@ -59,6 +59,7 @@ export const Container = styled.div`
     height: 0.5rem;
     border-radius: 100%;
     padding: 0;
+    background: ${({ theme }) => theme.gray300};
     cursor: pointer;
   }
   .dotsCustom li.slick-active button {

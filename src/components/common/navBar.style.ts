@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const Container = styled.div<{ $isBottom: boolean; $isMargin: boolean }>`
   width: 100%;
   height: 56px;
-  padding: 0 1.25rem;
+  padding: ${({ $isBottom }) => ($isBottom ? '0' : '0 1.25rem')};
   display: flex;
   justify-content: space-between;
   align-items: center;
