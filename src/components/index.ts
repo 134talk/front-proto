@@ -10,6 +10,7 @@ export { default as FullModal } from './common/FullModal';
 export { default as Bubble } from './common/Bubble';
 export { default as EmotionData } from './common/EmotionData';
 export { default as PercentChart } from './common/PercentChart';
+export { default as InstallModal } from './common/InstallModal';
 // 회원 등록 페이지
 export { default as ButtonColumn } from './sign/ButtonColumn';
 export { default as SignButtonColumn } from './sign/SignButtonColumn';

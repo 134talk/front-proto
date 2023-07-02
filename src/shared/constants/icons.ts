@@ -143,3 +143,6 @@ export const SLIDER_IMAGE = process.env.PUBLIC_URL + '/assets/icons/slider.svg';
 export const NOT_FOUND = process.env.PUBLIC_URL + '/assets/icons/not-found.svg';
 
 export const BACKGROUND = process.env.PUBLIC_URL + '/assets/background.svg';
+
+export const IOS_SHARE_ICON =
+  process.env.PUBLIC_URL + '/assets/icons/ios-share.svg';

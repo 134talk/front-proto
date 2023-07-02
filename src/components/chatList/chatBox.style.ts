@@ -21,6 +21,7 @@ export const Container = styled.div`
   }
   > .emoticons {
     display: flex;
+    gap: 0.3rem;
     margin-top: 0.7rem;
   }
 `;
