@@ -11,15 +11,15 @@ export type Res = {
   today: boolean;
   statusEnergy: number;
   statusRelation: number;
-  statusStress: number;
   statusStable: number;
+  statusStress: number;
 };
 type Req = {
   roomId: number;
   statusEnergy: number;
   statusRelation: number;
-  statusStress: number;
   statusStable: number;
+  statusStress: number;
 };
 
 export default function useFeedRequirement() {
@@ -28,16 +28,34 @@ export default function useFeedRequirement() {
     [queryKeys.FEED_REQUIREMENT],
     () => getFeedRequirement()
   );
-  const feedRequirement = useMemo(() => data?.data || undefined, [data]);
+  const feedRequirementUser = useMemo(() => {
+    return data?.data
+      ? {
+          name: data.data.name,
+          nickname: data.data.nickname,
+          today: data.data.today,
+        }
+      : undefined;
+  }, [data]);
+  const feedRequirementData = useMemo(() => {
+    return data?.data
+      ? {
+          statusEnergy: data.data.statusEnergy,
+          statusRelation: data.data.statusRelation,
+          statusStable: data.data.statusStable,
+          statusStress: data.data.statusStress,
+        }
+      : undefined;
+  }, [data]);
 
   const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ roomId, statusEnergy, statusRelation, statusStress, statusStable }) =>
+    ({ roomId, statusEnergy, statusRelation, statusStable, statusStress }) =>
       postFeedRequirement(
         roomId,
         statusEnergy,
         statusRelation,
-        statusStress,
-        statusStable
+        statusStable,
+        statusStress
       ),
     {
       onSuccess: () => {
@@ -45,5 +63,5 @@ export default function useFeedRequirement() {
       },
     }
   );
-  return { feedRequirement, mutate };
+  return { feedRequirementUser, feedRequirementData, mutate };
 }

@@ -117,3 +117,10 @@ export const FEED_QUESTION_LIST = [
   { id: 5, question: '오늘 나의 심리적 안정감은 어떻게 변했나요?' },
   { id: 6, question: '오늘 스트레스 수치는 어떻게 변했나요?' },
 ];
+
+export const FEED_STATUS: { [key: string]: string } = {
+  '3': 'energy',
+  '4': 'relation',
+  '5': 'stable',
+  '6': 'stress',
+};

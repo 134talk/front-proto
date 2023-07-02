@@ -24,15 +24,15 @@ export const postFeedRequirement = (
   roomId: number,
   statusEnergy: number,
   statusRelation: number,
-  statusStress: number,
-  statusStable: number
+  statusStable: number,
+  statusStress: number
 ) =>
   axiosInstance.post('/chat/create/feedback', {
     roomId,
     statusEnergy,
     statusRelation,
-    statusStress,
     statusStable,
+    statusStress,
   });
 
 export const getStatusReport = (teamCode: string) =>

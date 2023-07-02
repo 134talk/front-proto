@@ -119,14 +119,25 @@ export default function ChatScreen() {
           ))}
         </div>
         <BottomButtonTab>
-          <Button
-            category="confirm"
-            text={
-              endFlag ? '마지막 질문입니다.' : '다음 질문으로 넘어가볼까요?'
-            }
-            bgColor={matchedItem[0]?.color[2]}
-            onClick={handleNext}
-          />
+          {speaker?.userId === Number(uid) ? (
+            <Button
+              category="confirm"
+              text={
+                endFlag ? '마지막 질문입니다.' : '다음 질문으로 넘어가볼까요?'
+              }
+              bgColor={matchedItem[0]?.color[2]}
+              onClick={handleNext}
+            />
+          ) : endFlag ? (
+            <Button
+              category="confirm"
+              text={'마지막 질문입니다.'}
+              bgColor={matchedItem[0]?.color[2]}
+              onClick={handleNext}
+            />
+          ) : (
+            <></>
+          )}
         </BottomButtonTab>
       </t.Container>
     </>

@@ -6,7 +6,7 @@ import {
   SelectionScreen,
   WaitingScreen,
 } from 'components';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import useUserData from 'shared/hooks/useUserData';
@@ -28,24 +28,21 @@ export default function ChatPage() {
     state => state.chat?.subTimeout?.fiveMinuteLeft
   );
 
-  // 대화방 입장 메세지 발행
-  const enterPayload = useMemo(
-    () => ({
-      destination: '/pub/enter',
-      data: {
-        roomId: Number(roomId),
-        userId: Number(uid),
-        selected: true,
-        socketFlag: 0,
-      },
-    }),
-    [roomId, uid]
-  );
-
   // 처음 렌더
   useEffect(() => {
     dispatch({ type: 'connect' });
-    dispatch({ type: 'sendData', payload: enterPayload });
+    dispatch({
+      type: 'sendData',
+      payload: {
+        destination: '/pub/enter',
+        data: {
+          roomId: Number(roomId),
+          userId: Number(uid),
+          selected: true,
+          socketFlag: 0,
+        },
+      },
+    });
     dispatch(subscribeUser(`/sub/chat/room/${roomId}`));
     dispatch(subscribeTimeout(`/sub/chat/room/timeout/${roomId}`));
     return () => {
@@ -66,8 +63,9 @@ export default function ChatPage() {
 
   // 마감 5분전 & 종료 알림
   useEffect(() => {
-    if (timeout) toast.error('대화 마감 5분 전입니다.');
-    if (!timeout) toast.error('대화 시간이 종료되었습니다.');
+    if (timeout === true) toast.error('대화 마감 5분 전입니다.');
+    console.log('timeout: ', timeout);
+    if (timeout === false) toast.error('대화 시간이 종료되었습니다.');
   }, [timeout]);
 
   const renderScreen = (pageNumber: number) => {
