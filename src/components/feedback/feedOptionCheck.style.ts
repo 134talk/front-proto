@@ -22,7 +22,7 @@ export const Container = styled.div`
     }
   }
   .check_wrapper {
-    padding: 1.5rem 0;
+    padding: 1.25rem;
     border-bottom: 10px solid ${({ theme }) => theme.gray100};
     .range_wrapper {
       display: flex;
@@ -64,10 +64,12 @@ export const Container = styled.div`
     margin: 1.5rem 0 1rem 0;
   }
   > textarea {
-    width: 100%;
+    width: 90%;
     height: 10rem;
+    display: flex;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
+    margin: 0 auto;
     border: 1px solid ${({ theme }) => theme.gray300};
     resize: none;
     &::placeholder {
