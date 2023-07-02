@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
+  padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
   .title_wrapper {

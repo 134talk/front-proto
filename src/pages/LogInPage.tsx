@@ -5,7 +5,7 @@ import { KAKAO_OAUTH_URL } from 'shared/constants/constants';
 import { LOGO } from 'shared/constants/icons';
 import useA2hs from 'shared/hooks/useA2hs';
 import useModal from 'shared/hooks/useModal';
-import isMobile, { isIos } from 'shared/utils/deviceDetector';
+import isMobile, { isInstalled, isIos } from 'shared/utils/deviceDetector';
 import { Background, Button, KakaoButton } from 'ui';
 import * as t from './loginPage.style';
 
@@ -16,6 +16,7 @@ export default function LogInPage() {
   const { deferredPrompt, installApp, clearPrompt } = useA2hs();
   const isIOS = isIos();
   const installModal = useModal();
+  const isIosInstalled = isInstalled();
   const [showKakaoButton, setShowKakaoButton] = useState(false);
 
   const handleClearPromptOnAndroid = () => {
@@ -44,7 +45,7 @@ export default function LogInPage() {
           <br />
           삶을 사랑해요.
         </p>
-        {isMobile ? (
+        {isMobile || !isIosInstalled ? (
           <>
             {isIOS && !showKakaoButton ? (
               <div>
