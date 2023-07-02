@@ -25,14 +25,14 @@ export default function SettingModal({
 
   return (
     <BottomModal isOpen={true}>
+      <NavBar
+        isMargin
+        isBottom
+        title="대화 설정"
+        button="닫기"
+        handleClose={onClose}
+      />
       <t.Container>
-        <NavBar
-          isMargin
-          isBottom
-          title="대화 설정"
-          button="닫기"
-          handleClose={onClose}
-        />
         <p>대화 권장 진행 시간</p>
         <p className="small_text">
           대화 참여 시간을 설정해주세요.

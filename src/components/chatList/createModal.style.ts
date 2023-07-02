@@ -2,12 +2,12 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 1rem 1.25rem 0 1.25rem;
+  padding: 0.5rem 1.25rem 0 1.25rem;
   .chipWrapper {
     width: 100%;
     > div {
-      &:nth-child(n + 2):nth-child(-n + 4) {
-        margin-left: 0.5rem;
+      &:nth-child(n + 2):nth-child(-n + 5) {
+        margin-left: 0.3rem;
       }
     }
   }
