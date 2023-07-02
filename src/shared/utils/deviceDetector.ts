@@ -19,7 +19,7 @@ export const isIos = () => {
   return /iphone|ipad|ipod/.test(userAgent);
 };
 
-export const isInstalled = () => {
+export const isInstalled = (): boolean => {
   const navigatorAny = window.navigator as any;
   if (
     navigatorAny.standalone === true ||
