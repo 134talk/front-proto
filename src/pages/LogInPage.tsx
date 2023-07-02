@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { InstallModal } from 'components';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { KAKAO_OAUTH_URL } from 'shared/constants/constants';
 import { LOGO } from 'shared/constants/icons';
 import useA2hs from 'shared/hooks/useA2hs';
-import isMobile from 'shared/utils/deviceDetector';
+import useModal from 'shared/hooks/useModal';
+import isMobile, { isIos } from 'shared/utils/deviceDetector';
 import { Background, Button, KakaoButton } from 'ui';
 import * as t from './loginPage.style';
 
@@ -12,6 +14,14 @@ export default function LogInPage() {
   const [searchParams] = useSearchParams();
   const channel = searchParams.get('channel');
   const { deferredPrompt, installApp, clearPrompt } = useA2hs();
+  const isIOS = isIos();
+  const installModal = useModal();
+  const [showKakaoButton, setShowKakaoButton] = useState(false);
+
+  const handleClearPromptOnAndroid = () => {
+    clearPrompt();
+    setShowKakaoButton(true);
+  };
 
   useEffect(() => {
     localStorage.setItem('invite-code', channel);
@@ -24,6 +34,7 @@ export default function LogInPage() {
 
   return (
     <>
+      {installModal.isOpen && <InstallModal modalActions={installModal} />}
       <Background />
       <t.Container>
         <img src={LOGO} alt="로고" />
@@ -35,7 +46,20 @@ export default function LogInPage() {
         </p>
         {isMobile ? (
           <>
-            {deferredPrompt ? (
+            {isIOS && !showKakaoButton ? (
+              <div>
+                <Button
+                  onClick={installModal.open}
+                  text="편하게 앱 이용하기"
+                  category="confirm"
+                  bgColor="#fff"
+                  color="#4059DE"
+                />
+                <button onClick={() => setShowKakaoButton(true)}>
+                  모바일 웹 이용하기
+                </button>
+              </div>
+            ) : deferredPrompt && !showKakaoButton ? (
               <div>
                 <Button
                   onClick={installApp}
@@ -44,7 +68,9 @@ export default function LogInPage() {
                   bgColor="#fff"
                   color="#4059DE"
                 />
-                <button onClick={clearPrompt}>모바일 웹 이용하기</button>
+                <button onClick={handleClearPromptOnAndroid}>
+                  모바일 웹 이용하기
+                </button>
               </div>
             ) : (
               <KakaoButton onClick={onLogin} />
