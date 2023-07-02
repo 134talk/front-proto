@@ -1,6 +1,6 @@
 import { TUTORIAL01, TUTORIAL02 } from 'shared/constants/guideImgs';
 import isMobile from 'shared/utils/deviceDetector';
-import * as t from './ChatTutorial.style';
+import * as t from './tutorial.style';
 
 interface ChatTutorialProps {
   onClose?: () => void;
@@ -10,6 +10,7 @@ export default function ChatTutorial({ onClose }: ChatTutorialProps) {
     localStorage.setItem('modalKey', 'true');
     onClose();
   };
+
   return (
     <t.Container onClick={handleClose}>
       {isMobile ? (
