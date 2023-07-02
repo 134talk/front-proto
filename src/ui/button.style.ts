@@ -24,9 +24,11 @@ export const Btn = styled.button<BtnProps>`
       : category === 'cancel'
       ? theme.white
       : theme.kakao_yellow};
-  color: ${({ category, theme }) =>
+  color: ${({ category, theme, color }) =>
     category === 'confirm'
-      ? theme.white
+      ? color
+        ? color
+        : theme.white
       : category === 'cancel'
       ? theme.primary_deep_blue
       : theme.gray900};
