@@ -14,6 +14,10 @@ export const Container = styled.div<{ $isBottom: boolean; $isMargin: boolean }>`
     left: 0.75rem;
     width: 1.5rem;
     height: 1.5rem;
+    > img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
   .close {
     position: absolute;
