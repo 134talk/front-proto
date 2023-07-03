@@ -46,9 +46,9 @@ export default function LogInPage() {
           <br />
           삶을 사랑해요.
         </p>
-        {isMobile || !isIosInstalled ? (
+        {isMobile ? (
           <>
-            {isIOS && !showKakaoButton ? (
+            {isIOS && !showKakaoButton && !isIosInstalled ? (
               <div>
                 <Button
                   onClick={installModal.open}
