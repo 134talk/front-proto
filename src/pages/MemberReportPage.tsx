@@ -55,26 +55,28 @@ export default function MemberReportPage() {
                 stress={memberData?.data.stressPercent}
               />
             </Bubble>
-            <Bubble>
-              <h1>
-                <span>
-                  {memberData?.data.nickname}
-                  <span className="name">({memberData?.data.name})</span>님
-                </span>
-                이 공감받은 감정은?
-                <div className="emotionWrapper">
-                  {memberData?.data.receivedEmoticons.map(
-                    ({ emoticon, totalCount }) => (
-                      <EmotionData
-                        key={emoticon}
-                        name={emoticon}
-                        count={totalCount}
-                      />
-                    )
-                  )}
-                </div>
-              </h1>
-            </Bubble>
+            {!!memberData?.data.receivedEmoticons.length && (
+              <Bubble>
+                <h1>
+                  <span>
+                    {memberData?.data.nickname}
+                    <span className="name">({memberData?.data.name})</span>님
+                  </span>
+                  이 공감받은 감정은?
+                  <div className="emotionWrapper">
+                    {memberData?.data.receivedEmoticons?.map(
+                      ({ emoticon, totalCount }) => (
+                        <EmotionData
+                          key={emoticon}
+                          name={emoticon}
+                          count={totalCount}
+                        />
+                      )
+                    )}
+                  </div>
+                </h1>
+              </Bubble>
+            )}
             <Bubble>
               <h1>
                 <span>

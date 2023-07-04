@@ -87,4 +87,9 @@ export const Container = styled.div<{
     flex-direction: column;
     gap: 1rem;
   }
+  .noData {
+    font-size: ${({ theme }) => theme.fs14};
+    color: ${({ theme }) => theme.gray700};
+    font-weight: ${({ theme }) => theme.fw400};
+  }
 `;
