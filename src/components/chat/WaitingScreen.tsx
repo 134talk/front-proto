@@ -32,10 +32,9 @@ export default function WaitingScreen() {
           <div className="list_wrapper">
             {subUserList &&
               subUserList.map((item: ChatUserInfo) => (
-                <>
+                <div key={item.userId}>
                   <ProfileImg
                     size="4rem"
-                    key={item.userId}
                     $isMyProf={uid === String(item.userId)}
                     data-tooltip-id={item.userId}
                     image={item.profileUrl}
@@ -49,7 +48,7 @@ export default function WaitingScreen() {
                     id={String(item.userId)}
                     content={`${item.nickname}(${item.name})`}
                   />
-                </>
+                </div>
               ))}
           </div>
           <img src={SHADOW_IMAGE} alt="shadow" />

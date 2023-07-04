@@ -9,19 +9,19 @@ export const Container = styled.div`
   align-items: flex-end;
   position: fixed;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.7);
+  background: ${({ theme }) => theme.dark_backdrop};
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 `;
-export const NavWrapper = styled.div<{ isMobile: boolean }>`
+export const NavWrapper = styled.div<{ $isMobile: boolean }>`
   width: 18.75rem;
   height: 100%;
   background: ${({ theme }) => theme.white};
   display: flex;
   flex-direction: column;
-  margin-top: ${props => (props.isMobile ? '0' : '2.75rem')};
+  margin-top: ${({ $isMobile }) => ($isMobile ? '0' : '2.75rem')};
   padding: 0 1.25rem;
   animation: fadeInLeft 0.5s ease-in;
   @keyframes fadeInLeft {
@@ -41,12 +41,12 @@ export const NavWrapper = styled.div<{ isMobile: boolean }>`
     flex-direction: column;
   }
   .title_text {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: ${({ theme }) => theme.fs16};
+    font-weight: ${({ theme }) => theme.fw700};
   }
   .sub_text {
     color: ${({ theme }) => theme.gray600};
-    font-size: 0.875rem;
+    font-size: ${({ theme }) => theme.fs14};
   }
   .emotion_wrapper {
     display: flex;
@@ -65,8 +65,8 @@ export const NavWrapper = styled.div<{ isMobile: boolean }>`
     align-items: center;
     > p {
       color: ${({ theme }) => theme.gray500};
-      font-size: 0.75rem;
-      font-weight: 400;
+      font-size: ${({ theme }) => theme.fs12};
+      font-weight: ${({ theme }) => theme.fw400};
     }
   }
   .image_wrapper {

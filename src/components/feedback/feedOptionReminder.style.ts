@@ -79,8 +79,6 @@ export const RemindWrapper = styled.div`
 export const SelectText = styled.label<{ $isChecked: boolean }>`
   font-size: ${({ theme }) => theme.fs16};
   font-weight: ${({ theme }) => theme.fw400};
-  color: ${props =>
-    props.$isChecked
-      ? ({ theme }) => theme.gray900
-      : ({ theme }) => theme.gray600};
+  color: ${({ $isChecked, theme }) =>
+    $isChecked ? theme.gray900 : theme.gray600};
 `;

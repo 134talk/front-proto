@@ -27,7 +27,7 @@ export default function Card({
 }: CardProps) {
   return (
     <t.Container onClick={handleSwipe}>
-      <t.CardWrapper isFront={isFront} size={size}>
+      <t.CardWrapper $isFront={isFront} size={size}>
         <t.CardSideWrapper className="card card_front">
           <CardImg lineColor={lineColor} fillColor={fillColor} size="16rem" />
           <t.ChatWrapper>

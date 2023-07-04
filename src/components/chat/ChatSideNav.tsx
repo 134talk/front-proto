@@ -35,7 +35,7 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
   };
   return (
     <t.Container onClick={handleClose}>
-      <t.NavWrapper isMobile={isMobile}>
+      <t.NavWrapper $isMobile={isMobile}>
         <div className="title_wrapper">
           <p className="title_text">내가 공감받은 감정은?</p>
         </div>

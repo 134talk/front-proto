@@ -27,7 +27,9 @@ const theme: ThemeType = {
   good_blue: '#259CF2',
   error_red: '#F0153D',
   backdrop: 'rgba(0, 0, 0, 0.5)',
+  dark_backdrop: 'rgba(0, 0, 0, 0.7)',
   shadow: 'rgba(172, 173, 177, 0.1)',
+  box_shadow: 'rgba(138, 138, 138, 0.2)',
   blue_shadow: 'rgba(151, 169, 218, 0.25)',
 
   // font-size

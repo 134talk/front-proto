@@ -1,6 +1,5 @@
 import { Profile } from 'components';
 import { CHECK_ICON } from 'shared/constants/icons';
-import useUserData from 'shared/hooks/useUserData';
 import type { ChatUserInfo } from 'shared/store/chatSlice';
 import * as t from './userList.style';
 
@@ -11,7 +10,6 @@ interface UserListProps {
 }
 
 export default function UserList({ userInfo, $isRow, scale }: UserListProps) {
-  const { uid } = useUserData();
   return (
     <t.Container $isRow={$isRow}>
       {userInfo?.map((item: ChatUserInfo) => (
@@ -24,7 +22,6 @@ export default function UserList({ userInfo, $isRow, scale }: UserListProps) {
             image={item.profileUrl}
             scale={$isRow ? 'small' : scale}
             $isRow={$isRow}
-            isMyProf={item.userId === Number(uid)}
           />
         </div>
       ))}
