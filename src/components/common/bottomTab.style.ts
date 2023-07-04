@@ -21,12 +21,14 @@ export const Container = styled.div`
     font-weight: ${({ theme }) => theme.fw700};
     color: ${({ theme }) => theme.gray800};
   }
-  .badgeWrapper {
-    position: relative;
-    .badge {
-      position: absolute;
-      top: 0;
-      right: 20px;
-    }
-  }
+`;
+
+export const BadgeWrapper = styled.div`
+  position: relative;
+`;
+
+export const Badge = styled.img<{ $isMobile: boolean }>`
+  position: absolute;
+  top: 0;
+  right: ${({ $isMobile }) => ($isMobile ? '15px' : '20px')};
 `;
