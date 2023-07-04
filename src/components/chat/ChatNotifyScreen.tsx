@@ -28,14 +28,30 @@ export default function ChatNotifyScreen() {
     state => state.chat?.subNotice?.speaker?.nickname
   );
   const name = useAppSelector(state => state.chat?.subNotice?.speaker?.name);
+  const reJoined = useAppSelector(state => state.chat?.subUser?.type);
+  const reJoinedUser = useAppSelector(state => state.chat?.subUser?.requestId);
   // 처음 렌더시 구독 해제(대화 입장, 키워드 선택, 질문순서 등록) & 질문순서 등록만 재구독
   useEffect(() => {
-    dispatch(subscribeSelect(`/sub/chat/question-order/${roomId}`));
-    return () => {
+    if (reJoined === 'RE_ENTER' && reJoinedUser === Number(uid)) {
       dispatch({
-        type: 'unsubscribe',
-        payload: { destination: `/sub/chat/room/${roomId}` },
+        type: 'sendData',
+        payload: {
+          destination: `/pub/question-notice/${roomId}`,
+          data: {
+            userId: Number(uid),
+            questionNumber: questionNumber ? questionNumber : 1,
+          },
+        },
       });
+      dispatch(subscribeNotice(`/sub/chat/room/question-notice/${roomId}`));
+      dispatch(subscribeEmotion(`/sub/chat/room/emoticon/${roomId}`));
+      dispatch(
+        subscribeEmotionList(`/sub/chat/room/emoticon/${roomId}/${uid}`)
+      );
+    } else {
+      dispatch(subscribeSelect(`/sub/chat/question-order/${roomId}`));
+    }
+    return () => {
       dispatch({
         type: 'unsubscribe',
         payload: { destination: `/sub/chat/keyword/${roomId}/${uid}` },

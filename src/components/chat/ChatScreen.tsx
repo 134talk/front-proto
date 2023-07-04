@@ -30,6 +30,10 @@ export default function ChatScreen() {
     state => state.chat?.subEmotionList?.emoticonList
   );
   const isNew = useAppSelector(state => state.chat?.isNew);
+  // questionNumber 등록 state
+  const [prevQuestionNumber, setPrevQuestionNumber] = useState<number>(
+    metadata?.questionNumber
+  );
   // 질문 카드 회전 state
   const [isRotate, setIsRotate] = useState<boolean>(false);
   // 감정 보내기 state
@@ -77,6 +81,16 @@ export default function ChatScreen() {
       dispatch(setIsNew(true));
     }
   }, [newEmotion]);
+  // 새로운 질문 넘어가기일 때 렌더
+  useEffect(() => {
+    if (
+      metadata?.questionNumber &&
+      metadata?.questionNumber > prevQuestionNumber
+    ) {
+      setPrevQuestionNumber(metadata?.questionNumber);
+      navigate(`/chat/${roomId}/4`);
+    }
+  }, [metadata]);
 
   return (
     <>
