@@ -5,9 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   > p {
-    font-size: 1.25rem;
-    font-weight: bold;
-    line-height: 1.95rem;
+    font-size: ${({ theme }) => theme.fs20};
+    font-weight: ${({ theme }) => theme.fw700};
     text-align: center;
     &:nth-child(2) {
       padding-top: 2.875rem;

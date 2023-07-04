@@ -78,17 +78,27 @@ export default function StatusReminder({
     handleValueChange(Number(e.target.value));
   };
   const handlePlusValue = () => {
-    if (value < 100) {
-      handleValueChange(value + 1);
-    }
+    setValue(prevValue => {
+      let newValue = prevValue;
+      if (prevValue < 100) {
+        newValue = prevValue + 1;
+      }
+      handleValueChange(newValue);
+      return newValue;
+    });
     plusTimeoutRef.current = window.setTimeout(() => {
       handlePlusValue();
     }, 200);
   };
   const handleMinusValue = () => {
-    if (value > -100) {
-      handleValueChange(value - 1);
-    }
+    setValue(prevValue => {
+      let newValue = prevValue;
+      if (prevValue > -100) {
+        newValue = prevValue - 1;
+      }
+      handleValueChange(newValue);
+      return newValue;
+    });
     minusTimeoutRef.current = window.setTimeout(() => {
       handleMinusValue();
     }, 200);

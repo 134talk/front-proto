@@ -9,7 +9,7 @@ export const Container = styled.div`
   align-items: flex-end;
   position: fixed;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.7);
+  background: ${({ theme }) => theme.dark_backdrop};
   top: 0;
   left: 0;
   right: 0;

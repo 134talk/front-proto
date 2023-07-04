@@ -22,15 +22,15 @@ export const Container = styled.div`
   }
   .tooltip {
     background-color: white;
-    color: #000;
+    color: ${({ theme }) => theme.gray900};
     border-radius: 20px;
-    border: 1px solid #f4f6f9;
-    box-shadow: 3px 4px 6px 0 rgba(138, 138, 138, 0.2);
+    border: 1px solid ${({ theme }) => theme.gray100};
+    box-shadow: 3px 4px 6px 0 ${({ theme }) => theme.box_shadow};
     width: 6rem;
     height: 2.8rem;
     padding: 0.5rem;
     text-align: center;
-    font-size: 0.75rem;
+    font-size: ${({ theme }) => theme.fs12};
     opacity: 1;
     z-index: 99;
   }
@@ -44,14 +44,10 @@ export const Container = styled.div`
     padding: 1.75rem 1.25rem;
   }
   p {
-    line-height: 1.95rem;
-    font-weight: bold;
+    font-weight: ${({ theme }) => theme.fw700};
+    font-size: ${({ theme }) => theme.fs24};
     &:nth-child(1) {
-      font-size: 1.25rem;
-      color: #f58548;
-    }
-    &:nth-child(2) {
-      font-size: 1.5rem;
+      color: ${({ theme }) => theme.primary_deep_blue};
     }
   }
   > img {

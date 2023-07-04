@@ -17,9 +17,9 @@ export const Container = styled.div`
     width: 14rem;
   }
   > p {
-    color: #475467;
-    font-size: 0.875rem;
     text-align: center;
+    color: ${({ theme }) => theme.gray700};
+    font-size: ${({ theme }) => theme.fs14};
     margin-top: 1.625rem;
   }
 `;

@@ -15,14 +15,11 @@ export const Container = styled.div`
   }
 `;
 export const ProgressText = styled.span<{ $status: boolean }>`
-  color: ${props =>
-    props.$status ? ({ theme }) => theme.white : ({ theme }) => theme.gray500};
+  color: ${({ $status, theme }) => ($status ? theme.white : theme.gray500)};
   font-size: ${({ theme }) => theme.fs12};
   font-weight: ${({ theme }) => theme.fw700};
-  background-color: ${props =>
-    props.$status
-      ? ({ theme }) => theme.primary_deep_blue
-      : ({ theme }) => theme.gray200};
+  background-color: ${({ $status, theme }) =>
+    $status ? theme.primary_deep_blue : theme.gray200};
   text-align: center;
   width: 1.25rem;
   height: 1.25rem;
@@ -32,8 +29,6 @@ export const ProgressText = styled.span<{ $status: boolean }>`
 export const ProgressLine = styled.div<{ $status: boolean }>`
   width: 2.69rem;
   height: 0.25rem;
-  background-color: ${props =>
-    props.$status
-      ? ({ theme }) => theme.primary_deep_blue
-      : ({ theme }) => theme.gray200};
+  background-color: ${({ $status, theme }) =>
+    $status ? theme.primary_deep_blue : theme.gray200};
 `;

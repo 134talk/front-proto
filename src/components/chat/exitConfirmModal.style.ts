@@ -6,11 +6,10 @@ export const Container = styled.div`
   gap: 1.5rem;
   padding-top: 1rem;
   > p {
-    font-size: 1.125rem;
-    font-weight: 700;
     text-align: center;
-    line-height: 1.5rem;
     letter-spacing: -0.025em;
+    font-size: ${({ theme }) => theme.fs18};
+    font-weight: ${({ theme }) => theme.fw700};
   }
   > div {
     display: flex;
