@@ -8,7 +8,7 @@ import {
   SettingModal,
 } from 'components';
 import debounce from 'lodash/debounce';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import useUserData from 'shared/hooks/useUserData';
 import useChatList from 'shared/query/useChatList';
@@ -36,7 +36,14 @@ export default function ChatListPage() {
     else toast.error('참여할 수 없는 대화방입니다.');
   };
 
-  const { chatList, refetch } = useChatList(keyword);
+  const { chatList, refetch, error } = useChatList(keyword);
+
+  useEffect(() => {
+    if (error?.response.data.errorCode === 1035) {
+      toast.error('검색 결과가 없습니다.');
+      onDelete();
+    }
+  }, [error]);
 
   const onDelete = () => {
     setKeyword('');
