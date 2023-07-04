@@ -5,7 +5,6 @@ export const Container = styled.div`
   p {
     color: ${({ theme }) => theme.gray800};
     font-size: ${({ theme }) => theme.fs16};
-    margin-top: 0.5rem;
-    padding-bottom: 0.75rem;
+    padding: 12px 0;
   }
 `;
