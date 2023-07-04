@@ -17,7 +17,7 @@ export const Scroll = styled.div<{ $isMobile: boolean }>`
   width: 100%;
   height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 11.5rem)' : '600px')};
   padding-top: 1rem;
-  padding-bottom: 6rem;
+  padding-bottom: 8rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;

@@ -77,6 +77,6 @@ const REPORT_MAPPINGS: Mappings = {
   Like: { img: EMOTION_LIKE, color: '#7499F9' },
   Hug: { img: EMOTION_HUG, color: '#FBC829' },
   Sad: { img: EMOTION_SAD, color: '#84D29F' },
-  Right: { img: EMOTION_RIGHT, color: '#7DCFF2' },
+  "You're Right": { img: EMOTION_RIGHT, color: '#7DCFF2' },
   Angry: { img: EMOTION_ANGRY, color: '#FF783F' },
 };
