@@ -36,12 +36,13 @@ export default function IntroductionScreen() {
         <p>나와 닮은 부족이 여기에도 있나요?</p>
       </div>
       <UserList scale="medium" $isRow={false} userInfo={subUserList} />
-      <Button
-        category="confirm"
-        text="자기소개 마무리하기"
-        margin="3rem 0 0 0"
-        onClick={handleCheckIn}
-      />
+      <div className="button_wrapper">
+        <Button
+          category="confirm"
+          text="자기소개 마무리하기"
+          onClick={handleCheckIn}
+        />
+      </div>
     </t.Container>
   );
 }

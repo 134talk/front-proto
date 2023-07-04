@@ -5,6 +5,8 @@ type StyleProps = {
 };
 
 export const Container = styled.div`
+  width: 100%;
+  padding: 0 1.25rem;
   > section {
     width: 100%;
     height: 6.675rem;
@@ -26,18 +28,16 @@ export const Container = styled.div`
       height: 17.5rem;
     }
     > p {
-      font-size: ${({ theme }) => theme.fs16};
+      font-size: ${({ theme }) => theme.fs18};
       text-align: center;
-      line-height: 1.3;
       color: ${({ theme }) => theme.gray900};
       margin-top: 1.2rem;
       span {
-        font-size: ${({ theme }) => theme.fs12};
+        font-size: ${({ theme }) => theme.fs14};
         text-align: center;
-        line-height: 1.3;
         color: ${({ theme }) => theme.gray600};
         &.blue {
-          font-size: ${({ theme }) => theme.fs16};
+          font-size: ${({ theme }) => theme.fs18};
           color: ${({ theme }) => theme.primary_deep_blue};
         }
       }

@@ -15,7 +15,7 @@ export const Container = styled.div<{
     justify-content: space-between;
   }
   h1 {
-    font-size: ${({ theme }) => theme.fs16};
+    font-size: ${({ theme }) => theme.fs18};
     font-weight: ${({ theme }) => theme.fw600};
     color: ${({ theme }) => theme.gray900};
     padding-bottom: 1rem;

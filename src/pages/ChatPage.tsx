@@ -55,6 +55,7 @@ export default function ChatPage() {
     const baseChatUrl = `/chat/${roomId}`;
     if (socketFlag === 0 && checkInFlag === 'stillFalse') navigate('/chats');
     if (socketFlag === 0) navigate(`${baseChatUrl}/0`);
+    if (socketFlag === 1 && checkInFlag === 'stillFalse') navigate('/chats');
     if (socketFlag === 1 || socketFlag === 2) navigate(`${baseChatUrl}/1`);
     if (socketFlag === 3) navigate(`${baseChatUrl}/2`);
     if (socketFlag === 4 || socketFlag === 5) navigate(`${baseChatUrl}/3`);
@@ -64,7 +65,6 @@ export default function ChatPage() {
   // 마감 5분전 & 종료 알림
   useEffect(() => {
     if (timeout === true) toast.error('대화 마감 5분 전입니다.');
-    console.log('timeout: ', timeout);
     if (timeout === false) toast.error('대화 시간이 종료되었습니다.');
   }, [timeout]);
 

@@ -31,7 +31,7 @@ export const Container = styled.div<{ $isBottom: boolean; $isMargin: boolean }>`
     justify-content: center;
     > div {
       position: absolute;
-      right: 0;
+      right: 1.25rem;
       top: 1rem;
       cursor: pointer;
       display: flex;

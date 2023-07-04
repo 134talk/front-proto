@@ -63,12 +63,14 @@ export default function KeywordScreen() {
           />
         ))}
       </div>
-      <Button
-        category="confirm"
-        text="키워드 선택하기"
-        disabled={!canSubmit}
-        onClick={handleSubmitKeyword}
-      />
+      <div className="button_wrapper">
+        <Button
+          category="confirm"
+          text="키워드 선택하기"
+          disabled={!canSubmit}
+          onClick={handleSubmitKeyword}
+        />
+      </div>
     </t.Container>
   );
 }

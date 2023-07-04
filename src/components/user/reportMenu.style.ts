@@ -10,7 +10,7 @@ export const Container = styled.div`
     align-items: center;
     margin-top: 1.75rem;
     .noData {
-      margin-top: 100px;
+      margin-top: 150px;
       color: ${({ theme }) => theme.gray500};
       font-size: ${({ theme }) => theme.fs16};
       text-align: center;

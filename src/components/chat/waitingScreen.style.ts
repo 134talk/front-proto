@@ -41,10 +41,7 @@ export const Container = styled.div`
     gap: 0.375rem;
   }
   .button_wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0.75rem 0;
+    padding: 1.75rem 1.25rem;
   }
   p {
     line-height: 1.95rem;

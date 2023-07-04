@@ -23,4 +23,7 @@ export const Container = styled.div`
       margin-bottom: 1rem;
     }
   }
+  .button_wrapper {
+    padding: 3rem 1.25rem 0 1.25rem;
+  }
 `;

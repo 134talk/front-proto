@@ -32,7 +32,7 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      padding: 0.75rem 0;
+      padding: 0.75rem 1.25rem;
       margin-top: 2.25rem;
     }
   }

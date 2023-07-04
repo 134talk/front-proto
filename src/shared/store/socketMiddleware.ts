@@ -67,7 +67,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
       case 'sendData': {
         const { destination, data } = action.payload;
         if (rxStomp && rxStomp.connected) {
-          console.log('data: ', data);
           rxStomp.publish({ destination, body: JSON.stringify(data) });
         }
         break;
