@@ -121,6 +121,7 @@ time, input,select,textarea {
 	padding: 0;
 	font-size: 100%;
 	box-sizing: border-box;
+	line-height: 130%;
 }
 *::before, *::after {
     margin: 0; 

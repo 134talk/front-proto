@@ -13,7 +13,6 @@ export const Container = styled.div`
     text-align: center;
     font-weight: ${({ theme }) => theme.fw500};
     color: ${({ theme }) => theme.gray900};
-    line-height: 1.3;
     span {
       font-size: ${({ theme }) => theme.fs24};
       font-weight: ${({ theme }) => theme.fw700};

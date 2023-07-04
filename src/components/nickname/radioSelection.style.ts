@@ -20,7 +20,7 @@ export const Container = styled.div`
     &:checked + label {
       border: ${({ theme }) => `solid 1px ${theme.primary_deep_blue}`};
       background-color: ${({ theme }) => theme.gray100};
-      font-size: ${({ theme }) => theme.fs18};
+      font-size: ${({ theme }) => theme.fs16};
       font-weight: ${({ theme }) => theme.fw700};
       color: ${({ theme }) => theme.primary_deep_blue};
     }

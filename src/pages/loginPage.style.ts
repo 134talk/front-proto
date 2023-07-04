@@ -17,7 +17,6 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.white};
     font-size: ${({ theme }) => theme.fs18};
     font-weight: ${({ theme }) => theme.fw400};
-    line-height: 1.3;
     text-align: center;
     margin-top: 0.5rem;
     &.bold {
