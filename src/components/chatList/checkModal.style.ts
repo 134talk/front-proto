@@ -11,7 +11,6 @@ export const Container = styled.div`
     font-size: ${({ theme }) => theme.fs16};
     color: ${({ theme }) => theme.gray700};
     text-align: center;
-    line-height: 1.3;
     margin-top: 0.6rem;
     span {
       font-size: ${({ theme }) => theme.fs16};

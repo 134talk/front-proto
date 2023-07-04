@@ -26,7 +26,7 @@ export default function ChatBox({
       <p className="users">{roomName}</p>
       <div className="emoticons">
         {emoticons.map(({ emoticon, emoticonCount }) => (
-          <EmotionData name={emoticon} count={emoticonCount} />
+          <EmotionData key={emoticon} name={emoticon} count={emoticonCount} />
         ))}
       </div>
     </t.Container>

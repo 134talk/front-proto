@@ -7,7 +7,6 @@ export const Container = styled.div`
   p {
     font-size: ${({ theme }) => theme.fs32};
     font-weight: ${({ theme }) => theme.fw700};
-    line-height: 1.8rem;
     color: ${({ theme }) => theme.primary_deep_blue};
     span {
       font-size: ${({ theme }) => theme.fs24};
