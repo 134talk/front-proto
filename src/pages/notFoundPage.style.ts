@@ -10,6 +10,7 @@ export const Container = styled.div`
   font-size: ${({ theme }) => theme.fs16};
   color: ${({ theme }) => theme.white};
   color: ${({ theme }) => theme.gray700};
+  padding: 0 1.25rem;
   > img {
     width: 6.25rem;
     height: 6.25rem;
