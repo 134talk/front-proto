@@ -11,8 +11,13 @@ type Res = {
   joinFlag: boolean;
 }[];
 
+type Error = { errorCode: number };
+
 export default function useChatList(keyword?: string) {
-  const { data, refetch } = useQuery<AxiosResponse<Res>, AxiosError>(
+  const { data, refetch, error } = useQuery<
+    AxiosResponse<Res>,
+    AxiosError<Error>
+  >(
     [queryKeys.CHATS],
     keyword.length > 0 ? () => searchChatList(keyword) : getChatList,
     {
@@ -22,5 +27,5 @@ export default function useChatList(keyword?: string) {
   );
   const chatList = useMemo(() => data?.data, [data]);
 
-  return { chatList, refetch };
+  return { chatList, refetch, error };
 }
