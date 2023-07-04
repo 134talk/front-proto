@@ -3,8 +3,10 @@ import { useQuery } from 'react-query';
 import {
   getChatReport,
   getFeedbackReport,
+  getMemberReport,
   getMemberReportDetail,
   getStatusReport,
+  searchMemberReport,
 } from 'shared/api/reportApi';
 import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
@@ -40,12 +42,21 @@ type MemberRes = {
   stressPercent: number;
 };
 
+type ListRes = {
+  userId: number;
+  profileUrl: string;
+  name: string;
+  nickname: string;
+  chatCount: number;
+}[];
+
 type Args = {
-  types: 'status' | 'chat' | 'feedback' | 'member';
+  types: 'status' | 'chat' | 'feedback' | 'member' | 'list';
   uid?: string;
+  keyword?: string;
 };
 
-export default function useReport({ types, uid }: Args) {
+export default function useReport({ types, uid, keyword }: Args) {
   const { channel: teamCode } = useUserData();
 
   const { data: statusData } = useQuery<AxiosResponse<StatusRes>, AxiosError>(
@@ -78,6 +89,21 @@ export default function useReport({ types, uid }: Args) {
     }
   );
 
+  const { data: memberDataList, refetch } = useQuery<
+    AxiosResponse<ListRes>,
+    AxiosError
+  >(
+    [queryKeys.MEMBER_REPORT, teamCode],
+    () =>
+      !!keyword
+        ? searchMemberReport(teamCode, keyword)
+        : getMemberReport(teamCode),
+    {
+      enabled: types === 'list',
+      refetchOnWindowFocus: false,
+    }
+  );
+
   const { data: memberData } = useQuery<AxiosResponse<MemberRes>, AxiosError>(
     [queryKeys.MEMBER_REPORT, teamCode],
     () => getMemberReportDetail(teamCode, uid),
@@ -87,5 +113,12 @@ export default function useReport({ types, uid }: Args) {
     }
   );
 
-  return { statusData, chatData, feedbackData, memberData };
+  return {
+    statusData,
+    chatData,
+    feedbackData,
+    memberDataList,
+    memberData,
+    refetch,
+  };
 }
