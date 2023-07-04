@@ -4,7 +4,7 @@ export const Container = styled.div<{ $isRow: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: ${props => (props.$isRow ? '0' : '1.25rem auto')};
+  margin: ${({ $isRow }) => ($isRow ? '0' : '1.25rem auto')};
   > button {
     display: flex;
     justify-content: center;
@@ -25,8 +25,8 @@ export const Container = styled.div<{ $isRow: boolean }>`
   }
 `;
 export const SliderWrapper = styled.div<{ $isRow: boolean }>`
-  height: ${props => (props.$isRow ? '2.938rem' : '18.688rem')};
-  width: ${props => (props.$isRow ? '18.688rem' : '2.938rem')};
+  height: ${({ $isRow }) => ($isRow ? '2.938rem' : '18.688rem')};
+  width: ${({ $isRow }) => ($isRow ? '18.688rem' : '2.938rem')};
   display: flex;
   position: relative;
   justify-content: center;
@@ -37,15 +37,15 @@ export const SliderWrapper = styled.div<{ $isRow: boolean }>`
 `;
 export const SliderInput = styled.input<{ $track: number; $isRow: boolean }>`
   margin-top: -0.56rem;
-  background: ${props =>
-    `linear-gradient(to right, ${props.theme.good_blue} 0%, ${props.theme.good_blue} ${props.$track}%, ${props.theme.gray200} ${props.$track}%, ${props.theme.gray200} 100%)`};
+  background: ${({ $track, theme }) =>
+    `linear-gradient(to right, ${theme.good_blue} 0%, ${theme.good_blue} ${$track}%, ${theme.gray200} ${$track}%, ${theme.gray200} 100%)`};
   position: absolute;
   height: 1.1875rem;
   width: 16.9375rem;
   outline: none;
   appearance: none;
   border-radius: 7.5rem;
-  transform: ${props => (props.$isRow ? 'rotate(0deg)' : 'rotate(270deg)')};
+  transform: ${({ $isRow }) => ($isRow ? 'rotate(0deg)' : 'rotate(270deg)')};
   -webkit-appearance: none;
   &::-webkit-slider-thumb {
     -webkit-appearance: none;

@@ -16,7 +16,6 @@ export const Container = styled.div`
       .main_text {
         font-size: ${({ theme }) => theme.fs18};
         font-weight: ${({ theme }) => theme.fw400};
-        line-height: 1.625rem;
         margin-top: 4rem;
         margin-bottom: 0.5rem;
         > span {
@@ -27,12 +26,10 @@ export const Container = styled.div`
         font-size: ${({ theme }) => theme.fs14};
         font-weight: ${({ theme }) => theme.fw400};
         color: ${({ theme }) => theme.gray600};
-        line-height: 1.25rem;
       }
       .percent_text {
         font-size: ${({ theme }) => theme.fs56};
         font-weight: ${({ theme }) => theme.fw700};
-        line-height: 1.625rem;
         text-align: right;
         position: fixed;
         bottom: 18.75rem;

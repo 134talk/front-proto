@@ -18,10 +18,10 @@ export const Container = styled.div`
       z-index: 1;
     }
     > p {
-      color: #fff;
-      text-align: center;
       position: fixed;
-      font-size: 1rem;
+      text-align: center;
+      color: ${({ theme }) => theme.white};
+      font-size: ${({ theme }) => theme.fs16};
     }
   }
 `;

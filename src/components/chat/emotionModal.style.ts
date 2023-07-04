@@ -39,15 +39,15 @@ export const Container = styled.div`
   }
   p {
     &.guide_text {
-      text-align: center;
       width: 100%;
-      font-size: 1.125rem;
-      font-weight: bold;
+      text-align: center;
+      font-size: ${({ theme }) => theme.fs18};
+      font-weight: ${({ theme }) => theme.fw700};
     }
     &.sub_text {
-      text-align: center;
       width: 100%;
-      font-size: 1rem;
+      text-align: center;
+      font-size: ${({ theme }) => theme.fs16};
     }
   }
   img {

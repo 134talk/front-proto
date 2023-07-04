@@ -3,8 +3,8 @@ import { styled } from 'styled-components';
 export const Container = styled.div<{ $isRow: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: ${props => (props.$isRow ? '1rem' : '1.25rem')};
-  margin: ${props => (props.$isRow ? '0' : '0 auto')};
+  gap: ${({ $isRow }) => ($isRow ? '1rem' : '1.25rem')};
+  margin: ${({ $isRow }) => ($isRow ? '0' : '0 auto')};
   > div {
     display: flex;
     flex-direction: row;

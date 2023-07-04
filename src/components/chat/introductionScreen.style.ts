@@ -11,15 +11,13 @@ export const Container = styled.div`
     text-align: center;
     gap: 0.625rem;
     > h2 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      line-height: 1.625rem;
+      font-size: ${({ theme }) => theme.fs20};
+      font-weight: ${({ theme }) => theme.fw700};
     }
     > p {
-      font-size: 1rem;
-      font-weight: 400;
-      color: #475467;
-      line-height: 1.3rem;
+      font-size: ${({ theme }) => theme.fs16};
+      font-weight: ${({ theme }) => theme.fw400};
+      color: ${({ theme }) => theme.gray700};
       margin-bottom: 1rem;
     }
   }
