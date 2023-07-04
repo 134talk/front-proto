@@ -29,7 +29,7 @@ export const RemindWrapper = styled.div`
   height: 27.5rem;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 0.625rem;
+  padding: 1.5rem 1.875rem;
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;

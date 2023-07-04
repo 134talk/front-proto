@@ -31,6 +31,7 @@ export interface ChatTopic extends Topic {
   questionGuide: string[];
 }
 export interface SubUser {
+  type: 'RE_ENTER' | 'NEW_CHATROOM';
   checkInFlag: 'true' | 'false' | 'stillFalse';
   requestId: number;
   chatroomUserInfos: ChatUserInfo[];
@@ -98,38 +99,30 @@ const chatSlice = createSlice({
     },
     setSubUser(state, action: PayloadAction<SubUser | null>) {
       state.subUser = action.payload;
-      console.log('setSubUser in chatSlice: ', action.payload);
     },
     setSubTimeout(state, action: PayloadAction<SubTimeout | null>) {
       state.subTimeout = action.payload;
-      console.log('setSubTimeout in chatSlice: ', action.payload);
     },
     setSubKeyword(state, action: PayloadAction<SubKeyword | null>) {
       state.subKeyword = action.payload;
-      console.log('setSubKeyword in chatSlice: ', action.payload);
     },
     setIsReselected(state, action: PayloadAction<boolean>) {
       state.isReselected = action.payload;
     },
     setSubSelect(state, action: PayloadAction<SubSelect | null>) {
       state.subSelect = action.payload;
-      console.log('setSubUser in chatSlice: ', action.payload);
     },
     setSubNotice(state, action: PayloadAction<SubNotice | null>) {
       state.subNotice = action.payload;
-      console.log('setSubSelect in chatSlice: ', action.payload);
     },
     setSubEmotion(state, action: PayloadAction<SubEmotion | null>) {
       state.subEmotion = action.payload;
-      console.log('setSubEmotion in chatSlice: ', action.payload);
     },
     setSubEmotionList(state, action: PayloadAction<SubEmotionList | null>) {
       state.subEmotionList = action.payload;
-      console.log('setSubEmotionList in chatSlice: ', action.payload);
     },
     setSubNewChat(state, action: PayloadAction<{ type: string } | null>) {
       state.subNewChat = action.payload;
-      console.log('setSubNewChat in chatSlice: ', action.payload);
     },
     setIsNew(state, action: PayloadAction<boolean>) {
       state.isNew = action.payload;

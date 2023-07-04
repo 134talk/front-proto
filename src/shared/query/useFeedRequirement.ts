@@ -26,7 +26,8 @@ export default function useFeedRequirement() {
   const navigate = useNavigate();
   const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.FEED_REQUIREMENT],
-    () => getFeedRequirement()
+    () => getFeedRequirement(),
+    { refetchOnWindowFocus: false }
   );
   const feedRequirementUser = useMemo(() => {
     return data?.data

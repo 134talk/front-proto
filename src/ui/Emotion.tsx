@@ -19,7 +19,7 @@ export default function Emotion({
         <img src={image} alt="emotion_image" />
       </t.EmotionImage>
       {isEmotion &&
-        Array(25)
+        Array(10)
           .fill(0)
           .map((item, index) => (
             <t.FloatImage key={index} src={image} alt="emotion_dummy" />

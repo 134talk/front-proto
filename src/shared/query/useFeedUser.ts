@@ -13,7 +13,8 @@ export type Res = {
 export default function useFeedUser(roomId: number) {
   const { data } = useQuery<AxiosResponse<Res[]>, AxiosError>(
     [queryKeys.FEED_USER],
-    () => getFeedUser(roomId)
+    () => getFeedUser(roomId),
+    { refetchOnWindowFocus: false }
   );
 
   const feedUserList = useMemo(() => data?.data || [], [data]);
