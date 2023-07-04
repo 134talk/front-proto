@@ -22,7 +22,6 @@ export default function UserList({ userInfo, $isRow, scale }: UserListProps) {
             nickname={item.nickname}
             name={item.name}
             image={item.profileUrl}
-            isCheck={!item.activeFlag}
             scale={$isRow ? 'small' : scale}
             $isRow={$isRow}
             isMyProf={item.userId === Number(uid)}

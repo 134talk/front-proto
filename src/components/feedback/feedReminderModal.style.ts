@@ -9,7 +9,6 @@ export const Container = styled.div`
     font-size: 1.125rem;
     font-weight: 700;
     text-align: center;
-    line-height: 1.5rem;
     letter-spacing: -0.025em;
   }
   > div {

@@ -106,7 +106,6 @@ export const NavWrapper = styled.div<{ isMobile: boolean }>`
         font-size: ${({ theme }) => theme.fs14};
         font-weight: ${({ theme }) => theme.fw400};
         color: ${({ theme }) => theme.gray600};
-        line-height: 1.5rem;
       }
     }
   }

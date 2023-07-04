@@ -7,7 +7,6 @@ export const Container = styled.div`
   > p {
     font-size: 1.25rem;
     font-weight: bold;
-    line-height: 1.95rem;
     text-align: center;
     &:nth-child(2) {
       padding-top: 2.875rem;

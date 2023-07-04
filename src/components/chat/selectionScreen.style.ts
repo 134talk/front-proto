@@ -8,12 +8,10 @@ export const Container = styled.div`
   }
   .guide_text {
     font-size: 1.25rem;
-    line-height: 1.625rem;
     font-weight: 700;
   }
   .sub_text {
     font-size: 0.875rem;
-    line-height: 1.6125rem;
     font-weight: 400;
     color: #667085;
   }

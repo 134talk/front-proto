@@ -13,13 +13,11 @@ export const Container = styled.div`
     > h2 {
       font-size: 1.25rem;
       font-weight: 700;
-      line-height: 1.625rem;
     }
     > p {
       font-size: 1rem;
       font-weight: 400;
       color: #475467;
-      line-height: 1.3rem;
       margin-bottom: 1rem;
     }
   }

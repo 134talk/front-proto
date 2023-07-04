@@ -88,11 +88,9 @@ export const ChatWrapper = styled.div`
   }
   .depth_text {
     font-size: 0.875rem;
-    line-height: 1.3rem;
     font-weight: 400;
   }
   .question_text {
     font-size: 1.125rem;
-    line-height: 1.5rem;
   }
 `;

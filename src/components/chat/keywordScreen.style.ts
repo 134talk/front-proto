@@ -8,7 +8,6 @@ export const Container = styled.div`
     margin: 1.25rem 0 2.438rem 0;
     text-align: center;
     font-size: 1rem;
-    line-height: 1.3rem;
   }
   .card_wrapper {
     display: flex;

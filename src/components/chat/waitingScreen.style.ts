@@ -44,7 +44,6 @@ export const Container = styled.div`
     padding: 1.75rem 1.25rem;
   }
   p {
-    line-height: 1.95rem;
     font-weight: bold;
     &:nth-child(1) {
       font-size: 1.25rem;

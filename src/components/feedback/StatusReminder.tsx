@@ -23,7 +23,6 @@ export default function StatusReminder({
     stable: 0,
     stress: 0,
   });
-  console.log('internalValues: ', internalValues);
 
   useEffect(() => {
     if (feedRequirementData) {
