@@ -14,11 +14,9 @@ export const Container = styled.div`
   input {
     width: 70%;
     height: 2.75rem;
-    padding: 0.75rem;
-    margin-left: -10px;
     background: none;
     border: none;
-    '' &::placeholder {
+    &::placeholder {
       color: ${({ theme }) => theme.gray500};
     }
     &:focus {
@@ -34,10 +32,10 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
+    padding: 18px 8px 18px 18px;
     img {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
     }
   }
 `;

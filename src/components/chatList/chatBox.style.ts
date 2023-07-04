@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 0.75rem 1.25rem;
+  padding: 16px;
   background: ${({ theme }) => theme.white};
   border-radius: 8px;
   > .wrapper {
@@ -22,6 +22,8 @@ export const Container = styled.div`
   > .emoticons {
     display: flex;
     gap: 0.3rem;
-    margin-top: 0.7rem;
+    > div {
+      margin-top: 0.7rem;
+    }
   }
 `;

@@ -50,5 +50,13 @@ export const getUserReport = (teamCode: string) =>
 export const getUserReportDetail = (teamCode: string, date: string) =>
   axiosInstance.get(`/statistics/user/report/${teamCode}/${date}`);
 
+export const getMemberReport = (teamCode: string) =>
+  axiosInstance.get(`/statistics/admin/report/list/${teamCode}`);
+
+export const searchMemberReport = (teamCode: string, searchName: string) =>
+  axiosInstance.get(
+    `/statistics/admin/report/search/list/${teamCode}?searchName=${searchName}`
+  );
+
 export const getMemberReportDetail = (teamCode: string, searchId: string) =>
   axiosInstance.get(`/statistics/admin/user/report/${teamCode}/${searchId}`);

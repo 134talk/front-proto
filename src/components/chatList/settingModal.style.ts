@@ -6,17 +6,14 @@ export const Container = styled.div`
     font-size: ${({ theme }) => theme.fs16};
     font-weight: ${({ theme }) => theme.fw500};
     color: ${({ theme }) => theme.gray900};
-    line-height: 1.3;
   }
   .small_text {
     font-size: ${({ theme }) => theme.fs14};
     color: ${({ theme }) => theme.gray700};
-    line-height: 1.3;
     margin-top: 0.5rem;
   }
   .setting_text {
     font-size: ${({ theme }) => theme.fs16};
-    line-height: 1.3;
     text-align: center;
     margin: 1.2rem;
     > input {

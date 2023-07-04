@@ -21,6 +21,7 @@ export const Tab = styled.button<{ $isSelected: boolean }>`
   font-weight: ${({ theme }) => theme.fw600};
   color: ${({ $isSelected, theme }) =>
     $isSelected ? theme.gray900 : theme.gray500};
+  padding-bottom: ${({ $isSelected }) => !$isSelected && '2px'};
   border-bottom: ${({ $isSelected, theme }) =>
     $isSelected
       ? `2px solid ${theme.primary_deep_blue}`
@@ -31,7 +32,7 @@ export const Scroll = styled.div<{ $isMobile: boolean }>`
   width: 100%;
   height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 9rem)' : '620px')};
   background: ${({ theme }) => theme.gray100};
-  padding: 3rem 1.25rem 2rem 1.25rem;
+  padding: 3rem 1.25rem 4rem 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
