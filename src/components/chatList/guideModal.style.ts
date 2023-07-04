@@ -5,6 +5,8 @@ type StyleProps = {
 };
 
 export const Container = styled.div`
+  width: 100%;
+  padding: 0 1.25rem;
   > section {
     width: 100%;
     height: 6.675rem;
