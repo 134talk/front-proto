@@ -30,6 +30,7 @@ export const Container = styled.div<{ $isBottom: boolean; $isMargin: boolean }>`
     margin: 0 auto;
     justify-content: center;
     > div {
+      z-index: 999;
       position: absolute;
       right: 1.25rem;
       top: 1rem;
