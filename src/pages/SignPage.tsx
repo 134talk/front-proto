@@ -48,14 +48,14 @@ export default function SignPage() {
       />
       <SignInputColumn
         isAdmin={type === 'admin'}
-        isName={!!name.length}
+        isName={!!name?.length}
         team={team}
-        isError={!!name.length && !validateName(name)}
+        isError={!!name?.length && !validateName(name)}
         handleName={handleName}
         handleTeam={handleTeam}
       />
       <SignButtonColumn
-        disabled={!name.length || !team.length || !validateName(name)}
+        disabled={!name?.length || !team?.length || !validateName(name)}
         onRegister={onRegister}
         onCancel={onCancel}
       />
