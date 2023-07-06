@@ -1,76 +1,49 @@
 import { BottomButtonTab } from 'components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FEED_OPTION_SELECT } from 'shared/constants/constants';
-import type { Feedback } from 'shared/query/useFeedOption';
+import useUserData from 'shared/hooks/useUserData';
+import type { UpdatedFeedback } from 'shared/hooks/useUserFeedbacks';
+import { useUserFeedbacks } from 'shared/hooks/useUserFeedbacks';
 import useFeedOption from 'shared/query/useFeedOption';
 import useFeedUser from 'shared/query/useFeedUser';
 import { Button } from 'ui';
 import * as t from './feedOptionReminder.style';
 
-type UpdatedFeedback = Feedback & { selectedOption: number | null };
-// type UpdatedFeedback = {
-//   toUserId: number;
-//   review: string;
-//   selectedOption: number | null;
-// };
-
 export default function FeedOptionReminder() {
   const { roomId } = useParams();
   const navigate = useNavigate();
-  const score = localStorage.getItem('optionScore');
-  const sentence = localStorage.getItem('optionSentence');
+  const { optVal, optText } = useUserData();
   const { feedUserList } = useFeedUser(Number(roomId));
-  const [userFeedbacks, setUserFeedbacks] = useState<UpdatedFeedback[]>([]);
-  console.log('userFeedbacks: ', userFeedbacks);
-  useEffect(() => {
-    const initialFeedbacks: UpdatedFeedback[] = feedUserList?.map(user => ({
-      toUserId: user.userId,
-      review: '',
-      selectedOption: null,
-    }));
-    setUserFeedbacks(initialFeedbacks);
-  }, [feedUserList]);
 
-  // 임시 수정
-  const handleSelect = (
-    userId: number,
-    field: keyof UpdatedFeedback,
-    value: string | number
-  ) => {
-    if (value === 6) {
-      setUserFeedbacks(prev =>
-        prev.map(item =>
-          item.toUserId === userId ? { ...item, [field]: value } : item
-        )
-      );
-    } else {
-      const matchedFeedback = FEED_OPTION_SELECT.find(
-        item => item.id === value
-      );
-      setUserFeedbacks(prev =>
-        prev.map(item =>
-          item.toUserId === userId
-            ? { ...item, [field]: matchedFeedback.label }
-            : item
-        )
-      );
-    }
-  };
+  const initialFeedbacks: UpdatedFeedback[] = feedUserList?.map(user => ({
+    toUserId: user.userId,
+    review: '',
+    selectedOption: null,
+  }));
+  const { userFeedbacks, handleSelect, resetFeedbacks } =
+    useUserFeedbacks(initialFeedbacks);
+
+  useEffect(() => {
+    resetFeedbacks(initialFeedbacks);
+  }, [feedUserList]);
 
   const { mutate } = useFeedOption();
   const handleNext = () => {
     mutate(
       {
         roomId: Number(roomId),
-        sentence: sentence,
-        score: Number(score),
-        feedback: userFeedbacks.map(({ selectedOption, ...rest }) => rest),
+        sentence: optText,
+        score: Number(optVal),
+        feedback: userFeedbacks.map(({ toUserId, review }) => ({
+          toUserId,
+          review,
+        })),
       },
       {
         onSuccess: () => {
-          localStorage.removeItem('optionScore');
-          localStorage.removeItem('optionSentence');
+          localStorage.removeItem('optVal');
+          localStorage.removeItem('optText');
           navigate(`/feedback/3/${roomId}`);
         },
       }
@@ -121,7 +94,7 @@ export default function FeedOptionReminder() {
                       {item.label}
                     </t.SelectText>
                   </div>
-                  {item.id === 6 && feedback.selectedOption && (
+                  {feedback.selectedOption === 6 && item.id === 6 && (
                     <textarea
                       className="select_textarea"
                       placeholder={`${feedUserList[index].name}님과의 대화는 어땠는지 자유롭게 남겨주세요!`}
