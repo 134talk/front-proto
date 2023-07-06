@@ -8,7 +8,7 @@ type InstallModalProps = {
 };
 export default function InstallModal({ modalActions }: InstallModalProps) {
   return (
-    <BaseModal isCloseButton>
+    <BaseModal isCloseButton onClose={modalActions.close}>
       <t.Container onClick={modalActions.close}>
         <p className="title_text">134 앱을 다운받는 방법</p>
         <p className="sub_text">1. 브라우저 상단 또는 하단의</p>

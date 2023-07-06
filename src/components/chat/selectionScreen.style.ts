@@ -9,6 +9,9 @@ export const Container = styled.div`
   .guide_text {
     font-size: ${({ theme }) => theme.fs20};
     font-weight: ${({ theme }) => theme.fw700};
+    > span {
+      color: ${({ theme }) => theme.primary_deep_blue};
+    }
   }
   .sub_text {
     font-size: ${({ theme }) => theme.fs14};
@@ -37,7 +40,8 @@ export const Container = styled.div`
 `;
 export const StyledCard = styled.div<{ order: number; selected: boolean }>`
   position: absolute;
-  transition: transform 0.5s;
+  transition: transform 0.3s;
+  z-index: 1;
   transform: ${({ order, selected }) => {
     if (selected) return 'translateX(0)';
     if (order > 0) return `translateX(${100 * order}%)`;

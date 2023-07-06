@@ -65,6 +65,7 @@ export default function ChatScreen() {
       });
       navigate(`/chat/${roomId}/4`);
     } else {
+      dispatch({ type: 'disconnect' });
       navigate(`/feedback/1/${roomId}`);
     }
   };
