@@ -51,16 +51,16 @@ export default function ChatNotifyScreen() {
     } else {
       dispatch(subscribeSelect(`/sub/chat/question-order/${roomId}`));
     }
-    return () => {
-      dispatch({
-        type: 'unsubscribe',
-        payload: { destination: `/sub/chat/keyword/${roomId}/${uid}` },
-      });
-      dispatch({
-        type: 'unsubscribe',
-        payload: { destination: `/sub/chat/question-order/${roomId}` },
-      });
-    };
+    // return () => {
+    //   dispatch({
+    //     type: 'unsubscribe',
+    //     payload: { destination: `/sub/chat/keyword/${roomId}/${uid}` },
+    //   });
+    //   dispatch({
+    //     type: 'unsubscribe',
+    //     payload: { destination: `/sub/chat/question-order/${roomId}` },
+    //   });
+    // };
   }, []);
 
   // 순서 등록 완료시 질문 알림 조회 소켓 메세지 발행 & 나머지 구독(질문 알림 조회, 감정 조회, new 감정 리스트)
@@ -96,7 +96,7 @@ export default function ChatNotifyScreen() {
     <t.Container>
       <NavBar isCenter={true} title="대화방" />
       <p>
-        처음 이야기를 시작하실 분은
+        {questionNumber === 1 ? '처음' : '다음'} 이야기를 시작하실 분은
         <br />'{nickName && `${nickName}(${name})`}'님 입니다.
       </p>
       <img src={CHAT_NOTIFY_IMAGE} alt="chat_image" />

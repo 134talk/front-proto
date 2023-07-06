@@ -5,7 +5,6 @@ import { postFeedOption } from 'shared/api/reportApi';
 export type Feedback = {
   toUserId: number;
   review: string | '';
-  feedbackScore: number | null;
 };
 type Req = {
   roomId: number;

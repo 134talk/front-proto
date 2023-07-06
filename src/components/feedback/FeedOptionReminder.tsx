@@ -2,45 +2,60 @@ import { BottomButtonTab } from 'components';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FEED_OPTION_SELECT } from 'shared/constants/constants';
-import useUserData from 'shared/hooks/useUserData';
 import type { Feedback } from 'shared/query/useFeedOption';
 import useFeedOption from 'shared/query/useFeedOption';
 import useFeedUser from 'shared/query/useFeedUser';
 import { Button } from 'ui';
 import * as t from './feedOptionReminder.style';
 
+type UpdatedFeedback = Feedback & { selectedOption: number | null };
+// type UpdatedFeedback = {
+//   toUserId: number;
+//   review: string;
+//   selectedOption: number | null;
+// };
+
 export default function FeedOptionReminder() {
   const { roomId } = useParams();
-  const { uid } = useUserData();
   const navigate = useNavigate();
   const score = localStorage.getItem('optionScore');
   const sentence = localStorage.getItem('optionSentence');
   const { feedUserList } = useFeedUser(Number(roomId));
-  const [userFeedbacks, setUserFeedbacks] = useState<Feedback[]>([]);
-
+  const [userFeedbacks, setUserFeedbacks] = useState<UpdatedFeedback[]>([]);
+  console.log('userFeedbacks: ', userFeedbacks);
   useEffect(() => {
-    if (!feedUserList) return;
-    const setFeedList = feedUserList?.filter(
-      item => item.userId !== Number(uid)
-    );
-    const initialFeedbacks: Feedback[] = setFeedList.map(user => ({
+    const initialFeedbacks: UpdatedFeedback[] = feedUserList?.map(user => ({
       toUserId: user.userId,
       review: '',
-      feedbackScore: null,
+      selectedOption: null,
     }));
     setUserFeedbacks(initialFeedbacks);
   }, [feedUserList]);
 
+  // 임시 수정
   const handleSelect = (
     userId: number,
-    field: keyof Feedback,
+    field: keyof UpdatedFeedback,
     value: string | number
   ) => {
-    setUserFeedbacks(prev =>
-      prev.map(item =>
-        item.toUserId === userId ? { ...item, [field]: value } : item
-      )
-    );
+    if (value === 6) {
+      setUserFeedbacks(prev =>
+        prev.map(item =>
+          item.toUserId === userId ? { ...item, [field]: value } : item
+        )
+      );
+    } else {
+      const matchedFeedback = FEED_OPTION_SELECT.find(
+        item => item.id === value
+      );
+      setUserFeedbacks(prev =>
+        prev.map(item =>
+          item.toUserId === userId
+            ? { ...item, [field]: matchedFeedback.label }
+            : item
+        )
+      );
+    }
   };
 
   const { mutate } = useFeedOption();
@@ -50,7 +65,7 @@ export default function FeedOptionReminder() {
         roomId: Number(roomId),
         sentence: sentence,
         score: Number(score),
-        feedback: userFeedbacks,
+        feedback: userFeedbacks.map(({ selectedOption, ...rest }) => rest),
       },
       {
         onSuccess: () => {
@@ -89,24 +104,24 @@ export default function FeedOptionReminder() {
                     <input
                       className="select_input"
                       type="radio"
-                      checked={feedback.feedbackScore === item.id}
+                      checked={feedback.selectedOption === item.id}
                       onChange={() =>
                         handleSelect(
                           feedback.toUserId,
-                          'feedbackScore',
+                          'selectedOption',
                           item.id
                         )
                       }
-                      id={String(item.id)}
+                      id={`${feedback.toUserId}-${item.id}`}
                     />
                     <t.SelectText
-                      htmlFor={String(item.id)}
-                      $isChecked={feedback.feedbackScore === item.id}
+                      htmlFor={`${feedback.toUserId}-${item.id}`}
+                      $isChecked={feedback.selectedOption === item.id}
                     >
                       {item.label}
                     </t.SelectText>
                   </div>
-                  {item.id === 6 && feedback.feedbackScore === item.id && (
+                  {item.id === 6 && feedback.selectedOption && (
                     <textarea
                       className="select_textarea"
                       placeholder={`${feedUserList[index].name}님과의 대화는 어땠는지 자유롭게 남겨주세요!`}

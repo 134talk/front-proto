@@ -45,6 +45,6 @@ const EMOTION_MAPPINGS: Mappings = {
   Like: { img: EMOTION_LIKE },
   Hug: { img: EMOTION_HUG },
   Sad: { img: EMOTION_SAD },
-  Right: { img: EMOTION_RIGHT },
+  "You're Right": { img: EMOTION_RIGHT },
   Angry: { img: EMOTION_ANGRY },
 };

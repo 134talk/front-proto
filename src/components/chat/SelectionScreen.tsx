@@ -28,6 +28,11 @@ export default function SelectionScreen() {
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
   const [orderList, setOrderList] = useState<number[]>([]);
+  console.log('orderList: ', orderList);
+
+  const [hiddenCards, setHiddenCards] = useState<number[]>([]);
+  console.log('hiddenCards: ', hiddenCards);
+
   // 질문 카드 데이터 & 상수 데이터 매칭
   useEffect(() => {
     const newCombinedList =
@@ -64,6 +69,7 @@ export default function SelectionScreen() {
   );
   // 선택한 질문 카드 리스트 함수
   const handleSelectOrder = useCallback(() => {
+    console.log('select!!!!!!!!!!!!');
     const order = orderList.indexOf(selectedId);
     if (orderList.includes(selectedId)) {
       toast.error(`이미 ${order + 1}번째로 선택한 질문입니다.`);
@@ -88,9 +94,10 @@ export default function SelectionScreen() {
             return [...prevOrderList, questionId];
           }
         });
+        setHiddenCards(prevHiddenCards => [...prevHiddenCards, selectedId]); // 선택된 카드를 hiddenCards에 추가
       }
     }
-  }, [selectedId, orderList, combinedList]);
+  }, [selectedId, orderList, subKeywordList, combinedList]);
   // 선택한 질문 카드 리스트 소켓 메세지 발행 & 구독
   useEffect(() => {
     if (orderList.length > 2) {
@@ -122,35 +129,37 @@ export default function SelectionScreen() {
     <t.Container>
       <NavBar isCenter={true} title="대화방" />
       <div className="carousel_wrapper">
-        {combinedList.map((item, index) => (
-          <t.StyledCard
-            order={index - currentIndex}
-            selected={item.keywordId === selectedId}
-            key={item.keywordId}
-          >
-            <Card
-              keyword={item.keyword}
-              depth={item.depth}
-              question={item.questionName}
-              lineColor={item.color[0]}
-              fillColor={item.color[1]}
-              isFront={item.isFront}
-              size="16rem"
-              handleRotate={() => handleRotate(item.keywordId)}
-              handleSwipe={() => handleSelect(item.keywordId)}
-            />
-          </t.StyledCard>
-        ))}
+        {combinedList
+          .filter(item => !hiddenCards.includes(item.keywordId))
+          .map((item, index) => (
+            <t.StyledCard
+              order={index - currentIndex}
+              selected={item.keywordId === selectedId}
+              key={item.keywordId}
+            >
+              <Card
+                keyword={item.keyword}
+                depth={item.depth}
+                question={item.questionName}
+                lineColor={item.color[0]}
+                fillColor={item.color[1]}
+                isFront={item.isFront}
+                size="16rem"
+                handleRotate={() => handleRotate(item.keywordId)}
+                handleSwipe={() => handleSelect(item.keywordId)}
+              />
+            </t.StyledCard>
+          ))}
       </div>
       {orderList.length < 1 && (
         <p className="guide_text">
-          처음으로 다뤄보고 싶은 <br />
+          <span>처음</span>으로 다뤄보고 싶은 <br />
           카드를 골라주세요.
         </p>
       )}
       {orderList.length === 1 && (
         <p className="guide_text">
-          두번째로 다뤄보고 싶은 <br />
+          <span>두번째</span>로 다뤄보고 싶은 <br />
           카드를 골라주세요.
         </p>
       )}
