@@ -10,6 +10,7 @@ export default function useUserData() {
 
   const optVal = localStorage.getItem('optVal');
   const optText = localStorage.getItem('optText');
+  const tutorialKey = localStorage.getItem('tutorialKey');
 
   useEffect(() => {
     if (!token) silentRefresh();
@@ -29,5 +30,6 @@ export default function useUserData() {
     isUserData,
     optVal,
     optText,
+    tutorialKey,
   };
 }

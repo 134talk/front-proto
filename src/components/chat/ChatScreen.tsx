@@ -12,7 +12,7 @@ import ChatSideNav from './ChatSideNav';
 import ChatTutorial from './ChatTutorial';
 
 export default function ChatScreen() {
-  const { uid } = useUserData();
+  const { uid, tutorialKey } = useUserData();
   const { roomId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -71,8 +71,7 @@ export default function ChatScreen() {
   };
   // 튜토리얼 오픈여부 확인
   useEffect(() => {
-    const key = localStorage.getItem('modalKey');
-    if (!key) {
+    if (!tutorialKey) {
       tutorialModal.open();
     }
   }, []);

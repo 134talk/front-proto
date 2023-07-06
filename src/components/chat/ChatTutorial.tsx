@@ -7,7 +7,7 @@ interface ChatTutorialProps {
 }
 export default function ChatTutorial({ onClose }: ChatTutorialProps) {
   const handleClose = () => {
-    localStorage.setItem('modalKey', 'true');
+    localStorage.setItem('tutorialKey', 'true');
     onClose();
   };
   return (
