@@ -27,7 +27,7 @@ export const RemindWrapper = styled.div`
   height: 27.5rem;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 1.875rem;
+  padding: 0 1.875rem;
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -44,12 +44,13 @@ export const RemindWrapper = styled.div`
     font-size: ${({ theme }) => theme.fs18};
     font-weight: ${({ theme }) => theme.fw700};
     text-align: center;
-    margin-bottom: 1rem;
+    margin: 1.5rem 0;
   }
   .select_wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 0.5rem;
     .select_input {
       width: 1rem;
       height: 1rem;
@@ -66,7 +67,7 @@ export const RemindWrapper = styled.div`
     height: 8rem;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     border: 1px solid ${({ theme }) => theme.gray300};
     resize: none;
     &::placeholder {

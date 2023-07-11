@@ -8,6 +8,12 @@ export default function useUserData() {
   const isAdmin = localStorage.getItem('isAdmin');
   const nickname = localStorage.getItem('nickname');
 
+  const selectKey = localStorage.getItem('selectKey');
+  const tutorialKey = localStorage.getItem('tutorialKey');
+  const emotionKey = localStorage.getItem('emotionKey');
+  const optVal = localStorage.getItem('optVal');
+  const optText = localStorage.getItem('optText');
+
   useEffect(() => {
     if (!token) silentRefresh();
   }, [token]);
@@ -17,5 +23,17 @@ export default function useUserData() {
     [uid, channel, isAdmin, nickname]
   );
 
-  return { token, uid, channel, isAdmin, nickname, isUserData };
+  return {
+    token,
+    uid,
+    channel,
+    isAdmin,
+    nickname,
+    isUserData,
+    selectKey,
+    tutorialKey,
+    emotionKey,
+    optVal,
+    optText,
+  };
 }
