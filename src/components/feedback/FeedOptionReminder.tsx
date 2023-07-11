@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FEED_OPTION_SELECT } from 'shared/constants/constants';
 import useUserData from 'shared/hooks/useUserData';
 import type { UpdatedFeedback } from 'shared/hooks/useUserFeedbacks';
-import { useUserFeedbacks } from 'shared/hooks/useUserFeedbacks';
+import useUserFeedbacks from 'shared/hooks/useUserFeedbacks';
 import useFeedOption from 'shared/query/useFeedOption';
 import useFeedUser from 'shared/query/useFeedUser';
 import { Button } from 'ui';

@@ -8,9 +8,11 @@ export default function useUserData() {
   const isAdmin = localStorage.getItem('isAdmin');
   const nickname = localStorage.getItem('nickname');
 
+  const selectKey = localStorage.getItem('selectKey');
+  const tutorialKey = localStorage.getItem('tutorialKey');
+  const emotionKey = localStorage.getItem('emotionKey');
   const optVal = localStorage.getItem('optVal');
   const optText = localStorage.getItem('optText');
-  const tutorialKey = localStorage.getItem('tutorialKey');
 
   useEffect(() => {
     if (!token) silentRefresh();
@@ -28,8 +30,10 @@ export default function useUserData() {
     isAdmin,
     nickname,
     isUserData,
+    selectKey,
+    tutorialKey,
+    emotionKey,
     optVal,
     optText,
-    tutorialKey,
   };
 }

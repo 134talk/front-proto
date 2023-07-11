@@ -2,9 +2,10 @@ import { BottomButtonTab, Card, EmotionModal, NavBar } from 'components';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EMOTION_LIST, KEYWORD_LIST } from 'shared/constants/constants';
+import useEmotionChange from 'shared/hooks/useEmotionChange';
 import useModal from 'shared/hooks/useModal';
 import useUserData from 'shared/hooks/useUserData';
-import { setIsNew } from 'shared/store/chatSlice';
+// import { setIsNew } from 'shared/store/chatSlice';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import { Button, Emotion } from 'ui';
 import * as t from './chatScreen.style';
@@ -12,7 +13,8 @@ import ChatSideNav from './ChatSideNav';
 import ChatTutorial from './ChatTutorial';
 
 export default function ChatScreen() {
-  const { uid, tutorialKey } = useUserData();
+  const { uid, tutorialKey, emotionKey } = useUserData();
+  console.log('emotionKey: ', emotionKey);
   const { roomId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -29,7 +31,9 @@ export default function ChatScreen() {
   const newEmotion = useAppSelector(
     state => state.chat?.subEmotionList?.emoticonList
   );
-  const isNew = useAppSelector(state => state.chat?.isNew);
+  const isChanged = useEmotionChange(newEmotion);
+  console.log('isChanged: ', isChanged);
+  // const isNew = useAppSelector(state => state.chat?.isNew);
   // questionNumber 등록 state
   const [prevQuestionNumber, setPrevQuestionNumber] = useState<number>(
     metadata?.questionNumber
@@ -66,6 +70,9 @@ export default function ChatScreen() {
       navigate(`/chat/${roomId}/4`);
     } else {
       dispatch({ type: 'disconnect' });
+      localStorage.removeItem('emotionKey');
+      localStorage.removeItem('emotionList');
+      localStorage.removeItem('selectKey');
       navigate(`/feedback/1/${roomId}`);
     }
   };
@@ -77,10 +84,11 @@ export default function ChatScreen() {
   }, []);
   // new 감정 뱃지 처리
   useEffect(() => {
-    if (newEmotion) {
-      dispatch(setIsNew(true));
+    if (isChanged) {
+      localStorage.setItem('emotionKey', 'true');
+      // dispatch(setIsNew(true));
     }
-  }, [newEmotion]);
+  }, [isChanged]);
   // 새로운 질문 넘어가기일 때 렌더
   useEffect(() => {
     if (
@@ -102,7 +110,7 @@ export default function ChatScreen() {
           title="대화방"
           isCenter={true}
           isHamburger={true}
-          isNew={isNew}
+          isNew={emotionKey === 'true'}
           handleSideNav={sideNavModal.open}
         />
         <p>

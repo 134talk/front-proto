@@ -88,7 +88,7 @@ export default function ChatNotifyScreen() {
     if (nickName) {
       setTimeout(() => {
         navigate(`/chat/${roomId}/5`);
-      }, 5000);
+      }, 1000);
     }
   }, [nickName]);
 

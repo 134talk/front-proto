@@ -15,13 +15,11 @@ type HandleSelectFunction = (
 
 type ResetFeedbacksFunction = (newFeedbacks: UpdatedFeedback[]) => void;
 
-export const useUserFeedbacks = (
-  initialFeedbacks: UpdatedFeedback[]
-): {
+export default function useUserFeedbacks(initialFeedbacks: UpdatedFeedback[]): {
   userFeedbacks: UpdatedFeedback[];
   handleSelect: HandleSelectFunction;
   resetFeedbacks: ResetFeedbacksFunction;
-} => {
+} {
   const [userFeedbacks, setUserFeedbacks] =
     useState<UpdatedFeedback[]>(initialFeedbacks);
 
@@ -58,4 +56,4 @@ export const useUserFeedbacks = (
   };
 
   return { userFeedbacks, handleSelect, resetFeedbacks };
-};
+}
