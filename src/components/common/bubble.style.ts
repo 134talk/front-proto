@@ -91,5 +91,6 @@ export const Container = styled.div<{
     font-size: ${({ theme }) => theme.fs14};
     color: ${({ theme }) => theme.gray700};
     font-weight: ${({ theme }) => theme.fw400};
+    padding: 12px 0;
   }
 `;

@@ -15,6 +15,7 @@ import useUserData from 'shared/hooks/useUserData';
 import { subscribeNewChat } from 'shared/store/chatAction';
 import { setSubNewChat } from 'shared/store/chatSlice';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
+import isMobile from 'shared/utils/deviceDetector';
 import * as t from './bottomTab.style';
 
 export default function BottomTab() {
@@ -52,16 +53,21 @@ export default function BottomTab() {
         />
         <p>참가자</p>
       </button>
-      <button onClick={onChatPage}>
-        <div className="badgeWrapper">
+      <button onClick={onChatPage} className="chatButton">
+        <t.BadgeWrapper>
           {isNewChat && (
-            <img src={NEW_BADGE_ICON} alt="새 대화" className="badge" />
+            <t.Badge
+              $isMobile={isMobile}
+              src={NEW_BADGE_ICON}
+              alt="새 대화"
+              className="badge"
+            />
           )}
           <img
             src={pathname === '/chats' ? TAB_CHAT_ACTIVE : TAB_CHAT}
             alt="대화"
           />
-        </div>
+        </t.BadgeWrapper>
         <p>대화</p>
       </button>
       <button onClick={() => navigate('/report')}>

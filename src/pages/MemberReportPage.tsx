@@ -55,7 +55,7 @@ export default function MemberReportPage() {
                 stress={memberData?.data.stressPercent}
               />
             </Bubble>
-            {!!memberData?.data.receivedEmoticons.length && (
+            {!!memberData?.data.receivedEmoticons?.length && (
               <Bubble>
                 <h1>
                   <span>
