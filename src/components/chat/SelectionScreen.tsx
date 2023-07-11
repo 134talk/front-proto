@@ -26,7 +26,7 @@ export default function SelectionScreen() {
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
   const [orderList, setOrderList] = useState<number[]>([]);
-  console.log('orderList: ', orderList);
+  console.log('orderList: ', orderList); // 로그 지우기
   // 질문 카드 데이터 & 상수 데이터 매칭
   useEffect(() => {
     const newCombinedList =
@@ -116,7 +116,7 @@ export default function SelectionScreen() {
   useEffect(() => {
     if (allRegistered) navigate(`/chat/${roomId}/4`);
   }, [allRegistered]);
-  console.log('allRegistered: ', allRegistered);
+  console.log('allRegistered: ', allRegistered); // 로그 지우기
 
   return (
     <t.Container>
