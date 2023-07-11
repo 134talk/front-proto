@@ -1,13 +1,13 @@
 import { BottomButtonTab, StatusSlider } from 'components';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import useUserData from 'shared/hooks/useUserData';
 import { Button } from 'ui';
 import * as t from './feedOptionCheck.style';
 
 export default function FeedOptionCheck() {
   const { roomId } = useParams();
-  const localOptionValue = localStorage.getItem('optionScore');
-  const localOptionSentence = localStorage.getItem('optionSentence');
+  const { optVal, optText } = useUserData();
   const [value, setValue] = useState<number>(5);
   const [sentence, setSentence] = useState<string>('');
   const navigate = useNavigate();
@@ -18,14 +18,14 @@ export default function FeedOptionCheck() {
     setSentence(e.target.value);
   };
   const handleNext = () => {
-    localStorage.setItem('optionScore', JSON.stringify(value));
-    localStorage.setItem('optionSentence', sentence);
+    localStorage.setItem('optVal', JSON.stringify(value));
+    localStorage.setItem('optText', sentence);
     navigate(`/feedback/2/${roomId}`);
   };
   useEffect(() => {
-    if (localOptionValue) setValue(Number(localOptionValue));
-    if (localOptionSentence) setSentence(localOptionSentence);
-  }, [localOptionValue, localOptionSentence]);
+    if (optVal) setValue(Number(optVal));
+    if (optText) setSentence(optText);
+  }, [optVal, optText]);
   return (
     <t.Container>
       <div className="title_wrapper">

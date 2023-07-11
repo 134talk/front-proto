@@ -67,13 +67,11 @@ type ChatState = {
   subUser: SubUser | null;
   subTimeout: SubTimeout | null;
   subKeyword: SubKeyword | null;
-  isReselected: boolean;
   subSelect: SubSelect | null;
   subNotice: SubNotice | null;
   subEmotion: SubEmotion | null;
   subEmotionList: SubEmotionList | null;
   subNewChat: { type: string };
-  isNew: boolean;
 };
 
 const initialState: ChatState = {
@@ -81,13 +79,11 @@ const initialState: ChatState = {
   subUser: null,
   subTimeout: null,
   subKeyword: null,
-  isReselected: false,
   subSelect: null,
   subNotice: null,
   subEmotion: null,
   subEmotionList: null,
   subNewChat: { type: '' },
-  isNew: false,
 };
 
 const chatSlice = createSlice({
@@ -106,9 +102,6 @@ const chatSlice = createSlice({
     setSubKeyword(state, action: PayloadAction<SubKeyword | null>) {
       state.subKeyword = action.payload;
     },
-    setIsReselected(state, action: PayloadAction<boolean>) {
-      state.isReselected = action.payload;
-    },
     setSubSelect(state, action: PayloadAction<SubSelect | null>) {
       state.subSelect = action.payload;
     },
@@ -124,9 +117,6 @@ const chatSlice = createSlice({
     setSubNewChat(state, action: PayloadAction<{ type: string } | null>) {
       state.subNewChat = action.payload;
     },
-    setIsNew(state, action: PayloadAction<boolean>) {
-      state.isNew = action.payload;
-    },
   },
 });
 
@@ -135,13 +125,11 @@ export const {
   setIsStompConnected,
   setSubTimeout,
   setSubKeyword,
-  setIsReselected,
   setSubSelect,
   setSubNotice,
   setSubEmotion,
   setSubEmotionList,
   setSubNewChat,
-  setIsNew,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

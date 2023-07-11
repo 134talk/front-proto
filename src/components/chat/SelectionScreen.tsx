@@ -5,13 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { KEYWORD_LIST } from 'shared/constants/constants';
 import useUserData from 'shared/hooks/useUserData';
 import { subscribeSelect } from 'shared/store/chatAction';
-import { setIsReselected } from 'shared/store/chatSlice';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import { Button } from 'ui';
 import * as t from './selectionScreen.style';
 
 export default function SelectionScreen() {
-  const { uid } = useUserData();
+  const { uid, selectKey } = useUserData();
   const { roomId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ export default function SelectionScreen() {
   const subKeywordList = useAppSelector(
     state => state.chat?.subKeyword?.topicList
   );
-  const isReselected = useAppSelector(state => state.chat?.isReselected);
   const allRegistered = useAppSelector(
     state => state.chat?.subSelect?.allRegistered
   );
@@ -28,11 +26,7 @@ export default function SelectionScreen() {
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
   const [orderList, setOrderList] = useState<number[]>([]);
-  console.log('orderList: ', orderList);
-
-  const [hiddenCards, setHiddenCards] = useState<number[]>([]);
-  console.log('hiddenCards: ', hiddenCards);
-
+  console.log('orderList: ', orderList); // 로그 지우기
   // 질문 카드 데이터 & 상수 데이터 매칭
   useEffect(() => {
     const newCombinedList =
@@ -69,7 +63,6 @@ export default function SelectionScreen() {
   );
   // 선택한 질문 카드 리스트 함수
   const handleSelectOrder = useCallback(() => {
-    console.log('select!!!!!!!!!!!!');
     const order = orderList.indexOf(selectedId);
     if (orderList.includes(selectedId)) {
       toast.error(`이미 ${order + 1}번째로 선택한 질문입니다.`);
@@ -94,10 +87,9 @@ export default function SelectionScreen() {
             return [...prevOrderList, questionId];
           }
         });
-        setHiddenCards(prevHiddenCards => [...prevHiddenCards, selectedId]); // 선택된 카드를 hiddenCards에 추가
       }
     }
-  }, [selectedId, orderList, subKeywordList, combinedList]);
+  }, [selectedId, orderList, combinedList]);
   // 선택한 질문 카드 리스트 소켓 메세지 발행 & 구독
   useEffect(() => {
     if (orderList.length > 2) {
@@ -117,39 +109,38 @@ export default function SelectionScreen() {
   }, [orderList]);
   // 키워드 다시 선택하기 함수
   const handleBack = () => {
-    dispatch(setIsReselected(true));
+    localStorage.setItem('selectKey', 'true');
     navigate(`/chat/${roomId}/2`);
   };
   // 모든 참가자 선택 완료시 질문 알림으로 이동
   useEffect(() => {
     if (allRegistered) navigate(`/chat/${roomId}/4`);
   }, [allRegistered]);
+  console.log('allRegistered: ', allRegistered); // 로그 지우기
 
   return (
     <t.Container>
       <NavBar isCenter={true} title="대화방" />
       <div className="carousel_wrapper">
-        {combinedList
-          .filter(item => !hiddenCards.includes(item.keywordId))
-          .map((item, index) => (
-            <t.StyledCard
-              order={index - currentIndex}
-              selected={item.keywordId === selectedId}
-              key={item.keywordId}
-            >
-              <Card
-                keyword={item.keyword}
-                depth={item.depth}
-                question={item.questionName}
-                lineColor={item.color[0]}
-                fillColor={item.color[1]}
-                isFront={item.isFront}
-                size="16rem"
-                handleRotate={() => handleRotate(item.keywordId)}
-                handleSwipe={() => handleSelect(item.keywordId)}
-              />
-            </t.StyledCard>
-          ))}
+        {combinedList.map((item, index) => (
+          <t.StyledCard
+            order={index - currentIndex}
+            selected={item.keywordId === selectedId}
+            key={item.keywordId}
+          >
+            <Card
+              keyword={item.keyword}
+              depth={item.depth}
+              question={item.questionName}
+              lineColor={item.color[0]}
+              fillColor={item.color[1]}
+              isFront={item.isFront}
+              size="16rem"
+              handleRotate={() => handleRotate(item.keywordId)}
+              handleSwipe={() => handleSelect(item.keywordId)}
+            />
+          </t.StyledCard>
+        ))}
       </div>
       {orderList.length < 1 && (
         <p className="guide_text">
@@ -172,7 +163,7 @@ export default function SelectionScreen() {
       )}
       <p className="sub_text">질문에 답을 하며 대화 여행이 진행됩니다.</p>
       <div className="button_wrapper">
-        {!isReselected && (
+        {!selectKey && (
           <Button
             category="cancel"
             text="키워드 다시고르기 (1회)"

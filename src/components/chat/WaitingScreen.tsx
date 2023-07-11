@@ -30,26 +30,25 @@ export default function WaitingScreen() {
         />
         <div className="user_wrapper">
           <div className="list_wrapper">
-            {subUserList &&
-              subUserList.map((item: ChatUserInfo) => (
-                <div key={item.userId}>
-                  <ProfileImg
-                    size="4rem"
-                    $isMyProf={uid === String(item.userId)}
-                    data-tooltip-id={item.userId}
-                    image={item.profileUrl}
-                    $isCheckIn={
-                      item.activeFlag || item.socketFlag === 1 ? false : true
-                    }
-                  />
-                  <Tooltip
-                    className="tooltip"
-                    place="bottom"
-                    id={String(item.userId)}
-                    content={`${item.nickname}(${item.name})`}
-                  />
-                </div>
-              ))}
+            {subUserList?.map((item: ChatUserInfo) => (
+              <div key={item.userId}>
+                <ProfileImg
+                  size="4rem"
+                  $isMyProf={uid === String(item.userId)}
+                  data-tooltip-id={item.userId}
+                  image={item.profileUrl}
+                  $isCheckIn={
+                    item.activeFlag || item.socketFlag === 1 ? false : true
+                  }
+                />
+                <Tooltip
+                  className="tooltip"
+                  place="bottom"
+                  id={String(item.userId)}
+                  content={`${item.nickname}(${item.name})`}
+                />
+              </div>
+            ))}
           </div>
           <img src={SHADOW_IMAGE} alt="shadow" />
         </div>
