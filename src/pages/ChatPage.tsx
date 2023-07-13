@@ -27,8 +27,6 @@ export default function ChatPage() {
   const timeout = useAppSelector(
     state => state.chat?.subTimeout?.fiveMinuteLeft
   );
-  console.log('timeout: ', timeout);
-
   // 처음 렌더
   useEffect(() => {
     dispatch({ type: 'connect' });
@@ -50,7 +48,6 @@ export default function ChatPage() {
       dispatch({ type: 'disconnect' });
     };
   }, []);
-
   // 재입장시 렌더 조건 처리
   useEffect(() => {
     const baseChatUrl = `/chat/${roomId}`;
@@ -62,7 +59,6 @@ export default function ChatPage() {
     if (socketFlag === 4 || socketFlag === 5) navigate(`${baseChatUrl}/3`);
     if (socketFlag === 6) navigate(`${baseChatUrl}/4`);
   }, [socketFlag, checkInFlag]);
-
   // 마감 5분전 & 종료 알림
   useEffect(() => {
     if (timeout === true) toast.error('대화 마감 5분 전입니다.');

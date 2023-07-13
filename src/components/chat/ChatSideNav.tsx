@@ -1,6 +1,5 @@
 import { UserList } from 'components';
 import { EMOTION_LIST } from 'shared/constants/constants';
-// import { setIsNew } from 'shared/store/chatSlice';
 import { useAppSelector } from 'shared/store/store';
 import isMobile from 'shared/utils/deviceDetector';
 import * as t from './chatSideNav.style';
@@ -9,7 +8,6 @@ interface ChatSideNavProps {
   onClose?: () => void;
 }
 export default function ChatSideNav({ onClose }: ChatSideNavProps) {
-  // const dispatch = useAppDispatch();
   // 소켓 fetching 데이터
   const emotionList = useAppSelector(
     state => state.chat?.subEmotionList?.emoticonList
@@ -31,7 +29,6 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
   const handleClose = () => {
     onClose();
     localStorage.setItem('emotionKey', 'false');
-    // dispatch(setIsNew(false));
   };
   return (
     <t.Container onClick={handleClose}>
