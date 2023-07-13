@@ -27,7 +27,6 @@ export default function ChatPage() {
   const timeout = useAppSelector(
     state => state.chat?.subTimeout?.fiveMinuteLeft
   );
-  console.log('timeout: ', timeout);
 
   // 처음 렌더
   useEffect(() => {
