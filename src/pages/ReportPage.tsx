@@ -8,7 +8,7 @@ export default function ReportPage() {
   const navigate = useNavigate();
 
   const { isAdmin } = useUserData();
-
+  console.log(isAdmin);
   const onClickMenu = (index: number) =>
     navigate(`/report-detail?category=${index}`);
 
@@ -50,7 +50,7 @@ export default function ReportPage() {
               <img src={RIGHT_ARROW} alt="화살표" />
             </section>
           </Bubble>
-          {isAdmin && (
+          {isAdmin === 'true' && (
             <Bubble isClickable onClick={() => onClickMenu(3)}>
               <section>
                 <div>
