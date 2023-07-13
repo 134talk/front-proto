@@ -42,7 +42,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const config: StompConfig = {
           brokerURL: process.env.REACT_APP_SOCKET_SERVER,
           webSocketFactory: () => socket,
-          debug: res => console.log(res), // 디버그 지우기
           heartbeatIncoming: 10000,
           heartbeatOutgoing: 10000,
           reconnectDelay: 3000,
@@ -55,8 +54,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
           } else if (state === RxStompState.CLOSED) {
             dispatch(setIsStompConnected(false));
             subscriptions.clear();
-            console.log('Connection lost. Reconnecting...'); // 콘솔 지우기
-            rxStomp.activate();
+            rxStomp?.activate();
           }
         });
         break;
@@ -66,7 +64,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
           rxStomp.deactivate();
           rxStomp = null;
           subscriptions.clear();
-          console.log('소켓 끊김!!!'); // 콘솔 지우기
         }
         break;
       }
