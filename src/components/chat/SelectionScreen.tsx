@@ -26,7 +26,6 @@ export default function SelectionScreen() {
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
   const [orderList, setOrderList] = useState<number[]>([]);
-  console.log('orderList: ', orderList); // 로그 지우기
   // 질문 카드 데이터 & 상수 데이터 매칭
   useEffect(() => {
     const newCombinedList =
@@ -63,14 +62,14 @@ export default function SelectionScreen() {
   );
   // 선택한 질문 카드 리스트 함수
   const handleSelectOrder = useCallback(() => {
-    const order = orderList.indexOf(selectedId);
-    if (orderList.includes(selectedId)) {
+    const selectedKeyword = subKeywordList.find(
+      item => item.keywordId === selectedId
+    );
+    const questionId = selectedKeyword ? selectedKeyword.questionId : null;
+    const order = orderList.indexOf(questionId);
+    if (orderList.includes(questionId)) {
       toast.error(`이미 ${order + 1}번째로 선택한 질문입니다.`);
     } else {
-      const selectedKeyword = subKeywordList.find(
-        item => item.keywordId === selectedId
-      );
-      const questionId = selectedKeyword ? selectedKeyword.questionId : null;
       if (questionId !== null) {
         setOrderList(prevOrderList => {
           if (prevOrderList.length === 1) {
@@ -116,7 +115,6 @@ export default function SelectionScreen() {
   useEffect(() => {
     if (allRegistered) navigate(`/chat/${roomId}/4`);
   }, [allRegistered]);
-  console.log('allRegistered: ', allRegistered); // 로그 지우기
 
   return (
     <t.Container>
