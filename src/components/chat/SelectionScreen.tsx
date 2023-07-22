@@ -26,7 +26,6 @@ export default function SelectionScreen() {
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
   const [orderList, setOrderList] = useState<number[]>([]);
-  console.log('orderList: ', orderList);
   // 질문 카드 데이터 & 상수 데이터 매칭
   useEffect(() => {
     const newCombinedList =
@@ -54,10 +53,8 @@ export default function SelectionScreen() {
   const handleSelect = useCallback(
     (id: number) => {
       const newIndex = combinedList.findIndex(item => item.keywordId === id);
-      if (newIndex !== -1) {
-        setSelectedId(id);
-        setCurrentIndex(newIndex);
-      }
+      setSelectedId(id);
+      setCurrentIndex(newIndex);
     },
     [combinedList]
   );
@@ -75,7 +72,9 @@ export default function SelectionScreen() {
         setOrderList(prevOrderList => {
           if (prevOrderList.length === 1) {
             const remainingKeyword = subKeywordList.find(
-              item => !prevOrderList.includes(item.keywordId)
+              item =>
+                !prevOrderList.includes(item.questionId) &&
+                item.questionId !== questionId
             );
             const remainingQuestionId = remainingKeyword
               ? remainingKeyword.questionId
