@@ -26,6 +26,7 @@ export default function SelectionScreen() {
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
   const [orderList, setOrderList] = useState<number[]>([]);
+  console.log('orderList: ', orderList);
   // 질문 카드 데이터 & 상수 데이터 매칭
   useEffect(() => {
     const newCombinedList =
