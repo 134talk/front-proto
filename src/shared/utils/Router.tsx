@@ -1,4 +1,4 @@
-import { BottomTab } from 'components';
+import { Nav } from 'components';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -19,8 +19,8 @@ const Router = createBrowserRouter(
           path={path}
           element={
             <ProtectedRoute redirectPath="/">
+              {isTab && <Nav />}
               {element}
-              {isTab && <BottomTab />}
             </ProtectedRoute>
           }
         />

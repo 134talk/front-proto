@@ -1,5 +1,5 @@
 // 공통
-export { default as BottomTab } from './common/BottomTab';
+export { default as Nav } from './common/Nav';
 export { default as SearchBar } from './common/SearchBar';
 export { default as NavBar } from './common/NavBar';
 export { default as BottomButtonTab } from './common/BottomButtonTab';
