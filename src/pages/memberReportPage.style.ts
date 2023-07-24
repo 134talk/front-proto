@@ -22,8 +22,8 @@ export const Container = styled.div`
 
 export const Scroll = styled.div<{ $isMobile: boolean }>`
   width: 100%;
-  height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 3.5rem)' : '678px')};
-  padding-bottom: 4rem;
+  height: ${({ $isMobile }) => ($isMobile ? '100vh' : '680px')};
+  padding-bottom: ${({ $isMobile }) => ($isMobile ? '20rem' : '5rem')};
   gap: 1.2rem;
   overflow: auto;
   -ms-overflow-style: none;

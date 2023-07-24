@@ -8,7 +8,7 @@ export default function ReportPage() {
   const navigate = useNavigate();
 
   const { isAdmin } = useUserData();
-  console.log(isAdmin);
+
   const onClickMenu = (index: number) =>
     navigate(`/report-detail?category=${index}`);
 

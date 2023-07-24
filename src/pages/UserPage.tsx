@@ -16,21 +16,12 @@ export default function UserPage() {
   return (
     <t.Container>
       <NavBar isCenter title="마이페이지" isMargin />
-      <UserProfile profile={profile} name={name} nickname={nickname} />
-      <t.TabWrapper $isMobile={isMobile}>
-        <t.Tab
-          onClick={() => navigate('/user?tab=info')}
-          $isSelected={tab === 'info'}
-        >
-          나의 정보
-        </t.Tab>
-        <t.Tab
-          onClick={() => navigate('/user?tab=chat')}
-          $isSelected={tab === 'chat'}
-        >
-          나의 대화
-        </t.Tab>
-      </t.TabWrapper>
+      <UserProfile
+        tab={tab}
+        profile={profile}
+        name={name}
+        nickname={nickname}
+      />
       <t.Scroll $isMobile={isMobile}>
         {tab === 'info' && (
           <>

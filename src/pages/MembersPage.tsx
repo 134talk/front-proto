@@ -26,7 +26,6 @@ export default function MembersPage() {
       />
       <t.Container>
         {isModalOpen && <InviteModal onClose={handleModal} />}
-
         <SearchBar
           keyword={keyword}
           handleSearch={handleSearch}
