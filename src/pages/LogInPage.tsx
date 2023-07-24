@@ -1,5 +1,4 @@
 import { AddToHomeScreen, InstallModal } from 'components';
-import TestLogin from 'components/TestLogin';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { KAKAO_OAUTH_URL } from 'shared/constants/constants';
@@ -36,7 +35,6 @@ export default function LogInPage() {
           <br />
           삶을 사랑해요.
         </p>
-        <TestLogin />
         {isMobile ? (
           <AddToHomeScreen onLogin={onLogin} onOpen={installModal.open} />
         ) : (

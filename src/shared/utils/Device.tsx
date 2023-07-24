@@ -93,7 +93,6 @@ const StatusBar = styled.div`
   flex-direction: row;
   z-index: 9999;
   position: relative;
-  background: #ffffff;
   margin: 0 1.25rem 0 -1.25rem;
   padding: 0 40px;
   p {

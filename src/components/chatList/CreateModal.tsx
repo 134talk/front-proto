@@ -84,28 +84,30 @@ export default function CreateModal({ handleCreateModal }: Props) {
           handleClose={handleCreateModal}
         />
         <t.Container>
-          <div className="chipWrapper">
-            {selectedMembers.map(({ userId, name }) => (
-              <Chip
-                text={name}
-                isDelete={true}
-                key={userId}
-                onDelete={() => handleDelete(userId)}
-              />
-            ))}
-          </div>
-          <SearchBar
-            keyword={keyword}
-            handleSearch={handleSearch}
-            onDelete={onDelete}
-          />
+          <section>
+            <div className="chipWrapper">
+              {selectedMembers.map(({ userId, name }) => (
+                <Chip
+                  text={name}
+                  isDelete={true}
+                  key={userId}
+                  onDelete={() => handleDelete(userId)}
+                />
+              ))}
+            </div>
+            <SearchBar
+              keyword={keyword}
+              handleSearch={handleSearch}
+              onDelete={onDelete}
+            />
+          </section>
           <t.Scroll $isMobile={isMobile}>
             {filteredUserList.length ? (
               <>
                 {filteredUserList.map(
                   ({ userId, nickname, name, profileUrl }) => (
-                    <div
-                      className="profileWrapper"
+                    <t.ProfileWrapper
+                      $isSelected={selectedIdList?.includes(userId)}
                       key={userId}
                       onClick={() => handleClick(userId, name)}
                     >
@@ -119,7 +121,7 @@ export default function CreateModal({ handleCreateModal }: Props) {
                       {selectedIdList?.includes(userId) && (
                         <img src={CHECK_ICON} alt="선택" />
                       )}
-                    </div>
+                    </t.ProfileWrapper>
                   )
                 )}
               </>

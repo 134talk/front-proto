@@ -2,7 +2,10 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 0.5rem 1.25rem 0 1.25rem;
+  padding-top: 0.5rem;
+  > section {
+    padding: 0 1.25rem;
+  }
   .chipWrapper {
     width: 100%;
     > div {
@@ -11,27 +14,15 @@ export const Container = styled.div`
       }
     }
   }
-  .profileWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    > img {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-  }
 `;
 
 export const Scroll = styled.div<{ $isMobile: boolean }>`
   width: 100%;
-  height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 11.5rem)' : '558px')};
+  height: ${({ $isMobile }) => ($isMobile ? '100vh' : '558px')};
   margin-top: 1rem;
-  padding-bottom: 6rem;
+  padding-bottom: ${({ $isMobile }) => ($isMobile ? '20rem' : '5rem')};
   display: flex;
   flex-direction: column;
-  gap: 1.125rem;
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -43,5 +34,19 @@ export const Scroll = styled.div<{ $isMobile: boolean }>`
     color: ${({ theme }) => theme.gray700};
     text-align: center;
     margin: 15rem auto;
+  }
+`;
+
+export const ProfileWrapper = styled.div<{ $isSelected: boolean }>`
+  width: 100%;
+  padding: 8px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: ${({ $isSelected, theme }) => $isSelected && theme.gray100};
+  > img {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;
