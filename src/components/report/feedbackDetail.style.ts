@@ -6,8 +6,8 @@ export const Container = styled.div`
 
 export const Scroll = styled.div<{ $isMobile: boolean }>`
   width: 100%;
-  height: ${({ $isMobile }) => ($isMobile ? 'calc(100vh - 9rem)' : '630px')};
-  padding-bottom: 2rem;
+  height: ${({ $isMobile }) => ($isMobile ? '100vh' : '680px')};
+  padding-bottom: ${({ $isMobile }) => ($isMobile ? '20rem' : '5rem')};
   display: flex;
   flex-direction: column;
   overflow: auto;
