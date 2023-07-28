@@ -3,10 +3,11 @@ import { silentRefresh } from 'shared/api/userApi';
 
 export default function useUserData() {
   const token = sessionStorage.getItem('token');
-  const uid = localStorage.getItem('uid');
+  const uId = localStorage.getItem('uid');
   const channel = localStorage.getItem('channel');
   const isAdmin = localStorage.getItem('isAdmin');
   const nickname = localStorage.getItem('nickname');
+  const name = localStorage.getItem('name');
 
   const selectKey = localStorage.getItem('selectKey');
   const tutorialKey = localStorage.getItem('tutorialKey');
@@ -19,16 +20,17 @@ export default function useUserData() {
   }, [token]);
 
   const isUserData = useMemo(
-    () => !!uid && !!channel && !!isAdmin && !!nickname,
-    [uid, channel, isAdmin, nickname]
+    () => !!uId && !!channel && !!isAdmin && !!nickname,
+    [uId, channel, isAdmin, nickname]
   );
 
   return {
     token,
-    uid,
+    uId,
     channel,
     isAdmin,
     nickname,
+    name,
     isUserData,
     selectKey,
     tutorialKey,
