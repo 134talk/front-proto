@@ -1,10 +1,7 @@
 import axiosInstance from './instance';
 
 export const login = (code: string) =>
-  axiosInstance.post('/auth/login/kakao', {
-    code,
-    redirectUri: process.env.REACT_APP_KAKAO_REDIRECT_URI,
-  });
+  axiosInstance.get(`/auth/kakao/callback?code=${code}`);
 
 export const silentRefresh = () => axiosInstance.post('/auth/refresh');
 
