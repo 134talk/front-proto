@@ -2,7 +2,7 @@ import {
   ChatBox,
   CheckModal,
   CreateModal,
-  GuIdeModal,
+  GuideModal,
   NavBar,
   SearchBar,
   SettingModal,
@@ -19,7 +19,7 @@ export default function ChatListPage() {
   const [createModal, setCreateModal] = useState(false);
   const [settingModal, setSettingModal] = useState(false);
   const [checkModal, setCheckModal] = useState(false);
-  const [guIdeModal, setGuIdeModal] = useState(false);
+  const [guideModal, setGuideModal] = useState(false);
   const [chatTime, setChatTime] = useState('30');
   const [keyword, setKeyword] = useState('');
   const [chatId, setChatId] = useState(0);
@@ -28,7 +28,7 @@ export default function ChatListPage() {
   const handleSettingModal = () => setSettingModal(prev => !prev);
   const handleCheckModal = () => setCheckModal(prev => !prev);
   const handleGuIdeModal = () => {
-    setGuIdeModal(prev => !prev);
+    setGuideModal(prev => !prev);
   };
 
   const enterRoom = (isMyRoom: boolean) => {
@@ -78,7 +78,7 @@ export default function ChatListPage() {
           onClose={handleSettingModal}
         />
       )}
-      {guIdeModal && <GuIdeModal onClose={handleGuIdeModal} roomId={chatId} />}
+      {guideModal && <GuideModal onClose={handleGuIdeModal} roomId={chatId} />}
       <NavBar
         isCenter={false}
         isMargin
