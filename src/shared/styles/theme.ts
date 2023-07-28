@@ -40,6 +40,7 @@ const theme: ThemeType = {
   fs18: '1.125rem',
   fs20: '1.25rem',
   fs24: '1.5rem',
+  fs26: '1.625rem',
   fs32: '2rem',
   fs56: '3.5rem',
 
