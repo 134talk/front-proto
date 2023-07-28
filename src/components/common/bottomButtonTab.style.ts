@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ $height: string }>`
   width: 100%;
-  height: 6.75rem;
+  height: ${({ $height }) => ($height ? $height : '6.75rem')};
   position: absolute;
   left: 0;
   bottom: 0;
