@@ -2,13 +2,16 @@ import type { AxiosError, AxiosResponse } from 'axios';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { signAdmin, signUser } from 'shared/api/userApi';
+import useUserData from 'shared/hooks/useUserData';
 
 type UserReq = {
+  uId: string;
   name: string;
   teamCode: string;
 };
 
 type AdminReq = {
+  uId: string;
   name: string;
   teamName: string;
 };
@@ -19,6 +22,7 @@ type Res = {
 
 export default function useSign() {
   const navigate = useNavigate();
+  const { uId } = useUserData();
 
   const onSuccessCallback = ({ teamCode }: Res) => {
     localStorage.setItem('channel', teamCode);
@@ -29,7 +33,7 @@ export default function useSign() {
     AxiosResponse<Res>,
     AxiosError,
     UserReq
-  >(({ name, teamCode }) => signUser(name, teamCode), {
+  >(({ name, teamCode }) => signUser(uId, name, teamCode), {
     onSuccess: res => onSuccessCallback(res?.data),
   });
 
@@ -37,7 +41,7 @@ export default function useSign() {
     AxiosResponse<Res>,
     AxiosError,
     AdminReq
-  >(({ name, teamName }) => signAdmin(name, teamName), {
+  >(({ name, teamName }) => signAdmin(uId, name, teamName), {
     onSuccess: res => onSuccessCallback(res?.data),
   });
 

@@ -11,6 +11,7 @@ type Res = {
   isAdmin: boolean;
   nickname: string;
   teamCode: string;
+  name: string;
 };
 
 export default function useAuth(code?: string) {
@@ -23,12 +24,14 @@ export default function useAuth(code?: string) {
     isAdmin,
     nickname,
     teamCode,
+    name,
   }: Res) => {
     sessionStorage.setItem('token', accessToken);
     localStorage.setItem('uid', String(userId));
     localStorage.setItem('channel', teamCode);
     localStorage.setItem('isAdmin', String(isAdmin));
     localStorage.setItem('nickname', nickname);
+    localStorage.setItem('name', name);
 
     if (teamCode && nickname) {
       navigate('/channel');
@@ -44,14 +47,21 @@ export default function useAuth(code?: string) {
     () => login(code),
     {
       onSuccess: res => {
-        let userData = res.data.data.find_user;
-        let tokenData = res.data.data.tokens;
+        let { userData, tokenData } = res.data.data;
         let accessToken = tokenData.accessToken;
         let userId = userData.id;
         let isAdmin = userData.role === 'editor';
         let nickname = userData.nickname;
         let teamCode = userData.team.code;
-        handleUserData({ accessToken, userId, isAdmin, nickname, teamCode });
+        let name = userData.name;
+        handleUserData({
+          accessToken,
+          userId,
+          isAdmin,
+          nickname,
+          teamCode,
+          name,
+        });
       },
     }
   );
