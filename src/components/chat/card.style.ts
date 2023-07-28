@@ -2,7 +2,7 @@ import { css, keyframes, styled } from 'styled-components';
 
 export const Container = styled.div`
   perspective: 50rem;
-  width: 15rem;
+  width: 16rem;
 `;
 export const CardWrapper = styled.div<{ $isFront: boolean; size: string }>`
   align-items: center;
@@ -83,15 +83,15 @@ export const ChatWrapper = styled.div`
     text-align: center;
   }
   .keyword_text {
-    font-size: ${({ theme }) => theme.fs24};
+    font-size: ${({ theme }) => theme.fs26};
     font-weight: ${({ theme }) => theme.fw600};
     margin-bottom: 0.75rem;
   }
   .depth_text {
-    font-size: ${({ theme }) => theme.fs14};
+    font-size: ${({ theme }) => theme.fs18};
     font-weight: ${({ theme }) => theme.fw400};
   }
   .question_text {
-    font-size: ${({ theme }) => theme.fs16};
+    font-size: ${({ theme }) => theme.fs18};
   }
 `;
