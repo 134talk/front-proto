@@ -10,7 +10,7 @@ import { Button } from 'ui';
 import * as t from './keywordScreen.style';
 
 export default function KeywordScreen() {
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   const { roomId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -38,19 +38,19 @@ export default function KeywordScreen() {
         destination: '/pub/select/keyword',
         data: {
           roomId: Number(roomId),
-          userId: Number(uid),
+          userId: Number(uId),
           keywordCode: selectedKeywords,
         },
       },
     });
-    dispatch(subscribeKeyword(`/sub/chat/keyword/${roomId}/${uid}`));
+    dispatch(subscribeKeyword(`/sub/chat/keyword/${roomId}/${uId}`));
     navigate(`/chat/${roomId}/3`);
   };
 
   return (
     <t.Container>
       <NavBar isCenter={true} title="대화방" />
-      <p className="guide_text">키워드 3개를 선택해주세요.</p>
+      <p className="guIde_text">키워드 3개를 선택해주세요.</p>
       <div className="card_wrapper">
         {KEYWORD_LIST.map(item => (
           <KeywordList

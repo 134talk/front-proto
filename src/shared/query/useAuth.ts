@@ -47,7 +47,8 @@ export default function useAuth(code?: string) {
     () => login(code),
     {
       onSuccess: res => {
-        let { userData, tokenData } = res.data.data;
+        let userData = res.data.data.find_user;
+        let tokenData = res.data.data.tokens;
         let accessToken = tokenData.accessToken;
         let userId = userData.id;
         let isAdmin = userData.role === 'editor';

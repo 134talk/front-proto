@@ -23,7 +23,7 @@ export default function Profile({
   isCheck,
   isMyProf,
 }: ProfileProps) {
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   return (
     <t.Container scale={scale}>
       <ProfileImg
@@ -38,9 +38,9 @@ export default function Profile({
       />
       <t.NameWrapper $isRow={$isRow}>
         <div>
-          {$isRow && String(userId) === uid && <span>나</span>}
+          {$isRow && String(userId) === uId && <span>나</span>}
           <t.NicknameText scale={scale}>{nickname && nickname}</t.NicknameText>
-          {!$isRow && String(userId) === uid && <span>나</span>}
+          {!$isRow && String(userId) === uId && <span>나</span>}
         </div>
         <t.NameText scale={scale}>{name && name}</t.NameText>
       </t.NameWrapper>

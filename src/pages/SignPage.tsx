@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { NAME_REGEX } from 'shared/constants/constants';
 import { ADMIN_ICON, USER_ICON } from 'shared/constants/icons';
+import useUserData from 'shared/hooks/useUserData';
 import useSign from 'shared/query/useSign';
 import * as t from './signPage.style';
 
@@ -13,6 +14,8 @@ export default function SignPage() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [team, setTeam] = useState('');
+
+  const { uId } = useUserData();
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     let spacesRemovedName = e.target.value.replace(/\s/g, '');
@@ -32,8 +35,8 @@ export default function SignPage() {
 
   const onRegister = () =>
     type === 'user'
-      ? onSignUser({ name: name, teamCode: team })
-      : onSignAdmin({ name: name, teamName: team });
+      ? onSignUser({ uId: uId, name: name, teamCode: team })
+      : onSignAdmin({ uId: uId, name: name, teamName: team });
 
   const onCancel = () => navigate('/sign');
 

@@ -27,12 +27,12 @@ export default function ChatListPage() {
   const handleCreateModal = () => setCreateModal(prev => !prev);
   const handleSettingModal = () => setSettingModal(prev => !prev);
   const handleCheckModal = () => setCheckModal(prev => !prev);
-  const handleGuideModal = () => {
+  const handleGuIdeModal = () => {
     setGuideModal(prev => !prev);
   };
 
   const enterRoom = (isMyRoom: boolean) => {
-    if (isMyRoom) handleGuideModal();
+    if (isMyRoom) handleGuIdeModal();
     else toast.error('참여할 수 없는 대화방입니다.');
   };
 
@@ -78,7 +78,7 @@ export default function ChatListPage() {
           onClose={handleSettingModal}
         />
       )}
-      {guideModal && <GuideModal onClose={handleGuideModal} roomId={chatId} />}
+      {guideModal && <GuideModal onClose={handleGuIdeModal} roomId={chatId} />}
       <NavBar
         isCenter={false}
         isMargin

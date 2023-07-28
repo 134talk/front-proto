@@ -13,7 +13,7 @@ export default function Nav() {
 
   const [isNewChat, setIsNewChat] = useState(false);
 
-  const { uid } = useUserData();
+  const { uId } = useUserData();
 
   const dispatch = useAppDispatch();
   const { type } = useAppSelector(state => state.chat.subNewChat);
@@ -24,8 +24,8 @@ export default function Nav() {
 
   useEffect(() => {
     dispatch({ type: 'connect' });
-    dispatch(subscribeNewChat(`/sub/private/channel/${uid}`));
-  }, [dispatch, uid]);
+    dispatch(subscribeNewChat(`/sub/private/channel/${uId}`));
+  }, [dispatch, uId]);
 
   const onChatPage = () => {
     setIsNewChat(false);

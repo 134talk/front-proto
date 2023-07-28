@@ -16,7 +16,7 @@ import NotFoundPage from './NotFoundPage';
 
 export default function ChatPage() {
   const { type, roomId } = useParams();
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   // 소켓 fetching 데이터
@@ -36,7 +36,7 @@ export default function ChatPage() {
         destination: '/pub/enter',
         data: {
           roomId: Number(roomId),
-          userId: Number(uid),
+          userId: Number(uId),
           selected: true,
           socketFlag: 0,
         },
