@@ -18,10 +18,10 @@ export default function EmotionModal({
   modalActions,
 }: EmotionModalProps) {
   const dispatch = useAppDispatch();
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   const { roomId } = useParams();
   const subUserList = useAppSelector(state => state.chat?.subNotice?.userList);
-  const chatUserList = subUserList?.filter(el => el.userId !== Number(uid));
+  const chatUserList = subUserList?.filter(el => el.userId !== Number(uId));
   const [sendTo, setSendTo] = useState<{
     nickname: string;
     userId: number;
@@ -40,7 +40,7 @@ export default function EmotionModal({
         destination: '/pub/room/emoticon',
         data: {
           roomId: Number(roomId),
-          userId: Number(uid),
+          userId: Number(uId),
           toUserId: sendTo.userId,
           emoticonCode: sendEmotion.id,
         },
@@ -57,7 +57,7 @@ export default function EmotionModal({
           <t.Container>
             <div className="navbar_wrapper">
               <div className="navbar_top_wrapper">
-                <p className="guide_text">어느 분에게 감정을 표현하시겠어요?</p>
+                <p className="guIde_text">어느 분에게 감정을 표현하시겠어요?</p>
                 <img src={CLOSE_BLACK} alt="close" onClick={handleClose} />
               </div>
               {sendTo && <p className="sub_text">'{sendTo.nickname}'님에게</p>}

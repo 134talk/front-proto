@@ -6,7 +6,7 @@ import { Button } from 'ui';
 import * as t from './introductionScreen.style';
 
 export default function IntroductionScreen() {
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   const { roomId } = useParams();
   const dispatch = useAppDispatch();
   // 소켓 fetching 데이터
@@ -21,7 +21,7 @@ export default function IntroductionScreen() {
         destination: '/pub/enter',
         data: {
           roomId: Number(roomId),
-          userId: Number(uid),
+          userId: Number(uId),
           selected: true,
           socketFlag: 2,
         },

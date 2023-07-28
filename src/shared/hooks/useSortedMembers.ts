@@ -7,14 +7,14 @@ export default function useSortedMembers() {
   const [myProfile, setMyProfile] = useState({});
   const [teamListExceptMe, setTeamListExceptMe] = useState([]);
 
-  const { uid } = useUserData();
+  const { uId } = useUserData();
 
   useEffect(() => {
-    setMyProfile(teamList?.find(({ userId }) => String(userId) === uid));
+    setMyProfile(teamList?.find(({ userId }) => String(userId) === uId));
     setTeamListExceptMe(
-      teamList?.filter(({ userId }) => String(userId) !== uid) || []
+      teamList?.filter(({ userId }) => String(userId) !== uId) || []
     );
-  }, [teamList, uid]);
+  }, [teamList, uId]);
 
   return [myProfile, ...teamListExceptMe];
 }

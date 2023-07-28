@@ -10,7 +10,7 @@ import { Button } from 'ui';
 import * as t from './selectionScreen.style';
 
 export default function SelectionScreen() {
-  const { uid, selectKey } = useUserData();
+  const { uId, selectKey } = useUserData();
   const { roomId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ export default function SelectionScreen() {
           destination: '/pub/question-order',
           data: {
             roomId: Number(roomId),
-            userId: Number(uid),
+            userId: Number(uId),
             questionCodeList: orderList,
           },
         },
@@ -141,19 +141,19 @@ export default function SelectionScreen() {
         ))}
       </div>
       {orderList.length < 1 && (
-        <p className="guide_text">
+        <p className="guIde_text">
           <span>처음</span>으로 다뤄보고 싶은 <br />
           카드를 골라주세요.
         </p>
       )}
       {orderList.length === 1 && (
-        <p className="guide_text">
+        <p className="guIde_text">
           <span>두번째</span>로 다뤄보고 싶은 <br />
           카드를 골라주세요.
         </p>
       )}
       {orderList.length > 1 && (
-        <p className="guide_text">
+        <p className="guIde_text">
           대화가 곧 시작될거에요.
           <br />
           잠시만 기다려주세요.

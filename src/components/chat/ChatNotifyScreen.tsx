@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import * as t from './chatNotifyScreen.style';
 
 export default function ChatNotifyScreen() {
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   const { roomId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -32,13 +32,13 @@ export default function ChatNotifyScreen() {
   const reJoinedUser = useAppSelector(state => state.chat?.subUser?.requestId);
   // 처음 렌더시 구독 해제(대화 입장, 키워드 선택, 질문순서 등록) & 질문순서 등록만 재구독
   useEffect(() => {
-    if (reJoined === 'RE_ENTER' && reJoinedUser === Number(uid)) {
+    if (reJoined === 'RE_ENTER' && reJoinedUser === Number(uId)) {
       dispatch({
         type: 'sendData',
         payload: {
           destination: `/pub/question-notice/${roomId}`,
           data: {
-            userId: Number(uid),
+            userId: Number(uId),
             questionNumber: questionNumber ? questionNumber : 1,
           },
         },
@@ -46,7 +46,7 @@ export default function ChatNotifyScreen() {
       dispatch(subscribeNotice(`/sub/chat/room/question-notice/${roomId}`));
       dispatch(subscribeEmotion(`/sub/chat/room/emoticon/${roomId}`));
       dispatch(
-        subscribeEmotionList(`/sub/chat/room/emoticon/${roomId}/${uid}`)
+        subscribeEmotionList(`/sub/chat/room/emoticon/${roomId}/${uId}`)
       );
     } else {
       dispatch(subscribeSelect(`/sub/chat/question-order/${roomId}`));
@@ -54,7 +54,7 @@ export default function ChatNotifyScreen() {
     // return () => {
     //   dispatch({
     //     type: 'unsubscribe',
-    //     payload: { destination: `/sub/chat/keyword/${roomId}/${uid}` },
+    //     payload: { destination: `/sub/chat/keyword/${roomId}/${uId}` },
     //   });
     //   dispatch({
     //     type: 'unsubscribe',
@@ -71,7 +71,7 @@ export default function ChatNotifyScreen() {
         payload: {
           destination: `/pub/question-notice/${roomId}`,
           data: {
-            userId: Number(uid),
+            userId: Number(uId),
             questionNumber: questionNumber,
           },
         },
@@ -79,7 +79,7 @@ export default function ChatNotifyScreen() {
       dispatch(subscribeNotice(`/sub/chat/room/question-notice/${roomId}`));
       dispatch(subscribeEmotion(`/sub/chat/room/emoticon/${roomId}`));
       dispatch(
-        subscribeEmotionList(`/sub/chat/room/emoticon/${roomId}/${uid}`)
+        subscribeEmotionList(`/sub/chat/room/emoticon/${roomId}/${uId}`)
       );
     }
   }, [allRegistered, questionNumber]);

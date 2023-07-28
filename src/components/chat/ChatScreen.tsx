@@ -12,7 +12,7 @@ import ChatSideNav from './ChatSideNav';
 import ChatTutorial from './ChatTutorial';
 
 export default function ChatScreen() {
-  const { uid, tutorialKey, emotionKey } = useUserData();
+  const { uId, tutorialKey, emotionKey } = useUserData();
   const { roomId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -58,7 +58,7 @@ export default function ChatScreen() {
         payload: {
           destination: `/pub/question-notice/${roomId}`,
           data: {
-            userId: Number(uid),
+            userId: Number(uId),
             questionNumber: metadata?.questionNumber + 1,
           },
         },
@@ -130,7 +130,7 @@ export default function ChatScreen() {
           ))}
         </div>
         <BottomButtonTab>
-          {speaker?.userId === Number(uid) ? (
+          {speaker?.userId === Number(uId) ? (
             <Button
               category="confirm"
               text={

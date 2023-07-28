@@ -13,7 +13,7 @@ interface ExitConfirmModalProps {
 export default function ExitConfirmModal({
   modalActions,
 }: ExitConfirmModalProps) {
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   const { roomId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ export default function ExitConfirmModal({
         destination: '/pub/enter',
         data: {
           roomId: Number(roomId),
-          userId: Number(uid),
+          userId: Number(uId),
           selected: false,
           socketFlag: 0,
         },
