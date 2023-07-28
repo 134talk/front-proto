@@ -6,10 +6,10 @@ export default function KakaoPage() {
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
 
-  const { signIn } = useAuth();
+  const { signIn } = useAuth(code);
 
   useEffect(() => {
-    signIn(code);
+    signIn();
   }, [signIn, code]);
 
   return <></>;

@@ -1,4 +1,5 @@
 const queryKeys = {
+  AUTH: 'auth',
   NAME: 'name',
   TEAM: 'team',
   CHATS: 'chatList',
