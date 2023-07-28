@@ -15,3 +15,5 @@ export { default as FeedbackPage } from './FeedbackPage';
 export { default as MemberReportPage } from './MemberReportPage';
 export { default as UserReportPage } from './UserReportPage';
 export { default as NotFoundPage } from './NotFoundPage';
+export { default as ChatKeywordPage } from './ChatKeywordPage';
+export { default as ChatSelectionPage } from './ChatSelectionPage';
