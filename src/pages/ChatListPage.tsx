@@ -96,13 +96,13 @@ export default function ChatListPage() {
         />
         <t.Scroll $isMobile={isMobile}>
           {chatList?.length > 0 ? (
-            chatList.map(({ roomId, roomName, joinFlag, emoticons }) => (
-              <div key={roomId} onClick={() => setChatId(roomId)}>
+            chatList.map(({ id, name, joinFlag, emotions }) => (
+              <div key={id} onClick={() => setChatId(id)}>
                 <ChatBox
-                  roomId={roomId}
-                  roomName={roomName}
+                  roomId={id}
+                  roomName={name}
                   isJoin={joinFlag}
-                  emoticons={emoticons}
+                  emoticons={emotions}
                   onClick={() => enterRoom(joinFlag)}
                 />
               </div>
