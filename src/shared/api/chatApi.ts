@@ -1,6 +1,7 @@
 import axiosInstance from './instance';
 
-export const getTeam = () => axiosInstance.get('/user/teammate');
+export const getTeam = (tId: string) =>
+  axiosInstance.get(`/teams/${tId}/users`);
 
 export const getChatList = () => axiosInstance.get('/chat/find-chatrooms');
 

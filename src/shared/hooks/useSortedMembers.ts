@@ -10,10 +10,8 @@ export default function useSortedMembers() {
   const { uId } = useUserData();
 
   useEffect(() => {
-    setMyProfile(teamList?.find(({ userId }) => String(userId) === uId));
-    setTeamListExceptMe(
-      teamList?.filter(({ userId }) => String(userId) !== uId) || []
-    );
+    setMyProfile(teamList?.find(({ id }) => String(id) === uId));
+    setTeamListExceptMe(teamList?.filter(({ id }) => String(id) !== uId) || []);
   }, [teamList, uId]);
 
   return [myProfile, ...teamListExceptMe];
