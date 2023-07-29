@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getTimer, setTimer } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
+import useUserData from 'shared/hooks/useUserData';
 
 type Res = {
   timeout: number;
@@ -10,16 +11,18 @@ type Res = {
 
 export default function useTimer() {
   const queryClient = useQueryClient();
+  const { channel: tId } = useUserData();
+
   const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.TIMER],
-    getTimer,
+    () => getTimer(tId),
     {
       refetchOnWindowFocus: false,
     }
   );
 
   const { mutate } = useMutation<AxiosResponse<Res>, AxiosError, string>(
-    time => setTimer(time),
+    time => setTimer(tId, time),
     {
       onSuccess: _ => queryClient.invalidateQueries([queryKeys.TIMER]),
     }

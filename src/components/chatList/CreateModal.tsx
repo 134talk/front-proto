@@ -105,20 +105,20 @@ export default function CreateModal({ handleCreateModal }: Props) {
             {filteredUserList.length ? (
               <>
                 {filteredUserList.map(
-                  ({ userId, nickname, name, profileUrl }) => (
+                  ({ id, nickname, name, profile_image_url }) => (
                     <t.ProfileWrapper
-                      $isSelected={selectedIdList?.includes(userId)}
-                      key={userId}
-                      onClick={() => handleClick(userId, name)}
+                      $isSelected={selectedIdList?.includes(id)}
+                      key={id}
+                      onClick={() => handleClick(id, name)}
                     >
                       <Profile
                         scale="medium"
-                        userId={userId}
+                        userId={id}
                         nickname={nickname}
                         name={name}
-                        image={profileUrl}
+                        image={profile_image_url}
                       />
-                      {selectedIdList?.includes(userId) && (
+                      {selectedIdList?.includes(id) && (
                         <img src={CHECK_ICON} alt="선택" />
                       )}
                     </t.ProfileWrapper>

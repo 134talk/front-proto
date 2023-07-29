@@ -17,8 +17,6 @@ export const signAdmin = (uid: string, name: string, tName: string) =>
     team_name: tName,
   });
 
-export const getName = () => axiosInstance.get('/user/name');
-
 export const updateNickname = (uId: string, nameCode: string[]) =>
   axiosInstance.put(`/users/${uId}/nickname`, {
     emotion_code: nameCode[0],
