@@ -12,6 +12,7 @@ type Res = {
   nickname: string;
   teamCode: string;
   name: string;
+  guideConfirmDate: string;
 };
 
 export default function useAuth(code?: string) {
@@ -25,6 +26,7 @@ export default function useAuth(code?: string) {
     nickname,
     teamCode,
     name,
+    guideConfirmDate,
   }: Res) => {
     sessionStorage.setItem('token', accessToken);
     localStorage.setItem('uid', String(userId));
@@ -47,14 +49,15 @@ export default function useAuth(code?: string) {
     () => login(code),
     {
       onSuccess: res => {
-        let userData = res.data.data.find_user;
-        let tokenData = res.data.data.tokens;
+        let userData = res.data.data.user;
+        let tokenData = res.data.data.token;
         let accessToken = tokenData.accessToken;
         let userId = userData.id;
         let isAdmin = userData.role === 'editor';
         let nickname = userData.nickname;
         let teamCode = userData.team.code;
         let name = userData.name;
+        let guideConfirmDate = userData.guide_confirm_date;
         handleUserData({
           accessToken,
           userId,
@@ -62,6 +65,7 @@ export default function useAuth(code?: string) {
           nickname,
           teamCode,
           name,
+          guideConfirmDate,
         });
       },
     }
