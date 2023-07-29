@@ -8,8 +8,10 @@ export const getChatList = () => axiosInstance.get('/conversation-rooms');
 export const searchChatList = (searchName: string) =>
   axiosInstance.get(`/chat/find-chatrooms-with-name?searchName=${searchName}`);
 
-export const createRoom = (userIdList: number[]) =>
-  axiosInstance.post('/chat/create-chatroom', userIdList);
+export const createRoom = (tId: string, userList: number[]) =>
+  axiosInstance.post(`/teams/${tId}/conversation-room`, {
+    user_array: userList,
+  });
 
 export const getTimer = (tId: string) => axiosInstance.get(`/teams/${tId}`);
 
