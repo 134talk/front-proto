@@ -33,17 +33,19 @@ export default function MembersPage() {
         />
         <t.Scroll $isMobile={isMobile}>
           {filteredUserList?.length > 0 ? (
-            filteredUserList.map(({ userId, nickname, name, profileUrl }) => (
-              <div key={userId}>
-                <Profile
-                  userId={userId}
-                  nickname={nickname}
-                  name={name}
-                  scale="medium"
-                  image={profileUrl}
-                />
-              </div>
-            ))
+            filteredUserList.map(
+              ({ id, nickname, name, profile_image_url }) => (
+                <div key={id}>
+                  <Profile
+                    userId={id}
+                    nickname={nickname}
+                    name={name}
+                    scale="medium"
+                    image={profile_image_url}
+                  />
+                </div>
+              )
+            )
           ) : (
             <p className="notFound">검색 결과가 없습니다.</p>
           )}
