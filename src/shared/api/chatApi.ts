@@ -11,7 +11,9 @@ export const searchChatList = (searchName: string) =>
 export const createRoom = (userIdList: number[]) =>
   axiosInstance.post('/chat/create-chatroom', userIdList);
 
-export const getTimer = () => axiosInstance.get('/user/get-timeout');
+export const getTimer = (tId: string) => axiosInstance.get(`/teams/${tId}`);
 
-export const setTimer = (timeout: string) =>
-  axiosInstance.put(`/user/update-timeout/${timeout}`);
+export const setTimer = (tId: string, chatTime: string) =>
+  axiosInstance.put(`/teams/${tId}`, {
+    timeout: chatTime,
+  });
