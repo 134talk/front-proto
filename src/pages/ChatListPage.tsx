@@ -10,6 +10,7 @@ import {
 import debounce from 'lodash/debounce';
 import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { updateGuideStatus } from 'shared/api/chatApi';
 import useUserData from 'shared/hooks/useUserData';
 import useChatList from 'shared/query/useChatList';
 import isMobile from 'shared/utils/deviceDetector';
@@ -24,10 +25,13 @@ export default function ChatListPage() {
   const [keyword, setKeyword] = useState('');
   const [chatId, setChatId] = useState(0);
 
+  const { uId } = useUserData();
+
   const handleCreateModal = () => setCreateModal(prev => !prev);
   const handleSettingModal = () => setSettingModal(prev => !prev);
   const handleCheckModal = () => setCheckModal(prev => !prev);
   const handleGuIdeModal = () => {
+    updateGuideStatus(uId);
     setGuideModal(prev => !prev);
   };
 

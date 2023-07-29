@@ -19,3 +19,6 @@ export const setTimer = (tId: string, chatTime: string) =>
   axiosInstance.put(`/teams/${tId}`, {
     timeout: chatTime,
   });
+
+export const updateGuideStatus = (uId: string) =>
+  axiosInstance.post(`/users/${uId}/notify`);
