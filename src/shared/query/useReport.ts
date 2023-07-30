@@ -31,23 +31,23 @@ type FeedbackRes = {
 };
 
 type MemberRes = {
-  chatCount: number;
-  energyPercent: number;
+  converstaion_count: number;
+  energy_percent: number;
   name: string;
   nickname: string;
-  receivedEmoticons: { emoticon: string; totalCount: number }[];
-  relationPercent: number;
-  scorePercent: number;
-  stablePercent: number;
-  stressPercent: number;
+  received_emotions: { emotion_name: string; emotion_count: number }[];
+  relation_percent: number;
+  score_percent: number;
+  stable_percent: number;
+  stress_percent: number;
 };
 
 type ListRes = {
-  userId: number;
-  profileUrl: string;
+  id: number;
+  profile_image_url: string;
   name: string;
   nickname: string;
-  chatCount: number;
+  conversation_count: number;
 }[];
 
 type Args = {

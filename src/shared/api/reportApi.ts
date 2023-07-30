@@ -50,13 +50,13 @@ export const getUserReport = (uId: string) =>
 export const getUserReportDetail = (uId: string, rId: string) =>
   axiosInstance.get(`/statistics/users/${uId}/reports/${rId}`);
 
-export const getMemberReport = (teamCode: string) =>
-  axiosInstance.get(`/statistics/admin/report/list/${teamCode}`);
+export const getMemberReport = (tId: string) =>
+  axiosInstance.get(`/statistics/editor/teams/${tId}/user-log`);
 
-export const searchMemberReport = (teamCode: string, searchName: string) =>
+export const searchMemberReport = (tId: string, searchKeyword: string) =>
   axiosInstance.get(
-    `/statistics/admin/report/search/list/${teamCode}?searchName=${searchName}`
+    `/statistics/editor/teams/${tId}/user-log/serach?name=${searchKeyword}`
   );
 
-export const getMemberReportDetail = (teamCode: string, searchId: string) =>
-  axiosInstance.get(`/statistics/admin/user/report/${teamCode}/${searchId}`);
+export const getMemberReportDetail = (tId: string, searchId: string) =>
+  axiosInstance.get(`/statistics/eidtor/teams/${tId}/users/${searchId}/report`);
