@@ -59,11 +59,11 @@ export default function useAuth(code?: string) {
     {
       onSuccess: res => {
         let { token: tokenData, user: userData } = res.data.data;
-        let accessToken = tokenData.accessToken;
+        let accessToken = tokenData.access_token;
         let userId = userData.id;
         let isAdmin = userData.role === 'editor';
         let nickname = userData.nickname;
-        let teamCode = userData.team.code;
+        let teamCode = userData.team_id;
         let name = userData.name;
         let guideConfirmDate = userData.guide_confirm_date;
         handleUserData({

@@ -9,8 +9,10 @@ type Req = {
 };
 
 type Res = {
-  nickname: string;
-  profile_image_url: string;
+  data: {
+    nickname: string;
+    profile_image_url: string;
+  };
 };
 
 export default function useNickname() {
@@ -20,8 +22,8 @@ export default function useNickname() {
 
   const { nickname, profile } = useMemo(
     () => ({
-      nickname: data?.data.nickname,
-      profile: data?.data.profile_image_url,
+      nickname: data?.data.data.nickname,
+      profile: data?.data.data.profile_image_url,
     }),
     [data]
   );
