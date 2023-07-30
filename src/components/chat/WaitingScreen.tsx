@@ -9,7 +9,7 @@ import { Button, ProfileImg, Spinner } from 'ui';
 import * as t from './waitingScreen.style';
 
 export default function WaitingScreen() {
-  const { uid } = useUserData();
+  const { uId } = useUserData();
   const exitConfirmModal = useModal();
   // 소켓 fetching 데이터
   const subUserList = useAppSelector(
@@ -34,7 +34,7 @@ export default function WaitingScreen() {
               <div key={item.userId}>
                 <ProfileImg
                   size="4rem"
-                  $isMyProf={uid === String(item.userId)}
+                  $isMyProf={uId === String(item.userId)}
                   data-tooltip-id={item.userId}
                   image={item.profileUrl}
                   $isCheckIn={

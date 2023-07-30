@@ -1,7 +1,6 @@
 import FullModal from 'components/common/FullModal';
 import NavBar from 'components/common/NavBar';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -15,18 +14,21 @@ import {
   GUIDE07,
 } from 'shared/constants/guideImgs';
 import { SKIP_ICON } from 'shared/constants/icons';
+import useChatFlag from 'shared/query/useChatFlag';
 import { Button } from 'ui';
 import * as t from './guideModal.style';
 
 type Props = {
   roomId: number;
+  chatUserId: number;
   onClose: () => void;
 };
 
-export default function GuideModal({ roomId, onClose }: Props) {
-  const navigate = useNavigate();
+export default function GuideModal({ roomId, chatUserId, onClose }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
+
+  const { refetch } = useChatFlag(roomId, chatUserId);
 
   const SETTINGS = {
     dotsClass: 'dotsCustom',
@@ -45,7 +47,7 @@ export default function GuideModal({ roomId, onClose }: Props) {
   };
 
   const onSkip = () => sliderRef.current.slickGoTo(6);
-  const onConfirm = () => navigate(`/chat/${roomId}/0`);
+  const onConfirm = () => refetch();
 
   return (
     <FullModal>

@@ -12,19 +12,19 @@ export default function FeedbackDetail() {
         <ReportTitle text="대화는 우리에게 좋은 영향을 주고 있는걸까?" />
         <FeedbackSection
           title="대화를 하고 우리의 에너지는 이렇게 변했어요."
-          value={feedbackData?.data.energyPercent}
+          value={feedbackData?.data.energy_percent}
         />
         <FeedbackSection
           title="대화를 하고 우리의 관계 이해도는 이렇게 변했어요."
-          value={feedbackData?.data.relationPercent}
+          value={feedbackData?.data.relation_percent}
         />
         <FeedbackSection
           title="대화를 하고 우리의 심리적 안정감은 이렇게 변했어요."
-          value={feedbackData?.data.stablePercent}
+          value={feedbackData?.data.stable_percent}
         />
         <FeedbackSection
           title="대화를 하고 우리의 스트레스는 이렇게 변했어요."
-          value={feedbackData?.data.stressPercent}
+          value={feedbackData?.data.stress_percent}
         />
       </t.Scroll>
     </t.Container>

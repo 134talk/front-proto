@@ -34,7 +34,7 @@ export default function MemberDetail() {
     [refetch]
   );
 
-  const onDetail = (uid: string) => navigate(`/report-detail/${uid}`);
+  const onDetail = (id: number) => navigate(`/report-detail/${id}`);
 
   return (
     <t.Container>
@@ -49,22 +49,24 @@ export default function MemberDetail() {
           />
           <t.Scroll $isMobile={isMobile}>
             {members?.map(
-              ({ userId, profileUrl, nickname, name, chatCount }) => (
-                <Bubble
-                  key={userId}
-                  isClickable
-                  onClick={() => onDetail(`${userId}`)}
-                >
+              ({
+                id,
+                profile_image_url,
+                nickname,
+                name,
+                conversation_count,
+              }) => (
+                <Bubble key={id} isClickable onClick={() => onDetail(id)}>
                   <section>
                     <div className="userWrapper">
-                      <ProfileImg size="3.25rem" image={profileUrl} />
+                      <ProfileImg size="3.25rem" image={profile_image_url} />
                       <div className="user">
                         <p>
                           {nickname}
                           <span>({name})</span>
                         </p>
                         <p className="subText">
-                          대화 참여 횟수 : {chatCount}번
+                          대화 참여 횟수 : {conversation_count}번
                         </p>
                       </div>
                     </div>

@@ -35,8 +35,8 @@ export default function MemberReportPage() {
               {memberData?.data.nickname}
               <span className="name">({memberData?.data.name})</span>님
             </span>
-            은<br /> 총 <span>{memberData?.data.chatCount}</span>번의 대화에
-            참여했어요.
+            은<br /> 총 <span>{memberData?.data.converstaion_count}</span>번의
+            대화에 참여했어요.
           </p>
           <div className="bubbleWrapper">
             <Bubble>
@@ -49,13 +49,13 @@ export default function MemberReportPage() {
                 에게 이런 영향을 주었어요.
               </h1>
               <EffectGraph
-                energy={memberData?.data.energyPercent}
-                relation={memberData?.data.relationPercent}
-                stable={memberData?.data.stablePercent}
-                stress={memberData?.data.stressPercent}
+                energy={memberData?.data.energy_percent}
+                relation={memberData?.data.relation_percent}
+                stable={memberData?.data.stable_percent}
+                stress={memberData?.data.stress_percent}
               />
             </Bubble>
-            {!!memberData?.data.receivedEmoticons?.length && (
+            {!!memberData?.data.received_emotions?.length && (
               <Bubble>
                 <h1>
                   <span>
@@ -64,12 +64,12 @@ export default function MemberReportPage() {
                   </span>
                   이 공감받은 감정은?
                   <div className="emotionWrapper">
-                    {memberData?.data.receivedEmoticons?.map(
-                      ({ emoticon, totalCount }) => (
+                    {memberData?.data.received_emotions?.map(
+                      ({ emotion_name, emotion_count }) => (
                         <EmotionData
-                          key={emoticon}
-                          name={emoticon}
-                          count={totalCount}
+                          key={emotion_name}
+                          name={emotion_name}
+                          count={emotion_count}
                         />
                       )
                     )}
@@ -87,7 +87,7 @@ export default function MemberReportPage() {
               </h1>
               <PercentChart
                 text="전체 대화 만족도"
-                value={memberData?.data.scorePercent}
+                value={memberData?.data.score_percent}
                 isMemberReport
               />
             </Bubble>

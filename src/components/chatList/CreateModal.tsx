@@ -5,11 +5,12 @@ import {
   Profile,
   SearchBar,
 } from 'components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import useSortedMembers from 'shared/hooks/useSortedMembers';
+import useUserData from 'shared/hooks/useUserData';
 import useChatInvitation from 'shared/query/useChatInvitation';
 import isMobile from 'shared/utils/deviceDetector';
 import { Button, Chip } from 'ui';
@@ -21,6 +22,11 @@ type Props = {
 
 export default function CreateModal({ handleCreateModal }: Props) {
   const members = useSortedMembers();
+  const { uId } = useUserData();
+
+  useEffect(() => {
+    handleSelectedIdList(Number(uId));
+  }, [uId]);
 
   const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(members);
@@ -105,20 +111,20 @@ export default function CreateModal({ handleCreateModal }: Props) {
             {filteredUserList.length ? (
               <>
                 {filteredUserList.map(
-                  ({ userId, nickname, name, profileUrl }) => (
+                  ({ id, nickname, name, profile_image_url }) => (
                     <t.ProfileWrapper
-                      $isSelected={selectedIdList?.includes(userId)}
-                      key={userId}
-                      onClick={() => handleClick(userId, name)}
+                      $isSelected={selectedIdList?.includes(id)}
+                      key={id}
+                      onClick={() => handleClick(id, name)}
                     >
                       <Profile
                         scale="medium"
-                        userId={userId}
+                        userId={id}
                         nickname={nickname}
                         name={name}
-                        image={profileUrl}
+                        image={profile_image_url}
                       />
-                      {selectedIdList?.includes(userId) && (
+                      {selectedIdList?.includes(id) && (
                         <img src={CHECK_ICON} alt="선택" />
                       )}
                     </t.ProfileWrapper>

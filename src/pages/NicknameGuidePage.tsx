@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SILHOUETTE } from 'shared/constants/icons';
-import useName from 'shared/query/useName';
+import useUserData from 'shared/hooks/useUserData';
 import { Background, Button } from 'ui';
 import * as t from './nicknameGuidePage.style';
 
 export default function NicknameGuidePage() {
   const navigate = useNavigate();
-  const name = useName();
+
+  const { name } = useUserData();
 
   useEffect(() => {
     localStorage.removeItem('mood');

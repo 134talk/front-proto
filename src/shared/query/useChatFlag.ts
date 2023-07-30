@@ -15,7 +15,7 @@ export default function useChatFlag(
 ) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
+  const { data, refetch } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.CHAT_FLAG],
     () => getFlag(conversation_room_id, conversation_user_id),
     {
@@ -49,5 +49,5 @@ export default function useChatFlag(
 
   const chatFlag = useMemo(() => data?.data.flag || null, [data]);
 
-  return { chatFlag };
+  return { chatFlag, refetch };
 }

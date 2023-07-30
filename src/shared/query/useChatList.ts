@@ -5,11 +5,14 @@ import { getChatList, searchChatList } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
 
 type Res = {
-  roomId: number;
-  roomName: string;
-  emoticons: { emoticon: string; emoticonCount: number }[] | [];
-  joinFlag: boolean;
-}[];
+  conversation_room: {
+    conversation_room_id: number;
+    name: string;
+    emotions: { emotion: string; emotion_count: number }[];
+    conversation_user_id: number;
+    join_flag: boolean;
+  }[];
+};
 
 type Error = { errorCode: number };
 
@@ -25,7 +28,7 @@ export default function useChatList(keyword?: string) {
       refetchInterval: 10000,
     }
   );
-  const chatList = useMemo(() => data?.data, [data]);
+  const chatList = useMemo(() => data?.data.conversation_room, [data]);
 
   return { chatList, refetch, error };
 }

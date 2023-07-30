@@ -1,19 +1,27 @@
 import axiosInstance from './instance';
 
-export const getTeam = () => axiosInstance.get('/user/teammate');
+export const getTeam = (tId: string) =>
+  axiosInstance.get(`/teams/${tId}/users`);
 
-export const getChatList = () => axiosInstance.get('/chat/find-chatrooms');
+export const getChatList = () => axiosInstance.get('/conversation-rooms');
 
-export const searchChatList = (searchName: string) =>
-  axiosInstance.get(`/chat/find-chatrooms-with-name?searchName=${searchName}`);
+export const searchChatList = (searchKeyword: string) =>
+  axiosInstance.get(`/conversation-rooms/search?name=${searchKeyword}`);
 
-export const createRoom = (userIdList: number[]) =>
-  axiosInstance.post('/chat/create-chatroom', userIdList);
+export const createRoom = (tId: string, userList: number[]) =>
+  axiosInstance.post(`/teams/${tId}/conversation-room`, {
+    user_array: userList,
+  });
 
-export const getTimer = () => axiosInstance.get('/user/get-timeout');
+export const getTimer = (tId: string) => axiosInstance.get(`/teams/${tId}`);
 
-export const setTimer = (timeout: string) =>
-  axiosInstance.put(`/user/update-timeout/${timeout}`);
+export const setTimer = (tId: string, chatTime: string) =>
+  axiosInstance.put(`/teams/${tId}`, {
+    timeout: chatTime,
+  });
+
+export const updateGuideStatus = (uId: string) =>
+  axiosInstance.post(`/users/${uId}/notify`);
 
 export const getFlag = (
   conversation_room_id: number,

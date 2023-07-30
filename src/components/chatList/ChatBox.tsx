@@ -6,7 +6,7 @@ type Props = {
   roomId: number;
   roomName: string;
   isJoin: boolean;
-  emoticons: { emoticon: string; emoticonCount: number }[] | [];
+  emoticons: { emotion: string; emotion_count: number }[] | [];
   onClick: () => void;
 };
 
@@ -25,8 +25,8 @@ export default function ChatBox({
       </div>
       <p className="users">{roomName}</p>
       <div className="emoticons">
-        {emoticons.map(({ emoticon, emoticonCount }) => (
-          <EmotionData key={emoticon} name={emoticon} count={emoticonCount} />
+        {emoticons.map(({ emotion, emotion_count }) => (
+          <EmotionData key={emotion} name={emotion} count={emotion_count} />
         ))}
       </div>
     </t.Container>

@@ -34,7 +34,7 @@ export default function useAuth(code?: string) {
     localStorage.setItem('name', name);
 
     if (teamCode && nickname) {
-      navigate('/channel');
+      navigate('/chats');
     } else if (!teamCode && !nickname) {
       navigate('/sign');
     } else {
@@ -42,18 +42,30 @@ export default function useAuth(code?: string) {
     }
   };
 
+  const handleGuideConfirm = (guideConfirmDate: string) => {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = ('0' + (1 + date.getMonth())).slice(-2);
+    let day = ('0' + date.getDate()).slice(-2);
+
+    let today = year + '-' + month + '-' + day;
+
+    localStorage.setItem('isGuideAccess', String(guideConfirmDate === today));
+  };
+
   const { refetch: signIn } = useQuery<AxiosResponse, AxiosError>(
     [queryKeys.AUTH],
     () => login(code),
     {
       onSuccess: res => {
-        let { userData, tokenData } = res.data.data;
+        let { token: tokenData, user: userData } = res.data.data;
         let accessToken = tokenData.accessToken;
         let userId = userData.id;
         let isAdmin = userData.role === 'editor';
         let nickname = userData.nickname;
         let teamCode = userData.team.code;
         let name = userData.name;
+        let guideConfirmDate = userData.guide_confirm_date;
         handleUserData({
           accessToken,
           userId,
@@ -62,6 +74,7 @@ export default function useAuth(code?: string) {
           teamCode,
           name,
         });
+        handleGuideConfirm(guideConfirmDate);
       },
     }
   );
