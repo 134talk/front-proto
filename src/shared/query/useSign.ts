@@ -19,11 +19,12 @@ type Res = {
   teamCode: string;
 };
 
-export default function useSign() {
+export default function useSign(uName: string) {
   const navigate = useNavigate();
 
   const onSuccessCallback = ({ teamCode }: Res) => {
     localStorage.setItem('channel', teamCode);
+    localStorage.setItem('name', uName);
     navigate('/nickname/guide');
   };
 
