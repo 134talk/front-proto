@@ -35,15 +35,15 @@ export default function Nav() {
 
   return (
     <t.Container>
+      <t.Nav $isActive={pathname === '/chats'} onClick={onChatPage}>
+        대화
+        {isNewChat && <img src={NEW_BADGE_ICON} alt="새 대화" />}
+      </t.Nav>
       <t.Nav
         $isActive={pathname === '/channel'}
         onClick={() => navigate('/channel')}
       >
         참가자
-      </t.Nav>
-      <t.Nav $isActive={pathname === '/chats'} onClick={onChatPage}>
-        대화
-        {isNewChat && <img src={NEW_BADGE_ICON} alt="새 대화" />}
       </t.Nav>
       <t.Nav
         $isActive={pathname === '/report' || pathname === '/report-detail'}

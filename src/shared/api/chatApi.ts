@@ -5,8 +5,8 @@ export const getTeam = (tId: string) =>
 
 export const getChatList = () => axiosInstance.get('/conversation-rooms');
 
-export const searchChatList = (searchName: string) =>
-  axiosInstance.get(`/chat/find-chatrooms-with-name?searchName=${searchName}`);
+export const searchChatList = (searchKeyword: string) =>
+  axiosInstance.get(`/conversation-rooms/search?name=${searchKeyword}`);
 
 export const createRoom = (tId: string, userList: number[]) =>
   axiosInstance.post(`/teams/${tId}/conversation-room`, {

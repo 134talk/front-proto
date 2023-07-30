@@ -119,7 +119,7 @@ export const AuthRouter: RouterData[] = [
     isTab: true,
     element: <UserPage />,
   },
-  { id: 15, path: '/user/:date', isTab: false, element: <UserReportPage /> },
+  { id: 15, path: '/user/:id', isTab: false, element: <UserReportPage /> },
   {
     id: 16,
     path: '*',

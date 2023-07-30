@@ -18,7 +18,10 @@ export default function NicknameResultPage() {
   const { mutate, nickname, profile } = useNickname();
 
   useEffect(() => {
-    mutate({ uId: uId, code: [mood, personality, status] });
+    mutate({
+      uId: uId,
+      code: [Number(mood), Number(personality), Number(status)],
+    });
   }, [mutate, mood, personality, status, uId]);
 
   return (

@@ -12,18 +12,19 @@ export const signUser = (uid: string, name: string, tId: string) =>
   });
 
 export const signAdmin = (uid: string, name: string, tName: string) =>
-  axiosInstance.post(`/users/${uid}/register/guest`, {
+  axiosInstance.post(`/users/${uid}/register/editor`, {
     name: name,
     team_name: tName,
   });
 
-export const updateNickname = (uId: string, nameCode: string[]) =>
+export const updateNickname = (uId: string, nameCode: number[]) =>
   axiosInstance.put(`/users/${uId}/nickname`, {
     emotion_code: nameCode[0],
     action_code: nameCode[1],
     state_code: nameCode[2],
   });
 
-export const getProfile = () => axiosInstance.get('/user/profile');
+export const getProfile = (uId: string) =>
+  axiosInstance.get(`/user/${uId}/profile`);
 
-export const logout = () => axiosInstance.post('user/logout');
+export const logout = () => axiosInstance.post('/auth/signout');

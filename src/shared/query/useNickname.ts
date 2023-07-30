@@ -5,7 +5,7 @@ import { updateNickname } from 'shared/api/userApi';
 
 type Req = {
   uId: string;
-  code: string[];
+  code: number[];
 };
 
 type Res = {

@@ -5,11 +5,12 @@ import {
   Profile,
   SearchBar,
 } from 'components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import useSortedMembers from 'shared/hooks/useSortedMembers';
+import useUserData from 'shared/hooks/useUserData';
 import useChatInvitation from 'shared/query/useChatInvitation';
 import isMobile from 'shared/utils/deviceDetector';
 import { Button, Chip } from 'ui';
@@ -21,6 +22,11 @@ type Props = {
 
 export default function CreateModal({ handleCreateModal }: Props) {
   const members = useSortedMembers();
+  const { uId } = useUserData();
+
+  useEffect(() => {
+    handleSelectedIdList(Number(uId));
+  }, [uId]);
 
   const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(members);

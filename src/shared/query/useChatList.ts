@@ -6,11 +6,11 @@ import queryKeys from 'shared/constants/queryKeys';
 
 type Res = {
   conversation_room: {
-    id: number;
+    conversation_room_id: number;
     name: string;
     emotions: { emotion: string; emotion_count: number }[];
     conversation_user_id: number;
-    joinFlag: boolean;
+    join_flag: boolean;
   }[];
 };
 

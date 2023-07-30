@@ -14,23 +14,21 @@ import {
   GUIDE07,
 } from 'shared/constants/guideImgs';
 import { SKIP_ICON } from 'shared/constants/icons';
-import useUserData from 'shared/hooks/useUserData';
 import useChatFlag from 'shared/query/useChatFlag';
 import { Button } from 'ui';
 import * as t from './guideModal.style';
 
 type Props = {
   roomId: number;
+  chatUserId: number;
   onClose: () => void;
 };
 
-export default function GuideModal({ roomId, onClose }: Props) {
+export default function GuideModal({ roomId, chatUserId, onClose }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
 
-  const { uId } = useUserData();
-
-  const { refetch } = useChatFlag(roomId, Number(uId));
+  const { refetch } = useChatFlag(roomId, chatUserId);
 
   const SETTINGS = {
     dotsClass: 'dotsCustom',

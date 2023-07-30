@@ -12,6 +12,7 @@ import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { updateGuideStatus } from 'shared/api/chatApi';
 import useUserData from 'shared/hooks/useUserData';
+import useChatFlag from 'shared/query/useChatFlag';
 import useChatList from 'shared/query/useChatList';
 import isMobile from 'shared/utils/deviceDetector';
 import * as t from './chatListPage.style';
@@ -24,8 +25,11 @@ export default function ChatListPage() {
   const [chatTime, setChatTime] = useState('30');
   const [keyword, setKeyword] = useState('');
   const [chatId, setChatId] = useState(0);
+  const [chatUserId, setChatUserId] = useState(0);
 
-  const { uId } = useUserData();
+  const { uId, isGuideAccess } = useUserData();
+
+  const { refetch: openChatRoom } = useChatFlag(chatId, chatUserId);
 
   const handleCreateModal = () => setCreateModal(prev => !prev);
   const handleSettingModal = () => setSettingModal(prev => !prev);
@@ -36,8 +40,9 @@ export default function ChatListPage() {
   };
 
   const enterRoom = (isMyRoom: boolean) => {
-    if (isMyRoom) handleGuIdeModal();
-    else toast.error('참여할 수 없는 대화방입니다.');
+    if (isMyRoom && !isGuideAccess) handleGuIdeModal();
+    else if (!isMyRoom) toast.error('참여할 수 없는 대화방입니다.');
+    else if (isGuideAccess) openChatRoom();
   };
 
   const { chatList, refetch, error } = useChatList(keyword);
@@ -82,7 +87,13 @@ export default function ChatListPage() {
           onClose={handleSettingModal}
         />
       )}
-      {guideModal && <GuideModal onClose={handleGuIdeModal} roomId={chatId} />}
+      {guideModal && (
+        <GuideModal
+          onClose={handleGuIdeModal}
+          roomId={chatId}
+          chatUserId={chatUserId}
+        />
+      )}
       <NavBar
         isCenter={false}
         isMargin
@@ -100,17 +111,31 @@ export default function ChatListPage() {
         />
         <t.Scroll $isMobile={isMobile}>
           {chatList?.length > 0 ? (
-            chatList.map(({ id, name, joinFlag, emotions }) => (
-              <div key={id} onClick={() => setChatId(id)}>
-                <ChatBox
-                  roomId={id}
-                  roomName={name}
-                  isJoin={joinFlag}
-                  emoticons={emotions}
-                  onClick={() => enterRoom(joinFlag)}
-                />
-              </div>
-            ))
+            chatList.map(
+              ({
+                conversation_room_id,
+                name,
+                join_flag,
+                emotions,
+                conversation_user_id,
+              }) => (
+                <div
+                  key={conversation_room_id}
+                  onClick={() => {
+                    setChatUserId(conversation_user_id);
+                    setChatId(conversation_room_id);
+                  }}
+                >
+                  <ChatBox
+                    roomId={conversation_room_id}
+                    roomName={name}
+                    isJoin={join_flag}
+                    emoticons={emotions}
+                    onClick={() => enterRoom(join_flag)}
+                  />
+                </div>
+              )
+            )
           ) : (
             <p className="notFound">진행 중인 대화방이 없습니다.</p>
           )}
