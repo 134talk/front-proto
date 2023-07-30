@@ -24,6 +24,7 @@ export default function ChatListPage() {
   const [chatTime, setChatTime] = useState('30');
   const [keyword, setKeyword] = useState('');
   const [chatId, setChatId] = useState(0);
+  const [chatUserId, setChatUserId] = useState(0);
 
   const { uId } = useUserData();
 
@@ -82,7 +83,13 @@ export default function ChatListPage() {
           onClose={handleSettingModal}
         />
       )}
-      {guideModal && <GuideModal onClose={handleGuIdeModal} roomId={chatId} />}
+      {guideModal && (
+        <GuideModal
+          onClose={handleGuIdeModal}
+          roomId={chatId}
+          chatUserId={chatUserId}
+        />
+      )}
       <NavBar
         isCenter={false}
         isMargin
@@ -100,17 +107,25 @@ export default function ChatListPage() {
         />
         <t.Scroll $isMobile={isMobile}>
           {chatList?.length > 0 ? (
-            chatList.map(({ id, name, joinFlag, emotions }) => (
-              <div key={id} onClick={() => setChatId(id)}>
-                <ChatBox
-                  roomId={id}
-                  roomName={name}
-                  isJoin={joinFlag}
-                  emoticons={emotions}
-                  onClick={() => enterRoom(joinFlag)}
-                />
-              </div>
-            ))
+            chatList.map(
+              ({ id, name, joinFlag, emotions, conversation_user_id }) => (
+                <div
+                  key={id}
+                  onClick={() => {
+                    setChatUserId(conversation_user_id);
+                    setChatId(id);
+                  }}
+                >
+                  <ChatBox
+                    roomId={id}
+                    roomName={name}
+                    isJoin={joinFlag}
+                    emoticons={emotions}
+                    onClick={() => enterRoom(joinFlag)}
+                  />
+                </div>
+              )
+            )
           ) : (
             <p className="notFound">진행 중인 대화방이 없습니다.</p>
           )}
