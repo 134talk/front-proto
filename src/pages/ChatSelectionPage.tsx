@@ -1,8 +1,9 @@
-import { BottomButtonTab, Card, NavBar } from 'components';
+import { BottomButtonTab, Card, ExitConfirmModal, NavBar } from 'components';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { KEYWORD_LIST } from 'shared/constants/constants';
+import useModal from 'shared/hooks/useModal';
 import useUserData from 'shared/hooks/useUserData';
 import useSelection from 'shared/query/useSelection';
 import { Button, CardImg } from 'ui';
@@ -10,6 +11,7 @@ import * as t from './chatSelectionPage.style';
 
 export default function ChatSelectionPage() {
   const navigate = useNavigate();
+  const exitConfirmModal = useModal();
   const { roomId, chatUserId } = useParams();
   const { selectKey } = useUserData();
   const [combinedList, setCombinedList] = useState([]);
@@ -69,8 +71,8 @@ export default function ChatSelectionPage() {
   useEffect(() => {
     if (orderList.length > 2) {
       mutate({
-        roomId: Number(roomId),
-        chatUserId: Number(chatUserId),
+        conversation_room_id: Number(roomId),
+        conversation_user_id: Number(chatUserId),
         question_code_list: orderList,
       });
     }
@@ -82,62 +84,70 @@ export default function ChatSelectionPage() {
   };
 
   return (
-    <t.Container>
-      <NavBar isCenter={true} title="대화방" />
-      <div className="selection_order_wrapper">
-        {combinedList?.map(item => (
-          <div
-            className="selection_card_wrapper"
-            key={item.keyword_id}
-            onClick={() => handleSelect(item.question_id)}
-          >
-            <CardImg
-              lineColor={item.color[0]}
-              fillColor={item.color[1]}
-              size="3rem"
-            />
-            <p>{item.keyword_name}</p>
-            {orderList.includes(item.question_id) && (
-              <span>{orderList.indexOf(item.question_id) + 1}</span>
-            )}
-          </div>
-        ))}
-      </div>
-      <div className="card_wrapper">
-        <Card
-          keyword={cardItem?.keyword_name}
-          depth={cardItem?.depth}
-          question={cardItem?.question_content}
-          size="16rem"
-          isFront={isRotate}
-          lineColor={cardItem?.color[0]}
-          fillColor={isRotate ? cardItem?.color[2] : cardItem?.color[1]}
-          handleRotate={() => setIsRotate(!isRotate)}
+    <>
+      <ExitConfirmModal modalActions={exitConfirmModal} />
+      <t.Container>
+        <NavBar
+          isCenter={true}
+          title="대화방"
+          isNav={true}
+          handleNav={exitConfirmModal.open}
         />
-      </div>
-      <div className="guide_text_wrapper">
-        <p className="guide_text">
-          <span>{orderList.length === 0 ? '처음으' : '두번째'}</span>로 다뤄보고
-          싶은 <br />
-          카드를 골라주세요.
-        </p>
-        <p className="sub_text">질문에 답을 하며 대화 여행이 진행됩니다.</p>
-      </div>
-      <BottomButtonTab height="9.25rem">
-        <Button
-          category="confirm"
-          text="질문 선택하기"
-          onClick={handleSelectOrder}
-        />
-        {!selectKey && (
-          <Button
-            category="cancel"
-            text="키워드 다시 고르기 (1회)"
-            margin="1rem 0 0 0"
-            onClick={handleBack}
+        <div className="selection_order_wrapper">
+          {combinedList?.map(item => (
+            <div
+              className="selection_card_wrapper"
+              key={item.keyword_id}
+              onClick={() => handleSelect(item.question_id)}
+            >
+              <CardImg
+                lineColor={item.color[0]}
+                fillColor={item.color[1]}
+                size="3rem"
+              />
+              <p>{item.keyword_name}</p>
+              {orderList.includes(item.question_id) && (
+                <span>{orderList.indexOf(item.question_id) + 1}</span>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="card_wrapper">
+          <Card
+            keyword={cardItem?.keyword_name}
+            depth={cardItem?.depth}
+            question={cardItem?.question_content}
+            size="16rem"
+            isFront={isRotate}
+            lineColor={cardItem?.color[0]}
+            fillColor={isRotate ? cardItem?.color[2] : cardItem?.color[1]}
+            handleRotate={() => setIsRotate(!isRotate)}
           />
-        )}
-      </BottomButtonTab>
-    </t.Container>
+        </div>
+        <div className="guide_text_wrapper">
+          <p className="guide_text">
+            <span>{orderList.length === 0 ? '처음으' : '두번째'}</span>로
+            다뤄보고 싶은 <br />
+            카드를 골라주세요.
+          </p>
+          <p className="sub_text">질문에 답을 하며 대화 여행이 진행됩니다.</p>
+        </div>
+        <BottomButtonTab height="9.25rem">
+          <Button
+            category="confirm"
+            text="질문 선택하기"
+            onClick={handleSelectOrder}
+          />
+          {!selectKey && (
+            <Button
+              category="cancel"
+              text="키워드 다시 고르기 (1회)"
+              margin="1rem 0 0 0"
+              onClick={handleBack}
+            />
+          )}
+        </BottomButtonTab>
+      </t.Container>
+    </>
   );
 }

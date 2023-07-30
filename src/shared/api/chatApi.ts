@@ -78,3 +78,11 @@ export const postSelections = (
       question_code_list,
     }
   );
+
+export const postExitChatRoom = (
+  conversation_room_id: number,
+  conversation_user_id: number
+) =>
+  axiosInstance.post(
+    `/conversation-rooms/${conversation_room_id}/conversation-users/${conversation_user_id}/cancel`
+  );

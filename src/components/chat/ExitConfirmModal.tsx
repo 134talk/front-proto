@@ -1,8 +1,7 @@
 import { BaseModal } from 'components';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import type { ModalActions } from 'shared/hooks/useModal';
-import useUserData from 'shared/hooks/useUserData';
-import { useAppDispatch } from 'shared/store/store';
+import useExitChatRoom from 'shared/query/useExitChatRoom';
 import { Button } from 'ui';
 import * as t from './exitConfirmModal.style';
 
@@ -13,30 +12,14 @@ interface ExitConfirmModalProps {
 export default function ExitConfirmModal({
   modalActions,
 }: ExitConfirmModalProps) {
-  const { uId } = useUserData();
-  const { roomId } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  // 대화 나가기 activeFlag = false 처리
-  const waitNavigate = async () => {
-    dispatch({
-      type: 'sendData',
-      payload: {
-        destination: '/pub/enter',
-        data: {
-          roomId: Number(roomId),
-          userId: Number(uId),
-          selected: false,
-          socketFlag: 0,
-        },
-      },
-    });
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    navigate('/chats');
-  };
+  const { roomId, chatUserId } = useParams();
+  const { mutate } = useExitChatRoom();
   const handleConfirm = () => {
     modalActions.close();
-    waitNavigate();
+    mutate({
+      conversation_room_id: Number(roomId),
+      conversation_user_id: Number(chatUserId),
+    });
   };
   return (
     <>

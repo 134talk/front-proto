@@ -17,22 +17,27 @@ export type Res = {
   questions: Question[];
 };
 export type Req = {
-  roomId: number;
-  chatUserId: number;
+  conversation_room_id: number;
+  conversation_user_id: number;
   question_code_list: number[];
 };
 
-export default function useSelection(roomId?: number, chatUserId?: number) {
+export default function useSelection(
+  conversation_room_id?: number,
+  conversation_user_id?: number
+) {
   const navigate = useNavigate();
   const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.SELECTION],
-    () => getSelections(roomId, chatUserId),
+    () => getSelections(conversation_room_id, conversation_user_id),
     {
       onSuccess: res => {
         if (res?.data.flag === 'keyword') {
-          navigate(`/chat-keyword/${roomId}/${chatUserId}`);
+          navigate(
+            `/chat-keyword/${conversation_room_id}/${conversation_user_id}`
+          );
         } else if (res?.data.flag === 'active') {
-          navigate(`/chat/${roomId}/${chatUserId}/0`);
+          navigate(`/chat/${conversation_room_id}/${conversation_user_id}/0`);
         } else return res;
       },
     }
@@ -41,9 +46,14 @@ export default function useSelection(roomId?: number, chatUserId?: number) {
 
   const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
     ({ question_code_list }) =>
-      postSelections(roomId, chatUserId, question_code_list),
+      postSelections(
+        conversation_room_id,
+        conversation_user_id,
+        question_code_list
+      ),
     {
-      onSuccess: () => navigate(`chat/${roomId}/${chatUserId}/0`),
+      onSuccess: () =>
+        navigate(`chat/${conversation_room_id}/${conversation_user_id}/0`),
     }
   );
 

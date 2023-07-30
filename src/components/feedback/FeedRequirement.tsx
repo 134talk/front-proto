@@ -8,7 +8,7 @@ export default function FeedRequirement() {
   const feedReminderModal = useModal();
   const { feedRequirementUser, feedRequirementData } = useFeedRequirement();
   useEffect(() => {
-    if (feedRequirementUser?.today) feedReminderModal.open();
+    if (feedRequirementUser?.remained_feedback) feedReminderModal.open();
   }, [feedRequirementUser]);
 
   return (

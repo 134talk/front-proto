@@ -15,6 +15,7 @@ export default function useUserData() {
   const emotionKey = localStorage.getItem('emotionKey');
   const optVal = localStorage.getItem('optVal');
   const optText = localStorage.getItem('optText');
+  const feedbackKey = localStorage.getItem('feedbackKey');
 
   useEffect(() => {
     if (!token) silentRefresh();
@@ -45,5 +46,6 @@ export default function useUserData() {
     emotionKey,
     optVal,
     optText,
+    feedbackKey,
   };
 }

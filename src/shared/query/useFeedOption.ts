@@ -2,21 +2,26 @@ import type { AxiosError, AxiosResponse } from 'axios';
 import { useMutation } from 'react-query';
 import { postFeedOption } from 'shared/api/reportApi';
 
-export type Feedback = {
-  toUserId: number;
-  review: string | '';
+export type ReviewList = {
+  review_user_id: number;
+  review_content: string | '';
 };
 type Req = {
-  roomId: number;
-  sentence: string | '';
-  score: number;
-  feedback: Feedback[];
+  conversation_room_id: number;
+  feed_content: string | '';
+  feed_score: number;
+  review_list: ReviewList[];
 };
 
 export default function useFeedOption() {
   const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ roomId, sentence, score, feedback }) =>
-      postFeedOption(roomId, sentence, score, feedback)
+    ({ conversation_room_id, feed_content, feed_score, review_list }) =>
+      postFeedOption(
+        conversation_room_id,
+        feed_content,
+        feed_score,
+        review_list
+      )
   );
   return { mutate };
 }

@@ -2,7 +2,6 @@ import type { AxiosError, AxiosResponse } from 'axios';
 import { useMemo } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-
 import { getKeywordsFlag, postKeywords, putKeywords } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
 
@@ -10,16 +9,19 @@ export type Res = {
   keyword_selection: number;
 };
 export type Req = {
-  roomId: number;
-  chatUserId: number;
+  conversation_room_id: number;
+  conversation_user_id: number;
   keyword_code: string[];
 };
 
-export default function useKeyword(roomId?: number, chatUserId?: number) {
+export default function useKeyword(
+  conversation_room_id?: number,
+  conversation_user_id?: number
+) {
   const navigate = useNavigate();
   const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.KEYWORD_FLAG],
-    () => getKeywordsFlag(roomId, chatUserId)
+    () => getKeywordsFlag(conversation_room_id, conversation_user_id)
   );
   const keywordFlag = useMemo(
     () => data?.data.keyword_selection || null,
@@ -27,16 +29,24 @@ export default function useKeyword(roomId?: number, chatUserId?: number) {
   );
 
   const { mutate: postMutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ keyword_code }) => postKeywords(roomId, chatUserId, keyword_code),
+    ({ keyword_code }) =>
+      postKeywords(conversation_room_id, conversation_user_id, keyword_code),
     {
-      onSuccess: () => navigate(`chat-selection/${roomId}/${chatUserId}`),
+      onSuccess: () =>
+        navigate(
+          `chat-selection/${conversation_room_id}/${conversation_user_id}`
+        ),
     }
   );
 
   const { mutate: putMutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ keyword_code }) => putKeywords(roomId, chatUserId, keyword_code),
+    ({ keyword_code }) =>
+      putKeywords(conversation_room_id, conversation_user_id, keyword_code),
     {
-      onSuccess: () => navigate(`chat-selection/${roomId}/${chatUserId}`),
+      onSuccess: () =>
+        navigate(
+          `chat-selection/${conversation_room_id}/${conversation_user_id}`
+        ),
     }
   );
 
