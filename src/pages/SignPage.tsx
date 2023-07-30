@@ -31,7 +31,7 @@ export default function SignPage() {
     if (type === 'user') setTeam(code !== 'null' ? code : '');
   }, [type, code]);
 
-  const { onSignUser, onSignAdmin } = useSign();
+  const { onSignUser, onSignAdmin } = useSign(name);
 
   const onRegister = () =>
     type === 'user'

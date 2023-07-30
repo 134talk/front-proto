@@ -7,7 +7,7 @@ import * as t from './nicknameResultPage.style';
 
 export default function NicknameResultPage() {
   const navigate = useNavigate();
-  const handleConfirm = () => navigate('/channel');
+  const handleConfirm = () => navigate('/chats');
 
   const { uId } = useUserData();
 
