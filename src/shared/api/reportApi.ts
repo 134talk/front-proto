@@ -35,8 +35,11 @@ export const postFeedRequirement = (
     statusStress,
   });
 
-export const getStatusReport = (teamCode: string) =>
-  axiosInstance.get(`/statistics/team/character/${teamCode}`);
+// export const getStatusReport = (teamCode: string) =>
+//   axiosInstance.get(`/statistics/team/character/${teamCode}`);
+
+export const getStatusReport = (tId: string) =>
+  axiosInstance.get(`/statistics/teams/${tId}/character`);
 
 export const getFeedbackReport = (teamCode: string) =>
   axiosInstance.get(`/statistics/feedback/detail/${teamCode}`);

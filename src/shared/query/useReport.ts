@@ -12,9 +12,9 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type StatusRes = {
-  type1: { emotion: string; emotionCount: number }[];
-  type2: { act: string; actCount: number }[];
-  type3: { status: string; statusCount: number }[];
+  emotion_array: { emotion: string; emotion_count: number }[];
+  action_array: { action: string; action_count: number }[];
+  state_array: { state: string; state_count: number }[];
 };
 
 type ChatRes = {
