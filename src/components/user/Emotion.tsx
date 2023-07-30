@@ -3,7 +3,7 @@ import * as t from './emotion.style';
 
 type Props = {
   idx: number;
-  emoticons: { name: string; count: number }[];
+  emoticons: { emotion_name: string; emotion_count: number }[];
 };
 
 export default function Emotion({ idx, emoticons }: Props) {
@@ -12,8 +12,12 @@ export default function Emotion({ idx, emoticons }: Props) {
       <Chip text={`${idx + 1}번째 대화`} idx={idx} />
       {!!emoticons.length ? (
         <div className="emotionWrapper">
-          {emoticons.map(({ name, count }) => (
-            <EmotionData name={name} count={count} key={name} />
+          {emoticons.map(({ emotion_name, emotion_count }) => (
+            <EmotionData
+              name={emotion_name}
+              count={emotion_count}
+              key={emotion_name}
+            />
           ))}
         </div>
       ) : (

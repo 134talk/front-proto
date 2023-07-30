@@ -8,12 +8,12 @@ export default function ReportMenuButton() {
   const navigate = useNavigate();
   const { data } = useUserChatData();
 
-  const onClickReport = (date: string) => navigate(`/user/${date}`);
+  const onClickReport = (rId: number) => navigate(`/user/${rId}`);
 
   return (
     <t.Container>
       <div className="sectionWrapper">
-        {!data?.data.myReportList.length ? (
+        {!data?.data.my_report_list.length ? (
           <p className="noData">
             리포트 리스트는
             <br />
@@ -21,15 +21,15 @@ export default function ReportMenuButton() {
           </p>
         ) : (
           <>
-            {data?.data.myReportList.map(date => (
-              <div className="reportMenu">
+            {data?.data.my_report_list.map(({ report_date, report_id }) => (
+              <div className="reportMenu" key={report_id}>
                 <div className="pointLineWrapper">
                   <div className="point" />
                   <div className="line" />
                 </div>
-                <section onClick={() => onClickReport(date)}>
+                <section onClick={() => onClickReport(report_id)}>
                   <p>
-                    <span>{date}</span>의 대화 리포트
+                    <span>{report_date}</span>의 대화 리포트
                   </p>
                   <img src={RIGHT_ARROW} alt="화살표 아이콘" />
                 </section>

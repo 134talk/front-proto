@@ -44,11 +44,11 @@ export const getFeedbackReport = (tId: string) =>
 export const getChatReport = (tId: string) =>
   axiosInstance.get(`/statistics/teams/${tId}/conversation-log`);
 
-export const getUserReport = (teamCode: string) =>
-  axiosInstance.get(`/statistics/user/report/${teamCode}`);
+export const getUserReport = (uId: string) =>
+  axiosInstance.get(`/statistics/users/${uId}/reports`);
 
-export const getUserReportDetail = (teamCode: string, date: string) =>
-  axiosInstance.get(`/statistics/user/report/${teamCode}/${date}`);
+export const getUserReportDetail = (uId: string, rId: string) =>
+  axiosInstance.get(`/statistics/users/${uId}/reports/${rId}`);
 
 export const getMemberReport = (teamCode: string) =>
   axiosInstance.get(`/statistics/admin/report/list/${teamCode}`);
