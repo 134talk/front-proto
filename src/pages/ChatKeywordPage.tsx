@@ -1,8 +1,14 @@
-import { BottomButtonTab, KeywordList, NavBar } from 'components';
+import {
+  BottomButtonTab,
+  ExitConfirmModal,
+  KeywordList,
+  NavBar,
+} from 'components';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { KEYWORD_LIST } from 'shared/constants/constants';
+import useModal from 'shared/hooks/useModal';
 import useChatFlag from 'shared/query/useChatFlag';
 import useKeyword from 'shared/query/useKeyword';
 import { Button } from 'ui';
@@ -10,6 +16,7 @@ import * as t from './chatKeywordPage.style';
 
 export default function ChatKeywordPage() {
   const navigate = useNavigate();
+  const exitConfirmModal = useModal();
   const { roomId, chatUserId } = useParams();
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const canSubmit = selectedKeywords.length > 2;
@@ -34,14 +41,14 @@ export default function ChatKeywordPage() {
   const handleSubmitKeyword = () => {
     if (keywordFlag === 2)
       postMutate({
-        roomId: Number(roomId),
-        chatUserId: Number(chatUserId),
+        conversation_room_id: Number(roomId),
+        conversation_user_id: Number(chatUserId),
         keyword_code: selectedKeywords,
       });
     else if (keywordFlag === 1)
       putMutate({
-        roomId: Number(roomId),
-        chatUserId: Number(chatUserId),
+        conversation_room_id: Number(roomId),
+        conversation_user_id: Number(chatUserId),
         keyword_code: selectedKeywords,
       });
   };
@@ -54,32 +61,41 @@ export default function ChatKeywordPage() {
       }
     }
   }, [keywordFlag, chatFlag]);
+
   return (
-    <t.Container>
-      <NavBar isCenter={true} title="대화방" />
-      <p className="guide_text">
-        대화 주제 <strong>3가지</strong>를 골라주세요.
-      </p>
-      <div className="card_wrapper">
-        {KEYWORD_LIST.map(item => (
-          <KeywordList
-            key={item.id}
-            keyword={item.keyword}
-            lineColor={item.color[0]}
-            fillColor={item.color[1]}
-            selected={selectedKeywords.includes(item.keyword) && true}
-            onClick={() => handleSelectKeyword(item.keyword)}
-          />
-        ))}
-      </div>
-      <BottomButtonTab>
-        <Button
-          category="confirm"
-          text="키워드 선택하기"
-          disabled={!canSubmit}
-          onClick={handleSubmitKeyword}
+    <>
+      <ExitConfirmModal modalActions={exitConfirmModal} />
+      <t.Container>
+        <NavBar
+          isCenter={true}
+          title="대화방"
+          isNav={true}
+          handleNav={exitConfirmModal.open}
         />
-      </BottomButtonTab>
-    </t.Container>
+        <p className="guide_text">
+          대화 주제 <strong>3가지</strong>를 골라주세요.
+        </p>
+        <div className="card_wrapper">
+          {KEYWORD_LIST.map(item => (
+            <KeywordList
+              key={item.id}
+              keyword={item.keyword}
+              lineColor={item.color[0]}
+              fillColor={item.color[1]}
+              selected={selectedKeywords.includes(item.keyword) && true}
+              onClick={() => handleSelectKeyword(item.keyword)}
+            />
+          ))}
+        </div>
+        <BottomButtonTab>
+          <Button
+            category="confirm"
+            text="키워드 선택하기"
+            disabled={!canSubmit}
+            onClick={handleSubmitKeyword}
+          />
+        </BottomButtonTab>
+      </t.Container>
+    </>
   );
 }

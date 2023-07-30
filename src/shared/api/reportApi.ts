@@ -1,38 +1,54 @@
-import type { Feedback } from 'shared/query/useFeedOption';
+import type { ReviewList } from 'shared/query/useFeedOption';
 import axiosInstance from './instance';
 
-export const getFeedUser = (roomId: number) =>
-  axiosInstance.get(`/chat/find-users/chatroom/${roomId}`);
+export const getFeedUser = (conversation_room_id: number) =>
+  axiosInstance.get(
+    `/conversation-rooms/${conversation_room_id}/converstaion-users`
+  );
 
 export const postFeedOption = (
-  roomId: number,
-  sentence: string,
-  score: number,
-  feedback: Feedback[]
+  conversation_room_id: number,
+  feed_content: string,
+  feed_score: number,
+  review_list: ReviewList[]
 ) =>
-  axiosInstance.post('/chat/create/feedback/optional', {
-    roomId,
-    sentence,
-    score,
-    feedback,
+  axiosInstance.post('/feedback/option', {
+    conversation_room_id,
+    feed_content,
+    feed_score,
+    review_list,
   });
 
-export const getFeedRequirement = () =>
-  axiosInstance.get('/chat/find/feedback');
+export const getFeedRequirement = () => axiosInstance.get('/feedback');
 
 export const postFeedRequirement = (
-  roomId: number,
-  statusEnergy: number,
-  statusRelation: number,
-  statusStable: number,
-  statusStress: number
+  conversation_room_id: number,
+  status_energy: number,
+  status_relation: number,
+  status_stable: number,
+  status_stress: number
 ) =>
-  axiosInstance.post('/chat/create/feedback', {
-    roomId,
-    statusEnergy,
-    statusRelation,
-    statusStable,
-    statusStress,
+  axiosInstance.post('/feedback', {
+    conversation_room_id,
+    status_energy,
+    status_relation,
+    status_stable,
+    status_stress,
+  });
+
+export const putFeedRequirement = (
+  conversation_room_id: number,
+  status_energy: number,
+  status_relation: number,
+  status_stable: number,
+  status_stress: number
+) =>
+  axiosInstance.post('/feedback', {
+    conversation_room_id,
+    status_energy,
+    status_relation,
+    status_stable,
+    status_stress,
   });
 
 export const getStatusReport = (teamCode: string) =>

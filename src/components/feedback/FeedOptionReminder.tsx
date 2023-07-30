@@ -17,8 +17,8 @@ export default function FeedOptionReminder() {
   const { feedUserList } = useFeedUser(Number(roomId));
 
   const initialFeedbacks: UpdatedFeedback[] = feedUserList?.map(user => ({
-    toUserId: user.userId,
-    review: '',
+    review_user_id: user.id,
+    review_content: '',
     selectedOption: null,
   }));
   const { userFeedbacks, handleSelect, resetFeedbacks } =
@@ -32,13 +32,15 @@ export default function FeedOptionReminder() {
   const handleNext = () => {
     mutate(
       {
-        roomId: Number(roomId),
-        sentence: optText,
-        score: Number(optVal),
-        feedback: userFeedbacks.map(({ toUserId, review }) => ({
-          toUserId,
-          review,
-        })),
+        conversation_room_id: Number(roomId),
+        feed_content: optText,
+        feed_score: Number(optVal),
+        review_list: userFeedbacks.map(
+          ({ review_user_id, review_content }) => ({
+            review_user_id,
+            review_content,
+          })
+        ),
       },
       {
         onSuccess: () => {
@@ -64,7 +66,7 @@ export default function FeedOptionReminder() {
       </div>
       <t.RemindWrapper>
         {userFeedbacks?.map((feedback, index) => (
-          <div className="feedback_wrapper" key={feedback.toUserId}>
+          <div className="feedback_wrapper" key={feedback.review_user_id}>
             <p className="question_text">
               '{feedUserList[index].nickname}({feedUserList[index].name})'
               님과의 <br />
@@ -80,15 +82,15 @@ export default function FeedOptionReminder() {
                       checked={feedback.selectedOption === item.id}
                       onChange={() =>
                         handleSelect(
-                          feedback.toUserId,
+                          feedback.review_user_id,
                           'selectedOption',
                           item.id
                         )
                       }
-                      id={`${feedback.toUserId}-${item.id}`}
+                      id={`${feedback.review_user_id}-${item.id}`}
                     />
                     <t.SelectText
-                      htmlFor={`${feedback.toUserId}-${item.id}`}
+                      htmlFor={`${feedback.review_user_id}-${item.id}`}
                       $isChecked={feedback.selectedOption === item.id}
                     >
                       {item.label}
@@ -98,11 +100,11 @@ export default function FeedOptionReminder() {
                     <textarea
                       className="select_textarea"
                       placeholder={`${feedUserList[index].name}님과의 대화는 어땠는지 자유롭게 남겨주세요!`}
-                      value={feedback.review || ''}
+                      value={feedback.review_content || ''}
                       onChange={e =>
                         handleSelect(
-                          feedback.toUserId,
-                          'review',
+                          feedback.review_user_id,
+                          'review_content',
                           e.target.value
                         )
                       }

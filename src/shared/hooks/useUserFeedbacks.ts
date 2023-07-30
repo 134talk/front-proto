@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FEED_OPTION_SELECT } from 'shared/constants/constants';
-import type { Feedback } from 'shared/query/useFeedOption';
 
-export type UpdatedFeedback = Feedback & {
+export type UpdatedFeedback = {
+  review_user_id: number;
+  review_content: string | '';
   selectedOption: number | null;
-  review: string;
 };
 
 type HandleSelectFunction = (
@@ -26,7 +26,7 @@ export default function useUserFeedbacks(initialFeedbacks: UpdatedFeedback[]): {
   const handleSelect: HandleSelectFunction = (userId, field, value) => {
     setUserFeedbacks(prev =>
       prev.map(item => {
-        if (item.toUserId === userId) {
+        if (item.review_user_id === userId) {
           if (field === 'selectedOption') {
             const matchedFeedback = FEED_OPTION_SELECT.find(
               option => option.id === value
@@ -34,15 +34,15 @@ export default function useUserFeedbacks(initialFeedbacks: UpdatedFeedback[]): {
             return {
               ...item,
               selectedOption: matchedFeedback?.id,
-              review:
+              review_content:
                 matchedFeedback?.id === 6
                   ? ''
-                  : matchedFeedback?.label || item.review,
+                  : matchedFeedback?.label || item.review_content,
             };
-          } else if (field === 'review') {
+          } else if (field === 'review_content') {
             return {
               ...item,
-              review: value as string,
+              review_content: value as string,
             };
           }
         }
