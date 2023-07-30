@@ -8,6 +8,7 @@ export default function useUserData() {
   const isAdmin = localStorage.getItem('isAdmin');
   const nickname = localStorage.getItem('nickname');
   const name = localStorage.getItem('name');
+  const isGuideAccess = Boolean(localStorage.getItem('isGuideAccess'));
 
   const selectKey = localStorage.getItem('selectKey');
   const tutorialKey = localStorage.getItem('tutorialKey');
@@ -20,8 +21,14 @@ export default function useUserData() {
   }, [token]);
 
   const isUserData = useMemo(
-    () => !!uId && !!channel && !!isAdmin && !!nickname,
-    [uId, channel, isAdmin, nickname]
+    () =>
+      !!uId &&
+      !!channel &&
+      !!isAdmin &&
+      !!nickname &&
+      !!name &&
+      !!isGuideAccess,
+    [uId, channel, isAdmin, nickname, name, isGuideAccess]
   );
 
   return {
@@ -31,6 +38,7 @@ export default function useUserData() {
     isAdmin,
     nickname,
     name,
+    isGuideAccess,
     isUserData,
     selectKey,
     tutorialKey,

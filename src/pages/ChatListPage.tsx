@@ -12,6 +12,7 @@ import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { updateGuideStatus } from 'shared/api/chatApi';
 import useUserData from 'shared/hooks/useUserData';
+import useChatFlag from 'shared/query/useChatFlag';
 import useChatList from 'shared/query/useChatList';
 import isMobile from 'shared/utils/deviceDetector';
 import * as t from './chatListPage.style';
@@ -26,7 +27,9 @@ export default function ChatListPage() {
   const [chatId, setChatId] = useState(0);
   const [chatUserId, setChatUserId] = useState(0);
 
-  const { uId } = useUserData();
+  const { uId, isGuideAccess } = useUserData();
+
+  const { refetch: openChatRoom } = useChatFlag(chatId, chatUserId);
 
   const handleCreateModal = () => setCreateModal(prev => !prev);
   const handleSettingModal = () => setSettingModal(prev => !prev);
@@ -37,8 +40,9 @@ export default function ChatListPage() {
   };
 
   const enterRoom = (isMyRoom: boolean) => {
-    if (isMyRoom) handleGuIdeModal();
-    else toast.error('참여할 수 없는 대화방입니다.');
+    if (isMyRoom && !isGuideAccess) handleGuIdeModal();
+    else if (!isMyRoom) toast.error('참여할 수 없는 대화방입니다.');
+    else if (isGuideAccess) openChatRoom();
   };
 
   const { chatList, refetch, error } = useChatList(keyword);
