@@ -35,17 +35,14 @@ export const postFeedRequirement = (
     statusStress,
   });
 
-// export const getStatusReport = (teamCode: string) =>
-//   axiosInstance.get(`/statistics/team/character/${teamCode}`);
-
 export const getStatusReport = (tId: string) =>
   axiosInstance.get(`/statistics/teams/${tId}/character`);
 
 export const getFeedbackReport = (teamCode: string) =>
   axiosInstance.get(`/statistics/feedback/detail/${teamCode}`);
 
-export const getChatReport = (teamCode: string) =>
-  axiosInstance.get(`/statistics/report/chatlog/${teamCode}`);
+export const getChatReport = (tId: string) =>
+  axiosInstance.get(`/statistics/teams/${tId}/conversation-log`);
 
 export const getUserReport = (teamCode: string) =>
   axiosInstance.get(`/statistics/user/report/${teamCode}`);

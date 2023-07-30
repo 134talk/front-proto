@@ -18,9 +18,9 @@ type StatusRes = {
 };
 
 type ChatRes = {
-  emoticonScore: { emoticonName: string; score: number }[];
-  keywordScore: { code: number; score: number }[];
-  questionList: string[];
+  emotion_score: { emotion_name: string; emotion_count: number }[];
+  keyword_score: { keyword_id: number; keyword_count: number }[];
+  question_list: string[];
 };
 
 type FeedbackRes = {
