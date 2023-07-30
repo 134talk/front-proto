@@ -24,10 +24,10 @@ type ChatRes = {
 };
 
 type FeedbackRes = {
-  energyPercent: number;
-  relationPercent: number;
-  stablePercent: number;
-  stressPercent: number;
+  energy_percent: number;
+  relation_percent: number;
+  stable_percent: number;
+  stress_percent: number;
 };
 
 type MemberRes = {

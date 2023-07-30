@@ -38,8 +38,8 @@ export const postFeedRequirement = (
 export const getStatusReport = (tId: string) =>
   axiosInstance.get(`/statistics/teams/${tId}/character`);
 
-export const getFeedbackReport = (teamCode: string) =>
-  axiosInstance.get(`/statistics/feedback/detail/${teamCode}`);
+export const getFeedbackReport = (tId: string) =>
+  axiosInstance.get(`/statistics/teams/${tId}/feedback-log`);
 
 export const getChatReport = (tId: string) =>
   axiosInstance.get(`/statistics/teams/${tId}/conversation-log`);
