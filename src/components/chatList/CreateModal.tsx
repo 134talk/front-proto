@@ -5,7 +5,7 @@ import {
   Profile,
   SearchBar,
 } from 'components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
@@ -22,21 +22,18 @@ type Props = {
 
 export default function CreateModal({ handleCreateModal }: Props) {
   const members = useSortedMembers();
-  const { uId } = useUserData();
 
-  useEffect(() => {
-    handleSelectedIdList(Number(uId));
-  }, [uId]);
+  const { uId, name: uName } = useUserData();
 
   const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(members);
 
   const mutate = useChatInvitation();
 
-  const [selectedIdList, setSelectedIdList] = useState<number[]>([]);
+  const [selectedIdList, setSelectedIdList] = useState<number[]>([Number(uId)]);
   const [selectedMembers, setSelectedMembers] = useState<
     { userId: number; name: string }[]
-  >([]);
+  >([{ userId: Number(uId), name: uName }]);
 
   const handleSelectedIdList = (selectedId: number) => {
     if (selectedIdList.includes(selectedId))
