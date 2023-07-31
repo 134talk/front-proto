@@ -31,9 +31,13 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
           socket.close();
         }
         socket = io(process.env.REACT_APP_SOCKET_SERVER);
-        socket.on('connect', () => dispatch(setIsSocketConnected(true)));
+        socket.on('connect', () => {
+          dispatch(setIsSocketConnected(true));
+          console.log(`connect: ${socket.id}`);
+        });
         socket.on('disconnect', () => {
           dispatch(setIsSocketConnected(false));
+          console.log('disconnect');
         });
         break;
       }

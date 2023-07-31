@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NEW_BADGE_ICON } from 'shared/constants/icons';
 import useUserData from 'shared/hooks/useUserData';
-import { subscribeNewChat } from 'shared/store/chatAction';
-import { setSubNewChat } from 'shared/store/chatSlice';
+import { createRoom } from 'shared/store/chatAction';
+import { setCreateRoom } from 'shared/store/chatSlice';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import * as t from './nav.style';
 
@@ -16,20 +16,20 @@ export default function Nav() {
   const { uId } = useUserData();
 
   const dispatch = useAppDispatch();
-  const { type } = useAppSelector(state => state.chat.subNewChat);
+  const { type } = useAppSelector(state => state?.chat?.createRoom);
 
   useEffect(() => {
-    if (type === 'NEW_CHATROOM') setIsNewChat(true);
+    if (type === 'new') setIsNewChat(true);
   }, [type]);
 
   useEffect(() => {
     dispatch({ type: 'connect' });
-    dispatch(subscribeNewChat(`/sub/private/channel/${uId}`));
+    dispatch(createRoom('createRoom'));
   }, [dispatch, uId]);
 
   const onChatPage = () => {
     setIsNewChat(false);
-    dispatch(setSubNewChat({ type: '' }));
+    dispatch(setCreateRoom({ type: '' }));
     navigate('/chats');
   };
 

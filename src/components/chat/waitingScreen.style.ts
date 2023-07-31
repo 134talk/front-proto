@@ -40,9 +40,6 @@ export const Container = styled.div`
     margin-bottom: 0.875rem;
     gap: 0.375rem;
   }
-  .button_wrapper {
-    padding: 1.75rem 1.25rem;
-  }
   p {
     font-weight: ${({ theme }) => theme.fw700};
     font-size: ${({ theme }) => theme.fs24};

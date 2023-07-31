@@ -8,7 +8,7 @@ interface CardProps {
   lineColor: string;
   fillColor: string;
   keyword: string;
-  depth?: string;
+  depth?: number;
   question?: string;
   handleRotate?: () => void;
   handleSwipe?: () => void;

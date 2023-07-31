@@ -14,6 +14,7 @@ export interface ChatUserInfo extends UserInfo {
 }
 export interface RecChatRoom {
   socket_flag: number;
+  check_in_flag: boolean;
   user_info: ChatUserInfo[];
 }
 export interface RecAlert {
