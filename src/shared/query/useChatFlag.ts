@@ -19,7 +19,7 @@ export default function useChatFlag(
     [queryKeys.CHAT_FLAG],
     () => getFlag(conversation_room_id, conversation_user_id),
     {
-      enabled: !!roomId,
+      enabled: !!conversation_room_id,
       onSuccess: res => {
         if (
           res?.data.flag === 'keyword' &&
