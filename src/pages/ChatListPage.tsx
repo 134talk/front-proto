@@ -114,7 +114,7 @@ export default function ChatListPage() {
             chatList.map(
               ({
                 conversation_room_id,
-                name,
+                user_info,
                 join_flag,
                 emotions,
                 conversation_user_id,
@@ -128,7 +128,7 @@ export default function ChatListPage() {
                 >
                   <ChatBox
                     roomId={conversation_room_id}
-                    roomName={name}
+                    roomName={user_info}
                     isJoin={join_flag}
                     emoticons={emotions}
                     onClick={() => enterRoom(join_flag)}

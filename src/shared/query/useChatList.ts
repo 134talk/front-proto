@@ -6,13 +6,16 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type Res = {
-  conversation_room: {
-    conversation_room_id: number;
-    name: string;
-    emotions: { emotion: string; emotion_count: number }[];
-    conversation_user_id: number;
-    join_flag: boolean;
-  }[];
+  data: {
+    conversation_room: {
+      conversation_room_id: number;
+      name: string;
+      emotions: { emotion: string; emotion_count: number }[];
+      conversation_user_id: number;
+      join_flag: boolean;
+      user_info: string[];
+    }[];
+  };
 };
 
 type Error = { errorCode: number };
@@ -31,7 +34,7 @@ export default function useChatList(keyword?: string) {
       refetchInterval: 10000,
     }
   );
-  const chatList = useMemo(() => data?.data.conversation_room, [data]);
+  const chatList = useMemo(() => data?.data.data.conversation_room, [data]);
 
   return { chatList, refetch, error };
 }
