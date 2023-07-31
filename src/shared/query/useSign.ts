@@ -16,14 +16,14 @@ type AdminReq = {
 };
 
 type Res = {
-  teamCode: string;
+  team_code: string;
 };
 
 export default function useSign(uName: string) {
   const navigate = useNavigate();
 
-  const onSuccessCallback = ({ teamCode }: Res) => {
-    localStorage.setItem('channel', teamCode);
+  const onSuccessCallback = ({ team_code }: Res) => {
+    localStorage.setItem('channel', team_code);
     localStorage.setItem('name', uName);
     navigate('/nickname/guide');
   };
