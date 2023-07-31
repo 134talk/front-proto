@@ -6,11 +6,13 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type Res = {
-  id: number;
-  nickname: string;
-  name: string;
-  profile_image_url: string;
-}[];
+  data: {
+    id: number;
+    nickname: string;
+    name: string;
+    profile_image_url: string;
+  }[];
+};
 
 export default function useTeam() {
   const { channel: tId } = useUserData();
@@ -23,7 +25,7 @@ export default function useTeam() {
     }
   );
 
-  const teamList = useMemo(() => data?.data, [data]);
+  const teamList = useMemo(() => data?.data.data, [data]);
 
   return { teamList };
 }
