@@ -16,6 +16,7 @@ export default function useChatFlag(roomId: number, chatUserId: number) {
     [queryKeys.CHAT_FLAG],
     () => getFlag(roomId, chatUserId),
     {
+      enabled: !!roomId,
       onSuccess: res => {
         if (
           res?.data.flag === 'keyword' &&
