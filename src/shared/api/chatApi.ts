@@ -3,7 +3,8 @@ import axiosInstance from './instance';
 export const getTeam = (tId: string) =>
   axiosInstance.get(`/teams/${tId}/users`);
 
-export const getChatList = () => axiosInstance.get('/conversation-rooms');
+export const getChatList = (tId: string) =>
+  axiosInstance.get(`/teams/${tId}/conversation-rooms`);
 
 export const searchChatList = (searchKeyword: string) =>
   axiosInstance.get(`/conversation-rooms/search?name=${searchKeyword}`);

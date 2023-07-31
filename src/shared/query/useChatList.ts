@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { getChatList, searchChatList } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
+import useUserData from 'shared/hooks/useUserData';
 
 type Res = {
   conversation_room: {
@@ -17,12 +18,14 @@ type Res = {
 type Error = { errorCode: number };
 
 export default function useChatList(keyword?: string) {
+  const { channel: tId } = useUserData();
+
   const { data, refetch, error } = useQuery<
     AxiosResponse<Res>,
     AxiosError<Error>
   >(
     [queryKeys.CHATS],
-    keyword.length > 0 ? () => searchChatList(keyword) : getChatList,
+    keyword.length > 0 ? () => searchChatList(keyword) : () => getChatList(tId),
     {
       refetchOnWindowFocus: false,
       refetchInterval: 10000,
