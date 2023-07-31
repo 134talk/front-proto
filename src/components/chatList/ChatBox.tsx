@@ -4,7 +4,7 @@ import * as t from './chatBox.style';
 
 type Props = {
   roomId: number;
-  roomName: string;
+  roomName: string[];
   isJoin: boolean;
   emoticons: { emotion: string; emotion_count: number }[] | [];
   onClick: () => void;
@@ -23,7 +23,11 @@ export default function ChatBox({
         <p>{roomId}</p>
         {isJoin && <Chip text="참여가능" />}
       </div>
-      <p className="users">{roomName}</p>
+      <p className="users">
+        {roomName.map((name, idx) => (
+          <span key={idx}>{name} </span>
+        ))}
+      </p>
       <div className="emoticons">
         {emoticons.map(({ emotion, emotion_count }) => (
           <EmotionData key={emotion} name={emotion} count={emotion_count} />
