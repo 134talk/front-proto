@@ -1,10 +1,9 @@
 import { Profile } from 'components';
-import { CHECK_ICON } from 'shared/constants/icons';
-import type { ChatUserInfo } from 'shared/store/chatSlice';
+import type { UserInfo } from 'shared/store/chatSlice';
 import * as t from './userList.style';
 
 interface UserListProps {
-  userInfo: ChatUserInfo[];
+  userInfo: UserInfo[];
   $isRow: boolean;
   scale?: 'small' | 'medium' | 'large';
 }
@@ -12,14 +11,13 @@ interface UserListProps {
 export default function UserList({ userInfo, $isRow, scale }: UserListProps) {
   return (
     <t.Container $isRow={$isRow}>
-      {userInfo?.map((item: ChatUserInfo) => (
-        <div key={item.userId}>
-          {item.activeFlag && <img src={CHECK_ICON} alt="check" />}
+      {userInfo?.map(item => (
+        <div key={item.id}>
           <Profile
-            userId={item.userId}
+            userId={item.id}
             nickname={item.nickname}
             name={item.name}
-            image={item.profileUrl}
+            image={item.profile_image_url}
             scale={$isRow ? 'small' : scale}
             $isRow={$isRow}
           />

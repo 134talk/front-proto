@@ -1,197 +1,121 @@
 import type { Middleware } from '@reduxjs/toolkit';
-import { RxStomp, RxStompState } from '@stomp/rx-stomp';
-import type { IMessage, StompConfig } from '@stomp/stompjs';
-import type { Subscription } from 'rxjs';
-import SockJS from 'sockjs-client';
+import type { Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import type { SocketAction } from './chatAction';
 import type {
-  SubEmotion,
-  SubEmotionList,
-  SubKeyword,
-  SubNotice,
-  SubSelect,
-  SubTimeout,
-  SubUser,
+  RecAlert,
+  RecChatRoom,
+  RecEmotion,
+  RecNewEmotion,
+  RecNotify,
+  RecQuestion,
 } from './chatSlice';
 import {
-  setIsStompConnected,
-  setSubEmotion,
-  setSubEmotionList,
-  setSubKeyword,
-  setSubNewChat,
-  setSubNotice,
-  setSubSelect,
-  setSubTimeout,
-  setSubUser,
+  setCreateRoom,
+  setIsSocketConnected,
+  setRecAlert,
+  setRecChatRoom,
+  setRecEmotion,
+  setRecNewEmotion,
+  setRecNotify,
+  setRecQuestion,
 } from './chatSlice';
 
-let rxStomp: RxStomp | null = null;
-
-const subscriptions: Map<string, Subscription> = new Map();
+let socket: Socket | null = null;
 
 const socketMiddleware: Middleware = ({ getState, dispatch }) => {
   return next => (action: SocketAction) => {
     switch (action.type) {
       case 'connect': {
-        if (rxStomp) {
-          rxStomp.deactivate();
-          subscriptions.clear();
+        if (socket) {
+          socket.close();
         }
-        const socket = new SockJS(process.env.REACT_APP_SOCKET_SERVER);
-        rxStomp = new RxStomp();
-        const config: StompConfig = {
-          brokerURL: process.env.REACT_APP_SOCKET_SERVER,
-          webSocketFactory: () => socket,
-          heartbeatIncoming: 10000,
-          heartbeatOutgoing: 10000,
-          reconnectDelay: 3000,
-        };
-        rxStomp.configure(config);
-        rxStomp.activate();
-        rxStomp.connectionState$.subscribe(state => {
-          if (state === RxStompState.OPEN) {
-            dispatch(setIsStompConnected(true));
-          } else if (state === RxStompState.CLOSED) {
-            dispatch(setIsStompConnected(false));
-            subscriptions.clear();
-            rxStomp?.activate();
-          }
+        socket = io(process.env.REACT_APP_SOCKET_SERVER);
+        socket.on('connect', () => {
+          dispatch(setIsSocketConnected(true));
+          console.log(`connect: ${socket.id}`);
+        });
+        socket.on('disconnect', () => {
+          dispatch(setIsSocketConnected(false));
+          console.log('disconnect');
         });
         break;
       }
       case 'disconnect': {
-        if (rxStomp) {
-          rxStomp.deactivate();
-          rxStomp = null;
-          subscriptions.clear();
+        if (socket) {
+          socket.close();
+          socket = null;
         }
         break;
       }
       case 'sendData': {
         const { destination, data } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          rxStomp.publish({ destination, body: JSON.stringify(data) });
+        if (socket && socket.connected) {
+          socket.emit(destination, data);
         }
         break;
       }
-      case 'subscribeUser': {
+      case 'recChatRoom': {
         const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: SubUser = JSON.parse(message.body);
-            dispatch(setSubUser(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
+        if (socket) {
+          socket.on(destination, (data: RecChatRoom) => {
+            dispatch(setRecChatRoom(data));
+          });
         }
         break;
       }
-      case 'subscribeTimeout': {
+
+      case 'recAlert': {
         const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: SubTimeout = JSON.parse(message.body);
-            dispatch(setSubTimeout(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
+        if (socket) {
+          socket.on(destination, (data: RecAlert) => {
+            dispatch(setRecAlert(data));
+          });
         }
         break;
       }
-      case 'subscribeKeyword': {
+      case 'recNotify': {
         const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: SubKeyword = JSON.parse(message.body);
-            dispatch(setSubKeyword(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
+        if (socket) {
+          socket.on(destination, (data: RecNotify) => {
+            dispatch(setRecNotify(data));
+          });
         }
         break;
       }
-      case 'subscribeSelect': {
+      case 'recQuestion': {
         const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: SubSelect = JSON.parse(message.body);
-            dispatch(setSubSelect(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
+        if (socket) {
+          socket.on(destination, (data: RecQuestion) => {
+            dispatch(setRecQuestion(data));
+          });
         }
         break;
       }
-      case 'subscribeNotice': {
+      case 'recEmotion': {
         const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: SubNotice = JSON.parse(message.body);
-            dispatch(setSubNotice(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
+        if (socket) {
+          socket.on(destination, (data: RecEmotion) => {
+            dispatch(setRecEmotion(data));
+          });
         }
         break;
       }
-      case 'subscribeEmotion': {
+      case 'recNewEmotion': {
         const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: SubEmotion = JSON.parse(message.body);
-            dispatch(setSubEmotion(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
+        if (socket) {
+          socket.on(destination, (data: RecNewEmotion) => {
+            dispatch(setRecNewEmotion(data));
+          });
         }
         break;
       }
-      case 'subscribeEmotionList': {
+      case 'createRoom': {
         const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: SubEmotionList = JSON.parse(message.body);
-            dispatch(setSubEmotionList(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
-        }
-        break;
-      }
-      case 'subscribeNewChat': {
-        const { destination } = action.payload;
-        if (rxStomp && rxStomp.connected) {
-          const handleReceivedData = (message: IMessage) => {
-            const data: { type: string } = JSON.parse(message.body);
-            dispatch(setSubNewChat(data));
-          };
-          const subscription = rxStomp
-            .watch(destination)
-            .subscribe(handleReceivedData);
-          subscriptions.set(destination, subscription);
-        }
-        break;
-      }
-      case 'unsubscribe': {
-        const { destination } = action.payload;
-        const subscription = subscriptions.get(destination);
-        if (subscription) {
-          subscription.unsubscribe();
-          subscriptions.delete(destination);
+        if (socket) {
+          socket.on(destination, (data: { type: string }) => {
+            dispatch(setCreateRoom(data));
+          });
         }
         break;
       }

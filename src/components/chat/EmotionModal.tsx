@@ -19,9 +19,9 @@ export default function EmotionModal({
 }: EmotionModalProps) {
   const dispatch = useAppDispatch();
   const { uId } = useUserData();
-  const { roomId } = useParams();
-  const subUserList = useAppSelector(state => state.chat?.subNotice?.userList);
-  const chatUserList = subUserList?.filter(el => el.userId !== Number(uId));
+  const { roomId, chatUserId } = useParams();
+  const userList = useAppSelector(state => state.chat?.recQuestion?.user_info);
+  const chatUserList = userList?.filter(el => el.id !== Number(uId));
   const [sendTo, setSendTo] = useState<{
     nickname: string;
     userId: number;
@@ -37,12 +37,12 @@ export default function EmotionModal({
     dispatch({
       type: 'sendData',
       payload: {
-        destination: '/pub/room/emoticon',
+        destination: 'recEmotion',
         data: {
-          roomId: Number(roomId),
-          userId: Number(uId),
-          toUserId: sendTo.userId,
-          emoticonCode: sendEmotion.id,
+          conversation_room_id: Number(roomId),
+          conversation_user_id: Number(chatUserId),
+          receive_user_id: sendTo.userId,
+          emotion_code: sendEmotion.id,
         },
       },
     });
@@ -64,11 +64,11 @@ export default function EmotionModal({
             </div>
             <div className="user_list_wrapper">
               {chatUserList?.map(item => (
-                <div className="user_wrapper" key={item.userId}>
+                <div className="user_wrapper" key={item.id}>
                   <ProfileImg
                     size="3rem"
-                    image={item.profileUrl}
-                    onClick={() => handleSelect(item.nickname, item.userId)}
+                    image={item.profile_image_url}
+                    onClick={() => handleSelect(item.nickname, item.id)}
                   />
                   {sendTo && sendTo.nickname.includes(item.nickname) && (
                     <img className="check_image" src={CHECK_ICON} alt="check" />

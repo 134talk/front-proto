@@ -2,9 +2,14 @@ import { BottomButtonTab, Card, EmotionModal, NavBar } from 'components';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EMOTION_LIST, KEYWORD_LIST } from 'shared/constants/constants';
-import useEmotionChange from 'shared/hooks/useEmotionChange';
+// import useEmotionChange from 'shared/hooks/useEmotionChange';
 import useModal from 'shared/hooks/useModal';
 import useUserData from 'shared/hooks/useUserData';
+import {
+  recEmotion,
+  recNewEmotion,
+  recQuestion,
+} from 'shared/store/chatAction';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import { Button, Emotion } from 'ui';
 import * as t from './chatScreen.style';
@@ -13,27 +18,32 @@ import ChatTutorial from './ChatTutorial';
 
 export default function ChatScreen() {
   const { uId, tutorialKey, emotionKey } = useUserData();
-  const { roomId } = useParams();
+  const { roomId, chatUserId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const emotionModal = useModal();
   const sideNavModal = useModal();
   const tutorialModal = useModal();
   // 소켓 fetching 데이터
-  const speaker = useAppSelector(state => state.chat?.subNotice?.speaker);
-  const topic = useAppSelector(state => state.chat?.subNotice?.topic);
-  const metadata = useAppSelector(state => state.chat?.subNotice?.metadata);
+  const speaker = useAppSelector(state => state.chat?.recQuestion?.speaker);
+  const topic = useAppSelector(state => state.chat?.recQuestion?.question_list);
+  const questionNumber = useAppSelector(
+    state => state.chat?.recQuestion?.question_number
+  );
+  const endFlag = useAppSelector(
+    state => state.chat?.recQuestion?.question_last_flag
+  );
   const emotionCode = useAppSelector(
-    state => state.chat?.subEmotion?.emoticonCode
+    state => state.chat?.recEmotion?.emotion_code
   );
   const newEmotion = useAppSelector(
-    state => state.chat?.subEmotionList?.emoticonList
+    state => state.chat?.recNewEmotion?.emotion_list
   );
   // new 감정 뱃지 처리
-  const isChanged = useEmotionChange(newEmotion);
-  const [prevQuestionNumber, setPrevQuestionNumber] = useState<number>(
-    metadata?.questionNumber
-  );
+  // const isChanged = useEmotionChange(newEmotion);
+  // const [prevQuestionNumber, setPrevQuestionNumber] = useState<number>(
+  //   metadata?.questionNumber
+  // );
   // 질문 카드 회전 state
   const [isRotate, setIsRotate] = useState<boolean>(false);
   // 감정 보내기 state
@@ -47,19 +57,20 @@ export default function ChatScreen() {
   };
   // 질문 카드 & 상수 데이터 매칭
   const matchedItem = KEYWORD_LIST
-    ? KEYWORD_LIST.filter(item => item.keyword === topic?.keywordName)
+    ? KEYWORD_LIST.filter(item => item.keyword === topic?.keyword_name)
     : [];
   // 버튼 텍스트 => 다음 대화 || 대화 마무리
-  const endFlag = metadata?.questionNumber === metadata?.finalQuestionNumber;
+
   const handleNext = () => {
     if (!endFlag) {
       dispatch({
         type: 'sendData',
         payload: {
-          destination: `/pub/question-notice/${roomId}`,
+          destination: 'sendNextQuestion',
           data: {
-            userId: Number(uId),
-            questionNumber: metadata?.questionNumber + 1,
+            conversation_room_id: Number(roomId),
+            conversation_user_id: Number(chatUserId),
+            question_number: questionNumber + 1,
           },
         },
       });
@@ -72,22 +83,40 @@ export default function ChatScreen() {
       navigate(`/feedback/1/${roomId}`);
     }
   };
-  // 튜토리얼 오픈여부 확인
+  // 소켓 데이터 구독 & 튜토리얼 오픈여부 확인
   useEffect(() => {
+    dispatch({
+      type: 'sendData',
+      payload: {
+        destination: 'sendQuestion',
+        data: {
+          conversation_room_id: Number(roomId),
+          conversation_user_id: Number(chatUserId),
+        },
+      },
+    });
+    dispatch(recQuestion('recQuestion'));
+    dispatch(recEmotion('recEmotion'));
+    dispatch(recNewEmotion('recNewEmotion'));
+    localStorage.setItem('emotionKey', 'true');
     if (!tutorialKey) {
       tutorialModal.open();
     }
   }, []);
-  // 새로운 질문 넘어가기일 때 렌더
+
   useEffect(() => {
-    if (
-      metadata?.questionNumber &&
-      metadata?.questionNumber > prevQuestionNumber
-    ) {
-      setPrevQuestionNumber(metadata?.questionNumber);
-      navigate(`/chat/${roomId}/4`);
-    }
-  }, [metadata]);
+    if (newEmotion) localStorage.setItem('emotionKey', 'true');
+  }, [newEmotion]);
+  // // 새로운 질문 넘어가기일 때 렌더
+  // useEffect(() => {
+  //   if (
+  //     questionNumber &&
+  //     questionNumber > prevQuestionNumber
+  //   ) {
+  //     setPrevQuestionNumber(metadata?.questionNumber);
+  //     navigate(`/chat/${roomId}/4`);
+  //   }
+  // }, [metadata]);
 
   return (
     <>
@@ -99,7 +128,7 @@ export default function ChatScreen() {
           title="대화방"
           isCenter={true}
           isHamburger={true}
-          isNew={!isChanged && emotionKey === 'true'}
+          isNew={emotionKey === 'true'}
           handleSideNav={sideNavModal.open}
         />
         <p>
@@ -107,9 +136,9 @@ export default function ChatScreen() {
         </p>
         <div className="card_wrapper">
           <Card
-            keyword={topic?.keywordName}
+            keyword={topic?.keyword_name}
             depth={topic?.depth}
-            question={topic?.questionName}
+            question={topic?.question_content}
             size="15rem"
             isFront={isRotate}
             lineColor={matchedItem[0]?.color[0]}
@@ -130,7 +159,7 @@ export default function ChatScreen() {
           ))}
         </div>
         <BottomButtonTab>
-          {speaker?.userId === Number(uId) ? (
+          {speaker?.id === Number(uId) ? (
             <Button
               category="confirm"
               text={
