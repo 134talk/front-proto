@@ -16,17 +16,18 @@ type AdminReq = {
 };
 
 type Res = {
-  team_code: string;
-  team_id: number;
+  data: { team_code: string; team_id: number; role: string };
 };
 
 export default function useSign(uName: string) {
   const navigate = useNavigate();
 
-  const onSuccessCallback = ({ team_code, team_id }: Res) => {
-    localStorage.setItem('teamCode', team_code);
-    localStorage.setItem('channel', String(team_id));
+  const onSuccessCallback = ({ data }: Res) => {
+    let isAdmin = data.role === 'editor';
+    localStorage.setItem('teamCode', data?.team_code);
+    localStorage.setItem('channel', String(data?.team_id));
     localStorage.setItem('name', uName);
+    localStorage.setItem('isAdmin', String(isAdmin));
     navigate('/nickname/guide');
   };
 
