@@ -3,17 +3,19 @@ import axiosInstance from './instance';
 
 export const getFeedUser = (conversation_room_id: number) =>
   axiosInstance.get(
-    `/conversation-rooms/${conversation_room_id}/converstaion-users`
+    `/conversation-rooms/${conversation_room_id}/conversation-users`
   );
 
 export const postFeedOption = (
   conversation_room_id: number,
+  conversation_user_id: number,
   feed_content: string,
   feed_score: number,
   review_list: ReviewList[]
 ) =>
   axiosInstance.post('/feedback/option', {
     conversation_room_id,
+    conversation_user_id,
     feed_content,
     feed_score,
     review_list,
@@ -23,6 +25,7 @@ export const getFeedRequirement = () => axiosInstance.get('/feedback');
 
 export const postFeedRequirement = (
   conversation_room_id: number,
+  conversation_user_id: number,
   status_energy: number,
   status_relation: number,
   status_stable: number,
@@ -30,6 +33,7 @@ export const postFeedRequirement = (
 ) =>
   axiosInstance.post('/feedback', {
     conversation_room_id,
+    conversation_user_id,
     status_energy,
     status_relation,
     status_stable,
@@ -37,14 +41,17 @@ export const postFeedRequirement = (
   });
 
 export const putFeedRequirement = (
+  status_id: number,
   conversation_room_id: number,
+  conversation_user_id: number,
   status_energy: number,
   status_relation: number,
   status_stable: number,
   status_stress: number
 ) =>
-  axiosInstance.post('/feedback', {
+  axiosInstance.put(`/feedback/${status_id}`, {
     conversation_room_id,
+    conversation_user_id,
     status_energy,
     status_relation,
     status_stable,

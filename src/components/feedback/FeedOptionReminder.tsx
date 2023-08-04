@@ -11,7 +11,7 @@ import { Button } from 'ui';
 import * as t from './feedOptionReminder.style';
 
 export default function FeedOptionReminder() {
-  const { roomId } = useParams();
+  const { roomId, chatUserId } = useParams();
   const navigate = useNavigate();
   const { optVal, optText } = useUserData();
   const { feedUserList } = useFeedUser(Number(roomId));
@@ -33,6 +33,7 @@ export default function FeedOptionReminder() {
     mutate(
       {
         conversation_room_id: Number(roomId),
+        conversation_user_id: Number(chatUserId),
         feed_content: optText,
         feed_score: Number(optVal),
         review_list: userFeedbacks.map(
@@ -46,7 +47,7 @@ export default function FeedOptionReminder() {
         onSuccess: () => {
           localStorage.removeItem('optVal');
           localStorage.removeItem('optText');
-          navigate(`/feedback/3/${roomId}`);
+          navigate(`/feedback/3/${roomId}/${chatUserId}`);
         },
       }
     );

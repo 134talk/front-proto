@@ -13,18 +13,22 @@ export type FeedRequirementData = {
 type FeedReminderModalProps = {
   onClose: () => void;
   feedRequirementData: FeedRequirementData;
+  feedStatusId: number | null;
 };
 
 export default function FeedReminderModal({
   onClose,
   feedRequirementData,
+  feedStatusId,
 }: FeedReminderModalProps) {
-  const { roomId } = useParams();
+  const { roomId, chatUserId } = useParams();
   const { putMutate } = useFeedRequirement();
   const handleCancel = () => {
     if (feedRequirementData) {
       putMutate({
+        status_id: feedStatusId,
         conversation_room_id: Number(roomId),
+        conversation_user_id: Number(chatUserId),
         status_energy: feedRequirementData?.status_energy,
         status_relation: feedRequirementData?.status_relation,
         status_stable: feedRequirementData?.status_stable,

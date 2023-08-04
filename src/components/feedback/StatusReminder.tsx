@@ -10,13 +10,15 @@ import * as t from './statusReminder.style';
 
 type StatusReminderProps = {
   feedRequirementData: FeedRequirementData;
+  feedStatusId: number | null;
 };
 
 export default function StatusReminder({
   feedRequirementData,
+  feedStatusId,
 }: StatusReminderProps) {
   const { feedbackKey } = useUserData();
-  const { type, roomId } = useParams();
+  const { type, roomId, chatUserId } = useParams();
   const navigate = useNavigate();
   const [value, setValue] = useState<number>(0);
   const [internalValues, setInternalValues] = useState({
@@ -59,6 +61,7 @@ export default function StatusReminder({
         if (feedbackKey) {
           putMutate({
             conversation_room_id: Number(roomId),
+            conversation_user_id: Number(chatUserId),
             status_energy: Number(internalValues.energy),
             status_relation: Number(internalValues.relation),
             status_stable: Number(internalValues.stable),
@@ -67,7 +70,9 @@ export default function StatusReminder({
           localStorage.removeItem('feedbackKey');
         } else {
           postMutate({
+            status_id: feedStatusId,
             conversation_room_id: Number(roomId),
+            conversation_user_id: Number(chatUserId),
             status_energy: Number(internalValues.energy),
             status_relation: Number(internalValues.relation),
             status_stable: Number(internalValues.stable),
@@ -76,7 +81,7 @@ export default function StatusReminder({
         }
         break;
       default:
-        navigate(`/feedback/${Number(type) + 1}/${roomId}`);
+        navigate(`/feedback/${Number(type) + 1}/${roomId}/${chatUserId}`);
         break;
     }
   };

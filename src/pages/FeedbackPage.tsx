@@ -9,7 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export default function FeedbackPage() {
-  const { type, roomId } = useParams();
+  const { type, roomId, chatUserId } = useParams();
   const navigate = useNavigate();
 
   return (
@@ -21,7 +21,9 @@ export default function FeedbackPage() {
           isCenter={true}
           isNav={true}
           title="대화는 어떠셨나요?"
-          handleNav={() => navigate(`/feedback/${Number(type) - 1}/${roomId}`)}
+          handleNav={() =>
+            navigate(`/feedback/${Number(type) - 1}/${roomId}/${chatUserId}`)
+          }
         />
       )}
       <ProgressBar type={Number(type)} />

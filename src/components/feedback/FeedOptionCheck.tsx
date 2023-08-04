@@ -6,7 +6,7 @@ import { Button } from 'ui';
 import * as t from './feedOptionCheck.style';
 
 export default function FeedOptionCheck() {
-  const { roomId } = useParams();
+  const { roomId, chatUserId } = useParams();
   const { optVal, optText } = useUserData();
   const [value, setValue] = useState<number>(5);
   const [sentence, setSentence] = useState<string>('');
@@ -20,7 +20,7 @@ export default function FeedOptionCheck() {
   const handleNext = () => {
     localStorage.setItem('optVal', JSON.stringify(value));
     localStorage.setItem('optText', sentence);
-    navigate(`/feedback/2/${roomId}`);
+    navigate(`/feedback/2/${roomId}/${chatUserId}`);
   };
   useEffect(() => {
     if (optVal) setValue(Number(optVal));
