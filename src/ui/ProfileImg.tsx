@@ -1,7 +1,7 @@
 import { PROFILE_IMAGE } from 'shared/constants/icons';
-import * as t from './profileImg.style';
+import { styled } from 'styled-components';
 
-export interface ProfileImgProps {
+export interface Props {
   image?: string;
   id?: string;
   $isMyProf?: boolean;
@@ -11,9 +11,9 @@ export interface ProfileImgProps {
   onClick?: () => void;
 }
 
-export default function ProfileImg(props: ProfileImgProps) {
+export default function ProfileImg(props: Props) {
   return (
-    <t.Profile
+    <Profile
       src={props.image ? props.image : PROFILE_IMAGE}
       alt="profileImg"
       {...props}
@@ -22,3 +22,13 @@ export default function ProfileImg(props: ProfileImgProps) {
     />
   );
 }
+
+const Profile = styled.img<Props>`
+  width: ${props => (props.size ? props.size : '2rem')};
+  height: ${props => (props.size ? props.size : '2rem')};
+  border: ${props => (props.$isMyProf ? '2px solid #7588EA' : 'none')};
+  opacity: ${props => (props.$isCheckIn ? '0.5' : '1')};
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: ${props => props.$isClickable && 'pointer'};
+`;

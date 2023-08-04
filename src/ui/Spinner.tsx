@@ -1,13 +1,13 @@
 import { FadeLoader } from 'react-spinners';
-import * as t from './spinner.style';
+import { styled } from 'styled-components';
 
-interface SpinnerProps {
+interface Props {
   isLoading?: boolean;
 }
 
-export default function Spinner(props: SpinnerProps) {
+export default function Spinner(props: Props) {
   return (
-    <t.Container>
+    <Container>
       {props.isLoading && (
         <FadeLoader
           color={'#7588EA'}
@@ -20,6 +20,12 @@ export default function Spinner(props: SpinnerProps) {
           }}
         />
       )}
-    </t.Container>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem auto;
+`;

@@ -1,10 +1,10 @@
-interface CardImgProps {
+interface Props {
   lineColor: string;
   fillColor: string;
   size?: string;
 }
 
-export default function CardImg({ lineColor, fillColor, size }: CardImgProps) {
+export default function CardImg({ lineColor, fillColor, size }: Props) {
   return (
     <svg
       width={size ? size : '6.25rem'}
