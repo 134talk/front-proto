@@ -29,8 +29,8 @@ export const Container = styled.div`
         font-size: ${({ theme }) => theme.fs12};
         border-radius: 15px;
         text-align: center;
-        margin-top: -1.875rem;
-        margin-right: -2.125rem;
+        margin-top: -1.871rem;
+        margin-right: -3rem;
       }
     }
   }

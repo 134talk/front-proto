@@ -27,7 +27,9 @@ export default function ChatSelectionPage() {
   useEffect(() => {
     const newCombinedList =
       questionList?.map(item => {
-        const keyword = KEYWORD_LIST.find(el => el.id === item.keyword_id);
+        const keyword = KEYWORD_LIST.find(
+          el => el.keyword === item.keyword_name
+        );
         return { ...item, ...keyword, isFront: false };
       }) || [];
     setCombinedList(newCombinedList);
@@ -79,7 +81,6 @@ export default function ChatSelectionPage() {
   }, [orderList]);
 
   const handleBack = () => {
-    localStorage.setItem('selectKey', 'true');
     navigate(`/chat-keyword/${roomId}/${chatUserId}`);
   };
 
@@ -103,7 +104,7 @@ export default function ChatSelectionPage() {
               <CardImg
                 lineColor={item.color[0]}
                 fillColor={item.color[1]}
-                size="3rem"
+                size="4rem"
               />
               <p>{item.keyword_name}</p>
               {orderList.includes(item.question_id) && (
@@ -138,7 +139,7 @@ export default function ChatSelectionPage() {
             text="질문 선택하기"
             onClick={handleSelectOrder}
           />
-          {!selectKey && (
+          {selectKey === 'false' && (
             <Button
               category="cancel"
               text="키워드 다시 고르기 (1회)"

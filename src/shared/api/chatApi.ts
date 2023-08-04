@@ -24,12 +24,14 @@ export const setTimer = (tId: string, chatTime: string) =>
 export const updateGuideStatus = (uId: string) =>
   axiosInstance.post(`/users/${uId}/notify`);
 
-export const getFlag = (
+export const setChatFlag = (
   conversation_room_id: number,
-  conversation_user_id: number
+  conversation_user_id: number,
+  team_id: number
 ) =>
-  axiosInstance.get(
-    `/conversation-rooms/${conversation_room_id}/users/${conversation_user_id}`
+  axiosInstance.put(
+    `/conversation-rooms/${conversation_room_id}/conversation-users/${conversation_user_id}`,
+    { team_id }
   );
 
 export const getKeywordsFlag = (
@@ -37,7 +39,7 @@ export const getKeywordsFlag = (
   conversation_user_id: number
 ) =>
   axiosInstance.get(
-    `/conversation-rooms/${conversation_room_id}/users/${conversation_user_id}/keywords`
+    `/conversation-rooms/${conversation_room_id}/conversation-users/${conversation_user_id}/keywords`
   );
 
 export const postKeywords = (
@@ -46,7 +48,7 @@ export const postKeywords = (
   keywordCode: string[]
 ) =>
   axiosInstance.post(
-    `/conversation-rooms/${conversation_room_id}/users/${conversation_user_id}/keywords`,
+    `/conversation-rooms/${conversation_room_id}/conversation-users/${conversation_user_id}/keywords`,
     { keywordCode }
   );
 
@@ -56,7 +58,7 @@ export const putKeywords = (
   keyword_code: string[]
 ) =>
   axiosInstance.put(
-    `/conversation-rooms/${conversation_room_id}/users/${conversation_user_id}/keywords`,
+    `/conversation-rooms/${conversation_room_id}/conversation-users/${conversation_user_id}/keywords`,
     { keyword_code }
   );
 
@@ -65,7 +67,7 @@ export const getSelections = (
   conversation_user_id: number
 ) =>
   axiosInstance.get(
-    `/conversation-rooms/${conversation_room_id}/users/${conversation_user_id}/keywords/questions`
+    `/conversation-rooms/${conversation_room_id}/conversation-users/${conversation_user_id}/keywords/questions`
   );
 
 export const postSelections = (
@@ -74,7 +76,7 @@ export const postSelections = (
   question_code_list: number[]
 ) =>
   axiosInstance.post(
-    `/conversation-rooms/${conversation_room_id}/users/${conversation_user_id}/keywords/questions`,
+    `/conversation-rooms/${conversation_room_id}/conversation-users/${conversation_user_id}/keywords/questions`,
     {
       question_code_list,
     }
