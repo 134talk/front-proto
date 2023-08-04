@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface User {
   id: number;
+  conversation_user_id?: number;
   nickname: string;
   name: string;
 }
@@ -15,6 +16,7 @@ export interface ChatUserInfo extends UserInfo {
 export interface RecChatRoom {
   socket_flag: number;
   check_in_flag: boolean;
+  speaker_id: number;
   user_info: ChatUserInfo[];
 }
 export interface RecAlert {

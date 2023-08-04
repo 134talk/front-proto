@@ -2,7 +2,14 @@ import { ChatNotifyScreen, ChatScreen, WaitingScreen } from 'components';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
-import { recAlert, recChatRoom } from 'shared/store/chatAction';
+import {
+  recAlert,
+  recChatRoom,
+  recEmotion,
+  recNewEmotion,
+  recNotify,
+  recQuestion,
+} from 'shared/store/chatAction';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import NotFoundPage from './NotFoundPage';
 
@@ -35,18 +42,24 @@ export default function ChatPage() {
     });
     dispatch(recChatRoom('recConversationRoom'));
     dispatch(recAlert('recAlert'));
+    dispatch(recNotify('recNotify'));
+    dispatch(recQuestion('recQuestion'));
+    dispatch(recEmotion('recEmotion'));
+    dispatch(recNewEmotion('recNewEmotion'));
     return () => {
       dispatch({ type: 'disconnect' });
     };
   }, []);
   // 재입장시 렌더 조건 처리
   useEffect(() => {
-    const baseChatUrl = `/chat/${roomId}`;
+    const baseChatUrl = `/chat/${roomId}/${chatUserId}`;
     if (socketFlag === 0 && checkInFlag === false) navigate('/chats');
-    if (socketFlag === 1) navigate(`${baseChatUrl}/0`);
     if (socketFlag === 1 && checkInFlag === true) navigate(`${baseChatUrl}/1`);
-    if (socketFlag === 2) navigate(`${baseChatUrl}/1`);
-    if (socketFlag === 3) navigate(`${baseChatUrl}/2`);
+    if (socketFlag === 2) {
+      setTimeout(() => {
+        navigate(`${baseChatUrl}/2`);
+      }, 3000);
+    }
   }, [socketFlag, checkInFlag]);
   // 마감 5분전 & 종료 알림
   useEffect(() => {

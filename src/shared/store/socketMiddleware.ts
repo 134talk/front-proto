@@ -1,6 +1,6 @@
 import type { Middleware } from '@reduxjs/toolkit';
-import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
+import type { Socket } from 'socket.io-client';
 import type { SocketAction } from './chatAction';
 import type {
   RecAlert,
@@ -12,7 +12,6 @@ import type {
 } from './chatSlice';
 import {
   setCreateRoom,
-  setIsSocketConnected,
   setRecAlert,
   setRecChatRoom,
   setRecEmotion,
@@ -31,18 +30,14 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
           socket.close();
         }
         socket = io(process.env.REACT_APP_SOCKET_SERVER);
-        socket.on('connect', () => {
-          dispatch(setIsSocketConnected(true));
-          console.log(`connect: ${socket.id}`);
-        });
-        socket.on('disconnect', () => {
-          dispatch(setIsSocketConnected(false));
-          console.log('disconnect');
-        });
+        socket.connect();
+        console.log('소켓 연결하기', socket);
         break;
       }
       case 'disconnect': {
         if (socket) {
+          socket.disconnect();
+          console.log('소켓 연결 끊기');
           socket.close();
           socket = null;
         }
@@ -50,8 +45,10 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
       }
       case 'sendData': {
         const { destination, data } = action.payload;
-        if (socket && socket.connected) {
+        if (socket && socket.active) {
           socket.emit(destination, data);
+          console.log('데이터 보내는 이벤트 이름: ', destination);
+          console.log('이벤트에 함께 보내는 데이터: ', data);
         }
         break;
       }
@@ -59,6 +56,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecChatRoom) => {
+            console.log('recChatRoom: ', data);
             dispatch(setRecChatRoom(data));
           });
         }
@@ -69,6 +67,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecAlert) => {
+            console.log('recAlert: ', data);
             dispatch(setRecAlert(data));
           });
         }
@@ -78,6 +77,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecNotify) => {
+            console.log('recNotify: ', data);
             dispatch(setRecNotify(data));
           });
         }
@@ -87,6 +87,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecQuestion) => {
+            console.log('recQuestion: ', data);
             dispatch(setRecQuestion(data));
           });
         }
@@ -96,6 +97,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecEmotion) => {
+            console.log('recEmotion: ', data);
             dispatch(setRecEmotion(data));
           });
         }
@@ -105,6 +107,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecNewEmotion) => {
+            console.log('recNewEmotion: ', data);
             dispatch(setRecNewEmotion(data));
           });
         }
@@ -114,6 +117,7 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: { type: string }) => {
+            console.log('createRoom: ', data);
             dispatch(setCreateRoom(data));
           });
         }
