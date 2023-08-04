@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.div`
-  z-index: 1;
+  z-index: 999;
   position: fixed;
   display: flex;
   justify-content: center;
