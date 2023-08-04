@@ -12,43 +12,53 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type StatusRes = {
-  type1: { emotion: string; emotionCount: number }[];
-  type2: { act: string; actCount: number }[];
-  type3: { status: string; statusCount: number }[];
+  data: {
+    emotion_array: { emotion: string; emotion_count: number }[];
+    action_array: { action: string; action_count: number }[];
+    state_array: { state: string; state_count: number }[];
+  };
 };
 
 type ChatRes = {
-  emoticonScore: { emoticonName: string; score: number }[];
-  keywordScore: { code: number; score: number }[];
-  questionList: string[];
+  data: {
+    emotion_score: { emotion_name: string; emotion_count: number }[];
+    keyword_score: { keyword_id: number; keyword_count: number }[];
+    question_list: string[];
+  };
 };
 
 type FeedbackRes = {
-  energyPercent: number;
-  relationPercent: number;
-  stablePercent: number;
-  stressPercent: number;
+  data: {
+    energy_percent: number;
+    relation_percent: number;
+    stable_percent: number;
+    stress_percent: number;
+  };
 };
 
 type MemberRes = {
-  chatCount: number;
-  energyPercent: number;
-  name: string;
-  nickname: string;
-  receivedEmoticons: { emoticon: string; totalCount: number }[];
-  relationPercent: number;
-  scorePercent: number;
-  stablePercent: number;
-  stressPercent: number;
+  data: {
+    converstaion_count: number;
+    energy_percent: number;
+    name: string;
+    nickname: string;
+    received_emotions: { emotion_name: string; emotion_count: number }[];
+    relation_percent: number;
+    score_percent: number;
+    stable_percent: number;
+    stress_percent: number;
+  };
 };
 
 type ListRes = {
-  userId: number;
-  profileUrl: string;
-  name: string;
-  nickname: string;
-  chatCount: number;
-}[];
+  data: {
+    id: number;
+    profile_image_url: string;
+    name: string;
+    nickname: string;
+    conversation_count: number;
+  }[];
+};
 
 type Args = {
   types: 'status' | 'chat' | 'feedback' | 'member' | 'list';
@@ -114,11 +124,11 @@ export default function useReport({ types, uid, keyword }: Args) {
   );
 
   return {
-    statusData,
-    chatData,
-    feedbackData,
-    memberDataList,
-    memberData,
+    statusData: statusData.data,
+    chatData: chatData.data,
+    feedbackData: feedbackData.data,
+    memberDataList: memberDataList.data,
+    memberData: memberData.data,
     refetch,
   };
 }

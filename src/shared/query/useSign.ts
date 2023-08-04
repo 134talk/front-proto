@@ -4,24 +4,30 @@ import { useNavigate } from 'react-router-dom';
 import { signAdmin, signUser } from 'shared/api/userApi';
 
 type UserReq = {
+  uId: string;
   name: string;
   teamCode: string;
 };
 
 type AdminReq = {
+  uId: string;
   name: string;
   teamName: string;
 };
 
 type Res = {
-  teamCode: string;
+  data: { team_code: string; team_id: number; role: string };
 };
 
-export default function useSign() {
+export default function useSign(uName: string) {
   const navigate = useNavigate();
 
-  const onSuccessCallback = ({ teamCode }: Res) => {
-    localStorage.setItem('channel', teamCode);
+  const onSuccessCallback = ({ data }: Res) => {
+    let isAdmin = data.role === 'editor';
+    localStorage.setItem('teamCode', data?.team_code);
+    localStorage.setItem('channel', String(data?.team_id));
+    localStorage.setItem('name', uName);
+    localStorage.setItem('isAdmin', String(isAdmin));
     navigate('/nickname/guide');
   };
 
@@ -29,7 +35,7 @@ export default function useSign() {
     AxiosResponse<Res>,
     AxiosError,
     UserReq
-  >(({ name, teamCode }) => signUser(name, teamCode), {
+  >(({ uId, name, teamCode }) => signUser(uId, name, teamCode), {
     onSuccess: res => onSuccessCallback(res?.data),
   });
 
@@ -37,7 +43,7 @@ export default function useSign() {
     AxiosResponse<Res>,
     AxiosError,
     AdminReq
-  >(({ name, teamName }) => signAdmin(name, teamName), {
+  >(({ uId, name, teamName }) => signAdmin(uId, name, teamName), {
     onSuccess: res => onSuccessCallback(res?.data),
   });
 

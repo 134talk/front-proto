@@ -2,134 +2,115 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface User {
-  userId: number;
-  name: string;
+  id: number;
+  conversation_user_id?: number;
   nickname: string;
+  name: string;
 }
 export interface UserInfo extends User {
-  profileUrl: string;
+  profile_image_url: string;
 }
 export interface ChatUserInfo extends UserInfo {
-  activeFlag?: boolean;
-  socketFlag?: number;
+  active_flag: number;
 }
-export interface Metadata {
-  senderId: number;
-  questionNumber: number;
-  finalQuestionNumber: number;
+export interface RecChatRoom {
+  socket_flag: number;
+  check_in_flag: boolean;
+  speaker_id: number;
+  user_info: ChatUserInfo[];
 }
-export interface Topic {
-  keywordName: string;
-  questionId: number;
-  questionName: string;
-  depth: string;
+export interface RecAlert {
+  alert_five_minute: number | null;
 }
-export interface TopicList extends Topic {
-  keywordId: number;
-}
-export interface ChatTopic extends Topic {
-  questionGuide: string[];
-}
-export interface SubUser {
-  type: 'RE_ENTER' | 'NEW_CHATROOM';
-  checkInFlag: 'true' | 'false' | 'stillFalse';
-  requestId: number;
-  chatroomUserInfos: ChatUserInfo[];
-}
-export interface SubTimeout {
-  fiveMinuteLeft: boolean;
-}
-export interface SubKeyword {
-  socketFlag: number;
-  topicList: TopicList[];
-}
-export interface SubSelect {
-  allRegistered: boolean;
-  questionNumber: number;
-}
-export interface SubNotice {
-  metadata: Metadata;
+export interface RecNotify {
+  socket_flag: number;
   speaker: User;
-  userList: UserInfo[];
-  topic: ChatTopic;
 }
-export interface SubEmotion {
-  emoticonCode: number;
+export interface RecQuestion {
+  socket_flag: number;
+  speaker: User;
+  question_number: number;
+  question_last_flag: boolean;
+  user_info: UserInfo[];
+  question_list: {
+    keyword_name: string;
+    question_content: string;
+    depth: number;
+    question_guide: string[];
+  };
 }
-export interface Emotion extends SubEmotion {
-  emoticonCount: number;
+export interface RecEmotion {
+  emotion_code: number;
 }
-export interface SubEmotionList {
-  emoticonList: Emotion[];
+export interface Emotion extends RecEmotion {
+  emotion_count: number;
 }
+export interface RecNewEmotion {
+  emotion_list: Emotion[];
+}
+
 type ChatState = {
-  isStompConnected: boolean;
-  subUser: SubUser | null;
-  subTimeout: SubTimeout | null;
-  subKeyword: SubKeyword | null;
-  subSelect: SubSelect | null;
-  subNotice: SubNotice | null;
-  subEmotion: SubEmotion | null;
-  subEmotionList: SubEmotionList | null;
-  subNewChat: { type: string };
+  isSocketConnected: boolean;
+  recChatRoom: RecChatRoom | null;
+  recAlert: RecAlert | null;
+  recNotify: RecNotify | null;
+  recQuestion: RecQuestion | null;
+  recEmotion: RecEmotion | null;
+  recNewEmotion: RecNewEmotion | null;
+  createRoom: { type: string };
 };
 
 const initialState: ChatState = {
-  isStompConnected: false,
-  subUser: null,
-  subTimeout: null,
-  subKeyword: null,
-  subSelect: null,
-  subNotice: null,
-  subEmotion: null,
-  subEmotionList: null,
-  subNewChat: { type: '' },
+  isSocketConnected: false,
+  recChatRoom: null,
+  recAlert: null,
+  recNotify: null,
+  recQuestion: null,
+  recEmotion: null,
+  recNewEmotion: null,
+  createRoom: { type: '' },
 };
 
 const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
-    setIsStompConnected(state, action: PayloadAction<boolean>) {
-      state.isStompConnected = action.payload;
+    setIsSocketConnected(state, action: PayloadAction<boolean>) {
+      state.isSocketConnected = action.payload;
     },
-    setSubUser(state, action: PayloadAction<SubUser | null>) {
-      state.subUser = action.payload;
+    setRecChatRoom(state, action: PayloadAction<RecChatRoom | null>) {
+      state.recChatRoom = action.payload;
     },
-    setSubTimeout(state, action: PayloadAction<SubTimeout | null>) {
-      state.subTimeout = action.payload;
+    setRecAlert(state, action: PayloadAction<RecAlert | null>) {
+      state.recAlert = action.payload;
     },
-    setSubKeyword(state, action: PayloadAction<SubKeyword | null>) {
-      state.subKeyword = action.payload;
+    setRecNotify(state, action: PayloadAction<RecNotify | null>) {
+      state.recNotify = action.payload;
     },
-    setSubSelect(state, action: PayloadAction<SubSelect | null>) {
-      state.subSelect = action.payload;
+    setRecQuestion(state, action: PayloadAction<RecQuestion | null>) {
+      state.recQuestion = action.payload;
     },
-    setSubNotice(state, action: PayloadAction<SubNotice | null>) {
-      state.subNotice = action.payload;
+    setRecEmotion(state, action: PayloadAction<RecEmotion | null>) {
+      state.recEmotion = action.payload;
     },
-    setSubEmotion(state, action: PayloadAction<SubEmotion | null>) {
-      state.subEmotion = action.payload;
+    setRecNewEmotion(state, action: PayloadAction<RecNewEmotion | null>) {
+      state.recNewEmotion = action.payload;
     },
-    setSubEmotionList(state, action: PayloadAction<SubEmotionList | null>) {
-      state.subEmotionList = action.payload;
-    },
-    setSubNewChat(state, action: PayloadAction<{ type: string } | null>) {
-      state.subNewChat = action.payload;
+    setCreateRoom(state, action: PayloadAction<{ type: string } | null>) {
+      state.createRoom = action.payload;
     },
   },
 });
 
 export const {
-  setSubUser,
-  setIsStompConnected,
-  setSubTimeout,
-  setSubKeyword,
-  setSubSelect,
-  setSubNotice,
-  setSubEmotion,
-  setSubEmotionList,
-  setSubNewChat,
+  setIsSocketConnected,
+  setRecChatRoom,
+  setRecAlert,
+  setRecNotify,
+  setRecQuestion,
+  setRecEmotion,
+  setRecNewEmotion,
+  setCreateRoom,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

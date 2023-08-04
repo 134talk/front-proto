@@ -1,56 +1,48 @@
 import type { Action } from '@reduxjs/toolkit';
 
-interface SubscribeUserAction extends Action {
-  type: 'subscribeUser';
+interface RecChatRoomAction extends Action {
+  type: 'recChatRoom';
+  payload: {
+    destination: string;
+  };
+}
+interface RecAlertAction extends Action {
+  type: 'recAlert';
   payload: {
     destination: string;
   };
 }
 
-interface SubscribeTimeoutAction extends Action {
-  type: 'subscribeTimeout';
+interface RecNotifyAction extends Action {
+  type: 'recNotify';
   payload: {
     destination: string;
   };
 }
 
-interface SubscribeKeywordAction extends Action {
-  type: 'subscribeKeyword';
+interface RecQuestionAction extends Action {
+  type: 'recQuestion';
   payload: {
     destination: string;
   };
 }
 
-interface SubscribeSelectAction extends Action {
-  type: 'subscribeSelect';
+interface RecEmotionAction extends Action {
+  type: 'recEmotion';
   payload: {
     destination: string;
   };
 }
 
-interface SubscribeNoticeAction extends Action {
-  type: 'subscribeNotice';
+interface RecNewEmotionAction extends Action {
+  type: 'recNewEmotion';
   payload: {
     destination: string;
   };
 }
 
-interface SubscribeEmotionAction extends Action {
-  type: 'subscribeEmotion';
-  payload: {
-    destination: string;
-  };
-}
-
-interface SubscribeEmotionListAction extends Action {
-  type: 'subscribeEmotionList';
-  payload: {
-    destination: string;
-  };
-}
-
-interface SubscribeNewChatAction extends Action {
-  type: 'subscribeNewChat';
+interface CreateRoomAction extends Action {
+  type: 'createRoom';
   payload: {
     destination: string;
   };
@@ -72,77 +64,49 @@ interface DisconnectAction extends Action {
   type: 'disconnect';
 }
 
-interface UnsubscribeAction extends Action {
-  type: 'unsubscribe';
-  payload: {
-    destination: string;
-  };
-}
-
 export type SocketAction =
   | ConnectAction
   | DisconnectAction
   | SendDataAction
-  | UnsubscribeAction
-  | SubscribeUserAction
-  | SubscribeTimeoutAction
-  | SubscribeKeywordAction
-  | SubscribeSelectAction
-  | SubscribeNoticeAction
-  | SubscribeEmotionAction
-  | SubscribeEmotionListAction
-  | SubscribeNewChatAction;
+  | RecChatRoomAction
+  | RecAlertAction
+  | RecNotifyAction
+  | RecQuestionAction
+  | RecEmotionAction
+  | RecNewEmotionAction
+  | CreateRoomAction;
 
-export const subscribeUser = (destination: string): SubscribeUserAction => ({
-  type: 'subscribeUser',
+export const recChatRoom = (destination: string): RecChatRoomAction => ({
+  type: 'recChatRoom',
   payload: { destination },
 });
 
-export const subscribeTimeout = (
-  destination: string
-): SubscribeTimeoutAction => ({
-  type: 'subscribeTimeout',
+export const recAlert = (destination: string): RecAlertAction => ({
+  type: 'recAlert',
   payload: { destination },
 });
 
-export const subscribeKeyword = (
-  destination: string
-): SubscribeKeywordAction => ({
-  type: 'subscribeKeyword',
+export const recNotify = (destination: string): RecNotifyAction => ({
+  type: 'recNotify',
   payload: { destination },
 });
 
-export const subscribeSelect = (
-  destination: string
-): SubscribeSelectAction => ({
-  type: 'subscribeSelect',
+export const recQuestion = (destination: string): RecQuestionAction => ({
+  type: 'recQuestion',
   payload: { destination },
 });
 
-export const subscribeNotice = (
-  destination: string
-): SubscribeNoticeAction => ({
-  type: 'subscribeNotice',
+export const recEmotion = (destination: string): RecEmotionAction => ({
+  type: 'recEmotion',
   payload: { destination },
 });
 
-export const subscribeEmotion = (
-  destination: string
-): SubscribeEmotionAction => ({
-  type: 'subscribeEmotion',
+export const recNewEmotion = (destination: string): RecNewEmotionAction => ({
+  type: 'recNewEmotion',
   payload: { destination },
 });
 
-export const subscribeEmotionList = (
-  destination: string
-): SubscribeEmotionListAction => ({
-  type: 'subscribeEmotionList',
-  payload: { destination },
-});
-
-export const subscribeNewChat = (
-  destination: string
-): SubscribeNewChatAction => ({
-  type: 'subscribeNewChat',
+export const createRoom = (destination: string): CreateRoomAction => ({
+  type: 'createRoom',
   payload: { destination },
 });

@@ -31,7 +31,7 @@ export default function AddToHomeScreen({
             onClick={onOpen}
             text="편하게 앱 이용하기"
             category="confirm"
-            bgColor="#fff"
+            $bgColor="#fff"
             color="#4059DE"
           />
           <button onClick={() => setShowKakaoButton(true)}>
@@ -44,7 +44,7 @@ export default function AddToHomeScreen({
             onClick={installApp}
             text="편하게 앱 이용하기"
             category="confirm"
-            bgColor="#fff"
+            $bgColor="#fff"
             color="#4059DE"
           />
           <button onClick={handleClearPromptOnAndroid}>

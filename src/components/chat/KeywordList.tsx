@@ -1,4 +1,4 @@
-import { SELECTED_IMAGE } from 'shared/constants/cards';
+import { SELECTED_IMAGE } from 'shared/constants/icons';
 import { CardImg } from 'ui';
 import * as t from './keywordList.style';
 

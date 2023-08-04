@@ -1,24 +1,33 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { useMemo } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { getFeedRequirement, postFeedRequirement } from 'shared/api/reportApi';
+import {
+  getFeedRequirement,
+  postFeedRequirement,
+  putFeedRequirement,
+} from 'shared/api/reportApi';
 import queryKeys from 'shared/constants/queryKeys';
 
 export type Res = {
-  name: string;
-  nickname: string;
-  today: boolean;
-  statusEnergy: number;
-  statusRelation: number;
-  statusStable: number;
-  statusStress: number;
+  data: {
+    status_id: number | null;
+    name: string;
+    nickname: string;
+    remained_feedback: boolean;
+    status_energy: number;
+    status_relation: number;
+    status_stable: number;
+    status_stress: number;
+  };
 };
 type Req = {
-  roomId: number;
-  statusEnergy: number;
-  statusRelation: number;
-  statusStable: number;
-  statusStress: number;
+  status_id?: number;
+  conversation_room_id: number;
+  conversation_user_id: number;
+  status_energy: number;
+  status_relation: number;
+  status_stable: number;
+  status_stress: number;
 };
 
 export default function useFeedRequirement() {
@@ -30,31 +39,40 @@ export default function useFeedRequirement() {
   const feedRequirementUser = useMemo(() => {
     return data?.data
       ? {
-          name: data.data.name,
-          nickname: data.data.nickname,
-          today: data.data.today,
+          status_id: data.data.data.status_id,
+          name: data.data.data.name,
+          nickname: data.data.data.nickname,
+          remained_feedback: data.data.data.remained_feedback,
         }
       : undefined;
   }, [data]);
   const feedRequirementData = useMemo(() => {
     return data?.data
       ? {
-          statusEnergy: data.data.statusEnergy,
-          statusRelation: data.data.statusRelation,
-          statusStable: data.data.statusStable,
-          statusStress: data.data.statusStress,
+          status_energy: data.data.data.status_energy,
+          status_relation: data.data.data.status_relation,
+          status_stable: data.data.data.status_stable,
+          status_stress: data.data.data.status_stress,
         }
       : undefined;
   }, [data]);
 
-  const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
-    ({ roomId, statusEnergy, statusRelation, statusStable, statusStress }) =>
+  const { mutate: postMutate } = useMutation<AxiosResponse, AxiosError, Req>(
+    ({
+      conversation_room_id,
+      conversation_user_id,
+      status_energy,
+      status_relation,
+      status_stable,
+      status_stress,
+    }) =>
       postFeedRequirement(
-        roomId,
-        statusEnergy,
-        statusRelation,
-        statusStable,
-        statusStress
+        conversation_room_id,
+        conversation_user_id,
+        status_energy,
+        status_relation,
+        status_stable,
+        status_stress
       ),
     {
       onSuccess: () => {
@@ -62,5 +80,31 @@ export default function useFeedRequirement() {
       },
     }
   );
-  return { feedRequirementUser, feedRequirementData, mutate };
+
+  const { mutate: putMutate } = useMutation<AxiosResponse, AxiosError, Req>(
+    ({
+      status_id,
+      conversation_room_id,
+      conversation_user_id,
+      status_energy,
+      status_relation,
+      status_stable,
+      status_stress,
+    }) =>
+      putFeedRequirement(
+        status_id,
+        conversation_room_id,
+        conversation_user_id,
+        status_energy,
+        status_relation,
+        status_stable,
+        status_stress
+      ),
+    {
+      onSuccess: () => {
+        window.location.href = '/chats';
+      },
+    }
+  );
+  return { feedRequirementUser, feedRequirementData, postMutate, putMutate };
 }

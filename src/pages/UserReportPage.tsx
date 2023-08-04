@@ -16,9 +16,9 @@ import * as t from './userReportPage.style';
 export default function UserReportPage() {
   const navigate = useNavigate();
   const onClose = () => navigate('/user?tab=chat');
-  const { date } = useParams();
+  const { id } = useParams();
 
-  const { detailData } = useUserChatData(date);
+  const { detailData } = useUserChatData(id);
 
   return (
     <>
@@ -32,8 +32,9 @@ export default function UserReportPage() {
         <InnerBackground />
         <t.Scroll $isMobile={isMobile}>
           <p>
-            <span>{date}</span>일에는 <span>{detailData?.data.count}</span>번의
-            대화에 참여했어요.
+            <span>{detailData?.data.report_date}</span>일에는{' '}
+            <span>{detailData?.data.conversation_count}</span>번의 대화에
+            참여했어요.
           </p>
           <div className="bubbleWrapper">
             <Bubble>
@@ -47,20 +48,20 @@ export default function UserReportPage() {
             </Bubble>
             <Bubble>
               <h1>내가 공감받은 감정은?</h1>
-              {detailData?.data.receivedEmoticons.map((emoticons, idx) => (
+              {detailData?.data.received_emotions.map((emoticons, idx) => (
                 <Emotion key={idx} idx={idx} emoticons={emoticons} />
               ))}
             </Bubble>
             <Bubble>
               <h1>대화 후 나에게 남은 문장은?</h1>
-              {detailData?.data.remainedSentences.map((sentence, idx) => (
+              {detailData?.data.feed_contents.map((sentence, idx) => (
                 <Sentence key={idx} idx={idx} sentence={sentence} />
               ))}
             </Bubble>
             <Bubble>
               <h1>대화의 만족도는?</h1>
               <div className="circleWrapper">
-                {detailData?.data.scores.map((score, idx) => (
+                {detailData?.data.feed_scores.map((score, idx) => (
                   <Satisfaction key={idx} idx={idx} score={score} />
                 ))}
               </div>
@@ -68,13 +69,13 @@ export default function UserReportPage() {
             <Bubble>
               <h1>나에게 남겨진 피드백은?</h1>
               <div className="contentWrapper">
-                {detailData?.data.feedbacks.map(
-                  ({ profileImgUrl, nickname, content }, idx) => (
+                {detailData?.data.review_list.map(
+                  ({ profile_img_url, nickname, review_content }, idx) => (
                     <Feedback
                       key={idx}
-                      profile={profileImgUrl}
+                      profile={profile_img_url}
                       nickname={nickname}
-                      content={content}
+                      content={review_content}
                     />
                   )
                 )}

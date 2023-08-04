@@ -1,4 +1,5 @@
 const queryKeys = {
+  AUTH: 'auth',
   NAME: 'name',
   TEAM: 'team',
   CHATS: 'chatList',
@@ -11,6 +12,8 @@ const queryKeys = {
   FEEDBACK_REPORT: 'feedbackReport',
   USER_REPORT: 'userReport',
   MEMBER_REPORT: 'memberReport',
+  KEYWORD_FLAG: 'keywordFlag',
+  SELECTION: 'selection',
 };
 
 export default queryKeys;

@@ -8,7 +8,7 @@ interface CardProps {
   lineColor: string;
   fillColor: string;
   keyword: string;
-  depth?: string;
+  depth?: number;
   question?: string;
   handleRotate?: () => void;
   handleSwipe?: () => void;
@@ -32,7 +32,7 @@ export default function Card({
           <CardImg lineColor={lineColor} fillColor={fillColor} size="16rem" />
           <t.ChatWrapper>
             <p className="keyword_text">{keyword}</p>
-            <p className="depth_text">{depth}</p>
+            <p className="depth_text">{depth}m</p>
             <div>
               <img src={ROTATE_ICON} alt="rotate" />
               <button onClick={handleRotate}>뒷면 확인하기</button>

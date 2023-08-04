@@ -4,20 +4,24 @@ import { useQuery } from 'react-query';
 import { getFeedUser } from 'shared/api/reportApi';
 import queryKeys from 'shared/constants/queryKeys';
 
-export type Res = {
-  userId: number;
-  name: string;
+type UserInfo = {
+  id: number;
   nickname: string;
+  name: string;
+};
+
+export type Res = {
+  data: { user_info: UserInfo[] };
 };
 
 export default function useFeedUser(roomId: number) {
-  const { data } = useQuery<AxiosResponse<Res[]>, AxiosError>(
+  const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
     [queryKeys.FEED_USER],
     () => getFeedUser(roomId),
     { refetchOnWindowFocus: false }
   );
 
-  const feedUserList = useMemo(() => data?.data || [], [data]);
+  const feedUserList = useMemo(() => data?.data.data.user_info || [], [data]);
 
   return { feedUserList };
 }

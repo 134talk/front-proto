@@ -31,10 +31,7 @@ export { default as CheckModal } from './chatList/CheckModal';
 export { default as GuideModal } from './chatList/GuideModal';
 // 대화 페이지
 export { default as WaitingScreen } from './chat/WaitingScreen';
-export { default as IntroductionScreen } from './chat/IntroductionScreen';
 export { default as UserList } from './chat/UserList';
-export { default as KeywordScreen } from './chat/KeywordScreen';
-export { default as SelectionScreen } from './chat/SelectionScreen';
 export { default as EmotionModal } from './chat/EmotionModal';
 export { default as ChatScreen } from './chat/ChatScreen';
 export { default as ChatNotifyScreen } from './chat/ChatNotifyScreen';

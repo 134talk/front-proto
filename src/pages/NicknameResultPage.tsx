@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useUserData from 'shared/hooks/useUserData';
 import useNickname from 'shared/query/useNickname';
 import { Button, ProfileImg } from 'ui';
 import * as t from './nicknameResultPage.style';
 
 export default function NicknameResultPage() {
   const navigate = useNavigate();
-  const handleConfirm = () => navigate('/channel');
+  const handleConfirm = () => navigate('/chats');
+
+  const { uId } = useUserData();
 
   const [mood] = useState(() => localStorage.getItem('mood'));
   const [personality] = useState(() => localStorage.getItem('personality'));
@@ -15,8 +18,11 @@ export default function NicknameResultPage() {
   const { mutate, nickname, profile } = useNickname();
 
   useEffect(() => {
-    mutate({ code: [mood, personality, status] });
-  }, [mutate, mood, personality, status]);
+    mutate({
+      uId: uId,
+      code: [Number(mood), Number(personality), Number(status)],
+    });
+  }, [mutate, mood, personality, status, uId]);
 
   return (
     <t.Container>

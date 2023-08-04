@@ -10,16 +10,16 @@ interface ChatSideNavProps {
 export default function ChatSideNav({ onClose }: ChatSideNavProps) {
   // 소켓 fetching 데이터
   const emotionList = useAppSelector(
-    state => state.chat?.subEmotionList?.emoticonList
+    state => state.chat?.recNewEmotion?.emotion_list
   );
-  const subUserList = useAppSelector(state => state.chat?.subNotice?.userList);
+  const userList = useAppSelector(state => state.chat?.recQuestion?.user_info);
   const guide = useAppSelector(
-    state => state.chat?.subNotice?.topic?.questionGuide
+    state => state.chat?.recQuestion?.question_list?.question_guide
   );
   // 감정 리스트 & 상수 데이터 매칭
   const combinedEmotionList = EMOTION_LIST.map(emotionItem => {
     const matchedItem = emotionList?.find(
-      emotion => emotion.emoticonCode === emotionItem.id
+      emotion => emotion.emotion_code === emotionItem.id
     );
     return {
       ...emotionItem,
@@ -41,9 +41,9 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
             <div className="emotion_content_wrapper" key={item.id}>
               <div className="image_wrapper">
                 <img src={item.source} alt={item.emotion} />
-                {item.emoticonCount > 0 && (
+                {item.emotion_count > 0 && (
                   <div className="badge_wrapper">
-                    <span>{item.emoticonCount}</span>
+                    <span>{item.emotion_count}</span>
                   </div>
                 )}
               </div>
@@ -65,7 +65,7 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
         <div className="title_wrapper">
           <p className="title_text">대화 상대</p>
         </div>
-        <UserList userInfo={subUserList} $isRow={true} />
+        <UserList userInfo={userList} $isRow={true} />
       </t.NavWrapper>
     </t.Container>
   );

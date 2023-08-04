@@ -5,36 +5,39 @@ import { Button } from 'ui';
 import * as t from './feedReminderModal.style';
 
 export type FeedRequirementData = {
-  statusEnergy: number;
-  statusRelation: number;
-  statusStable: number;
-  statusStress: number;
+  status_energy: number;
+  status_relation: number;
+  status_stable: number;
+  status_stress: number;
 };
-
 type FeedReminderModalProps = {
   onClose: () => void;
   feedRequirementData: FeedRequirementData;
+  feedStatusId: number | null;
 };
+
 export default function FeedReminderModal({
   onClose,
   feedRequirementData,
+  feedStatusId,
 }: FeedReminderModalProps) {
-  const { roomId } = useParams();
-  const { statusEnergy, statusRelation, statusStress, statusStable } =
-    feedRequirementData;
-  const { mutate } = useFeedRequirement();
+  const { roomId, chatUserId } = useParams();
+  const { putMutate } = useFeedRequirement();
   const handleCancel = () => {
     if (feedRequirementData) {
-      mutate({
-        roomId: Number(roomId),
-        statusEnergy,
-        statusRelation,
-        statusStress,
-        statusStable,
+      putMutate({
+        status_id: feedStatusId,
+        conversation_room_id: Number(roomId),
+        conversation_user_id: Number(chatUserId),
+        status_energy: feedRequirementData?.status_energy,
+        status_relation: feedRequirementData?.status_relation,
+        status_stable: feedRequirementData?.status_stable,
+        status_stress: feedRequirementData?.status_stress,
       });
     }
   };
   const handleConfirm = () => {
+    localStorage.setItem('feedbackKey', 'true');
     onClose();
   };
   return (

@@ -1,31 +1,31 @@
-import {
-  ChatNotifyScreen,
-  ChatScreen,
-  IntroductionScreen,
-  KeywordScreen,
-  SelectionScreen,
-  WaitingScreen,
-} from 'components';
+import { ChatNotifyScreen, ChatScreen, WaitingScreen } from 'components';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
-import useUserData from 'shared/hooks/useUserData';
-import { subscribeTimeout, subscribeUser } from 'shared/store/chatAction';
+import {
+  recAlert,
+  recChatRoom,
+  recEmotion,
+  recNewEmotion,
+  recNotify,
+  recQuestion,
+} from 'shared/store/chatAction';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import NotFoundPage from './NotFoundPage';
 
 export default function ChatPage() {
-  const { type, roomId } = useParams();
-  const { uid } = useUserData();
+  const { type, roomId, chatUserId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   // 소켓 fetching 데이터
-  const checkInFlag = useAppSelector(state => state.chat?.subUser?.checkInFlag);
+  const checkInFlag = useAppSelector(
+    state => state.chat?.recChatRoom?.check_in_flag
+  );
   const socketFlag = useAppSelector(
-    state => state.chat?.subUser?.chatroomUserInfos[0]?.socketFlag
+    state => state.chat?.recChatRoom?.socket_flag
   );
   const timeout = useAppSelector(
-    state => state.chat?.subTimeout?.fiveMinuteLeft
+    state => state.chat?.recAlert?.alert_five_minute
   );
   // 처음 렌더
   useEffect(() => {
@@ -33,46 +33,45 @@ export default function ChatPage() {
     dispatch({
       type: 'sendData',
       payload: {
-        destination: '/pub/enter',
+        destination: 'enterConversationRoom',
         data: {
-          roomId: Number(roomId),
-          userId: Number(uid),
-          selected: true,
-          socketFlag: 0,
+          conversation_room_id: Number(roomId),
+          conversation_user_id: Number(chatUserId),
         },
       },
     });
-    dispatch(subscribeUser(`/sub/chat/room/${roomId}`));
-    dispatch(subscribeTimeout(`/sub/chat/room/timeout/${roomId}`));
+    dispatch(recChatRoom('recConversationRoom'));
+    dispatch(recAlert('recAlert'));
+    dispatch(recNotify('recNotify'));
+    dispatch(recQuestion('recQuestion'));
+    dispatch(recEmotion('recEmotion'));
+    dispatch(recNewEmotion('recNewEmotion'));
     return () => {
       dispatch({ type: 'disconnect' });
     };
   }, []);
   // 재입장시 렌더 조건 처리
   useEffect(() => {
-    const baseChatUrl = `/chat/${roomId}`;
-    if (socketFlag === 0 && checkInFlag === 'stillFalse') navigate('/chats');
-    if (socketFlag === 0) navigate(`${baseChatUrl}/0`);
-    if (socketFlag === 1 && checkInFlag === 'stillFalse') navigate('/chats');
-    if (socketFlag === 1 || socketFlag === 2) navigate(`${baseChatUrl}/1`);
-    if (socketFlag === 3) navigate(`${baseChatUrl}/2`);
-    if (socketFlag === 4 || socketFlag === 5) navigate(`${baseChatUrl}/3`);
-    if (socketFlag === 6) navigate(`${baseChatUrl}/4`);
+    const baseChatUrl = `/chat/${roomId}/${chatUserId}`;
+    if (socketFlag === 0 && checkInFlag === false) navigate('/chats');
+    if (socketFlag === 1 && checkInFlag === true) navigate(`${baseChatUrl}/1`);
+    if (socketFlag === 2) {
+      setTimeout(() => {
+        navigate(`${baseChatUrl}/2`);
+      }, 3000);
+    }
   }, [socketFlag, checkInFlag]);
   // 마감 5분전 & 종료 알림
   useEffect(() => {
-    if (timeout === true) toast.error('대화 마감 5분 전입니다.');
-    if (timeout === false) toast.error('대화 시간이 종료되었습니다.');
+    if (timeout === 1) toast.error('대화 마감 5분 전입니다.');
+    if (timeout === 0) toast.error('대화 시간이 종료되었습니다.');
   }, [timeout]);
 
   const renderScreen = (pageNumber: number) => {
     const screenMap: { [key: number]: React.ElementType } = {
       0: WaitingScreen,
-      1: IntroductionScreen,
-      2: KeywordScreen,
-      3: SelectionScreen,
-      4: ChatNotifyScreen,
-      5: ChatScreen,
+      1: ChatNotifyScreen,
+      2: ChatScreen,
     };
 
     const ScreenComponent = screenMap[pageNumber];

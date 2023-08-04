@@ -4,23 +4,26 @@ import { useMutation } from 'react-query';
 import { updateNickname } from 'shared/api/userApi';
 
 type Req = {
-  code: string[];
+  uId: string;
+  code: number[];
 };
 
 type Res = {
-  nickname: string;
-  profileUrl: string;
+  data: {
+    nickname: string;
+    profile_image_url: string;
+  };
 };
 
 export default function useNickname() {
   const { mutate, data } = useMutation<AxiosResponse<Res>, AxiosError, Req>(
-    ({ code }) => updateNickname(code)
+    ({ uId, code }) => updateNickname(uId, code)
   );
 
   const { nickname, profile } = useMemo(
     () => ({
-      nickname: data?.data.nickname,
-      profile: data?.data.profileUrl,
+      nickname: data?.data.data.nickname,
+      profile: data?.data.data.profile_image_url,
     }),
     [data]
   );

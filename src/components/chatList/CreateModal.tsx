@@ -10,6 +10,7 @@ import { toast } from 'react-hot-toast';
 import { CHECK_ICON } from 'shared/constants/icons';
 import useSearchKeyword from 'shared/hooks/useSearchKeyword';
 import useSortedMembers from 'shared/hooks/useSortedMembers';
+import useUserData from 'shared/hooks/useUserData';
 import useChatInvitation from 'shared/query/useChatInvitation';
 import isMobile from 'shared/utils/deviceDetector';
 import { Button, Chip } from 'ui';
@@ -22,15 +23,17 @@ type Props = {
 export default function CreateModal({ handleCreateModal }: Props) {
   const members = useSortedMembers();
 
+  const { uId, name: uName } = useUserData();
+
   const { keyword, handleSearch, filteredUserList, onDelete } =
     useSearchKeyword(members);
 
   const mutate = useChatInvitation();
 
-  const [selectedIdList, setSelectedIdList] = useState<number[]>([]);
+  const [selectedIdList, setSelectedIdList] = useState<number[]>([Number(uId)]);
   const [selectedMembers, setSelectedMembers] = useState<
     { userId: number; name: string }[]
-  >([]);
+  >([{ userId: Number(uId), name: uName }]);
 
   const handleSelectedIdList = (selectedId: number) => {
     if (selectedIdList.includes(selectedId))
@@ -105,20 +108,20 @@ export default function CreateModal({ handleCreateModal }: Props) {
             {filteredUserList.length ? (
               <>
                 {filteredUserList.map(
-                  ({ userId, nickname, name, profileUrl }) => (
+                  ({ id, nickname, name, profile_image_url }) => (
                     <t.ProfileWrapper
-                      $isSelected={selectedIdList?.includes(userId)}
-                      key={userId}
-                      onClick={() => handleClick(userId, name)}
+                      $isSelected={selectedIdList?.includes(id)}
+                      key={id}
+                      onClick={() => handleClick(id, name)}
                     >
                       <Profile
                         scale="medium"
-                        userId={userId}
+                        userId={id}
                         nickname={nickname}
                         name={name}
-                        image={profileUrl}
+                        image={profile_image_url}
                       />
-                      {selectedIdList?.includes(userId) && (
+                      {selectedIdList?.includes(id) && (
                         <img src={CHECK_ICON} alt="선택" />
                       )}
                     </t.ProfileWrapper>
