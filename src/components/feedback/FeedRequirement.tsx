@@ -17,6 +17,7 @@ export default function FeedRequirement() {
         <FeedReminderModal
           onClose={feedReminderModal.close}
           feedRequirementData={feedRequirementData}
+          feedStatusId={feedRequirementUser?.status_id}
         />
       )}
       <t.Container>
@@ -28,7 +29,10 @@ export default function FeedRequirement() {
           </p>
           <p className="sub_text">대화 후에 어떤 변화가 있었는지 알려주세요.</p>
         </div>
-        <StatusReminder feedRequirementData={feedRequirementData} />
+        <StatusReminder
+          feedRequirementData={feedRequirementData}
+          feedStatusId={feedRequirementUser?.status_id}
+        />
       </t.Container>
     </>
   );

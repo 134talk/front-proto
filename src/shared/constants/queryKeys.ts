@@ -12,7 +12,6 @@ const queryKeys = {
   FEEDBACK_REPORT: 'feedbackReport',
   USER_REPORT: 'userReport',
   MEMBER_REPORT: 'memberReport',
-  CHAT_FLAG: 'chatFlag',
   KEYWORD_FLAG: 'keywordFlag',
   SELECTION: 'selection',
 };

@@ -26,10 +26,9 @@ export default function ChatListPage() {
   const [keyword, setKeyword] = useState('');
   const [chatId, setChatId] = useState(0);
   const [chatUserId, setChatUserId] = useState(0);
+  const { uId, isGuideAccess, channel } = useUserData();
 
-  const { uId, isGuideAccess } = useUserData();
-
-  const { refetch: openChatRoom } = useChatFlag(chatId, chatUserId);
+  const { mutate } = useChatFlag();
 
   const handleCreateModal = () => setCreateModal(prev => !prev);
   const handleSettingModal = () => setSettingModal(prev => !prev);
@@ -39,10 +38,21 @@ export default function ChatListPage() {
     setGuideModal(prev => !prev);
   };
 
-  const enterRoom = (isMyRoom: boolean) => {
-    if (isMyRoom && !isGuideAccess) handleGuIdeModal();
+  const enterRoom = (
+    isMyRoom: boolean,
+    isReJoin: boolean,
+    id: number,
+    userId: number
+  ) => {
+    if (isMyRoom && isReJoin && isGuideAccess === 'true') handleGuIdeModal();
     else if (!isMyRoom) toast.error('참여할 수 없는 대화방입니다.');
-    else if (isGuideAccess) openChatRoom();
+    else if (isGuideAccess === 'false') {
+      mutate({
+        conversation_room_id: id,
+        conversation_user_id: userId,
+        team_id: Number(channel),
+      });
+    }
   };
 
   const { chatList, refetch, error } = useChatList(keyword);
@@ -111,11 +121,12 @@ export default function ChatListPage() {
         />
         <t.Scroll $isMobile={isMobile}>
           {chatList?.length > 0 ? (
-            chatList.map(
+            chatList?.map(
               ({
                 conversation_room_id,
                 user_info,
                 join_flag,
+                re_join_flag,
                 emotions,
                 conversation_user_id,
               }) => (
@@ -131,7 +142,14 @@ export default function ChatListPage() {
                     roomName={user_info}
                     isJoin={join_flag}
                     emoticons={emotions}
-                    onClick={() => enterRoom(join_flag)}
+                    onClick={() =>
+                      enterRoom(
+                        join_flag,
+                        re_join_flag,
+                        conversation_room_id,
+                        conversation_user_id
+                      )
+                    }
                   />
                 </div>
               )

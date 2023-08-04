@@ -9,16 +9,21 @@ import {
 import queryKeys from 'shared/constants/queryKeys';
 
 export type Res = {
-  name: string;
-  nickname: string;
-  remained_feedback: boolean;
-  status_energy: number;
-  status_relation: number;
-  status_stable: number;
-  status_stress: number;
+  data: {
+    status_id: number | null;
+    name: string;
+    nickname: string;
+    remained_feedback: boolean;
+    status_energy: number;
+    status_relation: number;
+    status_stable: number;
+    status_stress: number;
+  };
 };
 type Req = {
+  status_id?: number;
   conversation_room_id: number;
+  conversation_user_id: number;
   status_energy: number;
   status_relation: number;
   status_stable: number;
@@ -34,19 +39,20 @@ export default function useFeedRequirement() {
   const feedRequirementUser = useMemo(() => {
     return data?.data
       ? {
-          name: data.data.name,
-          nickname: data.data.nickname,
-          remained_feedback: data.data.remained_feedback,
+          status_id: data.data.data.status_id,
+          name: data.data.data.name,
+          nickname: data.data.data.nickname,
+          remained_feedback: data.data.data.remained_feedback,
         }
       : undefined;
   }, [data]);
   const feedRequirementData = useMemo(() => {
     return data?.data
       ? {
-          status_energy: data.data.status_energy,
-          status_relation: data.data.status_relation,
-          status_stable: data.data.status_stable,
-          status_stress: data.data.status_stress,
+          status_energy: data.data.data.status_energy,
+          status_relation: data.data.data.status_relation,
+          status_stable: data.data.data.status_stable,
+          status_stress: data.data.data.status_stress,
         }
       : undefined;
   }, [data]);
@@ -54,6 +60,7 @@ export default function useFeedRequirement() {
   const { mutate: postMutate } = useMutation<AxiosResponse, AxiosError, Req>(
     ({
       conversation_room_id,
+      conversation_user_id,
       status_energy,
       status_relation,
       status_stable,
@@ -61,6 +68,7 @@ export default function useFeedRequirement() {
     }) =>
       postFeedRequirement(
         conversation_room_id,
+        conversation_user_id,
         status_energy,
         status_relation,
         status_stable,
@@ -75,14 +83,18 @@ export default function useFeedRequirement() {
 
   const { mutate: putMutate } = useMutation<AxiosResponse, AxiosError, Req>(
     ({
+      status_id,
       conversation_room_id,
+      conversation_user_id,
       status_energy,
       status_relation,
       status_stable,
       status_stress,
     }) =>
       putFeedRequirement(
+        status_id,
         conversation_room_id,
+        conversation_user_id,
         status_energy,
         status_relation,
         status_stable,

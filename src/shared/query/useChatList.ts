@@ -10,9 +10,10 @@ type Res = {
     conversation_room: {
       conversation_room_id: number;
       name: string;
-      emotions: { emotion: string; emotion_count: number }[];
+      emotions: { emotion_name: string; emotion_count: number }[];
       conversation_user_id: number;
       join_flag: boolean;
+      re_join_flag: boolean;
       user_info: string[];
     }[];
   };
@@ -34,6 +35,7 @@ export default function useChatList(keyword?: string) {
       refetchInterval: 10000,
     }
   );
+
   const chatList = useMemo(() => data?.data.data.conversation_room, [data]);
 
   return { chatList, refetch, error };

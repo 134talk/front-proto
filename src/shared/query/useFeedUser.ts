@@ -11,7 +11,7 @@ type UserInfo = {
 };
 
 export type Res = {
-  user_info: UserInfo[];
+  data: { user_info: UserInfo[] };
 };
 
 export default function useFeedUser(roomId: number) {
@@ -21,7 +21,7 @@ export default function useFeedUser(roomId: number) {
     { refetchOnWindowFocus: false }
   );
 
-  const feedUserList = useMemo(() => data?.data.user_info || [], [data]);
+  const feedUserList = useMemo(() => data?.data.data.user_info || [], [data]);
 
   return { feedUserList };
 }

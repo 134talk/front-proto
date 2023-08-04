@@ -2,14 +2,9 @@ import { BottomButtonTab, Card, EmotionModal, NavBar } from 'components';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EMOTION_LIST, KEYWORD_LIST } from 'shared/constants/constants';
-// import useEmotionChange from 'shared/hooks/useEmotionChange';
 import useModal from 'shared/hooks/useModal';
 import useUserData from 'shared/hooks/useUserData';
-import {
-  recEmotion,
-  recNewEmotion,
-  recQuestion,
-} from 'shared/store/chatAction';
+import { setRecEmotion } from 'shared/store/chatSlice';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import { Button, Emotion } from 'ui';
 import * as t from './chatScreen.style';
@@ -25,6 +20,10 @@ export default function ChatScreen() {
   const sideNavModal = useModal();
   const tutorialModal = useModal();
   // 소켓 fetching 데이터
+  const socketFlag = useAppSelector(
+    state => state.chat?.recChatRoom?.socket_flag
+  );
+  const chatUser = useAppSelector(state => state.chat?.recChatRoom?.speaker_id);
   const speaker = useAppSelector(state => state.chat?.recQuestion?.speaker);
   const topic = useAppSelector(state => state.chat?.recQuestion?.question_list);
   const questionNumber = useAppSelector(
@@ -39,11 +38,6 @@ export default function ChatScreen() {
   const newEmotion = useAppSelector(
     state => state.chat?.recNewEmotion?.emotion_list
   );
-  // new 감정 뱃지 처리
-  // const isChanged = useEmotionChange(newEmotion);
-  // const [prevQuestionNumber, setPrevQuestionNumber] = useState<number>(
-  //   metadata?.questionNumber
-  // );
   // 질문 카드 회전 state
   const [isRotate, setIsRotate] = useState<boolean>(false);
   // 감정 보내기 state
@@ -60,7 +54,6 @@ export default function ChatScreen() {
     ? KEYWORD_LIST.filter(item => item.keyword === topic?.keyword_name)
     : [];
   // 버튼 텍스트 => 다음 대화 || 대화 마무리
-
   const handleNext = () => {
     if (!endFlag) {
       dispatch({
@@ -74,49 +67,40 @@ export default function ChatScreen() {
           },
         },
       });
-      navigate(`/chat/${roomId}/4`);
     } else {
       dispatch({ type: 'disconnect' });
       localStorage.removeItem('emotionKey');
       localStorage.removeItem('emotionList');
       localStorage.removeItem('selectKey');
-      navigate(`/feedback/1/${roomId}`);
+      navigate(`/feedback/1/${roomId}/${chatUserId}`);
     }
   };
   // 소켓 데이터 구독 & 튜토리얼 오픈여부 확인
   useEffect(() => {
-    dispatch({
-      type: 'sendData',
-      payload: {
-        destination: 'sendQuestion',
-        data: {
-          conversation_room_id: Number(roomId),
-          conversation_user_id: Number(chatUserId),
-        },
-      },
-    });
-    dispatch(recQuestion('recQuestion'));
-    dispatch(recEmotion('recEmotion'));
-    dispatch(recNewEmotion('recNewEmotion'));
-    localStorage.setItem('emotionKey', 'true');
-    if (!tutorialKey) {
-      tutorialModal.open();
-    }
+    if (socketFlag === 2) {
+      dispatch(setRecEmotion({ emotion_code: null }));
+      if (chatUser === Number(chatUserId)) {
+        dispatch({
+          type: 'sendData',
+          payload: {
+            destination: 'sendQuestion',
+            data: {
+              conversation_room_id: Number(roomId),
+              conversation_user_id: Number(chatUserId),
+            },
+          },
+        });
+      }
+      localStorage.setItem('emotionKey', 'true');
+      if (!tutorialKey) {
+        tutorialModal.open();
+      }
+    } else if (socketFlag === 1) navigate(`/chat/${roomId}/${chatUserId}/1`);
   }, []);
-
+  // new 감정
   useEffect(() => {
     if (newEmotion) localStorage.setItem('emotionKey', 'true');
   }, [newEmotion]);
-  // // 새로운 질문 넘어가기일 때 렌더
-  // useEffect(() => {
-  //   if (
-  //     questionNumber &&
-  //     questionNumber > prevQuestionNumber
-  //   ) {
-  //     setPrevQuestionNumber(metadata?.questionNumber);
-  //     navigate(`/chat/${roomId}/4`);
-  //   }
-  // }, [metadata]);
 
   return (
     <>
@@ -165,14 +149,14 @@ export default function ChatScreen() {
               text={
                 endFlag ? '마지막 질문입니다.' : '다음 질문으로 넘어가볼까요?'
               }
-              bgColor={matchedItem[0]?.color[2]}
+              $bgColor={matchedItem[0]?.color[2]}
               onClick={handleNext}
             />
           ) : endFlag ? (
             <Button
               category="confirm"
               text={'마지막 질문입니다.'}
-              bgColor={matchedItem[0]?.color[2]}
+              $bgColor={matchedItem[0]?.color[2]}
               onClick={handleNext}
             />
           ) : (

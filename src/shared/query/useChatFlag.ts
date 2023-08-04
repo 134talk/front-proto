@@ -1,54 +1,40 @@
 import type { AxiosError, AxiosResponse } from 'axios';
-import { useMemo } from 'react';
-import { useQuery } from 'react-query';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { getFlag } from 'shared/api/chatApi';
-import queryKeys from 'shared/constants/queryKeys';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { setChatFlag } from 'shared/api/chatApi';
 
 export type Res = {
-  flag: 'keyword' | 'question' | 'active';
+  data: {
+    check_flag: 'keyword' | 'question' | 'active';
+    conversation_room_id: number;
+    conversation_user_id: number;
+  };
+};
+type Req = {
+  conversation_room_id: number;
+  conversation_user_id: number;
+  team_id: number;
 };
 
-export default function useChatFlag(
-  conversation_room_id: number,
-  conversation_user_id: number
-) {
+export default function useChatFlag() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { data, refetch } = useQuery<AxiosResponse<Res>, AxiosError>(
-    [queryKeys.CHAT_FLAG],
-    () => getFlag(conversation_room_id, conversation_user_id),
+  const { mutate } = useMutation<AxiosResponse<Res>, AxiosError, Req>(
+    ({ conversation_room_id, conversation_user_id, team_id }) =>
+      setChatFlag(conversation_room_id, conversation_user_id, team_id),
     {
-      enabled: !!conversation_room_id,
       onSuccess: res => {
-        if (
-          res?.data.flag === 'keyword' &&
-          location.pathname !==
-            `/chat-keyword/${conversation_room_id}/${conversation_user_id}`
-        ) {
-          navigate(
-            `/chat-keyword/${conversation_room_id}/${conversation_user_id}`
-          );
-        } else if (
-          res?.data.flag === 'question' &&
-          location.pathname !==
-            `/chat-selection/${conversation_room_id}/${conversation_user_id}`
-        ) {
-          navigate(
-            `/chat-selection/${conversation_room_id}/${conversation_user_id}`
-          );
-        } else if (
-          res?.data.flag === 'active' &&
-          location.pathname !==
-            `/chat/${conversation_room_id}/${conversation_user_id}/0`
-        ) {
-          navigate(`/chat/${conversation_room_id}/${conversation_user_id}/0`);
+        const roomId = res?.data.data.conversation_room_id;
+        const chatUserId = res?.data.data.conversation_user_id;
+        if (res?.data.data.check_flag === 'keyword') {
+          navigate(`/chat-keyword/${roomId}/${chatUserId}`);
+        } else if (res?.data.data.check_flag === 'question') {
+          navigate(`/chat-selection/${roomId}/${chatUserId}`);
+        } else if (res?.data.data.check_flag === 'active') {
+          navigate(`/chat/${roomId}/${chatUserId}/0`);
         } else return navigate('/chats');
       },
     }
   );
 
-  const chatFlag = useMemo(() => data?.data.flag || null, [data]);
-
-  return { chatFlag, refetch };
+  return { mutate };
 }

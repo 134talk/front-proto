@@ -1,42 +1,34 @@
 import { NavBar } from 'components';
 import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { CHAT_NOTIFY_IMAGE } from 'shared/constants/icons';
-import { recNotify } from 'shared/store/chatAction';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import * as t from './chatNotifyScreen.style';
 
 export default function ChatNotifyScreen() {
   const { roomId, chatUserId } = useParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   // 소켓 fetching 데이터
+  const chatUser = useAppSelector(state => state.chat?.recChatRoom?.speaker_id);
   const nickName = useAppSelector(
     state => state.chat?.recNotify?.speaker?.nickname
   );
   const name = useAppSelector(state => state.chat?.recNotify?.speaker?.name);
-  // 처음 렌더시 구독 해제(대화 입장, 키워드 선택, 질문순서 등록) & 질문순서 등록만 재구독
+  // 처음 렌더시 질문 알림 조회 on, emit
   useEffect(() => {
-    dispatch({
-      type: 'sendData',
-      payload: {
-        destination: 'sendNotify',
-        data: {
-          conversation_room_id: Number(roomId),
-          conversation_user_id: Number(chatUserId),
+    if (chatUser === Number(chatUserId)) {
+      dispatch({
+        type: 'sendData',
+        payload: {
+          destination: 'sendNotify',
+          data: {
+            conversation_room_id: Number(roomId),
+            conversation_user_id: Number(chatUserId),
+          },
         },
-      },
-    });
-    dispatch(recNotify('recNotify'));
-  }, []);
-
-  useEffect(() => {
-    if (nickName) {
-      setTimeout(() => {
-        navigate(`/chat/${roomId}/5`);
-      }, 1000);
+      });
     }
-  }, [nickName]);
+  }, []);
 
   return (
     <t.Container>

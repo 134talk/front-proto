@@ -6,17 +6,18 @@ import {
 } from 'components';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { KEYWORD_LIST } from 'shared/constants/constants';
 import useModal from 'shared/hooks/useModal';
+import useUserData from 'shared/hooks/useUserData';
 import useChatFlag from 'shared/query/useChatFlag';
 import useKeyword from 'shared/query/useKeyword';
 import { Button } from 'ui';
 import * as t from './chatKeywordPage.style';
 
 export default function ChatKeywordPage() {
-  const navigate = useNavigate();
   const exitConfirmModal = useModal();
+  const { channel } = useUserData();
   const { roomId, chatUserId } = useParams();
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const canSubmit = selectedKeywords.length > 2;
@@ -33,11 +34,12 @@ export default function ChatKeywordPage() {
       setSelectedKeywords(deleteKeywords);
     }
   };
-  const { chatFlag } = useChatFlag(Number(roomId), Number(chatUserId));
+  const { mutate } = useChatFlag();
   const { keywordFlag, postMutate, putMutate } = useKeyword(
     Number(roomId),
     Number(chatUserId)
   );
+
   const handleSubmitKeyword = () => {
     if (keywordFlag === 2)
       postMutate({
@@ -45,22 +47,26 @@ export default function ChatKeywordPage() {
         conversation_user_id: Number(chatUserId),
         keyword_code: selectedKeywords,
       });
-    else if (keywordFlag === 1)
+    else if (keywordFlag === 1) {
       putMutate({
         conversation_room_id: Number(roomId),
         conversation_user_id: Number(chatUserId),
         keyword_code: selectedKeywords,
       });
+      localStorage.setItem('selectKey', 'true');
+    }
   };
   useEffect(() => {
     if (keywordFlag === 0) {
-      if (chatFlag === 'question') {
-        navigate(`/chat-selection/${roomId}`);
-      } else if (chatFlag === 'active') {
-        navigate(`/chat/${roomId}/0`);
-      }
+      mutate({
+        conversation_room_id: Number(roomId),
+        conversation_user_id: Number(chatUserId),
+        team_id: Number(channel),
+      });
+    } else if (keywordFlag === 2) {
+      localStorage.setItem('selectKey', 'false');
     }
-  }, [keywordFlag, chatFlag]);
+  }, [keywordFlag]);
 
   return (
     <>

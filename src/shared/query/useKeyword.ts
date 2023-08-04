@@ -6,7 +6,7 @@ import { getKeywordsFlag, postKeywords, putKeywords } from 'shared/api/chatApi';
 import queryKeys from 'shared/constants/queryKeys';
 
 export type Res = {
-  keyword_selection: number;
+  data: { keyword_selection: number };
 };
 export type Req = {
   conversation_room_id: number;
@@ -23,10 +23,7 @@ export default function useKeyword(
     [queryKeys.KEYWORD_FLAG],
     () => getKeywordsFlag(conversation_room_id, conversation_user_id)
   );
-  const keywordFlag = useMemo(
-    () => data?.data.keyword_selection || null,
-    [data]
-  );
+  const keywordFlag = useMemo(() => data?.data.data.keyword_selection, [data]);
 
   const { mutate: postMutate } = useMutation<AxiosResponse, AxiosError, Req>(
     ({ keyword_code }) =>
@@ -34,7 +31,7 @@ export default function useKeyword(
     {
       onSuccess: () =>
         navigate(
-          `chat-selection/${conversation_room_id}/${conversation_user_id}`
+          `/chat-selection/${conversation_room_id}/${conversation_user_id}`
         ),
     }
   );
@@ -45,7 +42,7 @@ export default function useKeyword(
     {
       onSuccess: () =>
         navigate(
-          `chat-selection/${conversation_room_id}/${conversation_user_id}`
+          `/chat-selection/${conversation_room_id}/${conversation_user_id}`
         ),
     }
   );

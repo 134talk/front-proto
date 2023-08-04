@@ -37,7 +37,7 @@ export default function EmotionModal({
     dispatch({
       type: 'sendData',
       payload: {
-        destination: 'recEmotion',
+        destination: 'sendEmotion',
         data: {
           conversation_room_id: Number(roomId),
           conversation_user_id: Number(chatUserId),

@@ -13,8 +13,10 @@ type Question = {
   depth: number;
 };
 export type Res = {
-  flag: 'keyword' | 'question' | 'active';
-  questions: Question[];
+  data: {
+    check_flag: 'keyword' | 'question' | 'active';
+    questions: Question[];
+  };
 };
 export type Req = {
   conversation_room_id: number;
@@ -32,17 +34,17 @@ export default function useSelection(
     () => getSelections(conversation_room_id, conversation_user_id),
     {
       onSuccess: res => {
-        if (res?.data.flag === 'keyword') {
+        if (res?.data.data.check_flag === 'keyword') {
           navigate(
             `/chat-keyword/${conversation_room_id}/${conversation_user_id}`
           );
-        } else if (res?.data.flag === 'active') {
+        } else if (res?.data.data.check_flag === 'active') {
           navigate(`/chat/${conversation_room_id}/${conversation_user_id}/0`);
         } else return res;
       },
     }
   );
-  const questionList = useMemo(() => data?.data.questions || [], [data]);
+  const questionList = useMemo(() => data?.data.data.questions || [], [data]);
 
   const { mutate } = useMutation<AxiosResponse, AxiosError, Req>(
     ({ question_code_list }) =>
@@ -53,7 +55,7 @@ export default function useSelection(
       ),
     {
       onSuccess: () =>
-        navigate(`chat/${conversation_room_id}/${conversation_user_id}/0`),
+        navigate(`/chat/${conversation_room_id}/${conversation_user_id}/0`),
     }
   );
 

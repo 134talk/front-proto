@@ -5,24 +5,33 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type Res = {
-  my_report_list: {
-    report_date: string;
-    report_id: number;
-  }[];
+  data: {
+    my_report_list: {
+      report_date: string;
+      report_id: number;
+    }[];
+  };
 };
 
 type DetailRes = {
-  report_date: string;
-  conversation_count: number;
-  effect: { energy: number; relation: number; stable: number; stress: number };
-  received_emotions: { emotion_name: string; emotion_count: number }[][];
-  feed_contents: string[];
-  feed_scores: number[];
-  review_list: {
-    nickname: string;
-    profile_img_url: string;
-    review_content: string;
-  }[];
+  data: {
+    report_date: string;
+    conversation_count: number;
+    effect: {
+      energy: number;
+      relation: number;
+      stable: number;
+      stress: number;
+    };
+    received_emotions: { emotion_name: string; emotion_count: number }[][];
+    feed_contents: string[];
+    feed_scores: number[];
+    review_list: {
+      nickname: string;
+      profile_img_url: string;
+      review_content: string;
+    }[];
+  };
 };
 
 export default function useUserChatData(rId?: string) {
@@ -46,5 +55,5 @@ export default function useUserChatData(rId?: string) {
     }
   );
 
-  return { data, detailData };
+  return { data: data.data, detailData: detailData.data };
 }

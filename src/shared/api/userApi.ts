@@ -25,6 +25,6 @@ export const updateNickname = (uId: string, nameCode: number[]) =>
   });
 
 export const getProfile = (uId: string) =>
-  axiosInstance.get(`/user/${uId}/profile`);
+  axiosInstance.get(`/users/${uId}/profile`);
 
 export const logout = () => axiosInstance.post('/auth/signout');

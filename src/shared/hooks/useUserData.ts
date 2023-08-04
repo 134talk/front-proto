@@ -4,13 +4,12 @@ import { silentRefresh } from 'shared/api/userApi';
 export default function useUserData() {
   const token = sessionStorage.getItem('token');
   const uId = localStorage.getItem('uid');
-  // channel === teamId
   const channel = localStorage.getItem('channel');
   const teamCode = localStorage.getItem('teamCode');
   const isAdmin = localStorage.getItem('isAdmin');
   const nickname = localStorage.getItem('nickname');
   const name = localStorage.getItem('name');
-  const isGuideAccess = Boolean(localStorage.getItem('isGuideAccess'));
+  const isGuideAccess = localStorage.getItem('isGuideAccess');
 
   const selectKey = localStorage.getItem('selectKey');
   const tutorialKey = localStorage.getItem('tutorialKey');

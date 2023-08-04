@@ -6,13 +6,15 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type Res = {
-  profile_image_url: string;
-  name: string;
-  nickname: string;
-  name_code: {
-    emotion_code: number;
-    action_code: number;
-    state_code: number;
+  data: {
+    profile_image_url: string;
+    name: string;
+    nickname: string;
+    name_code: {
+      emotion_code: number;
+      action_code: number;
+      state_code: number;
+    };
   };
 };
 
@@ -28,10 +30,10 @@ export default function useProfile() {
 
   const { profile, name, nickname, code } = useMemo(
     () => ({
-      profile: data?.data.profile_image_url,
-      name: data?.data.name,
-      nickname: data?.data.nickname,
-      code: data?.data.name_code,
+      profile: data?.data.data.profile_image_url,
+      name: data?.data.data.name,
+      nickname: data?.data.data.nickname,
+      code: data?.data.data.name_code,
     }),
     [data]
   );
