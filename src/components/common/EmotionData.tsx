@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  EMOTION_ANGRY,
-  EMOTION_HUG,
-  EMOTION_LIKE,
-  EMOTION_LOVE,
-  EMOTION_RIGHT,
-  EMOTION_SAD,
-} from 'shared/constants/icons';
+import { EMOTION_MAPPINGS } from 'shared/constants/constants';
 import * as t from './emotionData.style';
 
 type Props = {
@@ -33,18 +26,3 @@ export default function EmotionData({ name, count }: Props) {
     </t.Container>
   );
 }
-
-type Mappings = {
-  [key: string]: {
-    img: string;
-  };
-};
-
-const EMOTION_MAPPINGS: Mappings = {
-  Love: { img: EMOTION_LOVE },
-  Like: { img: EMOTION_LIKE },
-  Hug: { img: EMOTION_HUG },
-  Sad: { img: EMOTION_SAD },
-  "You're Right": { img: EMOTION_RIGHT },
-  Angry: { img: EMOTION_ANGRY },
-};

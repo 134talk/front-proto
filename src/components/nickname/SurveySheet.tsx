@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { ROUTES } from 'shared/constants/constants';
 import ButtonWrap from './ButtonWrap';
 import RadioSelection from './RadioSelection';
 import SurveyLegend from './SurveyLegend';
@@ -61,29 +62,3 @@ export default function SurveySheet({ optionList, question }: Props) {
     </t.Container>
   );
 }
-
-interface Routes {
-  [type: string]: {
-    nextType: string;
-    nextRoute: string;
-    prevRoute: string;
-  };
-}
-
-const ROUTES: Routes = {
-  mood: {
-    nextType: 'personality',
-    nextRoute: '/nickname/personality',
-    prevRoute: '/nickname/guide',
-  },
-  personality: {
-    nextType: 'status',
-    nextRoute: '/nickname/status',
-    prevRoute: '/nickname/mood',
-  },
-  status: {
-    nextType: '',
-    nextRoute: '/nickname/result',
-    prevRoute: '/nickname/personality',
-  },
-};
