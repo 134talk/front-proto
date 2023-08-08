@@ -22,6 +22,7 @@ export default function FeedReminderModal({
   feedStatusId,
 }: FeedReminderModalProps) {
   const { roomId, chatUserId } = useParams();
+
   const { putMutate } = useFeedRequirement();
   const handleCancel = () => {
     if (feedRequirementData) {
@@ -36,10 +37,12 @@ export default function FeedReminderModal({
       });
     }
   };
+
   const handleConfirm = () => {
     localStorage.setItem('feedbackKey', 'true');
     onClose();
   };
+
   return (
     <BaseModal>
       <t.Container>

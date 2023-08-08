@@ -8,7 +8,6 @@ interface ChatSideNavProps {
   onClose?: () => void;
 }
 export default function ChatSideNav({ onClose }: ChatSideNavProps) {
-  // 소켓 fetching 데이터
   const emotionList = useAppSelector(
     state => state.chat?.recNewEmotion?.emotion_list
   );
@@ -16,7 +15,7 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
   const guide = useAppSelector(
     state => state.chat?.recQuestion?.question_list?.question_guide
   );
-  // 감정 리스트 & 상수 데이터 매칭
+
   const combinedEmotionList = EMOTION_LIST.map(emotionItem => {
     const matchedItem = emotionList?.find(
       emotion => emotion.emotion_code === emotionItem.id
@@ -26,10 +25,12 @@ export default function ChatSideNav({ onClose }: ChatSideNavProps) {
       ...matchedItem,
     };
   });
+
   const handleClose = () => {
     onClose();
     localStorage.setItem('emotionKey', 'false');
   };
+
   return (
     <t.Container onClick={handleClose}>
       <t.NavWrapper $isMobile={isMobile}>

@@ -30,6 +30,6 @@ export const Container = styled.div`
   }
   .tutorial2_image {
     width: 100%;
-    margin-bottom: 8.875rem;
+    margin-bottom: 2.875rem;
   }
 `;

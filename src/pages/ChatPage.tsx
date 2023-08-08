@@ -17,7 +17,6 @@ export default function ChatPage() {
   const { type, roomId, chatUserId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // 소켓 fetching 데이터
   const checkInFlag = useAppSelector(
     state => state.chat?.recChatRoom?.check_in_flag
   );
@@ -27,7 +26,7 @@ export default function ChatPage() {
   const timeout = useAppSelector(
     state => state.chat?.recAlert?.alert_five_minute
   );
-  // 처음 렌더
+
   useEffect(() => {
     dispatch({ type: 'connect' });
     dispatch({
@@ -50,7 +49,7 @@ export default function ChatPage() {
       dispatch({ type: 'disconnect' });
     };
   }, []);
-  // 재입장시 렌더 조건 처리
+
   useEffect(() => {
     const baseChatUrl = `/chat/${roomId}/${chatUserId}`;
     if (socketFlag === 0 && checkInFlag === false) navigate('/chats');
@@ -61,7 +60,7 @@ export default function ChatPage() {
       }, 3000);
     }
   }, [socketFlag, checkInFlag]);
-  // 마감 5분전 & 종료 알림
+
   useEffect(() => {
     if (timeout === 1) toast.error('대화 마감 5분 전입니다.');
     if (timeout === 0) toast.error('대화 시간이 종료되었습니다.');

@@ -13,10 +13,11 @@ export default function AddToHomeScreen({
   onLogin,
   onOpen,
 }: AddToHomeScreenProps) {
-  const [showKakaoButton, setShowKakaoButton] = useState(false);
   const isIOS = isIos();
-  const { deferredPrompt, installApp, clearPrompt } = useA2hs();
   const isIosInstalled = isInstalled();
+  const [showKakaoButton, setShowKakaoButton] = useState(false);
+
+  const { deferredPrompt, installApp, clearPrompt } = useA2hs();
 
   const handleClearPromptOnAndroid = () => {
     clearPrompt();

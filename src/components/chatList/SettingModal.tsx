@@ -45,8 +45,7 @@ export default function SettingModal({
           <input
             type="text"
             placeholder="30"
-            value={chatTime}
-            defaultValue={time ? time : chatTime}
+            defaultValue={(time && time) || ''}
             onChange={onChange}
           />
           분으로 설정하겠습니다.

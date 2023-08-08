@@ -57,22 +57,29 @@ export default function EmotionModal({
           <t.Container>
             <div className="navbar_wrapper">
               <div className="navbar_top_wrapper">
-                <p className="guIde_text">어느 분에게 감정을 표현하시겠어요?</p>
+                <p className="guide_text">어느 분에게 감정을 표현하시겠어요?</p>
                 <img src={CLOSE_BLACK} alt="close" onClick={handleClose} />
               </div>
               {sendTo && <p className="sub_text">'{sendTo.nickname}'님에게</p>}
             </div>
             <div className="user_list_wrapper">
               {chatUserList?.map(item => (
-                <div className="user_wrapper" key={item.id}>
-                  <ProfileImg
-                    size="3rem"
-                    image={item.profile_image_url}
-                    onClick={() => handleSelect(item.nickname, item.id)}
-                  />
-                  {sendTo && sendTo.nickname.includes(item.nickname) && (
-                    <img className="check_image" src={CHECK_ICON} alt="check" />
-                  )}
+                <div className="user_wrapper">
+                  <div className="user_image_wrapper" key={item.id}>
+                    <ProfileImg
+                      size="3rem"
+                      image={item.profile_image_url}
+                      onClick={() => handleSelect(item.nickname, item.id)}
+                    />
+                    {sendTo && sendTo.nickname.includes(item.nickname) && (
+                      <img
+                        className="check_image"
+                        src={CHECK_ICON}
+                        alt="check"
+                      />
+                    )}
+                  </div>
+                  <p className="user_name_text">{item.name}</p>
                 </div>
               ))}
             </div>

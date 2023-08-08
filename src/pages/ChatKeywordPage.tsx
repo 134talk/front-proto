@@ -16,11 +16,13 @@ import { Button } from 'ui';
 import * as t from './chatKeywordPage.style';
 
 export default function ChatKeywordPage() {
-  const exitConfirmModal = useModal();
-  const { channel } = useUserData();
   const { roomId, chatUserId } = useParams();
+  const { channel } = useUserData();
+  const exitConfirmModal = useModal();
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+
   const canSubmit = selectedKeywords.length > 2;
+
   const handleSelectKeyword = (keyword: string) => {
     if (selectedKeywords.length > 2 && !selectedKeywords.includes(keyword))
       toast.error('키워드는 3개 이상 선택할 수 없습니다.');
@@ -34,6 +36,7 @@ export default function ChatKeywordPage() {
       setSelectedKeywords(deleteKeywords);
     }
   };
+
   const { mutate } = useChatFlag();
   const { keywordFlag, postMutate, putMutate } = useKeyword(
     Number(roomId),
@@ -56,6 +59,7 @@ export default function ChatKeywordPage() {
       localStorage.setItem('selectKey', 'true');
     }
   };
+
   useEffect(() => {
     if (keywordFlag === 0) {
       mutate({

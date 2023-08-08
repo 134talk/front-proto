@@ -13,15 +13,15 @@ export default function StatusDetail() {
         <Bubble>
           <h1>
             우리는 최근{' '}
-            <span>'{statusData?.data.emotion_array[0].emotion}'</span> 감정을
+            <span>'{statusData?.emotion_array[0].emotion_name}'</span> 감정을
             많이 느끼고 있어요.
           </h1>
           <div className="chartWrapper">
-            {statusData?.data.emotion_array.map(
-              ({ emotion, emotion_count }) => (
+            {statusData?.emotion_array.map(
+              ({ emotion_name, emotion_count }) => (
                 <BarChart
-                  key={emotion}
-                  text={emotion}
+                  key={emotion_name}
+                  text={emotion_name}
                   value={emotion_count}
                   isImage
                 />
@@ -31,11 +31,11 @@ export default function StatusDetail() {
         </Bubble>
         <Bubble>
           <h1>
-            우리 중엔 <span>'{statusData?.data.action_array[0].action}'</span>{' '}
-            사람이 많아요.
+            우리 중엔 <span>'{statusData?.action_array[0].action}'</span> 사람이
+            많아요.
           </h1>
           <div className="chartWrapper">
-            {statusData?.data.action_array.map(({ action, action_count }) => (
+            {statusData?.action_array.map(({ action, action_count }) => (
               <BarChart
                 key={action}
                 text={action}
@@ -47,11 +47,11 @@ export default function StatusDetail() {
         </Bubble>
         <Bubble>
           <h1>
-            우리는 지금 <span>'{statusData?.data.state_array[0].state}'</span>{' '}
-            를 원하는 사람이 많아요.
+            우리는 지금 <span>'{statusData?.state_array[0].state}'</span> 를
+            원하는 사람이 많아요.
           </h1>
           <div className="chartWrapper">
-            {statusData?.data.state_array.map(({ state, state_count }) => (
+            {statusData?.state_array.map(({ state, state_count }) => (
               <BarChart key={state} text={state} value={state_count} isImage />
             ))}
           </div>

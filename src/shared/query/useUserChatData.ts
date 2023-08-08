@@ -1,6 +1,7 @@
 import type { AxiosError, AxiosResponse } from 'axios';
+import { useMemo } from 'react';
 import { useQuery } from 'react-query';
-import { getUserReport, getUserReportDetail } from 'shared/api/reportApi';
+import { getMyUserReport, getUserReportDetail } from 'shared/api/reportApi';
 import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
@@ -38,16 +39,27 @@ export default function useUserChatData(rId?: string) {
   const { uId } = useUserData();
 
   const { data } = useQuery<AxiosResponse<Res>, AxiosError>(
-    [queryKeys.USER_REPORT, uId],
-    () => getUserReport(uId),
+    [queryKeys.MY_USER_REPORT, uId],
+    () => getMyUserReport(Number(uId)),
     {
+      onError: err => console.log(err),
       enabled: !rId,
       refetchOnWindowFocus: false,
     }
   );
 
-  const { data: detailData } = useQuery<AxiosResponse<DetailRes>, AxiosError>(
-    [queryKeys.USER_REPORT, uId, rId],
+  const { dateList } = useMemo(
+    () => ({
+      dateList: data?.data.data.my_report_list,
+    }),
+    [data]
+  );
+
+  const { data: reportDetailData } = useQuery<
+    AxiosResponse<DetailRes>,
+    AxiosError
+  >(
+    [queryKeys.MY_USER_REPORT_DETAILS, rId],
     () => getUserReportDetail(uId, rId),
     {
       enabled: !!rId,
@@ -55,5 +67,12 @@ export default function useUserChatData(rId?: string) {
     }
   );
 
-  return { data: data.data, detailData: detailData.data };
+  const { detailData } = useMemo(
+    () => ({
+      detailData: reportDetailData?.data.data,
+    }),
+    [reportDetailData]
+  );
+
+  return { dateList, detailData };
 }

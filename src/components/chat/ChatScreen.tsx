@@ -19,11 +19,13 @@ export default function ChatScreen() {
   const emotionModal = useModal();
   const sideNavModal = useModal();
   const tutorialModal = useModal();
-  // 소켓 fetching 데이터
   const socketFlag = useAppSelector(
     state => state.chat?.recChatRoom?.socket_flag
   );
   const chatUser = useAppSelector(state => state.chat?.recChatRoom?.speaker_id);
+  const reJoinedUser = useAppSelector(
+    state => state.chat?.recChatRoom?.re_enter_id
+  );
   const speaker = useAppSelector(state => state.chat?.recQuestion?.speaker);
   const topic = useAppSelector(state => state.chat?.recQuestion?.question_list);
   const questionNumber = useAppSelector(
@@ -38,22 +40,22 @@ export default function ChatScreen() {
   const newEmotion = useAppSelector(
     state => state.chat?.recNewEmotion?.emotion_list
   );
-  // 질문 카드 회전 state
+  const [isReJoined, setIsReJoined] = useState<boolean>(false);
   const [isRotate, setIsRotate] = useState<boolean>(false);
-  // 감정 보내기 state
   const [sendEmotion, setSendEmotion] = useState<{
     emotion: string;
     id: number;
   } | null>(null);
+
   const handleOpenEmotion = (emotion: string, id: number) => {
     emotionModal.toggle();
     setSendEmotion({ emotion, id });
   };
-  // 질문 카드 & 상수 데이터 매칭
+
   const matchedItem = KEYWORD_LIST
     ? KEYWORD_LIST.filter(item => item.keyword === topic?.keyword_name)
     : [];
-  // 버튼 텍스트 => 다음 대화 || 대화 마무리
+
   const handleNext = () => {
     if (!endFlag) {
       dispatch({
@@ -68,14 +70,24 @@ export default function ChatScreen() {
         },
       });
     } else {
+      dispatch({
+        type: 'sendData',
+        payload: {
+          destination: 'sendNextQuestion',
+          data: {
+            conversation_room_id: Number(roomId),
+            conversation_user_id: Number(chatUserId),
+            question_number: questionNumber + 1,
+          },
+        },
+      });
       dispatch({ type: 'disconnect' });
       localStorage.removeItem('emotionKey');
-      localStorage.removeItem('emotionList');
       localStorage.removeItem('selectKey');
       navigate(`/feedback/1/${roomId}/${chatUserId}`);
     }
   };
-  // 소켓 데이터 구독 & 튜토리얼 오픈여부 확인
+
   useEffect(() => {
     if (socketFlag === 2) {
       dispatch(setRecEmotion({ emotion_code: null }));
@@ -97,7 +109,33 @@ export default function ChatScreen() {
       }
     } else if (socketFlag === 1) navigate(`/chat/${roomId}/${chatUserId}/1`);
   }, []);
-  // new 감정
+
+  useEffect(() => {
+    if (Number(chatUserId) === reJoinedUser && !isReJoined) {
+      dispatch({
+        type: 'sendData',
+        payload: {
+          destination: 'sendQuestion',
+          data: {
+            conversation_room_id: Number(roomId),
+            conversation_user_id: Number(chatUserId),
+          },
+        },
+      });
+      dispatch({
+        type: 'sendData',
+        payload: {
+          destination: 'getEmotion',
+          data: {
+            conversation_room_id: Number(roomId),
+            conversation_user_id: Number(chatUserId),
+          },
+        },
+      });
+      setIsReJoined(true);
+    }
+  }, [reJoinedUser]);
+
   useEffect(() => {
     if (newEmotion) localStorage.setItem('emotionKey', 'true');
   }, [newEmotion]);
@@ -123,7 +161,7 @@ export default function ChatScreen() {
             keyword={topic?.keyword_name}
             depth={topic?.depth}
             question={topic?.question_content}
-            size="15rem"
+            size="16rem"
             isFront={isRotate}
             lineColor={matchedItem[0]?.color[0]}
             fillColor={
@@ -132,17 +170,17 @@ export default function ChatScreen() {
             handleRotate={() => setIsRotate(!isRotate)}
           />
         </div>
-        <div className="emotion_wrapper">
-          {EMOTION_LIST.map(item => (
-            <Emotion
-              image={item.source}
-              key={item.id}
-              isEmotion={emotionCode === item.id}
-              onClick={() => handleOpenEmotion(item.emotion, item.id)}
-            />
-          ))}
-        </div>
-        <BottomButtonTab>
+        <BottomButtonTab height="16.5rem">
+          <div className="emotion_wrapper">
+            {EMOTION_LIST.map(item => (
+              <Emotion
+                image={item.source}
+                key={item.id}
+                isEmotion={emotionCode === item.id}
+                onClick={() => handleOpenEmotion(item.emotion, item.id)}
+              />
+            ))}
+          </div>
           {speaker?.id === Number(uId) ? (
             <Button
               category="confirm"
@@ -150,6 +188,7 @@ export default function ChatScreen() {
                 endFlag ? '마지막 질문입니다.' : '다음 질문으로 넘어가볼까요?'
               }
               $bgColor={matchedItem[0]?.color[2]}
+              margin="1.5rem 0 0 0"
               onClick={handleNext}
             />
           ) : endFlag ? (
@@ -157,6 +196,7 @@ export default function ChatScreen() {
               category="confirm"
               text={'마지막 질문입니다.'}
               $bgColor={matchedItem[0]?.color[2]}
+              margin="1.5rem 0 0 0"
               onClick={handleNext}
             />
           ) : (

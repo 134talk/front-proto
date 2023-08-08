@@ -8,24 +8,29 @@ import * as t from './feedOptionCheck.style';
 export default function FeedOptionCheck() {
   const { roomId, chatUserId } = useParams();
   const { optVal, optText } = useUserData();
+  const navigate = useNavigate();
   const [value, setValue] = useState<number>(5);
   const [sentence, setSentence] = useState<string>('');
-  const navigate = useNavigate();
+
   const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(Number(e.target.value));
   };
+
   const handleSentence = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSentence(e.target.value);
   };
+
   const handleNext = () => {
     localStorage.setItem('optVal', JSON.stringify(value));
     localStorage.setItem('optText', sentence);
     navigate(`/feedback/2/${roomId}/${chatUserId}`);
   };
+
   useEffect(() => {
     if (optVal) setValue(Number(optVal));
     if (optText) setSentence(optText);
   }, [optVal, optText]);
+
   return (
     <t.Container>
       <div className="title_wrapper">
