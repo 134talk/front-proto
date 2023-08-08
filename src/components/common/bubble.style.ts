@@ -80,6 +80,9 @@ export const Container = styled.div<{
   .emotionWrapper {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    column-gap: 1rem;
     margin-top: 0.88rem;
   }
   .chartWrapper {

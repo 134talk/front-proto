@@ -58,7 +58,7 @@ const floatAnim = keyframes`
 const FloatImage = styled.img.attrs(props => ({
   style: {
     left: `${Math.random() * 100}%`,
-    bottom: `${40 + Math.random() * 10}px`,
+    bottom: `${-100 + Math.random() * 10}px`,
     width: `${5 + Math.random() * 10}%`,
     animationDuration: `${4}s`,
     animationIterationCount: `${Math.floor(2 + Math.random() * 2)}`,

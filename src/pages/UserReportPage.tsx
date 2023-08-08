@@ -32,36 +32,35 @@ export default function UserReportPage() {
         <InnerBackground />
         <t.Scroll $isMobile={isMobile}>
           <p>
-            <span>{detailData?.data.report_date}</span>일에는{' '}
-            <span>{detailData?.data.conversation_count}</span>번의 대화에
-            참여했어요.
+            <span>{detailData?.report_date}</span>일에는{' '}
+            <span>{detailData?.conversation_count}</span>번의 대화에 참여했어요.
           </p>
           <div className="bubbleWrapper">
             <Bubble>
               <h1>대화는 나에게 이런 영향을 주었어요.</h1>
               <EffectGraph
-                energy={detailData?.data.effect.energy}
-                relation={detailData?.data.effect.relation}
-                stable={detailData?.data.effect.stable}
-                stress={detailData?.data.effect.stress}
+                energy={detailData?.effect.energy}
+                relation={detailData?.effect.relation}
+                stable={detailData?.effect.stable}
+                stress={detailData?.effect.stress}
               />
             </Bubble>
             <Bubble>
               <h1>내가 공감받은 감정은?</h1>
-              {detailData?.data.received_emotions.map((emoticons, idx) => (
+              {detailData?.received_emotions.map((emoticons, idx) => (
                 <Emotion key={idx} idx={idx} emoticons={emoticons} />
               ))}
             </Bubble>
             <Bubble>
               <h1>대화 후 나에게 남은 문장은?</h1>
-              {detailData?.data.feed_contents.map((sentence, idx) => (
+              {detailData?.feed_contents.map((sentence, idx) => (
                 <Sentence key={idx} idx={idx} sentence={sentence} />
               ))}
             </Bubble>
             <Bubble>
               <h1>대화의 만족도는?</h1>
               <div className="circleWrapper">
-                {detailData?.data.feed_scores.map((score, idx) => (
+                {detailData?.feed_scores.map((score, idx) => (
                   <Satisfaction key={idx} idx={idx} score={score} />
                 ))}
               </div>
@@ -69,7 +68,7 @@ export default function UserReportPage() {
             <Bubble>
               <h1>나에게 남겨진 피드백은?</h1>
               <div className="contentWrapper">
-                {detailData?.data.review_list.map(
+                {detailData?.review_list.map(
                   ({ profile_img_url, nickname, review_content }, idx) => (
                     <Feedback
                       key={idx}

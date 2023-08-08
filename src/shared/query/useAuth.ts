@@ -9,9 +9,10 @@ type Res = {
   accessToken: string;
   userId: number;
   isAdmin: boolean;
-  nickname: string;
-  teamCode: string;
   name: string;
+  nickname: string;
+  teamId: number;
+  teamCode: string;
 };
 
 export default function useAuth(code?: string) {
@@ -22,17 +23,18 @@ export default function useAuth(code?: string) {
     accessToken,
     userId,
     isAdmin,
-    nickname,
-    teamCode,
     name,
+    nickname,
+    teamId,
+    teamCode,
   }: Res) => {
     sessionStorage.setItem('token', accessToken);
     localStorage.setItem('uid', String(userId));
-    localStorage.setItem('channel', teamCode);
     localStorage.setItem('isAdmin', String(isAdmin));
-    localStorage.setItem('nickname', nickname);
     localStorage.setItem('name', name);
-
+    localStorage.setItem('nickname', nickname);
+    localStorage.setItem('channel', String(teamId));
+    localStorage.setItem('teamCode', teamCode);
     if (teamCode && nickname) {
       navigate('/chats');
     } else if (!teamCode && !nickname) {
@@ -43,14 +45,18 @@ export default function useAuth(code?: string) {
   };
 
   const handleGuideConfirm = (guideConfirmDate: string) => {
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = ('0' + (1 + date.getMonth())).slice(-2);
-    let day = ('0' + date.getDate()).slice(-2);
+    if (guideConfirmDate === null)
+      localStorage.setItem('isGuideAccess', 'true');
+    else {
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = ('0' + (1 + date.getMonth())).slice(-2);
+      let day = ('0' + date.getDate()).slice(-2);
 
-    let today = year + '-' + month + '-' + day;
+      let today = year + '-' + month + '-' + day;
 
-    localStorage.setItem('isGuideAccess', String(guideConfirmDate === today));
+      localStorage.setItem('isGuideAccess', String(guideConfirmDate === today));
+    }
   };
 
   const { refetch: signIn } = useQuery<AxiosResponse, AxiosError>(
@@ -62,28 +68,38 @@ export default function useAuth(code?: string) {
         let accessToken = tokenData.access_token;
         let userId = userData.id;
         let isAdmin = userData.role === 'editor';
-        let nickname = userData.nickname;
-        let teamCode = userData.team_id;
         let name = userData.name;
+        let nickname = userData.nickname;
+        let teamId = userData.team_id;
+        let teamCode = userData.team_code;
         let guideConfirmDate = userData.guide_confirm_date;
         handleUserData({
           accessToken,
           userId,
           isAdmin,
-          nickname,
-          teamCode,
           name,
+          nickname,
+          teamId,
+          teamCode,
         });
         handleGuideConfirm(guideConfirmDate);
       },
       enabled: !!code,
+      retry: 0,
+      refetchOnWindowFocus: false,
     }
   );
 
   const { mutate: signOut } = useMutation<AxiosResponse, AxiosError>(logout, {
     onSuccess: res => {
       sessionStorage.removeItem('token');
-      localStorage.clear();
+      localStorage.removeItem('uid');
+      localStorage.removeItem('channel');
+      localStorage.removeItem('teamCode');
+      localStorage.removeItem('isAdmin');
+      localStorage.removeItem('nickname');
+      localStorage.removeItem('name');
+      localStorage.removeItem('isGuideAccess');
       dispatch({ type: 'disconnect' });
       navigate('/');
     },

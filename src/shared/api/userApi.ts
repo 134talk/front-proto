@@ -5,10 +5,10 @@ export const login = (code: string) =>
 
 export const silentRefresh = () => axiosInstance.post('/auth/refresh');
 
-export const signUser = (uid: string, name: string, tId: string) =>
+export const signUser = (uid: string, name: string, tCode: string) =>
   axiosInstance.post(`/users/${uid}/register/guest`, {
     name: name,
-    team_code: tId,
+    team_code: tCode,
   });
 
 export const signAdmin = (uid: string, name: string, tName: string) =>

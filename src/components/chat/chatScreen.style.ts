@@ -15,6 +15,7 @@ export const Container = styled.div`
     justify-content: space-between;
     row-gap: 0.5rem;
     width: 14rem;
+    margin: 0.25rem auto;
   }
   > p {
     text-align: center;

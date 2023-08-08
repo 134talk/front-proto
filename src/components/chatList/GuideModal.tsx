@@ -49,12 +49,14 @@ export default function GuideModal({ roomId, chatUserId, onClose }: Props) {
   };
 
   const onSkip = () => sliderRef.current.slickGoTo(6);
-  const onConfirm = () =>
+  const onConfirm = () => {
     mutate({
       conversation_room_id: roomId,
       conversation_user_id: chatUserId,
       team_id: Number(channel),
     });
+    localStorage.setItem('isGuideAccess', 'false');
+  };
 
   return (
     <FullModal>

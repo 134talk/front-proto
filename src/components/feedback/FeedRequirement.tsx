@@ -6,6 +6,7 @@ import * as t from './feedRequirement.style';
 
 export default function FeedRequirement() {
   const feedReminderModal = useModal();
+
   const { feedRequirementUser, feedRequirementData } = useFeedRequirement();
   useEffect(() => {
     if (feedRequirementUser?.remained_feedback) feedReminderModal.open();

@@ -12,6 +12,7 @@ export const Container = styled.div`
   .card_wrapper {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 auto;
     justify-content: center;
     width: 24rem;
     row-gap: 1rem;

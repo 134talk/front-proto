@@ -67,6 +67,9 @@ export const getFeedbackReport = (tId: string) =>
 export const getChatReport = (tId: string) =>
   axiosInstance.get(`/statistics/teams/${tId}/conversation-log`);
 
+export const getMyUserReport = (uId: number) =>
+  axiosInstance.get(`/statistics/users/${uId}/reports`);
+
 export const getUserReport = (uId: string) =>
   axiosInstance.get(`/statistics/users/${uId}/reports`);
 
@@ -82,4 +85,4 @@ export const searchMemberReport = (tId: string, searchKeyword: string) =>
   );
 
 export const getMemberReportDetail = (tId: string, searchId: string) =>
-  axiosInstance.get(`/statistics/eidtor/teams/${tId}/users/${searchId}/report`);
+  axiosInstance.get(`/statistics/editor/teams/${tId}/users/${searchId}/report`);

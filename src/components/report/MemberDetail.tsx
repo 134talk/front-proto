@@ -1,6 +1,7 @@
 import { Bubble, NoData, SearchBar } from 'components';
 import { debounce } from 'lodash';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { RIGHT_ARROW } from 'shared/constants/icons';
 import useReport from 'shared/query/useReport';
@@ -12,12 +13,10 @@ export default function MemberDetail() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState('');
 
-  const { memberDataList, refetch } = useReport({
+  const { memberDataList: members, refetch } = useReport({
     types: 'list',
     keyword: keyword,
   });
-
-  const members = useMemo(() => memberDataList?.data, [memberDataList]);
 
   const onDelete = () => {
     setKeyword('');
@@ -34,7 +33,10 @@ export default function MemberDetail() {
     [refetch]
   );
 
-  const onDetail = (id: number) => navigate(`/report-detail/${id}`);
+  const onDetail = (id: number, conversation_count: number) => {
+    if (conversation_count > 0) navigate(`/report-detail/${id}`);
+    else toast.error('대화 기록이 있는 팀원의 기록만 열람하실 수 있어요!');
+  };
 
   return (
     <t.Container>
@@ -56,7 +58,11 @@ export default function MemberDetail() {
                 name,
                 conversation_count,
               }) => (
-                <Bubble key={id} isClickable onClick={() => onDetail(id)}>
+                <Bubble
+                  key={id}
+                  isClickable
+                  onClick={() => onDetail(id, conversation_count)}
+                >
                   <section>
                     <div className="userWrapper">
                       <ProfileImg size="3.25rem" image={profile_image_url} />

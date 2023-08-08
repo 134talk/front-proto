@@ -9,7 +9,6 @@ import * as t from './waitingScreen.style';
 
 export default function WaitingScreen() {
   const { uId } = useUserData();
-  // 소켓 fetching 데이터
   const socketFlag = useAppSelector(
     state => state?.chat?.recChatRoom?.socket_flag
   );

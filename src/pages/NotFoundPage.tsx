@@ -5,7 +5,7 @@ import * as t from './notFoundPage.style';
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
-  const navigateHome = () => navigate('/channel');
+  const navigateHome = () => navigate('/chats');
 
   return (
     <t.Container>
