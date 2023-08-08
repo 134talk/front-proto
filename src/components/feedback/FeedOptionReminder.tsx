@@ -12,8 +12,9 @@ import * as t from './feedOptionReminder.style';
 
 export default function FeedOptionReminder() {
   const { roomId, chatUserId } = useParams();
-  const navigate = useNavigate();
   const { optVal, optText } = useUserData();
+  const navigate = useNavigate();
+
   const { feedUserList } = useFeedUser(Number(roomId));
 
   const initialFeedbacks: UpdatedFeedback[] = feedUserList?.map(user => ({
@@ -21,6 +22,7 @@ export default function FeedOptionReminder() {
     review_content: '',
     selectedOption: null,
   }));
+
   const { userFeedbacks, handleSelect, resetFeedbacks } =
     useUserFeedbacks(initialFeedbacks);
 

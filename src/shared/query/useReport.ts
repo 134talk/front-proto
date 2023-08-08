@@ -1,4 +1,5 @@
 import type { AxiosError, AxiosResponse } from 'axios';
+import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import {
   getChatReport,
@@ -13,7 +14,7 @@ import useUserData from 'shared/hooks/useUserData';
 
 type StatusRes = {
   data: {
-    emotion_array: { emotion: string; emotion_count: number }[];
+    emotion_array: { emotion_name: string; emotion_count: number }[];
     action_array: { action: string; action_count: number }[];
     state_array: { state: string; state_count: number }[];
   };
@@ -67,68 +68,89 @@ type Args = {
 };
 
 export default function useReport({ types, uid, keyword }: Args) {
-  const { channel: teamCode } = useUserData();
+  const { channel: tId } = useUserData();
 
-  const { data: statusData } = useQuery<AxiosResponse<StatusRes>, AxiosError>(
-    [queryKeys.STATUS_REPORT, teamCode, types],
-    () => getStatusReport(teamCode),
-    {
-      enabled: types === 'status',
-      refetchOnWindowFocus: false,
-    }
+  const { data: statusResData } = useQuery<
+    AxiosResponse<StatusRes>,
+    AxiosError
+  >([queryKeys.STATUS_REPORT, tId, types], () => getStatusReport(tId), {
+    enabled: types === 'status',
+    refetchOnWindowFocus: false,
+  });
+  const { statusData } = useMemo(
+    () => ({
+      statusData: statusResData?.data.data,
+    }),
+    [statusResData]
   );
 
-  const { data: chatData } = useQuery<AxiosResponse<ChatRes>, AxiosError>(
-    [queryKeys.CHAT_REPORT, teamCode, types],
-    () => getChatReport(teamCode),
+  const { data: chatResData } = useQuery<AxiosResponse<ChatRes>, AxiosError>(
+    [queryKeys.CHAT_REPORT, tId, types],
+    () => getChatReport(tId),
     {
       enabled: types === 'chat',
       refetchOnWindowFocus: false,
     }
   );
-
-  const { data: feedbackData } = useQuery<
-    AxiosResponse<FeedbackRes>,
-    AxiosError
-  >(
-    [queryKeys.FEEDBACK_REPORT, teamCode, types],
-    () => getFeedbackReport(teamCode),
-    {
-      enabled: types === 'feedback',
-      refetchOnWindowFocus: false,
-    }
+  const { chatData } = useMemo(
+    () => ({
+      chatData: chatResData?.data.data,
+    }),
+    [chatResData]
   );
 
-  const { data: memberDataList, refetch } = useQuery<
+  const { data: feedbackResData } = useQuery<
+    AxiosResponse<FeedbackRes>,
+    AxiosError
+  >([queryKeys.FEEDBACK_REPORT, tId, types], () => getFeedbackReport(tId), {
+    enabled: types === 'feedback',
+    refetchOnWindowFocus: false,
+  });
+  const { feedbackData } = useMemo(
+    () => ({
+      feedbackData: feedbackResData?.data.data,
+    }),
+    [feedbackResData]
+  );
+
+  const { data: memberDataResList, refetch } = useQuery<
     AxiosResponse<ListRes>,
     AxiosError
   >(
-    [queryKeys.MEMBER_REPORT, teamCode],
-    () =>
-      !!keyword
-        ? searchMemberReport(teamCode, keyword)
-        : getMemberReport(teamCode),
+    [queryKeys.MEMBER_REPORT, tId],
+    () => (!!keyword ? searchMemberReport(tId, keyword) : getMemberReport(tId)),
     {
       enabled: types === 'list',
       refetchOnWindowFocus: false,
     }
   );
+  const { memberDataList } = useMemo(
+    () => ({
+      memberDataList: memberDataResList?.data.data,
+    }),
+    [memberDataResList]
+  );
 
-  const { data: memberData } = useQuery<AxiosResponse<MemberRes>, AxiosError>(
-    [queryKeys.MEMBER_REPORT, teamCode],
-    () => getMemberReportDetail(teamCode, uid),
-    {
-      enabled: types === 'member',
-      refetchOnWindowFocus: false,
-    }
+  const { data: memberResData } = useQuery<
+    AxiosResponse<MemberRes>,
+    AxiosError
+  >([queryKeys.MEMBER_REPORT, tId], () => getMemberReportDetail(tId, uid), {
+    enabled: types === 'member',
+    refetchOnWindowFocus: false,
+  });
+  const { memberData } = useMemo(
+    () => ({
+      memberData: memberResData?.data.data,
+    }),
+    [memberResData]
   );
 
   return {
-    statusData: statusData.data,
-    chatData: chatData.data,
-    feedbackData: feedbackData.data,
-    memberDataList: memberDataList.data,
-    memberData: memberData.data,
+    statusData,
+    chatData,
+    feedbackData,
+    memberDataList,
+    memberData,
     refetch,
   };
 }

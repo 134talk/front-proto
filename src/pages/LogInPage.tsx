@@ -11,16 +11,23 @@ import * as t from './loginPage.style';
 export default function LogInPage() {
   const onLogin = () => (window.location.href = KAKAO_OAUTH_URL);
   const [searchParams] = useSearchParams();
-  const channel = searchParams.get('channel');
+  const channelId = searchParams.get('channel');
   const installModal = useModal();
 
   useEffect(() => {
-    localStorage.setItem('invite-code', channel);
+    localStorage.setItem('invite-code', channelId);
     return () => localStorage.removeItem('invite-code');
-  }, [channel]);
+  }, [channelId]);
 
   useEffect(() => {
     sessionStorage.removeItem('token');
+    localStorage.removeItem('uid');
+    localStorage.removeItem('channel');
+    localStorage.removeItem('teamCode');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('nickname');
+    localStorage.removeItem('name');
+    localStorage.removeItem('isGuideAccess');
   }, []);
 
   return (

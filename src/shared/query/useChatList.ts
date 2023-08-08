@@ -15,6 +15,8 @@ type Res = {
       join_flag: boolean;
       re_join_flag: boolean;
       user_info: string[];
+      remained_feedback: number;
+      conversation_flag: number;
     }[];
   };
 };

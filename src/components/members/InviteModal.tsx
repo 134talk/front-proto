@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function InviteModal({ onClose }: Props) {
-  const { channel: channelId } = useUserData();
+  const { teamCode: channelId } = useUserData();
 
   const copyClipBoard = async (text: string) => {
     try {

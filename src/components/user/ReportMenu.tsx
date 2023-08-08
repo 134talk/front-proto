@@ -1,19 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { RIGHT_ARROW } from 'shared/constants/icons';
 import useUserChatData from 'shared/query/useUserChatData';
-
 import * as t from './reportMenu.style';
 
 export default function ReportMenuButton() {
   const navigate = useNavigate();
-  const { data } = useUserChatData();
+
+  const { dateList } = useUserChatData();
 
   const onClickReport = (rId: number) => navigate(`/user/${rId}`);
 
   return (
     <t.Container>
       <div className="sectionWrapper">
-        {!data?.data.my_report_list.length ? (
+        {!dateList?.length ? (
           <p className="noData">
             리포트 리스트는
             <br />
@@ -21,7 +21,7 @@ export default function ReportMenuButton() {
           </p>
         ) : (
           <>
-            {data?.data.my_report_list.map(({ report_date, report_id }) => (
+            {dateList?.map(({ report_date, report_id }) => (
               <div className="reportMenu" key={report_id}>
                 <div className="pointLineWrapper">
                   <div className="point" />

@@ -32,39 +32,39 @@ export default function MemberReportPage() {
         <t.Scroll $isMobile={isMobile}>
           <p>
             <span>
-              {memberData?.data.nickname}
-              <span className="name">({memberData?.data.name})</span>님
+              {memberData?.nickname}
+              <span className="name">({memberData?.name})</span>님
             </span>
-            은<br /> 총 <span>{memberData?.data.converstaion_count}</span>번의
-            대화에 참여했어요.
+            은<br /> 총 <span>{memberData?.converstaion_count}</span>번의 대화에
+            참여했어요.
           </p>
           <div className="bubbleWrapper">
             <Bubble>
               <h1>
                 대화는{' '}
                 <span>
-                  {memberData?.data.nickname}
-                  <span className="name">({memberData?.data.name})</span>님
+                  {memberData?.nickname}
+                  <span className="name">({memberData?.name})</span>님
                 </span>
                 에게 이런 영향을 주었어요.
               </h1>
               <EffectGraph
-                energy={memberData?.data.energy_percent}
-                relation={memberData?.data.relation_percent}
-                stable={memberData?.data.stable_percent}
-                stress={memberData?.data.stress_percent}
+                energy={memberData?.energy_percent}
+                relation={memberData?.relation_percent}
+                stable={memberData?.stable_percent}
+                stress={memberData?.stress_percent}
               />
             </Bubble>
-            {!!memberData?.data.received_emotions?.length && (
+            {!!memberData?.received_emotions?.length && (
               <Bubble>
                 <h1>
                   <span>
-                    {memberData?.data.nickname}
-                    <span className="name">({memberData?.data.name})</span>님
+                    {memberData?.nickname}
+                    <span className="name">({memberData?.name})</span>님
                   </span>
                   이 공감받은 감정은?
                   <div className="emotionWrapper">
-                    {memberData?.data.received_emotions?.map(
+                    {memberData?.received_emotions?.map(
                       ({ emotion_name, emotion_count }) => (
                         <EmotionData
                           key={emotion_name}
@@ -80,14 +80,14 @@ export default function MemberReportPage() {
             <Bubble>
               <h1>
                 <span>
-                  {memberData?.data.nickname}
-                  <span className="name">({memberData?.data.name})</span>님
+                  {memberData?.nickname}
+                  <span className="name">({memberData?.name})</span>님
                 </span>
                 의 대화의 만족도는?
               </h1>
               <PercentChart
                 text="전체 대화 만족도"
-                value={memberData?.data.score_percent}
+                value={memberData?.score_percent}
                 isMemberReport
               />
             </Bubble>

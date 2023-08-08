@@ -10,10 +10,10 @@ import { Button, CardImg } from 'ui';
 import * as t from './chatSelectionPage.style';
 
 export default function ChatSelectionPage() {
-  const navigate = useNavigate();
-  const exitConfirmModal = useModal();
   const { roomId, chatUserId } = useParams();
   const { selectKey } = useUserData();
+  const exitConfirmModal = useModal();
+  const navigate = useNavigate();
   const [combinedList, setCombinedList] = useState([]);
   const [selectedId, setSelectedId] = useState<number>(null);
   const [cardItem, setCardItem] = useState(null);

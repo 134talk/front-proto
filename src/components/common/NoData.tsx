@@ -1,11 +1,13 @@
 import { NOT_FOUND } from 'shared/constants/icons';
 import { styled } from 'styled-components';
-
-export default function NoData() {
+type Props = {
+  text?: string;
+};
+export default function NoData({ text }: Props) {
   return (
     <Container>
       <img src={NOT_FOUND} alt="대화 내역이 없습니다." />
-      <p>대화 내역이 없습니다.</p>
+      <p>{text ? text : '대화 내역이 없습니다.'}</p>
     </Container>
   );
 }

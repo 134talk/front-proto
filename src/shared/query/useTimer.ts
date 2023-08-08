@@ -6,7 +6,7 @@ import queryKeys from 'shared/constants/queryKeys';
 import useUserData from 'shared/hooks/useUserData';
 
 type Res = {
-  timeout: number;
+  data: { timeout: number };
 };
 
 export default function useTimer() {
@@ -24,11 +24,14 @@ export default function useTimer() {
   const { mutate } = useMutation<AxiosResponse<Res>, AxiosError, string>(
     time => setTimer(tId, time),
     {
-      onSuccess: _ => queryClient.invalidateQueries([queryKeys.TIMER]),
+      onSuccess: () => {
+        queryClient.invalidateQueries([queryKeys.TIMER]);
+        window.location.reload();
+      },
     }
   );
 
-  const time = useMemo(() => data?.data.timeout, [data]);
+  const time = useMemo(() => data?.data.data.timeout, [data]);
 
   return { time, mutate };
 }

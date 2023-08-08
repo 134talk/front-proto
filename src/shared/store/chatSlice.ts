@@ -17,6 +17,7 @@ export interface RecChatRoom {
   socket_flag: number;
   check_in_flag: boolean;
   speaker_id: number;
+  re_enter_id: number;
   user_info: ChatUserInfo[];
 }
 export interface RecAlert {

@@ -10,6 +10,7 @@ import {
 import debounce from 'lodash/debounce';
 import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { updateGuideStatus } from 'shared/api/chatApi';
 import useUserData from 'shared/hooks/useUserData';
 import useChatFlag from 'shared/query/useChatFlag';
@@ -18,6 +19,7 @@ import isMobile from 'shared/utils/deviceDetector';
 import * as t from './chatListPage.style';
 
 export default function ChatListPage() {
+  const navigate = useNavigate();
   const [createModal, setCreateModal] = useState(false);
   const [settingModal, setSettingModal] = useState(false);
   const [checkModal, setCheckModal] = useState(false);
@@ -38,24 +40,35 @@ export default function ChatListPage() {
     setGuideModal(prev => !prev);
   };
 
+  const { chatList, refetch, error } = useChatList(keyword);
+  const resetReJoinFlag = chatList?.every(el => el.re_join_flag === false);
+
   const enterRoom = (
     isMyRoom: boolean,
     isReJoin: boolean,
     id: number,
     userId: number
   ) => {
-    if (isMyRoom && isReJoin && isGuideAccess === 'true') handleGuIdeModal();
-    else if (!isMyRoom) toast.error('참여할 수 없는 대화방입니다.');
-    else if (isGuideAccess === 'false') {
-      mutate({
-        conversation_room_id: id,
-        conversation_user_id: userId,
-        team_id: Number(channel),
-      });
-    }
+    if (isMyRoom) {
+      if (resetReJoinFlag) {
+        if (isGuideAccess === 'true') handleGuIdeModal();
+        else
+          mutate({
+            conversation_room_id: id,
+            conversation_user_id: userId,
+            team_id: Number(channel),
+          });
+      } else {
+        if (isReJoin) {
+          mutate({
+            conversation_room_id: id,
+            conversation_user_id: userId,
+            team_id: Number(channel),
+          });
+        } else toast.error('참여할 수 없는 대화방입니다.');
+      }
+    } else toast.error('참여할 수 없는 대화방입니다.');
   };
-
-  const { chatList, refetch, error } = useChatList(keyword);
 
   useEffect(() => {
     if (error?.response.data.errorCode === 1035) {
@@ -82,6 +95,19 @@ export default function ChatListPage() {
     debounce(() => refetch(), 500),
     [refetch]
   );
+
+  useEffect(() => {
+    const isFinishedChat = chatList?.find(el => el.conversation_flag === 2);
+    if (isFinishedChat && isFinishedChat.remained_feedback === 0)
+      navigate(
+        `/feedback/1/${isFinishedChat.conversation_room_id}/${isFinishedChat.conversation_user_id}`
+      );
+    else if (isFinishedChat && isFinishedChat.remained_feedback === 1)
+      navigate(
+        `/feedback/3/${isFinishedChat.conversation_room_id}/${isFinishedChat.conversation_user_id}`
+      );
+    else return;
+  }, [chatList]);
 
   return (
     <>
@@ -129,6 +155,7 @@ export default function ChatListPage() {
                 re_join_flag,
                 emotions,
                 conversation_user_id,
+                conversation_flag,
               }) => (
                 <div
                   key={conversation_room_id}
@@ -140,6 +167,7 @@ export default function ChatListPage() {
                   <ChatBox
                     roomId={conversation_room_id}
                     roomName={user_info}
+                    isChatFlag={conversation_flag}
                     isJoin={join_flag}
                     emoticons={emotions}
                     onClick={() =>

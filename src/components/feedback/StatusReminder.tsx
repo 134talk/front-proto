@@ -17,8 +17,8 @@ export default function StatusReminder({
   feedRequirementData,
   feedStatusId,
 }: StatusReminderProps) {
-  const { feedbackKey } = useUserData();
   const { type, roomId, chatUserId } = useParams();
+  const { feedbackKey } = useUserData();
   const navigate = useNavigate();
   const [value, setValue] = useState<number>(0);
   const [internalValues, setInternalValues] = useState({
@@ -27,6 +27,10 @@ export default function StatusReminder({
     stable: 0,
     stress: 0,
   });
+
+  const currentQuestion = FEED_QUESTION_LIST.find(
+    item => item.id === Number(type)
+  );
 
   useEffect(() => {
     if (feedRequirementData) {
@@ -60,6 +64,7 @@ export default function StatusReminder({
       case '6':
         if (feedbackKey) {
           putMutate({
+            status_id: feedStatusId,
             conversation_room_id: Number(roomId),
             conversation_user_id: Number(chatUserId),
             status_energy: Number(internalValues.energy),
@@ -70,7 +75,6 @@ export default function StatusReminder({
           localStorage.removeItem('feedbackKey');
         } else {
           postMutate({
-            status_id: feedStatusId,
             conversation_room_id: Number(roomId),
             conversation_user_id: Number(chatUserId),
             status_energy: Number(internalValues.energy),
@@ -86,15 +90,13 @@ export default function StatusReminder({
     }
   };
 
-  const currentQuestion = FEED_QUESTION_LIST.find(
-    item => item.id === Number(type)
-  );
-
   const plusTimeoutRef = useRef<number | null>(null);
   const minusTimeoutRef = useRef<number | null>(null);
+
   const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleValueChange(Number(e.target.value));
   };
+
   const handlePlusValue = () => {
     setValue(prevValue => {
       let newValue = prevValue;
@@ -108,6 +110,7 @@ export default function StatusReminder({
       handlePlusValue();
     }, 200);
   };
+
   const handleMinusValue = () => {
     setValue(prevValue => {
       let newValue = prevValue;
@@ -121,12 +124,15 @@ export default function StatusReminder({
       handleMinusValue();
     }, 200);
   };
+
   const handlePlusMouseDown = () => {
     handlePlusValue();
   };
+
   const handleMinusMouseDown = () => {
     handleMinusValue();
   };
+
   const handleMouseUp = () => {
     if (plusTimeoutRef.current) {
       window.clearTimeout(plusTimeoutRef.current);
