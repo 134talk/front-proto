@@ -35,7 +35,7 @@ export default function MemberReportPage() {
               {memberData?.nickname}
               <span className="name">({memberData?.name})</span>님
             </span>
-            은<br /> 총 <span>{memberData?.converstaion_count}</span>번의 대화에
+            은<br /> 총 <span>{memberData?.conversation_count}</span>번의 대화에
             참여했어요.
           </p>
           <div className="bubbleWrapper">

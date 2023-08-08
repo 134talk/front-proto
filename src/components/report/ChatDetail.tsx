@@ -9,7 +9,7 @@ export default function ChatDetail() {
 
   return (
     <t.Container>
-      {!chatData === null ? (
+      {chatData === null ? (
         <NoData />
       ) : (
         <t.Scroll $isMobile={isMobile}>

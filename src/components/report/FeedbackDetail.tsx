@@ -8,7 +8,7 @@ export default function FeedbackDetail() {
 
   return (
     <t.Container>
-      {!feedbackData === null ? (
+      {feedbackData === null ? (
         <NoData text="대화 후 남기신 평가 내역이 없습니다." />
       ) : (
         <t.Scroll $isMobile={isMobile}>

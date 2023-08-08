@@ -85,6 +85,8 @@ export default function useAuth(code?: string) {
         handleGuideConfirm(guideConfirmDate);
       },
       enabled: !!code,
+      retry: 0,
+      refetchOnWindowFocus: false,
     }
   );
 

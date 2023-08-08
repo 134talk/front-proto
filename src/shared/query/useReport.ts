@@ -39,7 +39,7 @@ type FeedbackRes = {
 
 type MemberRes = {
   data: {
-    converstaion_count: number;
+    conversation_count: number;
     energy_percent: number;
     name: string;
     nickname: string;

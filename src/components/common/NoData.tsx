@@ -20,7 +20,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 3rem;
-  margin-top: 10rem;
+  padding-top: 10rem;
   font-size: ${({ theme }) => theme.fs16};
   color: ${({ theme }) => theme.gray700};
   > img {
