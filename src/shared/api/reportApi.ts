@@ -81,7 +81,7 @@ export const getMemberReport = (tId: string) =>
 
 export const searchMemberReport = (tId: string, searchKeyword: string) =>
   axiosInstance.get(
-    `/statistics/editor/teams/${tId}/user-log/serach?name=${searchKeyword}`
+    `/statistics/editor/teams/${tId}/user-log/search?name=${searchKeyword}`
   );
 
 export const getMemberReportDetail = (tId: string, searchId: string) =>
