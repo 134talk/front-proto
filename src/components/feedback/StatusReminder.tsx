@@ -1,5 +1,5 @@
 import { BottomButtonTab, StatusSlider } from 'components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FEED_QUESTION_LIST, FEED_STATUS } from 'shared/constants/constants';
 import useUserData from 'shared/hooks/useUserData';
@@ -90,9 +90,6 @@ export default function StatusReminder({
     }
   };
 
-  const plusTimeoutRef = useRef<number | null>(null);
-  const minusTimeoutRef = useRef<number | null>(null);
-
   const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleValueChange(Number(e.target.value));
   };
@@ -106,9 +103,6 @@ export default function StatusReminder({
       handleValueChange(newValue);
       return newValue;
     });
-    plusTimeoutRef.current = window.setTimeout(() => {
-      handlePlusValue();
-    }, 200);
   };
 
   const handleMinusValue = () => {
@@ -120,9 +114,6 @@ export default function StatusReminder({
       handleValueChange(newValue);
       return newValue;
     });
-    minusTimeoutRef.current = window.setTimeout(() => {
-      handleMinusValue();
-    }, 200);
   };
 
   const handlePlusMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
@@ -133,18 +124,6 @@ export default function StatusReminder({
   const handleMinusMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     handleMinusValue();
-  };
-
-  const handleMouseUp = (e: React.MouseEvent | React.TouchEvent) => {
-    e.preventDefault();
-    if (plusTimeoutRef.current) {
-      window.clearTimeout(plusTimeoutRef.current);
-      plusTimeoutRef.current = null;
-    }
-    if (minusTimeoutRef.current) {
-      window.clearTimeout(minusTimeoutRef.current);
-      minusTimeoutRef.current = null;
-    }
   };
 
   return (
@@ -172,7 +151,6 @@ export default function StatusReminder({
           onChange={handleRange}
           handlePlusMouseDown={handlePlusMouseDown}
           handleMinusMouseDown={handleMinusMouseDown}
-          handleMouseUp={handleMouseUp}
         />
       </div>
       <BottomButtonTab>

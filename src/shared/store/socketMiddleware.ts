@@ -31,13 +31,11 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         }
         socket = io(process.env.REACT_APP_SOCKET_SERVER);
         socket.connect();
-        console.log('소켓 연결하기', socket);
         break;
       }
       case 'disconnect': {
         if (socket) {
           socket.disconnect();
-          console.log('소켓 연결 끊기');
           socket.close();
           socket = null;
         }
@@ -47,8 +45,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination, data } = action.payload;
         if (socket && socket.active) {
           socket.emit(destination, data);
-          console.log('데이터 보내는 이벤트 이름: ', destination);
-          console.log('이벤트에 함께 보내는 데이터: ', data);
         }
         break;
       }
@@ -56,7 +52,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecChatRoom) => {
-            console.log('recChatRoom: ', data);
             dispatch(setRecChatRoom(data));
           });
         }
@@ -67,7 +62,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecAlert) => {
-            console.log('recAlert: ', data);
             dispatch(setRecAlert(data));
           });
         }
@@ -77,7 +71,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecNotify) => {
-            console.log('recNotify: ', data);
             dispatch(setRecNotify(data));
           });
         }
@@ -87,7 +80,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecQuestion) => {
-            console.log('recQuestion: ', data);
             dispatch(setRecQuestion(data));
           });
         }
@@ -97,7 +89,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecEmotion) => {
-            console.log('recEmotion: ', data);
             dispatch(setRecEmotion(data));
           });
         }
@@ -107,7 +98,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: RecNewEmotion) => {
-            console.log('recNewEmotion: ', data);
             dispatch(setRecNewEmotion(data));
           });
         }
@@ -117,7 +107,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         const { destination } = action.payload;
         if (socket) {
           socket.on(destination, (data: { type: string }) => {
-            console.log('createRoom: ', data);
             dispatch(setCreateRoom(data));
           });
         }

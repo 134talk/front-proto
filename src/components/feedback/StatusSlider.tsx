@@ -12,12 +12,8 @@ interface StatusSliderProps {
   value: number;
   isRow: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  // handlePlusMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
-  // handleMinusMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
-  // handleMouseUp?: React.MouseEventHandler<HTMLButtonElement>;
-  handlePlusMouseDown?: (e: React.MouseEvent | React.TouchEvent) => void;
-  handleMinusMouseDown?: (e: React.MouseEvent | React.TouchEvent) => void;
-  handleMouseUp?: (e: React.MouseEvent | React.TouchEvent) => void;
+  handlePlusMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
+  handleMinusMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
 }
 export default function StatusSlider({
   minValue,
@@ -27,17 +23,11 @@ export default function StatusSlider({
   onChange,
   handlePlusMouseDown,
   handleMinusMouseDown,
-  handleMouseUp,
 }: StatusSliderProps) {
   return (
     <t.Container $isRow={isRow}>
       {!isRow && (
-        <button
-          onMouseDown={handlePlusMouseDown}
-          onTouchStart={handlePlusMouseDown}
-          onTouchEnd={handleMouseUp}
-          onMouseUp={handleMouseUp}
-        >
+        <button onMouseDown={handlePlusMouseDown}>
           <img src={PLUS_BLACK_ICON} alt="plus" />
         </button>
       )}
@@ -58,12 +48,7 @@ export default function StatusSlider({
         />
       </t.SliderWrapper>
       {!isRow && (
-        <button
-          onMouseDown={handleMinusMouseDown}
-          onTouchStart={handleMinusMouseDown}
-          onTouchEnd={handleMouseUp}
-          onMouseUp={handleMouseUp}
-        >
+        <button onMouseDown={handleMinusMouseDown}>
           <img src={MINUS_ICON} alt="minus" />
         </button>
       )}
