@@ -2,7 +2,8 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: calc(100% - 17rem);
+  // height: 100%;
+  // height: calc(100% - 17rem);
   .title_wrapper {
     display: flex;
     flex-direction: column;
@@ -24,11 +25,11 @@ export const Container = styled.div`
 `;
 export const RemindWrapper = styled.div<{ $height: number }>`
   width: 100%;
-  height: ${({ $height }) => `${$height} * (27.5) + rem`};
+  height: ${({ $height }) => $height * 200 + 'px'};
   display: flex;
   flex-direction: column;
   padding: 0 1.875rem;
-  overflow: auto;
+  overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -76,7 +77,6 @@ export const RemindWrapper = styled.div<{ $height: number }>`
     }
   }
 `;
-
 export const SelectText = styled.label<{ $isChecked: boolean }>`
   font-size: ${({ theme }) => theme.fs16};
   font-weight: ${({ theme }) => theme.fw400};
