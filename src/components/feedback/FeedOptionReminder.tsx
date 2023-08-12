@@ -67,7 +67,7 @@ export default function FeedOptionReminder() {
           피드백이 없다면 <strong>다음</strong>으로 넘어가주세요.
         </p>
       </div>
-      <t.RemindWrapper>
+      <t.RemindWrapper $height={feedUserList?.length}>
         {userFeedbacks?.map((feedback, index) => (
           <div className="feedback_wrapper" key={feedback.review_user_id}>
             <p className="question_text">
