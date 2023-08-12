@@ -6,11 +6,13 @@ export const getTeam = (tId: string) =>
 export const getChatList = (tId: string) =>
   axiosInstance.get(`/teams/${tId}/conversation-rooms`);
 
-export const searchChatList = (searchKeyword: string) =>
-  axiosInstance.get(`/conversation-rooms/search?name=${searchKeyword}`);
+export const searchChatList = (tId: string, searchKeyword: string) =>
+  axiosInstance.get(
+    `/teams/${tId}/conversation-rooms/search?name=${searchKeyword}`
+  );
 
 export const createRoom = (tId: string, userList: number[]) =>
-  axiosInstance.post(`/teams/${tId}/conversation-room`, {
+  axiosInstance.post(`teams/${tId}/conversation-room`, {
     user_array: userList,
   });
 

@@ -1,4 +1,4 @@
-import { Bubble, NoData, SearchBar } from 'components';
+import { Bubble, SearchBar } from 'components';
 import { debounce } from 'lodash';
 import { useCallback, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -40,50 +40,38 @@ export default function MemberDetail() {
 
   return (
     <t.Container>
-      {!members?.length ? (
-        <NoData />
-      ) : (
-        <>
-          <SearchBar
-            keyword={keyword}
-            handleSearch={handleSearch}
-            onDelete={onDelete}
-          />
-          <t.Scroll $isMobile={isMobile}>
-            {members?.map(
-              ({
-                id,
-                profile_image_url,
-                nickname,
-                name,
-                conversation_count,
-              }) => (
-                <Bubble
-                  key={id}
-                  isClickable
-                  onClick={() => onDetail(id, conversation_count)}
-                >
-                  <section>
-                    <div className="userWrapper">
-                      <ProfileImg size="3.25rem" image={profile_image_url} />
-                      <div className="user">
-                        <p>
-                          {nickname}
-                          <span>({name})</span>
-                        </p>
-                        <p className="subText">
-                          대화 참여 횟수 : {conversation_count}번
-                        </p>
-                      </div>
-                    </div>
-                    <img src={RIGHT_ARROW} alt="화살표" />
-                  </section>
-                </Bubble>
-              )
-            )}
-          </t.Scroll>
-        </>
-      )}
+      <SearchBar
+        keyword={keyword}
+        handleSearch={handleSearch}
+        onDelete={onDelete}
+      />
+      <t.Scroll $isMobile={isMobile}>
+        {members?.map(
+          ({ id, profile_image_url, nickname, name, conversation_count }) => (
+            <Bubble
+              key={id}
+              isClickable
+              onClick={() => onDetail(id, conversation_count)}
+            >
+              <section>
+                <div className="userWrapper">
+                  <ProfileImg size="3.25rem" image={profile_image_url} />
+                  <div className="user">
+                    <p>
+                      {nickname}
+                      <span>({name})</span>
+                    </p>
+                    <p className="subText">
+                      대화 참여 횟수 : {conversation_count}번
+                    </p>
+                  </div>
+                </div>
+                <img src={RIGHT_ARROW} alt="화살표" />
+              </section>
+            </Bubble>
+          )
+        )}
+      </t.Scroll>
     </t.Container>
   );
 }

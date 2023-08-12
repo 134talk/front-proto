@@ -125,15 +125,18 @@ export default function StatusReminder({
     }, 200);
   };
 
-  const handlePlusMouseDown = () => {
+  const handlePlusMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
     handlePlusValue();
   };
 
-  const handleMinusMouseDown = () => {
+  const handleMinusMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
     handleMinusValue();
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
     if (plusTimeoutRef.current) {
       window.clearTimeout(plusTimeoutRef.current);
       plusTimeoutRef.current = null;
