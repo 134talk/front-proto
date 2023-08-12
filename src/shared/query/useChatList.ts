@@ -24,7 +24,6 @@ type Res = {
 type Error = { errorCode: number };
 
 export default function useChatList(keyword?: string) {
-  console.log('keyword: ', keyword);
   const { channel: tId } = useUserData();
 
   const { data, refetch, error } = useQuery<
