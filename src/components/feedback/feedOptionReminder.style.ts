@@ -24,7 +24,7 @@ export const Container = styled.div`
 `;
 export const RemindWrapper = styled.div<{ $height: number }>`
   width: 100%;
-  height: ${({ $height }) => $height * 27.5 + 'rem'};
+  height: ${({ $height }) => `${$height} * (27.5) + rem`};
   display: flex;
   flex-direction: column;
   padding: 0 1.875rem;
