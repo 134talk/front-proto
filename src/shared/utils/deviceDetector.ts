@@ -10,7 +10,7 @@ function detectMobileDevice(agent: string) {
   return mobileRegex.some(mobile => agent.match(mobile));
 }
 
-const isMobile = detectMobileDevice(window.navigator.userAgent);
+const isMobile = detectMobileDevice(window.navigator.userAgent.toLowerCase());
 
 export default isMobile;
 
