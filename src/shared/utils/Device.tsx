@@ -15,7 +15,6 @@ export default function Device({ children }: Props) {
   });
   const realtime = now.slice(2);
   const mobileHeight = use100vh();
-
   return (
     <>
       {isMobile ? (
