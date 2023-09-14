@@ -7,6 +7,7 @@ import type { UpdatedFeedback } from 'shared/hooks/useUserFeedbacks';
 import useUserFeedbacks from 'shared/hooks/useUserFeedbacks';
 import useFeedOption from 'shared/query/useFeedOption';
 import useFeedUser from 'shared/query/useFeedUser';
+import isMobile from 'shared/utils/deviceDetector';
 import { Button } from 'ui';
 import * as t from './feedOptionReminder.style';
 
@@ -67,7 +68,7 @@ export default function FeedOptionReminder() {
           피드백이 없다면 <strong>다음</strong>으로 넘어가주세요.
         </p>
       </div>
-      <t.RemindWrapper $height={feedUserList?.length}>
+      <t.RemindWrapper $isMobile={isMobile} $height={feedUserList?.length}>
         {userFeedbacks?.map((feedback, index) => (
           <div className="feedback_wrapper" key={feedback.review_user_id}>
             <p className="question_text">

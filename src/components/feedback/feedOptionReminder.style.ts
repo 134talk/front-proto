@@ -2,8 +2,7 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  // height: 100%;
-  // height: calc(100% - 17rem);
+  height: 100vh;
   .title_wrapper {
     display: flex;
     flex-direction: column;
@@ -23,9 +22,13 @@ export const Container = styled.div`
     }
   }
 `;
-export const RemindWrapper = styled.div<{ $height: number }>`
+export const RemindWrapper = styled.div<{
+  $isMobile: boolean;
+  $height: number;
+}>`
   width: 100%;
-  height: ${({ $height }) => $height * 200 + 'px'};
+  height: ${({ $isMobile, $height }) =>
+    $isMobile ? 'calc(100% - 375px)' : $height * 200 + 'px'};
   display: flex;
   flex-direction: column;
   padding: 0 1.875rem;
