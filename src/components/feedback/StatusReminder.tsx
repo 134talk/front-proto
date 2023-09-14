@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FEED_QUESTION_LIST, FEED_STATUS } from 'shared/constants/constants';
 import useUserData from 'shared/hooks/useUserData';
 import useFeedRequirement from 'shared/query/useFeedRequirement';
+import isMobile from 'shared/utils/deviceDetector';
 import { Button } from 'ui';
 import type { FeedRequirementData } from './FeedReminderModal';
 import * as t from './statusReminder.style';
@@ -127,21 +128,23 @@ export default function StatusReminder({
   };
 
   return (
-    <t.Container>
+    <t.Container $isMobile={isMobile}>
       <div className="content_wrapper">
         <div className="text_wrapper">
           <p className="main_text">
             {currentQuestion && currentQuestion.question}
             <span>*</span>
           </p>
-          <p className="sub_text">
-            대화 후 나의 레벨을 <br />
-            체크해주세요.
-          </p>
-          <p className="percent_text">
+          {type && Number(type) === 6 && (
+            <p className="sub_text">
+              * (+)로 높아질 수록 더 많이
+              <br /> 좋아진 거예요.
+            </p>
+          )}
+          <t.PercentText $padding={Number(type)}>
             {value}
             <span>%</span>
-          </p>
+          </t.PercentText>
         </div>
         <StatusSlider
           minValue={-100}

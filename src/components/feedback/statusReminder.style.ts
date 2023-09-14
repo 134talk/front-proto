@@ -1,19 +1,27 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ $isMobile: boolean }>`
   width: 100%;
+  height: ${({ $isMobile }) => $isMobile && 'calc(100% - 320px)'};
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .content_wrapper {
     display: flex;
     flex-direction: row;
     .text_wrapper {
-      width: 12rem;
+      width: 14rem;
       display: flex;
       flex-direction: column;
-      padding-left: 0.75rem;
+      padding-left: 1.25rem;
       margin-right: 0.75rem;
       .main_text {
+        width: 11rem;
         font-size: ${({ theme }) => theme.fs18};
         font-weight: ${({ theme }) => theme.fw400};
         margin-top: 4rem;
@@ -27,17 +35,17 @@ export const Container = styled.div`
         font-weight: ${({ theme }) => theme.fw400};
         color: ${({ theme }) => theme.gray600};
       }
-      .percent_text {
-        font-size: ${({ theme }) => theme.fs56};
-        font-weight: ${({ theme }) => theme.fw700};
-        text-align: right;
-        position: fixed;
-        bottom: 18.75rem;
-        left: 8rem;
-        > span {
-          font-size: ${({ theme }) => theme.fs18};
-        }
-      }
     }
+  }
+`;
+export const PercentText = styled.div<{ $padding: number }>`
+  font-size: ${({ theme }) => theme.fs56};
+  font-weight: ${({ theme }) => theme.fw700};
+  text-align: right;
+  // padding-top: ${({ $padding }) => ($padding ? '0.5rem' : '4rem')};
+  padding-top: ${({ $padding }) =>
+    $padding === 4 ? '2.55rem' : $padding === 6 ? '0.25rem' : '4rem'};
+  > span {
+    font-size: ${({ theme }) => theme.fs18};
   }
 `;
