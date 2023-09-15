@@ -118,7 +118,7 @@ export default function ChatSelectionPage() {
             keyword={cardItem?.keyword_name}
             depth={cardItem?.depth}
             question={cardItem?.question_content}
-            size="16rem"
+            size="18rem"
             isFront={isRotate}
             lineColor={cardItem?.color[0]}
             fillColor={isRotate ? cardItem?.color[2] : cardItem?.color[1]}

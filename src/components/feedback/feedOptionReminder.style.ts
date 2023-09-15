@@ -28,7 +28,7 @@ export const RemindWrapper = styled.div<{
 }>`
   width: 100%;
   height: ${({ $isMobile, $height }) =>
-    $isMobile ? 'calc(100% - 375px)' : $height * 200 + 'px'};
+    $isMobile ? 'calc(100% - 375px)' : $height * 500 + 'px'};
   display: flex;
   flex-direction: column;
   padding: 0 1.875rem;

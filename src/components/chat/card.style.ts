@@ -2,7 +2,7 @@ import { css, keyframes, styled } from 'styled-components';
 
 export const Container = styled.div`
   perspective: 50rem;
-  width: 16rem;
+  width: 18rem;
 `;
 export const CardWrapper = styled.div<{ $isFront: boolean; size: string }>`
   align-items: center;
@@ -69,7 +69,8 @@ export const ChatWrapper = styled.div`
     align-items: center;
     gap: 0.25rem;
     position: fixed;
-    bottom: 3.25rem;
+    bottom: 3rem;
+    margin-top: 0.5rem;
     > button {
       font-size: ${({ theme }) => theme.fs10};
       color: ${({ theme }) => theme.white};
@@ -92,6 +93,6 @@ export const ChatWrapper = styled.div`
     font-weight: ${({ theme }) => theme.fw400};
   }
   .question_text {
-    font-size: ${({ theme }) => theme.fs18};
+    font-size: ${({ theme }) => theme.fs20};
   }
 `;

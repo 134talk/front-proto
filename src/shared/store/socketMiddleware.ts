@@ -9,6 +9,7 @@ import type {
   RecNewEmotion,
   RecNotify,
   RecQuestion,
+  ResQuestion,
 } from './chatSlice';
 import {
   setCreateRoom,
@@ -18,6 +19,7 @@ import {
   setRecNewEmotion,
   setRecNotify,
   setRecQuestion,
+  setResQuestion,
 } from './chatSlice';
 
 let socket: Socket | null = null;
@@ -57,7 +59,6 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         }
         break;
       }
-
       case 'recAlert': {
         const { destination } = action.payload;
         if (socket) {
@@ -81,6 +82,15 @@ const socketMiddleware: Middleware = ({ getState, dispatch }) => {
         if (socket) {
           socket.on(destination, (data: RecQuestion) => {
             dispatch(setRecQuestion(data));
+          });
+        }
+        break;
+      }
+      case 'resQuestion': {
+        const { destination } = action.payload;
+        if (socket) {
+          socket.on(destination, (data: ResQuestion) => {
+            dispatch(setResQuestion(data));
           });
         }
         break;

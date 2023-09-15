@@ -11,6 +11,7 @@ export { default as Bubble } from './common/Bubble';
 export { default as EmotionData } from './common/EmotionData';
 export { default as PercentChart } from './common/PercentChart';
 export { default as NoData } from './common/NoData';
+export { default as ChatUser } from './common/ChatUser';
 // 로그인 페이지
 export { default as InstallModal } from './login/InstallModal';
 export { default as AddToHomeScreen } from './login/AddToHomeScreen';
@@ -38,6 +39,7 @@ export { default as ChatNotifyScreen } from './chat/ChatNotifyScreen';
 export { default as ExitConfirmModal } from './chat/ExitConfirmModal';
 export { default as Card } from './chat/Card';
 export { default as KeywordList } from './chat/KeywordList';
+export { default as NextReminderModal } from './chat/NextReminderModal';
 // 피드백 페이지
 export { default as ProgressBar } from './feedback/ProgressBar';
 export { default as FeedOptionCheck } from './feedback/FeedOptionCheck';

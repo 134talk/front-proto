@@ -10,6 +10,7 @@ export default function useUserData() {
   const nickname = localStorage.getItem('nickname');
   const name = localStorage.getItem('name');
   const isGuideAccess = localStorage.getItem('isGuideAccess');
+  const isNextReminder = localStorage.getItem('isNextReminder');
 
   const selectKey = localStorage.getItem('selectKey');
   const tutorialKey = localStorage.getItem('tutorialKey');
@@ -49,5 +50,6 @@ export default function useUserData() {
     optVal,
     optText,
     feedbackKey,
+    isNextReminder,
   };
 }
