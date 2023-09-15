@@ -27,6 +27,13 @@ interface RecQuestionAction extends Action {
   };
 }
 
+interface ResQuestionAction extends Action {
+  type: 'resQuestion';
+  payload: {
+    destination: string;
+  };
+}
+
 interface RecEmotionAction extends Action {
   type: 'recEmotion';
   payload: {
@@ -72,6 +79,7 @@ export type SocketAction =
   | RecAlertAction
   | RecNotifyAction
   | RecQuestionAction
+  | ResQuestionAction
   | RecEmotionAction
   | RecNewEmotionAction
   | CreateRoomAction;
@@ -93,6 +101,11 @@ export const recNotify = (destination: string): RecNotifyAction => ({
 
 export const recQuestion = (destination: string): RecQuestionAction => ({
   type: 'recQuestion',
+  payload: { destination },
+});
+
+export const resQuestion = (destination: string): ResQuestionAction => ({
+  type: 'resQuestion',
   payload: { destination },
 });
 

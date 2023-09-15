@@ -1,11 +1,10 @@
-import { BottomModal } from 'components';
+import { BottomModal, ChatUser } from 'components';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CHECK_ICON, CLOSE_BLACK } from 'shared/constants/icons';
+import { CLOSE_BLACK } from 'shared/constants/icons';
 import type { ModalActions } from 'shared/hooks/useModal';
-import useUserData from 'shared/hooks/useUserData';
-import { useAppDispatch, useAppSelector } from 'shared/store/store';
-import { Button, ProfileImg } from 'ui';
+import { useAppDispatch } from 'shared/store/store';
+import { Button } from 'ui';
 import * as t from './emotionModal.style';
 
 interface EmotionModalProps {
@@ -18,10 +17,7 @@ export default function EmotionModal({
   modalActions,
 }: EmotionModalProps) {
   const dispatch = useAppDispatch();
-  const { uId } = useUserData();
   const { roomId, chatUserId } = useParams();
-  const userList = useAppSelector(state => state.chat?.recQuestion?.user_info);
-  const chatUserList = userList?.filter(el => el.id !== Number(uId));
   const [sendTo, setSendTo] = useState<{
     nickname: string;
     userId: number;
@@ -62,27 +58,7 @@ export default function EmotionModal({
               </div>
               {sendTo && <p className="sub_text">'{sendTo.nickname}'님에게</p>}
             </div>
-            <div className="user_list_wrapper">
-              {chatUserList?.map(item => (
-                <div className="user_wrapper">
-                  <div className="user_image_wrapper" key={item.id}>
-                    <ProfileImg
-                      size="3rem"
-                      image={item.profile_image_url}
-                      onClick={() => handleSelect(item.nickname, item.id)}
-                    />
-                    {sendTo && sendTo.nickname.includes(item.nickname) && (
-                      <img
-                        className="check_image"
-                        src={CHECK_ICON}
-                        alt="check"
-                      />
-                    )}
-                  </div>
-                  <p className="user_name_text">{item.name}</p>
-                </div>
-              ))}
-            </div>
+            <ChatUser onClick={handleSelect} sendTo={sendTo} />
             <div className="button_wrapper">
               <Button
                 category="confirm"

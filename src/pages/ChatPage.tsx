@@ -9,6 +9,7 @@ import {
   recNewEmotion,
   recNotify,
   recQuestion,
+  resQuestion,
 } from 'shared/store/chatAction';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import NotFoundPage from './NotFoundPage';
@@ -43,6 +44,7 @@ export default function ChatPage() {
     dispatch(recAlert('recAlert'));
     dispatch(recNotify('recNotify'));
     dispatch(recQuestion('recQuestion'));
+    dispatch(resQuestion('resQuestion'));
     dispatch(recEmotion('recEmotion'));
     dispatch(recNewEmotion('recNewEmotion'));
     return () => {

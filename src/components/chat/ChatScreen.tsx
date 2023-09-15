@@ -1,10 +1,17 @@
-import { BottomButtonTab, Card, EmotionModal, NavBar } from 'components';
+import {
+  BottomButtonTab,
+  Card,
+  EmotionModal,
+  NavBar,
+  NextReminderModal,
+} from 'components';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EMOTION_LIST, KEYWORD_LIST } from 'shared/constants/constants';
 import useModal from 'shared/hooks/useModal';
 import useUserData from 'shared/hooks/useUserData';
-import { setRecEmotion } from 'shared/store/chatSlice';
+import { setRecEmotion, setResQuestion } from 'shared/store/chatSlice';
 import { useAppDispatch, useAppSelector } from 'shared/store/store';
 import { Button, Emotion } from 'ui';
 import * as t from './chatScreen.style';
@@ -12,13 +19,20 @@ import ChatSideNav from './ChatSideNav';
 import ChatTutorial from './ChatTutorial';
 
 export default function ChatScreen() {
-  const { uId, tutorialKey, emotionKey } = useUserData();
+  const { uId, tutorialKey, emotionKey, isNextReminder } = useUserData();
   const { roomId, chatUserId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const emotionModal = useModal();
   const sideNavModal = useModal();
   const tutorialModal = useModal();
+  const nextReminderModal = useModal();
+  const sharedFlag = useAppSelector(
+    state => state.chat?.resQuestion?.sharedFlag
+  );
+  const nextSpeaker = useAppSelector(
+    state => state.chat?.resQuestion?.next_speaker
+  );
   const socketFlag = useAppSelector(
     state => state.chat?.recChatRoom?.socket_flag
   );
@@ -57,34 +71,39 @@ export default function ChatScreen() {
     : [];
 
   const handleNext = () => {
-    if (!endFlag) {
-      dispatch({
-        type: 'sendData',
-        payload: {
-          destination: 'sendNextQuestion',
-          data: {
-            conversation_room_id: Number(roomId),
-            conversation_user_id: Number(chatUserId),
-            question_number: questionNumber + 1,
+    if (!isNextReminder && speaker?.id === Number(uId))
+      nextReminderModal.open();
+    else {
+      localStorage.removeItem('isNextReminder');
+      if (!endFlag) {
+        dispatch({
+          type: 'sendData',
+          payload: {
+            destination: 'sendNextQuestion',
+            data: {
+              conversation_room_id: Number(roomId),
+              conversation_user_id: Number(chatUserId),
+              question_number: questionNumber + 1,
+            },
           },
-        },
-      });
-    } else {
-      dispatch({
-        type: 'sendData',
-        payload: {
-          destination: 'sendNextQuestion',
-          data: {
-            conversation_room_id: Number(roomId),
-            conversation_user_id: Number(chatUserId),
-            question_number: questionNumber + 1,
+        });
+      } else {
+        dispatch({
+          type: 'sendData',
+          payload: {
+            destination: 'sendNextQuestion',
+            data: {
+              conversation_room_id: Number(roomId),
+              conversation_user_id: Number(chatUserId),
+              question_number: questionNumber + 1,
+            },
           },
-        },
-      });
-      dispatch({ type: 'disconnect' });
-      localStorage.removeItem('emotionKey');
-      localStorage.removeItem('selectKey');
-      navigate(`/feedback/1/${roomId}/${chatUserId}`);
+        });
+        dispatch({ type: 'disconnect' });
+        localStorage.removeItem('emotionKey');
+        localStorage.removeItem('selectKey');
+        navigate(`/feedback/1/${roomId}/${chatUserId}`);
+      }
     }
   };
 
@@ -140,10 +159,32 @@ export default function ChatScreen() {
     if (newEmotion) localStorage.setItem('emotionKey', 'true');
   }, [newEmotion]);
 
+  useEffect(() => {
+    if (sharedFlag) {
+      toast.error(
+        `이 주제에 대한 ${nextSpeaker?.nickname}(${nextSpeaker?.name})님의 이야기가 궁금해요.`
+      );
+      setTimeout(() => {
+        dispatch(
+          setResQuestion({
+            sharedFlag: false,
+            next_speaker: {
+              nickname: null,
+              name: null,
+            },
+          })
+        );
+      }, 5000);
+    }
+  }, [sharedFlag]);
+
   return (
     <>
       {tutorialModal.isOpen && <ChatTutorial onClose={tutorialModal.close} />}
       {sideNavModal.isOpen && <ChatSideNav onClose={sideNavModal.close} />}
+      {nextReminderModal.isOpen && (
+        <NextReminderModal onClose={nextReminderModal.close} />
+      )}
       <EmotionModal sendEmotion={sendEmotion} modalActions={emotionModal} />
       <t.Container>
         <NavBar
@@ -161,7 +202,7 @@ export default function ChatScreen() {
             keyword={topic?.keyword_name}
             depth={topic?.depth}
             question={topic?.question_content}
-            size="16rem"
+            size="18rem"
             isFront={isRotate}
             lineColor={matchedItem[0]?.color[0]}
             fillColor={

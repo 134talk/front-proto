@@ -14,6 +14,7 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 0.5rem;
       > p {
         position: absolute;
         color: ${({ theme }) => theme.white};
@@ -42,7 +43,7 @@ export const Container = styled.div`
   .guide_text_wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 9.5rem;
+    margin-top: 10.5rem;
     gap: 0.5rem;
     > p {
       text-align: center;

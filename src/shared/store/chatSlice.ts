@@ -40,6 +40,13 @@ export interface RecQuestion {
     question_guide: string[];
   };
 }
+export interface ResQuestion {
+  sharedFlag: boolean;
+  next_speaker: {
+    nickname: string;
+    name: string;
+  };
+}
 export interface RecEmotion {
   emotion_code: number;
 }
@@ -56,6 +63,7 @@ type ChatState = {
   recAlert: RecAlert | null;
   recNotify: RecNotify | null;
   recQuestion: RecQuestion | null;
+  resQuestion: ResQuestion | null;
   recEmotion: RecEmotion | null;
   recNewEmotion: RecNewEmotion | null;
   createRoom: { type: string };
@@ -67,6 +75,7 @@ const initialState: ChatState = {
   recAlert: null,
   recNotify: null,
   recQuestion: null,
+  resQuestion: null,
   recEmotion: null,
   recNewEmotion: null,
   createRoom: { type: '' },
@@ -91,6 +100,9 @@ const chatSlice = createSlice({
     setRecQuestion(state, action: PayloadAction<RecQuestion | null>) {
       state.recQuestion = action.payload;
     },
+    setResQuestion(state, action: PayloadAction<ResQuestion | null>) {
+      state.resQuestion = action.payload;
+    },
     setRecEmotion(state, action: PayloadAction<RecEmotion | null>) {
       state.recEmotion = action.payload;
     },
@@ -109,6 +121,7 @@ export const {
   setRecAlert,
   setRecNotify,
   setRecQuestion,
+  setResQuestion,
   setRecEmotion,
   setRecNewEmotion,
   setCreateRoom,

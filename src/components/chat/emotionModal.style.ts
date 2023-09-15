@@ -19,22 +19,6 @@ export const Container = styled.div`
       justify-content: space-around;
       align-items: center;
     }
-    &.user_list_wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      width: 20rem;
-      height: 4rem;
-      margin-bottom: 2rem;
-    }
-    &.user_wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    &.user_image_wrapper {
-      display: flex;
-      position: relative;
-    }
     &.button_wrapper {
       display: flex;
       flex-direction: column;
@@ -52,22 +36,6 @@ export const Container = styled.div`
       width: 100%;
       text-align: center;
       font-size: ${({ theme }) => theme.fs16};
-    }
-    &.user_name_text {
-      font-size: ${({ theme }) => theme.fs12};
-      color: ${({ theme }) => theme.gray700};
-      font-weight: ${({ theme }) => theme.fw400};
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-  }
-  img {
-    &.check_image {
-      width: 1.125rem;
-      height: 1.125rem;
-      position: absolute;
-      right: -0.25rem;
-      cursor: pointer;
     }
   }
 `;
